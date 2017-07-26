@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Windows.Media;
 
@@ -19,20 +17,33 @@ namespace TeamGleason.Talk37.ComSupport
 {
     public class DeviceConnection
     {
-        public DeviceConnection(string comPort)
+        DeviceConnection(string comPort)
         {
             _arduinoConnectivity = new ArduinoConnectivityUWP();
             _comPort = comPort;
         }
 
+        public async Task<DeviceConnection> CreateAsync(string comPort)
+        {
+            var connection = new DeviceConnection(comPort);
+            await connection._arduinoConnectivity.Connect(_comPort);
+            return connection;
+        }
+
         public async void PlayAnimationSequence(List<IMediaMarker> markers)
         {
-            await _arduinoConnectivity.Connect(_comPort);
+            var startTime = DateTime.UtcNow;
 
             foreach (var marker in markers)
             {
+                var cueTime = startTime + marker.Time;
+                var delay = cueTime - DateTime.UtcNow;
+                if (TimeSpan.Zero < delay)
+                {
+                    await Task.Delay(delay);
+                }
+
                 await _arduinoConnectivity.UploadCompressedSequence(marker.Text);
-                await Task.Delay(marker.Time);
             }
         }
 
