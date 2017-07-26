@@ -45,7 +45,7 @@ namespace TeamGleason.Talk37.Keyboard
             }
         }
 
-        private void ctrlButton_click(object sender, RoutedEventArgs e)
+        private void clearButton_click(object sender, RoutedEventArgs e)
         {
             result.Text = "";
         }
@@ -101,7 +101,7 @@ namespace TeamGleason.Talk37.Keyboard
             theSpeech.Text = "Yay!!, I am happy...";
         }
 
-        private void wordBackButton_Click(object sender, RoutedEventArgs e)
+        private void sleepButton_Click(object sender, RoutedEventArgs e)
         {
             theSpeech.Text = "I am feeling sleepy...";
         }

@@ -35,7 +35,7 @@
             <Image Source="http://emojipedia-us.s3.amazonaws.com/cache/45/43/4543202f731f729d056cb94052db7810.png"/>
         </Button>
 
-        <Button x:Name="wordBackButton" Click="wordBackButton_Click" Content="zZZ.." HorizontalAlignment="Left" Height="75" Margin="46,406,0,0" VerticalAlignment="Top" Width="75" Background="#FF5C5177" FontWeight="Bold" FontSize="18"/>
+        <Button x:Name="sleepButton" Click="sleepButton_Click" Content="zZZ.." HorizontalAlignment="Left" Height="75" Margin="46,406,0,0" VerticalAlignment="Top" Width="75" Background="#FF5C5177" FontWeight="Bold" FontSize="18"/>
         <Button x:Name="qButton" Click="charButton_click" Content="q" HorizontalAlignment="Left" Height="75" Margin="124,406,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold" FontSize="30"/>
         <Button x:Name="wButton" Click="charButton_click" Content="w" HorizontalAlignment="Left" Height="75" Margin="202,406,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold" FontSize="30"/>
         <Button x:Name="eButton" Click="charButton_click" Content="e" HorizontalAlignment="Left" Height="75" Margin="280,406,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold" FontSize="30"/>
@@ -62,7 +62,7 @@
         <Button x:Name="enterButton" Click="enterButton_Click" Content="ENTER" HorizontalAlignment="Left" Height="75" Margin="904,484,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold" FontSize="18"/>
 
         <ToggleButton x:Name="shiftToggleButton" Click="shiftToggleButton_Click" Content="Shift" HorizontalAlignment="Left" Height="75" Margin="46,562,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold" FontSize="18" RenderTransformOrigin="0.653,-4.632"/>
-        <Button x:Name="ctrlButton" Click="ctrlButton_click" Content="CLEAR" HorizontalAlignment="Left" Height="75" Margin="124,562,0,0" VerticalAlignment="Top" Width="75" Background="#FF057779" FontWeight="Bold" FontSize="18"/>
+        <Button x:Name="clearButton" Click="clearButton_click" Content="CLEAR" HorizontalAlignment="Left" Height="75" Margin="124,562,0,0" VerticalAlignment="Top" Width="75" Background="#FF057779" FontWeight="Bold" FontSize="18"/>
         <Button x:Name="zButton" Click="charButton_click" Content="z" HorizontalAlignment="Left" Height="75" Margin="202,562,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold" FontSize="30"/>
         <Button x:Name="xButton" Click="charButton_click" Content="x" HorizontalAlignment="Left" Height="75" Margin="280,562,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold" FontSize="30"/>
         <Button x:Name="cButton" Click="charButton_click" Content="c" HorizontalAlignment="Left" Height="75" Margin="358,562,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold" FontSize="30"/>
