@@ -23,14 +23,14 @@ namespace TeamGleason.Talk37.SpeechSupport.Harness
             var text = TheTextBox.Text;
             TheTextBox.SelectAll();
 
-            var stream = await _engine.SayText(text);
+            var speech = await _engine.SayText(text);
 
-            foreach (var mark in stream.Markers)
+            foreach (var mark in speech.Stream.Markers)
             {
                 Debug.WriteLine($"{mark.Text} @ {mark.Time.Milliseconds}ms");
             }
 
-            TheMedia.SetSource(stream, stream.ContentType);
+            TheMedia.SetSource(speech.Stream, speech.Stream.ContentType);
             TheMedia.Play();
         }
     }
