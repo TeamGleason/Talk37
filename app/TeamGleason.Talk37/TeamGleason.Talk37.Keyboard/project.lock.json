@@ -22011,14 +22011,14 @@
     "UAP,Version=v10.0": []
   },
   "packageFolders": {
-    "C:\\Users\\angopala\\.nuget\\packages\\": {}
+    "C:\\Users\\me\\.nuget\\packages\\": {}
   },
   "project": {
     "restore": {
-      "projectUniqueName": "C:\\Users\\angopala\\Documents\\Visual Studio 2017\\Projects\\TeamGleason.Talk37.Keyboard\\TeamGleason.Talk37.Keyboard\\TeamGleason.Talk37.Keyboard.csproj",
+      "projectUniqueName": "C:\\github.com\\TeamGleason\\Talk37\\app\\TeamGleason.Talk37\\TeamGleason.Talk37.Keyboard\\TeamGleason.Talk37.Keyboard.csproj",
       "projectName": "TeamGleason.Talk37.Keyboard",
-      "projectPath": "C:\\Users\\angopala\\Documents\\Visual Studio 2017\\Projects\\TeamGleason.Talk37.Keyboard\\TeamGleason.Talk37.Keyboard\\TeamGleason.Talk37.Keyboard.csproj",
-      "projectJsonPath": "C:\\Users\\angopala\\Documents\\Visual Studio 2017\\Projects\\TeamGleason.Talk37.Keyboard\\TeamGleason.Talk37.Keyboard\\project.json",
+      "projectPath": "C:\\github.com\\TeamGleason\\Talk37\\app\\TeamGleason.Talk37\\TeamGleason.Talk37.Keyboard\\TeamGleason.Talk37.Keyboard.csproj",
+      "projectJsonPath": "C:\\github.com\\TeamGleason\\Talk37\\app\\TeamGleason.Talk37\\TeamGleason.Talk37.Keyboard\\project.json",
       "projectStyle": "ProjectJson"
     },
     "dependencies": {
