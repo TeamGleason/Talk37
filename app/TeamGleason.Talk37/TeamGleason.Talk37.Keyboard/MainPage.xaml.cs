@@ -69,59 +69,14 @@ namespace TeamGleason.Talk37.Keyboard
             AddCharToMessage(button.Content.ToString());
         }
 
-        private void emoji2Button_click(object sender, RoutedEventArgs e)
-        {
-            theSpeech.Text = "Wow!!, That's surprising...";
-        }
-
-        private void emoji3Button_click(object sender, RoutedEventArgs e)
-        {
-            theSpeech.Text = "Urgh!!, I feel like throwing up...";
-        }
-
-        private void emoji4Button_click(object sender, RoutedEventArgs e)
-        {
-            theSpeech.Text = "Grrrr!!, I am angry...";
-        }
-
-        private void emoji5Button_click(object sender, RoutedEventArgs e)
-        {
-            theSpeech.Text = "Oh no!!, I am scared...";
-        }
-
-        private void emoji6Button_click(object sender, RoutedEventArgs e)
-        {
-            theSpeech.Text = "Awww!!, I love you...";
-        }
-
-        private void emoji7Button_click(object sender, RoutedEventArgs e)
-        {
-            theSpeech.Text = "Poop...";
-        }
-
-        private void emoji8Button_click(object sender, RoutedEventArgs e)
-        {
-            theSpeech.Text = "Wink Wink...";
-        }
-
         private void spaceButton_click(object sender, RoutedEventArgs e)
         {
             AddCharToMessage(" ");
         }
 
-        private void emoji0Button_Click(object sender, RoutedEventArgs e)
-        {
-            theSpeech.Text = "Yay!!, I am happy...";
-        }
-
         private void sleepButton_Click(object sender, RoutedEventArgs e)
         {
             theSpeech.Text = "I am feeling sleepy...";
-        }
-
-        private void emoji9Button_Click(object sender, RoutedEventArgs e)
-        {
-            theSpeech.Text = "Okay";
         }
 
         private void backButton_Click(object sender, RoutedEventArgs e)

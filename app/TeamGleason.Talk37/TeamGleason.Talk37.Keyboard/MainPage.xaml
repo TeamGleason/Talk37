@@ -14,26 +14,17 @@
 
         <TextBlock x:Name="theSpeech" HorizontalAlignment="Left" Height="64" Margin="118,203,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="740" Foreground="White"/>
 
-        <Button x:Name="emoji0Button" Content="❤" Click="emojiButton_click" HorizontalAlignment="Left" Height="75" Margin="46,328,0,0" VerticalAlignment="Top" Width="75" Background="#FFCEC364" FontWeight="Bold" FontSize="40"/>
-        <Button x:Name="emoji1Button" Content="☹"  Click="emojiButton_click" HorizontalAlignment="Left" Height="75" Margin="124,328,0,0" VerticalAlignment="Top" Width="75" Background="#FFCEC364" FontWeight="Bold" FontSize="40"/>
-        <Button x:Name="emoji2Button" Content="💩" Click="emojiButton_click" HorizontalAlignment="Left" Height="75" Margin="202,328,0,0" VerticalAlignment="Top" Width="75" Background="#FFCEC364" FontWeight="Bold" FontSize="40"/>
-        <Button x:Name="emoji3Button" Content="😡" Click="emojiButton_click" HorizontalAlignment="Left" Height="75" Margin="280,328,0,0" VerticalAlignment="Top" Width="75" Background="#FFCEC364" FontWeight="Bold" FontSize="40"/>
-        <Button x:Name="emoji4Button" Content="😂" Click="emojiButton_click" HorizontalAlignment="Left" Height="75" Margin="358,328,0,0" VerticalAlignment="Top" Width="75" Background="#FFCEC364" FontWeight="Bold" FontSize="40"/>
-
+        <Button x:Name="happyEmojiButton" Content="😂" Click="emojiButton_click" HorizontalAlignment="Left" Height="75" Margin="46,328,0,0" VerticalAlignment="Top" Width="75" Background="#FFCEC364" FontWeight="Bold" FontSize="40"/>
+        <Button x:Name="sadEmojiButton" Content="☹"  Click="emojiButton_click" HorizontalAlignment="Left" Height="75" Margin="124,328,0,0" VerticalAlignment="Top" Width="75" Background="#FFCEC364" FontWeight="Bold" FontSize="40"/>
+        <Button x:Name="surpriseEmojiButton" Content="😲" Click="emojiButton_click" HorizontalAlignment="Left" Height="75" Margin="202,328,0,0" VerticalAlignment="Top" Width="75" Background="#FFCEC364" FontWeight="Bold" FontSize="40"/>
+        <Button x:Name="disgustEmojiButton" Content="😒" Click="emojiButton_click" HorizontalAlignment="Left" Height="75" Margin="280,328,0,0" VerticalAlignment="Top" Width="75" Background="#FFCEC364" FontWeight="Bold" FontSize="40"/>
+        <Button x:Name="angerEmojiButton" Content="😡" Click="emojiButton_click" HorizontalAlignment="Left" Height="75" Margin="358,328,0,0" VerticalAlignment="Top" Width="75" Background="#FFCEC364" FontWeight="Bold" FontSize="40"/>
         <Button x:Name="spaceButton" Click="spaceButton_click" Content="SPACE" HorizontalAlignment="Left" Height="75" Margin="436,328,0,0" VerticalAlignment="Top" Width="153" Background="#FF888888" FontWeight="Bold" FontSize="18"/>
-
-        <Button x:Name="emoji5Button" Content="😘" Click="emoji5Button_click" HorizontalAlignment="Left" Height="75" Margin="592,328,0,0" VerticalAlignment="Top" Width="75" Background="#FFCEC364" FontWeight="Bold" FontSize="40"/>
-        <Button x:Name="emoji6Button" Content="😲"  Click="emoji6Button_click" HorizontalAlignment="Left" Height="75" Margin="670,328,0,0" VerticalAlignment="Top" Width="75" Background="#FFCEC364" FontWeight="Bold" FontSize="40"/>
-
-        <Button x:Name="emoji7Button" Click="emoji7Button_click" HorizontalAlignment="Left" Height="75" Margin="748,328,0,0" VerticalAlignment="Top" Width="75" Background="#FFCEC364" FontWeight="Bold" FontSize="40">
-            <Image Source="https://s-media-cache-ak0.pinimg.com/originals/91/86/a4/9186a4f4d3f24827af0cead5a779936c.png"/>
-        </Button>
-        <Button x:Name="emoji8Button" Click="emoji8Button_click" HorizontalAlignment="Left" Height="75" Margin="826,328,0,0" VerticalAlignment="Top" Width="75" Background="#FFCEC364" FontWeight="Bold" FontSize="40">
-            <Image Source="https://cdn-insomniac.s3.amazonaws.com/emoji_sexface.png"/>
-        </Button>
-        <Button x:Name="emoji9Button" Click="emoji9Button_Click" HorizontalAlignment="Left" Height="75" Margin="904,328,0,0" VerticalAlignment="Top" Width="75" Background="#FFCEC364" FontWeight="Bold" FontSize="40">
-            <Image Source="http://emojipedia-us.s3.amazonaws.com/cache/45/43/4543202f731f729d056cb94052db7810.png"/>
-        </Button>
+        <Button x:Name="fearEmojiButton" Content="😱" Click="emojiButton_click" HorizontalAlignment="Left" Height="75" Margin="592,328,0,0" VerticalAlignment="Top" Width="75" Background="#FFCEC364" FontWeight="Bold" FontSize="40"/>
+        <Button x:Name="loveEmojiButton" Content="❤"  Click="emojiButton_click" HorizontalAlignment="Left" Height="75" Margin="670,328,0,0" VerticalAlignment="Top" Width="75" Background="#FFCEC364" FontWeight="Bold" FontSize="40"/>
+        <Button x:Name="poopEmojiButton" Content="💩" Click="emojiButton_click" HorizontalAlignment="Left" Height="75" Margin="748,328,0,0" VerticalAlignment="Top" Width="75" Background="#FFCEC364" FontWeight="Bold" FontSize="40"/>
+        <Button x:Name="winkyEmojiButton" Content="😘" Click="emojiButton_click" HorizontalAlignment="Left" Height="75" Margin="826,328,0,0" VerticalAlignment="Top" Width="75" Background="#FFCEC364" FontWeight="Bold" FontSize="40"/>
+        <Button x:Name="okayEmojiButton" Content="👌" Click="emojiButton_click" HorizontalAlignment="Left" Height="75" Margin="904,328,0,0" VerticalAlignment="Top" Width="75" Background="#FFCEC364" FontWeight="Bold" FontSize="40"/>
 
         <Button x:Name="sleepButton" Click="sleepButton_Click" Content="zZZ.." HorizontalAlignment="Left" Height="75" Margin="46,406,0,0" VerticalAlignment="Top" Width="75" Background="#FF5C5177" FontWeight="Bold" FontSize="18"/>
         <Button x:Name="qButton" Click="charButton_click" Content="q" HorizontalAlignment="Left" Height="75" Margin="124,406,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold" FontSize="30"/>
