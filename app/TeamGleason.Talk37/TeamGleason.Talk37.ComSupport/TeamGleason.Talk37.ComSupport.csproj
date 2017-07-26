@@ -43,6 +43,7 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ArduinoConnectivityUWP.cs" />
     <Compile Include="DeviceConnection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\TeamGleason.Talk37.ComSupport.rd.xml" />
