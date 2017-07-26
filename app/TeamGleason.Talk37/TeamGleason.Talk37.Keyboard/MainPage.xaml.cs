@@ -20,6 +20,8 @@ namespace TeamGleason.Talk37.Keyboard
 
         DeviceConnection _connection;
 
+        string _comPort = "COM5";
+
         public MainPage()
         {
             this.InitializeComponent();
@@ -31,7 +33,7 @@ namespace TeamGleason.Talk37.Keyboard
         {
             if (_connection == null)
             {
-                _connection = await DeviceConnection.CreateAsync("COM5");
+                _connection = await DeviceConnection.CreateAsync(_comPort);
             }
 
             return _connection;
@@ -121,6 +123,13 @@ namespace TeamGleason.Talk37.Keyboard
         async void enterButton_Click(object sender, RoutedEventArgs e)
         {
             var text = result.Text;
+            if (text.StartsWith(">"))
+            {
+                _comPort = text.Substring(1);
+                _connection?.Close();
+                _connection = null;
+            }
+
             result.SelectAll();
 
             var connection = await GetDeviceAsync();

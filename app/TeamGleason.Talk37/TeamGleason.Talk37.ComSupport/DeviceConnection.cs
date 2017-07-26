@@ -66,5 +66,10 @@ namespace TeamGleason.Talk37.ComSupport
         }
 
         private ArduinoConnectivityUWP _arduinoConnectivity;
+
+        public void Close()
+        {
+            _arduinoConnectivity.Close();
+        }
     }
 }
