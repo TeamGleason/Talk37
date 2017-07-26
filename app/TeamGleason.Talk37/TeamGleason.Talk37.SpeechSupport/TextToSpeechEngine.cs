@@ -19,6 +19,33 @@ namespace TeamGleason.Talk37.SpeechSupport
             return nextPosition;
         }
 
+        static void InsertSound(StringBuilder ssmlBuilder, EmojiDescription description)
+        {
+            ssmlBuilder.Append($"<mark name='{description.VisualString}'/>");
+            if (description.AudioFileName != null)
+            {
+                ssmlBuilder.Append($"<audio src='{description.AudioFileName}'/>");
+            }
+        }
+
+        static void InsertMarker(StringBuilder ssmlBuilder, int utf32)
+        {
+            var description = EmojiDescriptions.Get(utf32);
+            if (description != null)
+            {
+                InsertSound(ssmlBuilder, description);
+            }
+        }
+
+        static void InsertSpeach(StringBuilder ssmlBuilder, string text, int start, int index)
+        {
+            if (start == 0)
+            {
+                InsertMarker(ssmlBuilder, EmojiDescriptions.Emotionless);
+            }
+            ssmlBuilder.Append(text.Substring(start, index - start));
+        }
+
         /// <summary>
         /// Speak given text.
         /// </summary>
@@ -26,7 +53,6 @@ namespace TeamGleason.Talk37.SpeechSupport
         public async Task<SpeechSynthesisStream> SayText(string text)
         {
             var ssmlBuilder = new StringBuilder("<speak version='1.0' xmlns='http://www.w3.org/2001/10/synthesis' xml:lang='en-US'>");
-            ssmlBuilder.Append("<mark name='Start'/>");
 
             var start = 0;
             var index = 0;
@@ -38,19 +64,19 @@ namespace TeamGleason.Talk37.SpeechSupport
 
                 if (foundEmoji)
                 {
-                    ssmlBuilder.Append(text.Substring(start, index - start));
+                    InsertSpeach(ssmlBuilder, text, start, index);
                     index = NextPosition(text, index);
                     start = index;
-                    ssmlBuilder.Append($"<audio src='{description.AudioFileName}'/>");
+                    InsertSound(ssmlBuilder, description);
                 }
                 else
                 {
                     index = NextPosition(text, index);
                 }
             }
-            ssmlBuilder.Append(text.Substring(start));
+            InsertSpeach(ssmlBuilder, text, start, text.Length);
 
-            ssmlBuilder.Append("<mark name='Finish'/>");
+            InsertMarker(ssmlBuilder, EmojiDescriptions.Idle);
             ssmlBuilder.Append("</speak>");
 
             var ssml = ssmlBuilder.ToString();

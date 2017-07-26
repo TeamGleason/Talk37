@@ -10,6 +10,10 @@ namespace TeamGleason.Talk37.SpeechSupport
     /// </summary>
     public static class EmojiDescriptions
     {
+        internal const int Emotionless = -1;
+        internal const int Idle = -2;
+        internal const int Editing = -3;
+
         static readonly string Prefix = Path.GetFileNameWithoutExtension(typeof(EmojiDescriptions).GetTypeInfo().Assembly.ManifestModule.Name);
 
         static readonly Dictionary<int, EmojiDescription> _emojis = new Dictionary<int, EmojiDescription>();
