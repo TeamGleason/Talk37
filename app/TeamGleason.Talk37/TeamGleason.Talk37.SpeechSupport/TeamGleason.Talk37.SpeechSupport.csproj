@@ -110,6 +110,7 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="BuiltSpeech.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TextToSpeechEngine.cs" />
     <EmbeddedResource Include="Properties\TeamGleason.Talk37.SpeechSupport.rd.xml" />

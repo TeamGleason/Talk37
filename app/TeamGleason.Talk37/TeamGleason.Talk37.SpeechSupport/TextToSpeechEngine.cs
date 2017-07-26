@@ -19,7 +19,7 @@ namespace TeamGleason.Talk37.SpeechSupport
         /// Speak given text.
         /// </summary>
         /// <param name="text">The text.</param>
-        public async Task<SpeechSynthesisStream> SayText(string text)
+        public async Task<BuiltSpeech> SayText(string text)
         {
             for (var index = 0; index < text.Length; index++)
             {
@@ -51,7 +51,9 @@ namespace TeamGleason.Talk37.SpeechSupport
                 Debug.WriteLine($"{mark.Text} @ {mark.Time.Milliseconds}ms");
             }
 
-            return stream;
+            var speech = new BuiltSpeech(stream);
+
+            return speech;
         }
     }
 }
