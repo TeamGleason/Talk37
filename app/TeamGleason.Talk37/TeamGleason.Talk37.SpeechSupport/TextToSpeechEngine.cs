@@ -45,7 +45,7 @@ namespace TeamGleason.Talk37.SpeechSupport
             var ssml = ssmlBuilder.ToString();
 
             var stream = await _synthesizer.SynthesizeSsmlToStreamAsync(ssml);
-            Windows.Media.IMediaMarker;
+
             foreach (var mark in stream.Markers)
             {
                 Debug.WriteLine($"{mark.Text} @ {mark.Time.Milliseconds}ms");
