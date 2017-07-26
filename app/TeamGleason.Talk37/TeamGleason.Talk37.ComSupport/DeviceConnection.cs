@@ -8,5 +8,9 @@ namespace TeamGleason.Talk37.ComSupport
 {
     public class DeviceConnection
     {
+        DeviceConnection()
+        {
+
+        }
     }
 }
