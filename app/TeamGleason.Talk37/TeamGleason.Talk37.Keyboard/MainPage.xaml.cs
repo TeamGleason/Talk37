@@ -45,6 +45,19 @@ namespace TeamGleason.Talk37.Keyboard
             }
         }
 
+        private void charSpaceButton_click(object sender, RoutedEventArgs e)
+        {
+            Button btn = (Button)sender;
+            String keyword = btn.Content.ToString();
+            AddCharToMessage(keyword+" ");
+            if (shiftToggleButton.IsChecked == true)
+            {
+                shiftToggleButton.IsChecked = false;
+                // Not implementing the case, where Shift is pressed with CAPS lock.
+                allKeysToLower();
+            }
+        }
+
         private void clearButton_click(object sender, RoutedEventArgs e)
         {
             result.Text = "";

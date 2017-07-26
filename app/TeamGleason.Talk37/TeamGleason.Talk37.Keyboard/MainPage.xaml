@@ -58,7 +58,7 @@
         <Button x:Name="jButton" Click="charButton_click" Content="j" HorizontalAlignment="Left" Height="75" Margin="592,484,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold" FontSize="30"/>
         <Button x:Name="kButton" Click="charButton_click" Content="k" HorizontalAlignment="Left" Height="75" Margin="670,484,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold" FontSize="30"/>
         <Button x:Name="lButton" Click="charButton_click" Content="l" HorizontalAlignment="Left" Height="75" Margin="748,484,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold" FontSize="30"/>
-        <Button x:Name="periodButton" Click="charButton_click" Content="." HorizontalAlignment="Left" Height="75" Margin="826,484,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold" FontSize="40"/>
+        <Button x:Name="periodButton" Click="charSpaceButton_click" Content="." HorizontalAlignment="Left" Height="75" Margin="826,484,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold" FontSize="40"/>
         <Button x:Name="enterButton" Click="enterButton_Click" Content="ENTER" HorizontalAlignment="Left" Height="75" Margin="904,484,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold" FontSize="18"/>
 
         <ToggleButton x:Name="shiftToggleButton" Click="shiftToggleButton_Click" Content="Shift" HorizontalAlignment="Left" Height="75" Margin="46,562,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold" FontSize="18" RenderTransformOrigin="0.653,-4.632"/>
@@ -70,7 +70,7 @@
         <Button x:Name="bButton" Click="charButton_click" Content="b" HorizontalAlignment="Left" Height="75" Margin="514,562,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold" FontSize="30"/>
         <Button x:Name="nButton" Click="charButton_click" Content="n" HorizontalAlignment="Left" Height="75" Margin="592,562,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold" FontSize="30"/>
         <Button x:Name="mButton" Click="charButton_click" Content="m" HorizontalAlignment="Left" Height="75" Margin="670,562,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold" FontSize="30"/>
-        <Button x:Name="commaButton" Click="charButton_click" Content="," HorizontalAlignment="Left" Height="75" Margin="748,562,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold" FontSize="40"/>
+        <Button x:Name="commaButton" Click="charSpaceButton_click" Content="," HorizontalAlignment="Left" Height="75" Margin="748,562,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold" FontSize="40"/>
         <Button x:Name="noButton" Click="charButton_click" Content="No" HorizontalAlignment="Left" Height="75" Margin="826,562,0,0" VerticalAlignment="Top" Width="75" Background="#FFE43B0D" FontWeight="Bold" FontSize="18"/>
         <Button x:Name="yesButton" Click="charButton_click" Content="Yes" HorizontalAlignment="Left" Height="75" Margin="904,562,0,0" VerticalAlignment="Top" Width="75" Background="#FF359112" FontWeight="Bold" FontSize="18"/>
     </Grid>
