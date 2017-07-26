@@ -61,7 +61,8 @@ namespace TeamGleason.Talk37.Keyboard
         {
             if (result.Text.Length > 0)
             {
-                result.Text = result.Text.Remove((result.Text.Length - 1), 1);
+                var lastCharLength = char.IsSurrogate(result.Text, result.Text.Length - 1) ? 2 : 1;
+                result.Text = result.Text.Remove((result.Text.Length - lastCharLength), lastCharLength);
             }
         }
 
