@@ -50,9 +50,10 @@ namespace TeamGleason.Talk37.Keyboard
             result.Text = "";
         }
 
-        private void emoji1Button_click(object sender, RoutedEventArgs e)
+        private void emojiButton_click(object sender, RoutedEventArgs e)
         {
-            theSpeech.Text = "No!!, I am sad...";
+            var button = (Button)sender;
+            AddCharToMessage(button.Content.ToString());
         }
 
         private void emoji2Button_click(object sender, RoutedEventArgs e)

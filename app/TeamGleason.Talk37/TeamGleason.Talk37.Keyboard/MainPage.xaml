@@ -14,28 +14,17 @@
 
         <TextBlock x:Name="theSpeech" HorizontalAlignment="Left" Height="64" Margin="118,203,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="740" Foreground="White"/>
 
-        <Button x:Name="emoji0Button" Click="emoji0Button_Click" HorizontalAlignment="Left" Height="75" Margin="46,328,0,0" VerticalAlignment="Top" Width="75" Background="#FFCEC364" FontWeight="Bold">
-            <Image Source="https://cdn.shopify.com/s/files/1/1061/1924/files/Emoji_Icon_-_Happy.png" />
-        </Button>
-        <Button x:Name="emoji1Button" Click="emoji1Button_click" HorizontalAlignment="Left" Height="75" Margin="124,328,0,0" VerticalAlignment="Top" Width="75" Background="#FFCEC364" FontWeight="Bold">
-            <Image Source="https://cdn.shopify.com/s/files/1/1061/1924/products/Very_sad_emoji_icon_png_grande.png" Margin="0,2,0,-2"/>
-        </Button>
-        <Button x:Name="emoji2Button" Click="emoji2Button_click" HorizontalAlignment="Left" Height="75" Margin="202,328,0,0" VerticalAlignment="Top" Width="75" Background="#FFCEC364" FontWeight="Bold">
-            <Image Source="http://www.kebuena.com.mx/wp-content/uploads/2016/04/http-prod.static9.net_.au-_-media-TV-T-The-Voice-2015-Latest-Week-6-Emojis-Our-Artists-Wish-Existed-ShockedJoeLiam.png"/>
-        </Button>
-        <Button x:Name="emoji3Button" Click="emoji3Button_click" HorizontalAlignment="Left" Height="75" Margin="280,328,0,0" VerticalAlignment="Top" Width="75" Background="#FFCEC364" FontWeight="Bold">
-            <Image Source="http://www.funny-emoticons.com/files/smileys-emoticons/crazy-emoticons/258-thats-disgusting.png"/>
-        </Button>
-        <Button x:Name="emoji4Button" Click="emoji4Button_click" HorizontalAlignment="Left" Height="75" Margin="358,328,0,0" VerticalAlignment="Top" Width="75" Background="#FFCEC364" FontWeight="Bold">
-            <Image Source="http://www.pngmart.com/files/1/Angry-Emoji-PNG-Photo.png"/>
-        </Button>
+        <Button x:Name="emoji0Button" Content="❤" Click="emojiButton_click" HorizontalAlignment="Left" Height="75" Margin="46,328,0,0" VerticalAlignment="Top" Width="75" Background="#FFCEC364" FontWeight="Bold"/>
+        <Button x:Name="emoji1Button" Content="☹"  Click="emojiButton_click" HorizontalAlignment="Left" Height="75" Margin="124,328,0,0" VerticalAlignment="Top" Width="75" Background="#FFCEC364" FontWeight="Bold"/>
+        <Button x:Name="emoji2Button" Content="💩" Click="emojiButton_click" HorizontalAlignment="Left" Height="75" Margin="202,328,0,0" VerticalAlignment="Top" Width="75" Background="#FFCEC364" FontWeight="Bold"/>
+        <Button x:Name="emoji3Button" Content="😡" Click="emojiButton_click" HorizontalAlignment="Left" Height="75" Margin="280,328,0,0" VerticalAlignment="Top" Width="75" Background="#FFCEC364" FontWeight="Bold"/>
+        <Button x:Name="emoji4Button" Content="😂" Click="emojiButton_click" HorizontalAlignment="Left" Height="75" Margin="358,328,0,0" VerticalAlignment="Top" Width="75" Background="#FFCEC364" FontWeight="Bold"/>
+
         <Button x:Name="spaceButton" Click="spaceButton_click" Content="SPACE" HorizontalAlignment="Left" Height="75" Margin="436,328,0,0" VerticalAlignment="Top" Width="153" Background="#FF888888" FontWeight="Bold"/>
-        <Button x:Name="emoji5Button" Click="emoji5Button_click" HorizontalAlignment="Left" Height="75" Margin="592,328,0,0" VerticalAlignment="Top" Width="75" Background="#FFCEC364" FontWeight="Bold">
-            <Image Source="http://blog.draperinc.com/wp-content/uploads/2016/04/Fearful_Face_Emoji.png"/>
-        </Button>
-        <Button x:Name="emoji6Button" Click="emoji6Button_click" HorizontalAlignment="Left" Height="75" Margin="670,328,0,0" VerticalAlignment="Top" Width="75" Background="#FFCEC364" FontWeight="Bold">
-            <Image Source="https://images.vexels.com/media/users/3/134603/isolated/preview/2dd101be195b2560fd452658bbdb259f-in-love-emoji-emoticon-by-vexels.png"/>
-        </Button>
+
+        <Button x:Name="emoji5Button" Content="😘" Click="emoji5Button_click" HorizontalAlignment="Left" Height="75" Margin="592,328,0,0" VerticalAlignment="Top" Width="75" Background="#FFCEC364" FontWeight="Bold"/>
+        <Button x:Name="emoji6Button" Content="😲"  Click="emoji6Button_click" HorizontalAlignment="Left" Height="75" Margin="670,328,0,0" VerticalAlignment="Top" Width="75" Background="#FFCEC364" FontWeight="Bold"/>
+
         <Button x:Name="emoji7Button" Click="emoji7Button_click" HorizontalAlignment="Left" Height="75" Margin="748,328,0,0" VerticalAlignment="Top" Width="75" Background="#FFCEC364" FontWeight="Bold">
             <Image Source="https://s-media-cache-ak0.pinimg.com/originals/91/86/a4/9186a4f4d3f24827af0cead5a779936c.png"/>
         </Button>
