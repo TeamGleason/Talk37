@@ -1,0 +1,87 @@
+﻿<Page
+    x:Class="TeamGleason.Talk37.Keyboard.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:TeamGleason.Talk37.Keyboard"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+
+    <Grid Background="#FF1A1A1A">
+        <TextBox x:Name="result" HorizontalAlignment="Left" Height="86" Margin="118,51,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="740" Foreground="White"/>
+
+        <TextBlock x:Name="theSpeech" HorizontalAlignment="Left" Height="64" Margin="118,203,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="740" Foreground="White"/>
+
+        <Button x:Name="emoji0Button" Click="emoji0Button_Click" HorizontalAlignment="Left" Height="75" Margin="46,328,0,0" VerticalAlignment="Top" Width="75" Background="#FFCEC364" FontWeight="Bold">
+            <Image Source="https://cdn.shopify.com/s/files/1/1061/1924/files/Emoji_Icon_-_Happy.png" />
+        </Button>
+        <Button x:Name="emoji1Button" Click="emoji1Button_click" HorizontalAlignment="Left" Height="75" Margin="124,328,0,0" VerticalAlignment="Top" Width="75" Background="#FFCEC364" FontWeight="Bold">
+            <Image Source="https://cdn.shopify.com/s/files/1/1061/1924/products/Very_sad_emoji_icon_png_grande.png" Margin="0,2,0,-2"/>
+        </Button>
+        <Button x:Name="emoji2Button" Click="emoji2Button_click" HorizontalAlignment="Left" Height="75" Margin="202,328,0,0" VerticalAlignment="Top" Width="75" Background="#FFCEC364" FontWeight="Bold">
+            <Image Source="http://www.kebuena.com.mx/wp-content/uploads/2016/04/http-prod.static9.net_.au-_-media-TV-T-The-Voice-2015-Latest-Week-6-Emojis-Our-Artists-Wish-Existed-ShockedJoeLiam.png"/>
+        </Button>
+        <Button x:Name="emoji3Button" Click="emoji3Button_click" HorizontalAlignment="Left" Height="75" Margin="280,328,0,0" VerticalAlignment="Top" Width="75" Background="#FFCEC364" FontWeight="Bold">
+            <Image Source="http://www.funny-emoticons.com/files/smileys-emoticons/crazy-emoticons/258-thats-disgusting.png"/>
+        </Button>
+        <Button x:Name="emoji4Button" Click="emoji4Button_click" HorizontalAlignment="Left" Height="75" Margin="358,328,0,0" VerticalAlignment="Top" Width="75" Background="#FFCEC364" FontWeight="Bold">
+            <Image Source="http://www.pngmart.com/files/1/Angry-Emoji-PNG-Photo.png"/>
+        </Button>
+        <Button x:Name="spaceButton" Click="spaceButton_click" Content="SPACE" HorizontalAlignment="Left" Height="75" Margin="436,328,0,0" VerticalAlignment="Top" Width="153" Background="#FF888888" FontWeight="Bold"/>
+        <Button x:Name="emoji5Button" Click="emoji5Button_click" HorizontalAlignment="Left" Height="75" Margin="592,328,0,0" VerticalAlignment="Top" Width="75" Background="#FFCEC364" FontWeight="Bold">
+            <Image Source="http://blog.draperinc.com/wp-content/uploads/2016/04/Fearful_Face_Emoji.png"/>
+        </Button>
+        <Button x:Name="emoji6Button" Click="emoji6Button_click" HorizontalAlignment="Left" Height="75" Margin="670,328,0,0" VerticalAlignment="Top" Width="75" Background="#FFCEC364" FontWeight="Bold">
+            <Image Source="https://images.vexels.com/media/users/3/134603/isolated/preview/2dd101be195b2560fd452658bbdb259f-in-love-emoji-emoticon-by-vexels.png"/>
+        </Button>
+        <Button x:Name="emoji7Button" Click="emoji7Button_click" HorizontalAlignment="Left" Height="75" Margin="748,328,0,0" VerticalAlignment="Top" Width="75" Background="#FFCEC364" FontWeight="Bold">
+            <Image Source="https://s-media-cache-ak0.pinimg.com/originals/91/86/a4/9186a4f4d3f24827af0cead5a779936c.png"/>
+        </Button>
+        <Button x:Name="emoji8Button" Click="emoji8Button_click" HorizontalAlignment="Left" Height="75" Margin="826,328,0,0" VerticalAlignment="Top" Width="75" Background="#FFCEC364" FontWeight="Bold">
+            <Image Source="https://cdn-insomniac.s3.amazonaws.com/emoji_sexface.png"/>
+        </Button>
+        <Button x:Name="emoji9Button" Click="emoji9Button_Click" HorizontalAlignment="Left" Height="75" Margin="904,328,0,0" VerticalAlignment="Top" Width="75" Background="#FFCEC364" FontWeight="Bold">
+            <Image Source="http://emojipedia-us.s3.amazonaws.com/cache/45/43/4543202f731f729d056cb94052db7810.png"/>
+        </Button>
+
+        <Button x:Name="wordBackButton" Click="wordBackButton_Click" Content="zZZ.." HorizontalAlignment="Left" Height="75" Margin="46,406,0,0" VerticalAlignment="Top" Width="75" Background="#FF5C5177" FontWeight="Bold"/>
+        <Button x:Name="qButton" Click="charButton_click" Content="q" HorizontalAlignment="Left" Height="75" Margin="124,406,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold"/>
+        <Button x:Name="wButton" Click="charButton_click" Content="w" HorizontalAlignment="Left" Height="75" Margin="202,406,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold"/>
+        <Button x:Name="eButton" Click="charButton_click" Content="e" HorizontalAlignment="Left" Height="75" Margin="280,406,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold"/>
+        <Button x:Name="rButton" Click="charButton_click" Content="r" HorizontalAlignment="Left" Height="75" Margin="358,406,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold"/>
+        <Button x:Name="tButton" Click="charButton_click" Content="t" HorizontalAlignment="Left" Height="75" Margin="436,406,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold"/>
+        <Button x:Name="yButton" Click="charButton_click" Content="y" HorizontalAlignment="Left" Height="75" Margin="514,406,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold"/>
+        <Button x:Name="uButton" Click="charButton_click" Content="u" HorizontalAlignment="Left" Height="75" Margin="592,406,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold"/>
+        <Button x:Name="iButton" Click="charButton_click" Content="i" HorizontalAlignment="Left" Height="75" Margin="670,406,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold"/>
+        <Button x:Name="oButton" Click="charButton_click" Content="o" HorizontalAlignment="Left" Height="75" Margin="748,406,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold"/>
+        <Button x:Name="pButton" Click="charButton_click" Content="p" HorizontalAlignment="Left" Height="75" Margin="826,406,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold"/>
+        <Button x:Name="backButton" Click="backButton_Click" Content="&#x2190;" HorizontalAlignment="Left" Height="75" Margin="904,406,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold" FontSize="40"/>
+
+        <ToggleButton x:Name="capsToggleButton" Click="capsToggleButton_Click" Content="CAPS" HorizontalAlignment="Left" Height="75" Margin="46,484,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold"/>
+        <Button x:Name="aButton" Click="charButton_click" Content="a" HorizontalAlignment="Left" Height="75" Margin="124,484,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold"/>
+        <Button x:Name="sButton" Click="charButton_click" Content="s" HorizontalAlignment="Left" Height="75" Margin="202,484,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold"/>
+        <Button x:Name="dButton" Click="charButton_click" Content="d" HorizontalAlignment="Left" Height="75" Margin="280,484,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold"/>
+        <Button x:Name="fButton" Click="charButton_click" Content="f" HorizontalAlignment="Left" Height="75" Margin="358,484,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold"/>
+        <Button x:Name="gButton" Click="charButton_click" Content="g" HorizontalAlignment="Left" Height="75" Margin="436,484,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold"/>
+        <Button x:Name="hButton" Click="charButton_click" Content="h" HorizontalAlignment="Left" Height="75" Margin="514,484,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold"/>
+        <Button x:Name="jButton" Click="charButton_click" Content="j" HorizontalAlignment="Left" Height="75" Margin="592,484,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold"/>
+        <Button x:Name="kButton" Click="charButton_click" Content="k" HorizontalAlignment="Left" Height="75" Margin="670,484,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold"/>
+        <Button x:Name="lButton" Click="charButton_click" Content="l" HorizontalAlignment="Left" Height="75" Margin="748,484,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold"/>
+        <Button x:Name="periodButton" Click="charButton_click" Content="." HorizontalAlignment="Left" Height="75" Margin="826,484,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold"/>
+        <Button x:Name="enterButton" Click="enterButton_Click" Content="ENTER" HorizontalAlignment="Left" Height="75" Margin="904,484,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold"/>
+
+        <ToggleButton x:Name="shiftToggleButton" Click="shiftToggleButton_Click" Content="Shift" HorizontalAlignment="Left" Height="75" Margin="46,562,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold" RenderTransformOrigin="0.653,-4.632"/>
+        <Button x:Name="ctrlButton" Click="ctrlButton_click" Content="CLEAR" HorizontalAlignment="Left" Height="75" Margin="124,562,0,0" VerticalAlignment="Top" Width="75" Background="#FF057779" FontWeight="Bold"/>
+        <Button x:Name="zButton" Click="charButton_click" Content="z" HorizontalAlignment="Left" Height="75" Margin="202,562,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold"/>
+        <Button x:Name="xButton" Click="charButton_click" Content="x" HorizontalAlignment="Left" Height="75" Margin="280,562,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold"/>
+        <Button x:Name="cButton" Click="charButton_click" Content="c" HorizontalAlignment="Left" Height="75" Margin="358,562,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold"/>
+        <Button x:Name="vButton" Click="charButton_click" Content="v" HorizontalAlignment="Left" Height="75" Margin="436,562,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold"/>
+        <Button x:Name="bButton" Click="charButton_click" Content="b" HorizontalAlignment="Left" Height="75" Margin="514,562,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold"/>
+        <Button x:Name="nButton" Click="charButton_click" Content="n" HorizontalAlignment="Left" Height="75" Margin="592,562,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold"/>
+        <Button x:Name="mButton" Click="charButton_click" Content="m" HorizontalAlignment="Left" Height="75" Margin="670,562,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold"/>
+        <Button x:Name="commaButton" Click="charButton_click" Content="," HorizontalAlignment="Left" Height="75" Margin="748,562,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold"/>
+        <Button x:Name="noButton" Click="charButton_click" Content="No" HorizontalAlignment="Left" Height="75" Margin="826,562,0,0" VerticalAlignment="Top" Width="75" Background="#FFE43B0D" FontWeight="Bold"/>
+        <Button x:Name="yesButton" Click="charButton_click" Content="Yes" HorizontalAlignment="Left" Height="75" Margin="904,562,0,0" VerticalAlignment="Top" Width="75" Background="#FF359112" FontWeight="Bold"/>
+    </Grid>
+</Page>
