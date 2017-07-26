@@ -34,7 +34,10 @@ namespace TeamGleason.Talk37.ComSupport
                 await _arduinoConnectivity.UploadCompressedSequence(marker.Text);
                 await Task.Delay(marker.Time);
             }
+        }
 
+        public async void ClearDisplay()
+        {
             await _arduinoConnectivity.ClearSequence();
         }
 
