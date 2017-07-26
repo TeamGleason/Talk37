@@ -55,45 +55,62 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="beepy_angry.wav">
+    <Content Include="Assets\beepy_angry.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="beepy_bird.wav">
+    <Content Include="Assets\beepy_bird.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="beepy_disgust.wav">
+    <Content Include="Assets\beepy_disgust.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="beepy_fear.wav">
+    <Content Include="Assets\beepy_fear.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="beepy_happy.wav">
+    <Content Include="Assets\beepy_happy.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="beepy_heart.wav">
+    <Content Include="Assets\beepy_heart.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="beepy_meh.wav">
+    <Content Include="Assets\beepy_meh.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="beepy_poop.wav">
+    <Content Include="Assets\beepy_poop.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="beepy_poop_2.wav">
+    <Content Include="Assets\beepy_poop_2.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="beepy_sad.wav">
+    <Content Include="Assets\beepy_sad.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="beepy_smooch.wav">
+    <Content Include="Assets\beepy_smooch.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="beepy_surprise.wav">
+    <Content Include="Assets\beepy_surprise.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="beepy_winkykiss.wav">
+    <Content Include="Assets\beepy_winkykiss.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\love_mono.wav" />
+    <Content Include="Assets\okay_mono.wav" />
+    <Content Include="Assets\poop_mono.wav" />
+    <Content Include="Assets\talky_angry.wav" />
+    <Content Include="Assets\talky_disgust.wav" />
+    <Content Include="Assets\talky_happy.wav" />
+    <Content Include="Assets\talky_sad.wav" />
+    <Content Include="Assets\talky_surprise.wav" />
+    <Content Include="Assets\unicorn.wav" />
+    <Content Include="Assets\voxy_angry.wav" />
+    <Content Include="Assets\voxy_disgust.wav" />
+    <Content Include="Assets\voxy_fear.wav" />
+    <Content Include="Assets\voxy_happy.wav" />
+    <Content Include="Assets\voxy_laugh.wav" />
+    <Content Include="Assets\voxy_laugh2.wav" />
+    <Content Include="Assets\voxy_sad.wav" />
+    <Content Include="Assets\voxy_surprised.wav" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
