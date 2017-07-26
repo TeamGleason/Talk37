@@ -15,30 +15,44 @@ namespace TeamGleason.Talk37.SpeechSupport
     {
         readonly SpeechSynthesizer _synthesizer = new SpeechSynthesizer();
 
+        static int NextPosition(string text, int previousPosition)
+        {
+            var increment = char.IsSurrogatePair(text, previousPosition) ? 2 : 1;
+            var nextPosition = previousPosition + increment;
+            return nextPosition;
+        }
+
         /// <summary>
         /// Speak given text.
         /// </summary>
         /// <param name="text">The text.</param>
         public async Task<BuiltSpeech> SayText(string text)
         {
-            for (var index = 0; index < text.Length; index++)
-            {
-                Debug.WriteLineIf(char.IsHighSurrogate(text, index), $"{index} is high surrogate");
-                Debug.WriteLineIf(char.IsLowSurrogate(text, index), $"{index} is low surrogate");
-                Debug.WriteLineIf(char.IsSurrogatePair(text, index), $"{index} is surrogate pair");
-                Debug.WriteLineIf(char.IsSurrogate(text, index), $"{index} is surrogate");
-            }
-
-            var position = 0;
-            while (position < text.Length)
-            {
-                Debug.WriteLine($"{position} is {char.ConvertToUtf32(text, position)}");
-                position += char.IsSurrogatePair(text, position) ? 2 : 1;
-            }
-
             var ssmlBuilder = new StringBuilder("<speak version='1.0' xmlns='http://www.w3.org/2001/10/synthesis' xml:lang='en-US'>");
             ssmlBuilder.Append("<mark name='Start'/>");
-            ssmlBuilder.Append(text);
+
+            var start = 0;
+            var index = 0;
+            while (index < text.Length)
+            {
+                var utf32 = char.ConvertToUtf32(text, index);
+                var description = EmojiDescriptions.Get(utf32);
+                var foundEmoji = description != null;
+
+                if (foundEmoji)
+                {
+                    ssmlBuilder.Append(text.Substring(start, index - start));
+                    index = NextPosition(text, index);
+                    start = index;
+                    ssmlBuilder.Append($"<audio src='{description.AudioFileName}'/>");
+                }
+                else
+                {
+                    index = NextPosition(text, index);
+                }
+            }
+            ssmlBuilder.Append(text.Substring(start));
+
             ssmlBuilder.Append("<mark name='Finish'/>");
             ssmlBuilder.Append("</speak>");
 

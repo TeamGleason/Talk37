@@ -112,6 +112,7 @@
   <ItemGroup>
     <Compile Include="BuiltSpeech.cs" />
     <Compile Include="EmojiDescription.cs" />
+    <Compile Include="EmojiDescriptions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TextToSpeechEngine.cs" />
     <EmbeddedResource Include="Properties\TeamGleason.Talk37.SpeechSupport.rd.xml" />
@@ -120,6 +121,11 @@
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>5.2.3</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="poop_mono.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

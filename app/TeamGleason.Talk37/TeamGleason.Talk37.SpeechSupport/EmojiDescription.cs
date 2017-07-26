@@ -8,6 +8,13 @@ namespace TeamGleason.Talk37.SpeechSupport
     /// </summary>
     public class EmojiDescription
     {
+        internal EmojiDescription(int utf32, string audioFileName, string visualString)
+        {
+            Utf32s = new[] { utf32 };
+            AudioFileName = audioFileName;
+            VisualString = visualString;
+        }
+
         /// <summary>
         /// The UTF-32 characters that this represents.
         /// </summary>
@@ -16,7 +23,7 @@ namespace TeamGleason.Talk37.SpeechSupport
         /// <summary>
         /// File containing the audio.
         /// </summary>
-        public string AudioFile { get; }
+        public string AudioFileName { get; }
 
         /// <summary>
         /// Duration of the audio file.
