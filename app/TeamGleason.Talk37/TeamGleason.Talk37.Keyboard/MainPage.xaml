@@ -9,6 +9,7 @@
 
 
     <Grid Background="#FF1A1A1A">
+        <MediaElement x:Name="TheMedia"/>
         <TextBox x:Name="result" HorizontalAlignment="Left" Height="86" Margin="118,51,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="740" Foreground="White"/>
 
         <TextBlock x:Name="theSpeech" HorizontalAlignment="Left" Height="64" Margin="118,203,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="740" Foreground="White"/>

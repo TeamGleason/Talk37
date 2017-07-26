@@ -1,7 +1,5 @@
 ﻿using System;
-using Windows.ApplicationModel.Resources.Core;
-using Windows.Media.Playback;
-using Windows.Media.SpeechSynthesis;
+using TeamGleason.Talk37.SpeechSupport;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -14,7 +12,8 @@ namespace TeamGleason.Talk37.Keyboard
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        
+        readonly TextToSpeechEngine _engine = new TextToSpeechEngine();
+
         public MainPage()
         {
             this.InitializeComponent();
@@ -116,9 +115,15 @@ namespace TeamGleason.Talk37.Keyboard
             RemoveCharFromMessage();
         }
 
-        private void enterButton_Click(object sender, RoutedEventArgs e)
+        async void enterButton_Click(object sender, RoutedEventArgs e)
         {
-            theSpeech.Text = result.Text;
+            var text = result.Text;
+            result.SelectAll();
+
+            var stream = await _engine.SayText(text);
+
+            TheMedia.SetSource(stream, stream.ContentType);
+            TheMedia.Play();
         }
 
         private void allKeysToLower()

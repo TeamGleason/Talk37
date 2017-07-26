@@ -2168,6 +2168,13 @@
             "rid": "aot"
           }
         }
+      },
+      "TeamGleason.Talk37.SpeechSupport/1.0.0": {
+        "type": "project",
+        "framework": "Unsupported,Version=v0.0",
+        "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.3"
+        }
       }
     },
     "UAP,Version=v10.0/win10-arm": {
@@ -4419,6 +4426,13 @@
         },
         "runtime": {
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
+        }
+      },
+      "TeamGleason.Talk37.SpeechSupport/1.0.0": {
+        "type": "project",
+        "framework": "Unsupported,Version=v0.0",
+        "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.3"
         }
       }
     },
@@ -6711,6 +6725,13 @@
         "runtime": {
           "runtimes/aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
+      },
+      "TeamGleason.Talk37.SpeechSupport/1.0.0": {
+        "type": "project",
+        "framework": "Unsupported,Version=v0.0",
+        "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.3"
+        }
       }
     },
     "UAP,Version=v10.0/win10-x64": {
@@ -8971,6 +8992,13 @@
         },
         "runtime": {
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
+        }
+      },
+      "TeamGleason.Talk37.SpeechSupport/1.0.0": {
+        "type": "project",
+        "framework": "Unsupported,Version=v0.0",
+        "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.3"
         }
       }
     },
@@ -11272,6 +11300,13 @@
         "runtime": {
           "runtimes/aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
+      },
+      "TeamGleason.Talk37.SpeechSupport/1.0.0": {
+        "type": "project",
+        "framework": "Unsupported,Version=v0.0",
+        "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.3"
+        }
       }
     },
     "UAP,Version=v10.0/win10-x86": {
@@ -13532,6 +13567,13 @@
         },
         "runtime": {
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
+        }
+      },
+      "TeamGleason.Talk37.SpeechSupport/1.0.0": {
+        "type": "project",
+        "framework": "Unsupported,Version=v0.0",
+        "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.3"
         }
       }
     },
@@ -15832,6 +15874,13 @@
         },
         "runtime": {
           "runtimes/aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
+        }
+      },
+      "TeamGleason.Talk37.SpeechSupport/1.0.0": {
+        "type": "project",
+        "framework": "Unsupported,Version=v0.0",
+        "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.3"
         }
       }
     }
@@ -22002,6 +22051,11 @@
         "system.xml.xmlserializer.4.0.11.nupkg.sha512",
         "system.xml.xmlserializer.nuspec"
       ]
+    },
+    "TeamGleason.Talk37.SpeechSupport/1.0.0": {
+      "type": "project",
+      "path": "../TeamGleason.Talk37.SpeechSupport/TeamGleason.Talk37.SpeechSupport.csproj",
+      "msbuildProject": "../TeamGleason.Talk37.SpeechSupport/TeamGleason.Talk37.SpeechSupport.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -22019,7 +22073,16 @@
       "projectName": "TeamGleason.Talk37.Keyboard",
       "projectPath": "C:\\github.com\\TeamGleason\\Talk37\\app\\TeamGleason.Talk37\\TeamGleason.Talk37.Keyboard\\TeamGleason.Talk37.Keyboard.csproj",
       "projectJsonPath": "C:\\github.com\\TeamGleason\\Talk37\\app\\TeamGleason.Talk37\\TeamGleason.Talk37.Keyboard\\project.json",
-      "projectStyle": "ProjectJson"
+      "projectStyle": "ProjectJson",
+      "frameworks": {
+        "uap10.0": {
+          "projectReferences": {
+            "C:\\github.com\\TeamGleason\\Talk37\\app\\TeamGleason.Talk37\\TeamGleason.Talk37.SpeechSupport\\TeamGleason.Talk37.SpeechSupport.csproj": {
+              "projectPath": "C:\\github.com\\TeamGleason\\Talk37\\app\\TeamGleason.Talk37\\TeamGleason.Talk37.SpeechSupport\\TeamGleason.Talk37.SpeechSupport.csproj"
+            }
+          }
+        }
+      }
     },
     "dependencies": {
       "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.3"
