@@ -42,16 +42,21 @@ namespace TeamGleason.Talk37.ComSupport
                     await Task.Delay(delay);
                 }
 
-                switch (marker.Text)
-                {
-                    default:
-                        await _arduinoConnectivity.UploadCompressedSequence(marker.Text);
-                        break;
+                await PlayAnimationAsync(marker.Text);
+            }
+        }
 
-                    case "-":
-                        await ClearDisplayAsync();
-                        break;
-                }
+        public async Task PlayAnimationAsync(string visualString)
+        {
+            switch (visualString)
+            {
+                default:
+                    await _arduinoConnectivity.UploadCompressedSequence(visualString);
+                    break;
+
+                case "-":
+                    await ClearDisplayAsync();
+                    break;
             }
         }
 

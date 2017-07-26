@@ -15,11 +15,35 @@ namespace TeamGleason.Talk37.Keyboard
     {
         readonly TextToSpeechEngine _engine = new TextToSpeechEngine();
 
+        bool _isShowingIdle;
+
         DeviceConnection _connection;
 
         public MainPage()
         {
             this.InitializeComponent();
+
+            result.SelectionChanged += OnSelectionChanged;
+        }
+
+        async void OnSelectionChanged(object sender, RoutedEventArgs e)
+        {
+            var isIdle = result.SelectionStart == 0 && result.SelectionLength == result.Text.Length;
+            if (_isShowingIdle != isIdle)
+            {
+                _isShowingIdle = isIdle;
+
+                var description = EmojiDescriptions.Get(isIdle ? EmojiDescriptions.Idle : EmojiDescriptions.Editing);
+                if (description != null)
+                {
+                    if (_connection == null)
+                    {
+                        _connection = await DeviceConnection.CreateAsync("COM5");
+                    }
+
+                    var task = _connection.PlayAnimationAsync(description.VisualString);
+                }
+            }
         }
 
         private void AddCharToMessage(string c)

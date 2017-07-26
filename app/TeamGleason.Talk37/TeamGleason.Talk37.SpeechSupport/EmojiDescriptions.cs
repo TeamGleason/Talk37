@@ -10,9 +10,9 @@ namespace TeamGleason.Talk37.SpeechSupport
     /// </summary>
     public static class EmojiDescriptions
     {
-        internal const int Emotionless = -1;
-        internal const int Idle = -2;
-        internal const int Editing = -3;
+        public const int Emotionless = -1;
+        public const int Idle = -2;
+        public const int Editing = -3;
 
         static readonly string Prefix = Path.Combine(Path.GetFileNameWithoutExtension(typeof(EmojiDescriptions).GetTypeInfo().Assembly.ManifestModule.Name), "Assets");
         static readonly string Theme = "beepy";
