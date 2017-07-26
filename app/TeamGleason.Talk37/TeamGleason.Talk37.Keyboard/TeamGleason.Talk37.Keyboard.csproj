@@ -82,6 +82,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TeamGleason.Talk37.ComSupport\TeamGleason.Talk37.ComSupport.csproj">
+      <Project>{230d028f-62e2-4d6d-b5d8-250507f3c7fc}</Project>
+      <Name>TeamGleason.Talk37.ComSupport</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TeamGleason.Talk37.SpeechSupport\TeamGleason.Talk37.SpeechSupport.csproj">
       <Project>{3145c0b5-d9cd-4ebc-8c4f-6fa00cc6215f}</Project>
       <Name>TeamGleason.Talk37.SpeechSupport</Name>

@@ -17,20 +17,19 @@ namespace TeamGleason.Talk37.ComSupport
 {
     public class DeviceConnection
     {
-        DeviceConnection(string comPort)
+        DeviceConnection()
         {
             _arduinoConnectivity = new ArduinoConnectivityUWP();
-            _comPort = comPort;
         }
 
-        public async Task<DeviceConnection> CreateAsync(string comPort)
+        public static async Task<DeviceConnection> CreateAsync(string comPort)
         {
-            var connection = new DeviceConnection(comPort);
-            await connection._arduinoConnectivity.Connect(_comPort);
-            return connection;
+            var connection = new DeviceConnection();
+            var connected = await connection._arduinoConnectivity.Connect(comPort);
+            return connected ? connection : null;
         }
 
-        public async void PlayAnimationSequence(List<IMediaMarker> markers)
+        public async Task PlayAnimationSequenceAsync(IReadOnlyList<IMediaMarker> markers)
         {
             var startTime = DateTime.UtcNow;
 
@@ -43,16 +42,24 @@ namespace TeamGleason.Talk37.ComSupport
                     await Task.Delay(delay);
                 }
 
-                await _arduinoConnectivity.UploadCompressedSequence(marker.Text);
+                switch (marker.Text)
+                {
+                    default:
+                        await _arduinoConnectivity.UploadCompressedSequence(marker.Text);
+                        break;
+
+                    case "-":
+                        await ClearDisplayAsync();
+                        break;
+                }
             }
         }
 
-        public async void ClearDisplay()
+        public async Task ClearDisplayAsync()
         {
             await _arduinoConnectivity.ClearSequence();
         }
 
         private ArduinoConnectivityUWP _arduinoConnectivity;
-        private string _comPort;
     }
 }

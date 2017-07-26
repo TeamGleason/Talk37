@@ -1,4 +1,5 @@
 ﻿using System;
+using TeamGleason.Talk37.ComSupport;
 using TeamGleason.Talk37.SpeechSupport;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -13,6 +14,8 @@ namespace TeamGleason.Talk37.Keyboard
     public sealed partial class MainPage : Page
     {
         readonly TextToSpeechEngine _engine = new TextToSpeechEngine();
+
+        DeviceConnection _connection;
 
         public MainPage()
         {
@@ -49,7 +52,7 @@ namespace TeamGleason.Talk37.Keyboard
         {
             Button btn = (Button)sender;
             String keyword = btn.Content.ToString();
-            AddCharToMessage(keyword+" ");
+            AddCharToMessage(keyword + " ");
             if (shiftToggleButton.IsChecked == true)
             {
                 shiftToggleButton.IsChecked = false;
@@ -89,9 +92,15 @@ namespace TeamGleason.Talk37.Keyboard
             var text = result.Text;
             result.SelectAll();
 
+            if (_connection == null)
+            {
+                _connection = await DeviceConnection.CreateAsync("COM5");
+            }
+
             var stream = await _engine.SayText(text);
 
             TheMedia.SetSource(stream, stream.ContentType);
+            var task = _connection?.PlayAnimationSequenceAsync(stream.Markers);
             TheMedia.Play();
         }
 
