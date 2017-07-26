@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
 
 namespace TeamGleason.Talk37.SpeechSupport
 {
@@ -8,6 +10,8 @@ namespace TeamGleason.Talk37.SpeechSupport
     /// </summary>
     public static class EmojiDescriptions
     {
+        static readonly string Prefix = Path.GetFileNameWithoutExtension(typeof(EmojiDescriptions).GetTypeInfo().Assembly.ManifestModule.Name);
+
         static readonly Dictionary<int, EmojiDescription> _emojis = new Dictionary<int, EmojiDescription>();
 
         static void AddEmoji(EmojiDescription description)
@@ -20,7 +24,7 @@ namespace TeamGleason.Talk37.SpeechSupport
 
         static void AddEmoji(int utf32, string audioFileName, string visualString)
         {
-            var description = new EmojiDescription(utf32, "TeamGleason.Talk37.SpeechSupport\\" + audioFileName, visualString);
+            var description = new EmojiDescription(utf32, Path.Combine(Prefix, audioFileName), visualString);
             AddEmoji(description);
         }
 

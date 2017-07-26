@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Media.SpeechSynthesis;
@@ -26,7 +23,7 @@ namespace TeamGleason.Talk37.SpeechSupport
         /// Speak given text.
         /// </summary>
         /// <param name="text">The text.</param>
-        public async Task<BuiltSpeech> SayText(string text)
+        public async Task<SpeechSynthesisStream> SayText(string text)
         {
             var ssmlBuilder = new StringBuilder("<speak version='1.0' xmlns='http://www.w3.org/2001/10/synthesis' xml:lang='en-US'>");
             ssmlBuilder.Append("<mark name='Start'/>");
@@ -60,14 +57,7 @@ namespace TeamGleason.Talk37.SpeechSupport
 
             var stream = await _synthesizer.SynthesizeSsmlToStreamAsync(ssml);
 
-            foreach (var mark in stream.Markers)
-            {
-                Debug.WriteLine($"{mark.Text} @ {mark.Time.Milliseconds}ms");
-            }
-
-            var speech = new BuiltSpeech(stream);
-
-            return speech;
+            return stream;
         }
     }
 }

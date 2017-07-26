@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using System.IO;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -24,14 +23,14 @@ namespace TeamGleason.Talk37.SpeechSupport.Harness
             var text = TheTextBox.Text;
             TheTextBox.SelectAll();
 
-            var speech = await _engine.SayText(text);
+            var stream = await _engine.SayText(text);
 
-            foreach (var mark in speech.Stream.Markers)
+            foreach (var mark in stream.Markers)
             {
                 Debug.WriteLine($"{mark.Text} @ {mark.Time.Milliseconds}ms");
             }
 
-            TheMedia.SetSource(speech.Stream, speech.Stream.ContentType);
+            TheMedia.SetSource(stream, stream.ContentType);
             TheMedia.Play();
         }
     }
