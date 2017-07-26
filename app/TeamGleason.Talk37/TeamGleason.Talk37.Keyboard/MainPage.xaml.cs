@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using TeamGleason.Talk37.ComSupport;
 using TeamGleason.Talk37.SpeechSupport;
 using Windows.UI.Xaml;
@@ -26,6 +27,16 @@ namespace TeamGleason.Talk37.Keyboard
             result.SelectionChanged += OnSelectionChanged;
         }
 
+        async Task<DeviceConnection> GetDeviceAsync()
+        {
+            if (_connection == null)
+            {
+                _connection = await DeviceConnection.CreateAsync("COM5");
+            }
+
+            return _connection;
+        }
+
         async void OnSelectionChanged(object sender, RoutedEventArgs e)
         {
             var isIdle = result.SelectionStart == 0 && result.SelectionLength == result.Text.Length;
@@ -36,12 +47,7 @@ namespace TeamGleason.Talk37.Keyboard
                 var description = EmojiDescriptions.Get(isIdle ? EmojiDescriptions.Idle : EmojiDescriptions.Editing);
                 if (description != null)
                 {
-                    if (_connection == null)
-                    {
-                        _connection = await DeviceConnection.CreateAsync("COM5");
-                    }
-
-                    var task = _connection.PlayAnimationAsync(description.VisualString);
+                    var task = (await GetDeviceAsync())?.PlayAnimationAsync(description.VisualString);
                 }
             }
         }
@@ -116,15 +122,12 @@ namespace TeamGleason.Talk37.Keyboard
             var text = result.Text;
             result.SelectAll();
 
-            if (_connection == null)
-            {
-                _connection = await DeviceConnection.CreateAsync("COM5");
-            }
+            var connection = await GetDeviceAsync();
 
             var stream = await _engine.SayText(text);
 
             TheMedia.SetSource(stream, stream.ContentType);
-            var task = _connection?.PlayAnimationSequenceAsync(stream.Markers);
+            var task = connection?.PlayAnimationSequenceAsync(stream.Markers);
             TheMedia.Play();
         }
 
