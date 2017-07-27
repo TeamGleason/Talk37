@@ -41,7 +41,7 @@
 
         <TextBlock x:Name="theSpeech" TextWrapping="Wrap" Text="" Foreground="#FF020202" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="8" Visibility="Collapsed"/>
 
-        <Rectangle Grid.RowSpan="4" Grid.ColumnSpan="3" Grid.Column="9" Fill="#FFAD2EB7"/>
+        <Rectangle Grid.RowSpan="3" Grid.ColumnSpan="3" Grid.Column="9" Fill="#FFAD2EB7"/>
 
         <Button x:Name="happyEmojiButton" Content="😂" Click="emojiButton_click" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FF1A2019" FontWeight="Bold" FontSize="40" Grid.Row="4"/>
         <Button x:Name="sadEmojiButton" Content="☹"  Click="emojiButton_click" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" FontWeight="Bold" FontSize="40" Grid.Row="4" Grid.Column="1" BorderBrush="Transparent"/>
@@ -109,5 +109,10 @@
         <Button x:Name="BrightFutureButton2Private" Content="😎" Click="immediateEmojiButton_click" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" FontWeight="Bold" FontSize="40" Grid.Row="2" Grid.Column="11"/>
         <Button x:Name="playButton" Click="enterButton_Click" Content="&#x25b6;" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FF525252" FontWeight="Bold" FontSize="18" Grid.Row="3" Foreground="White" FontFamily="Segoe UI Symbol"/>
         <Button x:Name="clearXButton" Click="clearButton_click" Content="&#xE894;" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontWeight="Bold" FontSize="36" Grid.Row="3" Grid.Column="8" Foreground="Black" FontFamily="Segoe MDL2 Assets" Background="Transparent"/>
+
+
+        <Button x:Name="Emoji3ButtonPublic" Content="😒"  Click="immediateEmojiButton_click" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" FontWeight="Bold" FontSize="40" Grid.Row="1" Grid.Column="2"/>
+        <Button x:Name="Emoji5ButtonPublic" Content="😂"  Click="immediateEmojiButton_click" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" FontWeight="Bold" FontSize="40" Grid.Row="1" Grid.Column="4"/>
+        <Button x:Name="Emoji7ButtonPublic" Content="😲"  Click="immediateEmojiButton_click" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" FontWeight="Bold" FontSize="40" Grid.Row="1" Grid.Column="6"/>
     </Grid>
 </Page>
