@@ -50,7 +50,7 @@ namespace TeamGleason.Talk37.Keyboard
                     break;
                 case GazePointerState.Dwell:
                     _gazePointer.InvokeTarget(button);
-                    break;
+                    goto case GazePointerState.Exit;
                 case GazePointerState.Exit:
                     button.BorderThickness = new Thickness(0);
                     break;
