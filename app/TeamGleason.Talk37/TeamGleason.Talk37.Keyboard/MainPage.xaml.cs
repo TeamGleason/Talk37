@@ -4,21 +4,24 @@ using TeamGleason.Talk37.ComSupport;
 using TeamGleason.Talk37.SpeechSupport;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
+using Windows.UI;
 
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
+using GazeInput;
+
 
 namespace TeamGleason.Talk37.Keyboard
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class MainPage : Page
     {
         readonly TextToSpeechEngine _engine = new TextToSpeechEngine();
 
         bool _isShowingIdle;
+        GazePointer _gazePointer;
 
         DeviceConnection _connection;
+
+        Brush _hoverBrush;
 
         string _comPort = "COM5";
 
@@ -27,6 +30,38 @@ namespace TeamGleason.Talk37.Keyboard
             this.InitializeComponent();
 
             result.SelectionChanged += OnSelectionChanged;
+            
+            _hoverBrush = new SolidColorBrush(Colors.IndianRed);
+
+            _gazePointer = new GazePointer(this);
+            _gazePointer.Filter = new OneEuroFilter();
+
+            _gazePointer.CursorRadius = 5;
+            _gazePointer.IsCursorVisible = true;
+
+            _gazePointer.GazePointerEvent += OnGazePointerEvent;
+        }
+
+
+        private void OnGazePointerEvent(GazePointer sender, GazePointerEventArgs ea)
+        {
+            var button = ea.HitTarget as Button;
+            if (button == null)
+                return;
+
+            switch (ea.State)
+            {
+                case GazePointerState.Fixation:
+                    button.BorderBrush = _hoverBrush;
+                    button.BorderThickness = new Thickness(5);
+                    break;
+                case GazePointerState.Dwell:
+                    _gazePointer.InvokeTarget(button);
+                    goto case GazePointerState.Exit;
+                case GazePointerState.Exit:
+                    button.BorderThickness = new Thickness(0);
+                    break;
+            }
         }
 
         async Task<DeviceConnection> GetDeviceAsync()
@@ -57,6 +92,7 @@ namespace TeamGleason.Talk37.Keyboard
         private void AddCharToMessage(string c)
         {
             result.Text += c;
+            result.Select(result.Text.Length, 0);
         }
 
         private void RemoveCharFromMessage()
