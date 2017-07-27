@@ -5,64 +5,89 @@
     xmlns:local="using:TeamGleason.Talk37.Keyboard"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    mc:Ignorable="d" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"  d:DesignHeight="768" d:DesignWidth="1024">
 
 
     <Grid Background="#FF1A1A1A">
-        <MediaElement x:Name="TheMedia"/>
-        <TextBox x:Name="result" HorizontalAlignment="Left" Height="86" Margin="118,51,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="740" Foreground="White"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <!--<ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>-->
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <MediaElement x:Name="TheMedia" Margin="42,33,42.333,76.667" Grid.Row="3"/>
+        <TextBox x:Name="result" HorizontalAlignment="Left" Height="86" Margin="32.667,8,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="740" Foreground="White" Grid.ColumnSpan="10" Grid.Column="1" Grid.Row="3"/>
+        <Button x:Name="poopEmojiButton" Content="💩" Click="emojiButton_click" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FFCEC364" FontWeight="Bold" FontSize="40" Grid.Row="4" Grid.Column="9"/>
 
-        <TextBlock x:Name="theSpeech" HorizontalAlignment="Left" Height="64" Margin="118,203,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="740" Foreground="White"/>
+        <TextBlock x:Name="theSpeech" TextWrapping="Wrap" Text="" Foreground="White" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="10"/>
 
-        <Button x:Name="happyEmojiButton" Content="😂" Click="emojiButton_click" HorizontalAlignment="Left" Height="75" Margin="46,328,0,0" VerticalAlignment="Top" Width="75" Background="#FFCEC364" FontWeight="Bold" FontSize="40"/>
-        <Button x:Name="sadEmojiButton" Content="☹"  Click="emojiButton_click" HorizontalAlignment="Left" Height="75" Margin="124,328,0,0" VerticalAlignment="Top" Width="75" Background="#FFCEC364" FontWeight="Bold" FontSize="40"/>
-        <Button x:Name="surpriseEmojiButton" Content="😲" Click="emojiButton_click" HorizontalAlignment="Left" Height="75" Margin="202,328,0,0" VerticalAlignment="Top" Width="75" Background="#FFCEC364" FontWeight="Bold" FontSize="40"/>
-        <Button x:Name="disgustEmojiButton" Content="😒" Click="emojiButton_click" HorizontalAlignment="Left" Height="75" Margin="280,328,0,0" VerticalAlignment="Top" Width="75" Background="#FFCEC364" FontWeight="Bold" FontSize="40"/>
-        <Button x:Name="angerEmojiButton" Content="😡" Click="emojiButton_click" HorizontalAlignment="Left" Height="75" Margin="358,328,0,0" VerticalAlignment="Top" Width="75" Background="#FFCEC364" FontWeight="Bold" FontSize="40"/>
-        <Button x:Name="spaceButton" Click="spaceButton_click" Content="SPACE" HorizontalAlignment="Left" Height="75" Margin="436,328,0,0" VerticalAlignment="Top" Width="153" Background="#FF888888" FontWeight="Bold" FontSize="18"/>
-        <Button x:Name="fearEmojiButton" Content="😱" Click="emojiButton_click" HorizontalAlignment="Left" Height="75" Margin="592,328,0,0" VerticalAlignment="Top" Width="75" Background="#FFCEC364" FontWeight="Bold" FontSize="40"/>
-        <Button x:Name="loveEmojiButton" Content="❤"  Click="emojiButton_click" HorizontalAlignment="Left" Height="75" Margin="670,328,0,0" VerticalAlignment="Top" Width="75" Background="#FFCEC364" FontWeight="Bold" FontSize="40"/>
-        <Button x:Name="poopEmojiButton" Content="💩" Click="emojiButton_click" HorizontalAlignment="Left" Height="75" Margin="748,328,0,0" VerticalAlignment="Top" Width="75" Background="#FFCEC364" FontWeight="Bold" FontSize="40"/>
-        <Button x:Name="winkyEmojiButton" Content="😘" Click="emojiButton_click" HorizontalAlignment="Left" Height="75" Margin="826,328,0,0" VerticalAlignment="Top" Width="75" Background="#FFCEC364" FontWeight="Bold" FontSize="40"/>
-        <Button x:Name="okayEmojiButton" Content="👌" Click="emojiButton_click" HorizontalAlignment="Left" Height="75" Margin="904,328,0,0" VerticalAlignment="Top" Width="75" Background="#FFCEC364" FontWeight="Bold" FontSize="40"/>
+        <Button x:Name="happyEmojiButton" Content="😂" Click="emojiButton_click" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FFCEC364" FontWeight="Bold" FontSize="40" Grid.Row="4"/>
+        <Button x:Name="sadEmojiButton" Content="☹"  Click="emojiButton_click" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FFCEC364" FontWeight="Bold" FontSize="40" Grid.Row="4" Grid.Column="1"/>
+        <Button x:Name="surpriseEmojiButton" Content="😲" Click="emojiButton_click" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FFCEC364" FontWeight="Bold" FontSize="40" Grid.Row="4" Grid.Column="2"/>
+        <Button x:Name="disgustEmojiButton" Content="😒" Click="emojiButton_click" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FFCEC364" FontWeight="Bold" FontSize="40" Grid.Row="4" Grid.Column="3"/>
+        <Button x:Name="angerEmojiButton" Content="😡" Click="emojiButton_click" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FFCEC364" FontWeight="Bold" FontSize="40" Grid.Row="4" Grid.Column="4"/>
+        <Button x:Name="spaceButton" Click="spaceButton_click" Content="SPACE" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FF888888" FontWeight="Bold" FontSize="18" Grid.Row="4" Grid.Column="5" Grid.ColumnSpan="2"/>
+        <Button x:Name="fearEmojiButton" Content="😱" Click="emojiButton_click" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FFCEC364" FontWeight="Bold" FontSize="40" Grid.Row="4" Grid.Column="7"/>
+        <Button x:Name="loveEmojiButton" Content="❤"  Click="emojiButton_click" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FFCEC364" FontWeight="Bold" FontSize="40" Grid.Row="4" Grid.Column="8"/>
+        <Button x:Name="winkyEmojiButton" Content="😘" Click="emojiButton_click" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FFCEC364" FontWeight="Bold" FontSize="40" Grid.Row="4" Grid.Column="10"/>
+        <Button x:Name="okayEmojiButton" Content="👌" Click="emojiButton_click" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FFCEC364" FontWeight="Bold" FontSize="40" Grid.Row="4" Grid.Column="11"/>
 
-        <Button x:Name="sleepButton" Click="sleepButton_Click" Content="zZZ.." HorizontalAlignment="Left" Height="75" Margin="46,406,0,0" VerticalAlignment="Top" Width="75" Background="#FF5C5177" FontWeight="Bold" FontSize="18"/>
-        <Button x:Name="qButton" Click="charButton_click" Content="q" HorizontalAlignment="Left" Height="75" Margin="124,406,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold" FontSize="30"/>
-        <Button x:Name="wButton" Click="charButton_click" Content="w" HorizontalAlignment="Left" Height="75" Margin="202,406,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold" FontSize="30"/>
-        <Button x:Name="eButton" Click="charButton_click" Content="e" HorizontalAlignment="Left" Height="75" Margin="280,406,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold" FontSize="30"/>
-        <Button x:Name="rButton" Click="charButton_click" Content="r" HorizontalAlignment="Left" Height="75" Margin="358,406,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold" FontSize="30"/>
-        <Button x:Name="tButton" Click="charButton_click" Content="t" HorizontalAlignment="Left" Height="75" Margin="436,406,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold" FontSize="30"/>
-        <Button x:Name="yButton" Click="charButton_click" Content="y" HorizontalAlignment="Left" Height="75" Margin="514,406,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold" FontSize="30"/>
-        <Button x:Name="uButton" Click="charButton_click" Content="u" HorizontalAlignment="Left" Height="75" Margin="592,406,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold" FontSize="30"/>
-        <Button x:Name="iButton" Click="charButton_click" Content="i" HorizontalAlignment="Left" Height="75" Margin="670,406,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold" FontSize="30"/>
-        <Button x:Name="oButton" Click="charButton_click" Content="o" HorizontalAlignment="Left" Height="75" Margin="748,406,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold" FontSize="30"/>
-        <Button x:Name="pButton" Click="charButton_click" Content="p" HorizontalAlignment="Left" Height="75" Margin="826,406,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold" FontSize="30"/>
-        <Button x:Name="backButton" Click="backButton_Click" Content="&#x2190;" HorizontalAlignment="Left" Height="75" Margin="904,406,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold" FontSize="40"/>
+        <Button x:Name="sleepButton" Click="sleepButton_Click" Content="zZZ.." HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FF5C5177" FontWeight="Bold" FontSize="18" Grid.Row="5"/>
+        <Button x:Name="qButton" Click="charButton_click" Content="q" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FF888888" FontWeight="Bold" FontSize="30" Grid.Row="5" Grid.Column="1"/>
+        <Button x:Name="wButton" Click="charButton_click" Content="w" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FF888888" FontWeight="Bold" FontSize="30" Grid.Row="5" Grid.Column="2"/>
+        <Button x:Name="eButton" Click="charButton_click" Content="e" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FF888888" FontWeight="Bold" FontSize="30" Grid.Row="5" Grid.Column="3"/>
+        <Button x:Name="rButton" Click="charButton_click" Content="r" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FF888888" FontWeight="Bold" FontSize="30" Grid.Row="5" Grid.Column="4"/>
+        <Button x:Name="tButton" Click="charButton_click" Content="t" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FF888888" FontWeight="Bold" FontSize="30" Grid.Row="5" Grid.Column="5"/>
+        <Button x:Name="yButton" Click="charButton_click" Content="y" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FF888888" FontWeight="Bold" FontSize="30" Grid.Row="5" Grid.Column="6"/>
+        <Button x:Name="uButton" Click="charButton_click" Content="u" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FF888888" FontWeight="Bold" FontSize="30" Grid.Row="5" Grid.Column="7"/>
+        <Button x:Name="iButton" Click="charButton_click" Content="i" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FF888888" FontWeight="Bold" FontSize="30" Grid.Row="5" Grid.Column="8"/>
+        <Button x:Name="oButton" Click="charButton_click" Content="o" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FF888888" FontWeight="Bold" FontSize="30" Grid.Row="5" Grid.Column="9"/>
+        <Button x:Name="pButton" Click="charButton_click" Content="p" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FF888888" FontWeight="Bold" FontSize="30" Grid.Row="5" Grid.Column="10"/>
+        <Button x:Name="backButton" Click="backButton_Click" Content="&#x2190;" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FF888888" FontWeight="Bold" FontSize="40" Grid.Row="5" Grid.Column="11"/>
 
-        <ToggleButton x:Name="capsToggleButton" Click="capsToggleButton_Click" Content="CAPS" HorizontalAlignment="Left" Height="75" Margin="46,484,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold" FontSize="18"/>
-        <Button x:Name="aButton" Click="charButton_click" Content="a" HorizontalAlignment="Left" Height="75" Margin="124,484,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold" FontSize="30"/>
-        <Button x:Name="sButton" Click="charButton_click" Content="s" HorizontalAlignment="Left" Height="75" Margin="202,484,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold" FontSize="30"/>
-        <Button x:Name="dButton" Click="charButton_click" Content="d" HorizontalAlignment="Left" Height="75" Margin="280,484,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold" FontSize="30"/>
-        <Button x:Name="fButton" Click="charButton_click" Content="f" HorizontalAlignment="Left" Height="75" Margin="358,484,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold" FontSize="30"/>
-        <Button x:Name="gButton" Click="charButton_click" Content="g" HorizontalAlignment="Left" Height="75" Margin="436,484,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold" FontSize="30"/>
-        <Button x:Name="hButton" Click="charButton_click" Content="h" HorizontalAlignment="Left" Height="75" Margin="514,484,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold" FontSize="30"/>
-        <Button x:Name="jButton" Click="charButton_click" Content="j" HorizontalAlignment="Left" Height="75" Margin="592,484,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold" FontSize="30"/>
-        <Button x:Name="kButton" Click="charButton_click" Content="k" HorizontalAlignment="Left" Height="75" Margin="670,484,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold" FontSize="30"/>
-        <Button x:Name="lButton" Click="charButton_click" Content="l" HorizontalAlignment="Left" Height="75" Margin="748,484,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold" FontSize="30"/>
-        <Button x:Name="periodButton" Click="charSpaceButton_click" Content="." HorizontalAlignment="Left" Height="75" Margin="826,484,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold" FontSize="40"/>
-        <Button x:Name="enterButton" Click="enterButton_Click" Content="ENTER" HorizontalAlignment="Left" Height="75" Margin="904,484,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold" FontSize="18"/>
-
-        <ToggleButton x:Name="shiftToggleButton" Click="shiftToggleButton_Click" Content="Shift" HorizontalAlignment="Left" Height="75" Margin="46,562,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold" FontSize="18" RenderTransformOrigin="0.653,-4.632"/>
-        <Button x:Name="clearButton" Click="clearButton_click" Content="CLEAR" HorizontalAlignment="Left" Height="75" Margin="124,562,0,0" VerticalAlignment="Top" Width="75" Background="#FF057779" FontWeight="Bold" FontSize="18"/>
-        <Button x:Name="zButton" Click="charButton_click" Content="z" HorizontalAlignment="Left" Height="75" Margin="202,562,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold" FontSize="30"/>
-        <Button x:Name="xButton" Click="charButton_click" Content="x" HorizontalAlignment="Left" Height="75" Margin="280,562,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold" FontSize="30"/>
-        <Button x:Name="cButton" Click="charButton_click" Content="c" HorizontalAlignment="Left" Height="75" Margin="358,562,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold" FontSize="30"/>
-        <Button x:Name="vButton" Click="charButton_click" Content="v" HorizontalAlignment="Left" Height="75" Margin="436,562,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold" FontSize="30"/>
-        <Button x:Name="bButton" Click="charButton_click" Content="b" HorizontalAlignment="Left" Height="75" Margin="514,562,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold" FontSize="30"/>
-        <Button x:Name="nButton" Click="charButton_click" Content="n" HorizontalAlignment="Left" Height="75" Margin="592,562,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold" FontSize="30"/>
-        <Button x:Name="mButton" Click="charButton_click" Content="m" HorizontalAlignment="Left" Height="75" Margin="670,562,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold" FontSize="30"/>
-        <Button x:Name="commaButton" Click="charSpaceButton_click" Content="," HorizontalAlignment="Left" Height="75" Margin="748,562,0,0" VerticalAlignment="Top" Width="75" Background="#FF888888" FontWeight="Bold" FontSize="40"/>
-        <Button x:Name="noButton" Click="charButton_click" Content="No" HorizontalAlignment="Left" Height="75" Margin="826,562,0,0" VerticalAlignment="Top" Width="75" Background="#FFE43B0D" FontWeight="Bold" FontSize="18"/>
-        <Button x:Name="yesButton" Click="charButton_click" Content="Yes" HorizontalAlignment="Left" Height="75" Margin="904,562,0,0" VerticalAlignment="Top" Width="75" Background="#FF359112" FontWeight="Bold" FontSize="18"/>
+        <ToggleButton x:Name="capsToggleButton" Click="capsToggleButton_Click" Content="CAPS" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FF888888" FontWeight="Bold" FontSize="18" Grid.Row="6" Margin="0,0,0.333,0"/>
+        <Button x:Name="aButton" Click="charButton_click" Content="a" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FF888888" FontWeight="Bold" FontSize="30" Grid.Row="6" Grid.Column="1"/>
+        <Button x:Name="sButton" Click="charButton_click" Content="s" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FF888888" FontWeight="Bold" FontSize="30" Grid.Row="6" Grid.Column="2" Margin="0.333,0,0,0"/>
+        <Button x:Name="dButton" Click="charButton_click" Content="d" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FF888888" FontWeight="Bold" FontSize="30" Grid.Row="6" Grid.Column="3" Margin="0,0,0.333,0"/>
+        <Button x:Name="fButton" Click="charButton_click" Content="f" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FF888888" FontWeight="Bold" FontSize="30" Grid.Row="6" Grid.Column="4"/>
+        <Button x:Name="gButton" Click="charButton_click" Content="g" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FF888888" FontWeight="Bold" FontSize="30" Grid.Row="6" Grid.Column="5" Margin="0.333,0,0,0"/>
+        <Button x:Name="hButton" Click="charButton_click" Content="h" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FF888888" FontWeight="Bold" FontSize="30" Grid.Row="6" Grid.Column="6" Margin="0,0,0.333,0"/>
+        <Button x:Name="jButton" Click="charButton_click" Content="j" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FF888888" FontWeight="Bold" FontSize="30" Grid.Row="6" Grid.Column="7"/>
+        <Button x:Name="kButton" Click="charButton_click" Content="k" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FF888888" FontWeight="Bold" FontSize="30" Grid.Row="6" Grid.Column="8" Margin="0.333,0,0,0"/>
+        <Button x:Name="mButton" Click="charButton_click" Content="m" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FF888888" FontWeight="Bold" FontSize="30" Grid.Row="7" Grid.Column="8"/>
+        <Button x:Name="lButton" Click="charButton_click" Content="l" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FF888888" FontWeight="Bold" FontSize="30" Grid.Row="6" Grid.Column="9" Margin="0,0,0.333,0"/>
+        <Button x:Name="periodButton" Click="charSpaceButton_click" Content="." HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FF888888" FontWeight="Bold" FontSize="40" Grid.Row="6" Grid.Column="10"/>
+        <ToggleButton x:Name="shiftToggleButton" Click="shiftToggleButton_Click" Content="Shift" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FF888888" FontWeight="Bold" FontSize="18" RenderTransformOrigin="0.653,-4.632" Grid.Row="7"/>
+        <Button x:Name="clearButton" Click="clearButton_click" Content="CLEAR" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FF057779" FontWeight="Bold" FontSize="18" Grid.Row="7" Grid.Column="1"/>
+        <Button x:Name="zButton" Click="charButton_click" Content="z" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FF888888" FontWeight="Bold" FontSize="30" Grid.Row="7" Grid.Column="2"/>
+        <Button x:Name="xButton" Click="charButton_click" Content="x" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FF888888" FontWeight="Bold" FontSize="30" Grid.Row="7" Grid.Column="3"/>
+        <Button x:Name="cButton" Click="charButton_click" Content="c" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FF888888" FontWeight="Bold" FontSize="30" Grid.Row="7" Grid.Column="4"/>
+        <Button x:Name="vButton" Click="charButton_click" Content="v" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FF888888" FontWeight="Bold" FontSize="30" Grid.Row="7" Grid.Column="5"/>
+        <Button x:Name="bButton" Click="charButton_click" Content="b" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FF888888" FontWeight="Bold" FontSize="30" Grid.Row="7" Grid.Column="7"/>
+        <Button x:Name="nButton" Click="charButton_click" Content="n" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FF888888" FontWeight="Bold" FontSize="30" Grid.Row="7" Grid.Column="6"/>
+        <Button x:Name="commaButton" Click="charSpaceButton_click" Content="," HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FF888888" FontWeight="Bold" FontSize="40" Grid.Row="7" Grid.Column="9"/>
+        <Button x:Name="noButton" Click="charButton_click" Content="No" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FFE43B0D" FontWeight="Bold" FontSize="18" Grid.Row="7" Grid.Column="10"/>
+        <Button x:Name="yesButton" Click="charButton_click" Content="Yes" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FF359112" FontWeight="Bold" FontSize="18" Grid.Row="7" Grid.Column="11"/>
+        <Button x:Name="enterButton" Click="enterButton_Click" Content="ENTER" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FF888888" FontWeight="Bold" FontSize="18" Grid.Row="6" Grid.Column="11"/>
     </Grid>
 </Page>
