@@ -2169,6 +2169,13 @@
           }
         }
       },
+      "TeamGleason.Talk37.ComSupport/1.0.0": {
+        "type": "project",
+        "framework": "Unsupported,Version=v0.0",
+        "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.3"
+        }
+      },
       "TeamGleason.Talk37.SpeechSupport/1.0.0": {
         "type": "project",
         "framework": "Unsupported,Version=v0.0",
@@ -4426,6 +4433,13 @@
         },
         "runtime": {
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
+        }
+      },
+      "TeamGleason.Talk37.ComSupport/1.0.0": {
+        "type": "project",
+        "framework": "Unsupported,Version=v0.0",
+        "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.3"
         }
       },
       "TeamGleason.Talk37.SpeechSupport/1.0.0": {
@@ -6726,6 +6740,13 @@
           "runtimes/aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
+      "TeamGleason.Talk37.ComSupport/1.0.0": {
+        "type": "project",
+        "framework": "Unsupported,Version=v0.0",
+        "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.3"
+        }
+      },
       "TeamGleason.Talk37.SpeechSupport/1.0.0": {
         "type": "project",
         "framework": "Unsupported,Version=v0.0",
@@ -8992,6 +9013,13 @@
         },
         "runtime": {
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
+        }
+      },
+      "TeamGleason.Talk37.ComSupport/1.0.0": {
+        "type": "project",
+        "framework": "Unsupported,Version=v0.0",
+        "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.3"
         }
       },
       "TeamGleason.Talk37.SpeechSupport/1.0.0": {
@@ -11301,6 +11329,13 @@
           "runtimes/aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
+      "TeamGleason.Talk37.ComSupport/1.0.0": {
+        "type": "project",
+        "framework": "Unsupported,Version=v0.0",
+        "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.3"
+        }
+      },
       "TeamGleason.Talk37.SpeechSupport/1.0.0": {
         "type": "project",
         "framework": "Unsupported,Version=v0.0",
@@ -13567,6 +13602,13 @@
         },
         "runtime": {
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
+        }
+      },
+      "TeamGleason.Talk37.ComSupport/1.0.0": {
+        "type": "project",
+        "framework": "Unsupported,Version=v0.0",
+        "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.3"
         }
       },
       "TeamGleason.Talk37.SpeechSupport/1.0.0": {
@@ -15874,6 +15916,13 @@
         },
         "runtime": {
           "runtimes/aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
+        }
+      },
+      "TeamGleason.Talk37.ComSupport/1.0.0": {
+        "type": "project",
+        "framework": "Unsupported,Version=v0.0",
+        "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.3"
         }
       },
       "TeamGleason.Talk37.SpeechSupport/1.0.0": {
@@ -22052,6 +22101,11 @@
         "system.xml.xmlserializer.nuspec"
       ]
     },
+    "TeamGleason.Talk37.ComSupport/1.0.0": {
+      "type": "project",
+      "path": "../TeamGleason.Talk37.ComSupport/TeamGleason.Talk37.ComSupport.csproj",
+      "msbuildProject": "../TeamGleason.Talk37.ComSupport/TeamGleason.Talk37.ComSupport.csproj"
+    },
     "TeamGleason.Talk37.SpeechSupport/1.0.0": {
       "type": "project",
       "path": "../TeamGleason.Talk37.SpeechSupport/TeamGleason.Talk37.SpeechSupport.csproj",
@@ -22065,20 +22119,23 @@
     "UAP,Version=v10.0": []
   },
   "packageFolders": {
-    "C:\\Users\\me\\.nuget\\packages\\": {}
+    "C:\\Users\\v-dwlamb\\.nuget\\packages\\": {}
   },
   "project": {
     "restore": {
-      "projectUniqueName": "C:\\github.com\\TeamGleason\\Talk37\\app\\TeamGleason.Talk37\\TeamGleason.Talk37.Keyboard\\TeamGleason.Talk37.Keyboard.csproj",
+      "projectUniqueName": "C:\\Data\\CodeRepos2017\\RealTalk37\\app\\TeamGleason.Talk37\\TeamGleason.Talk37.Keyboard\\TeamGleason.Talk37.Keyboard.csproj",
       "projectName": "TeamGleason.Talk37.Keyboard",
-      "projectPath": "C:\\github.com\\TeamGleason\\Talk37\\app\\TeamGleason.Talk37\\TeamGleason.Talk37.Keyboard\\TeamGleason.Talk37.Keyboard.csproj",
-      "projectJsonPath": "C:\\github.com\\TeamGleason\\Talk37\\app\\TeamGleason.Talk37\\TeamGleason.Talk37.Keyboard\\project.json",
+      "projectPath": "C:\\Data\\CodeRepos2017\\RealTalk37\\app\\TeamGleason.Talk37\\TeamGleason.Talk37.Keyboard\\TeamGleason.Talk37.Keyboard.csproj",
+      "projectJsonPath": "C:\\Data\\CodeRepos2017\\RealTalk37\\app\\TeamGleason.Talk37\\TeamGleason.Talk37.Keyboard\\project.json",
       "projectStyle": "ProjectJson",
       "frameworks": {
         "uap10.0": {
           "projectReferences": {
-            "C:\\github.com\\TeamGleason\\Talk37\\app\\TeamGleason.Talk37\\TeamGleason.Talk37.SpeechSupport\\TeamGleason.Talk37.SpeechSupport.csproj": {
-              "projectPath": "C:\\github.com\\TeamGleason\\Talk37\\app\\TeamGleason.Talk37\\TeamGleason.Talk37.SpeechSupport\\TeamGleason.Talk37.SpeechSupport.csproj"
+            "C:\\Data\\CodeRepos2017\\RealTalk37\\app\\TeamGleason.Talk37\\TeamGleason.Talk37.ComSupport\\TeamGleason.Talk37.ComSupport.csproj": {
+              "projectPath": "C:\\Data\\CodeRepos2017\\RealTalk37\\app\\TeamGleason.Talk37\\TeamGleason.Talk37.ComSupport\\TeamGleason.Talk37.ComSupport.csproj"
+            },
+            "C:\\Data\\CodeRepos2017\\RealTalk37\\app\\TeamGleason.Talk37\\TeamGleason.Talk37.SpeechSupport\\TeamGleason.Talk37.SpeechSupport.csproj": {
+              "projectPath": "C:\\Data\\CodeRepos2017\\RealTalk37\\app\\TeamGleason.Talk37\\TeamGleason.Talk37.SpeechSupport\\TeamGleason.Talk37.SpeechSupport.csproj"
             }
           }
         }
