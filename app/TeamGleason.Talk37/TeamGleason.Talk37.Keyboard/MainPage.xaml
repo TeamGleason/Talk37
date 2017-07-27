@@ -6,7 +6,11 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"  d:DesignHeight="768" d:DesignWidth="1024">
-
+    <Page.Resources>
+        <Style TargetType="Button">
+            <Setter Property="AllowFocusOnInteraction" Value="False"/>
+        </Style>
+    </Page.Resources>
 
     <Grid Background="#FF1A1A1A">
         <Grid.ColumnDefinitions>
@@ -57,7 +61,7 @@
         <Button x:Name="Quick2Button"  Content="NO" Click="immediateEmojiButton_click" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FF3A3A3D" FontWeight="Bold" FontSize="30" Grid.Column="2" Grid.ColumnSpan="2" Foreground="White"/>
         <Button x:Name="Quick3Button"  Content="HELLO" Click="immediateEmojiButton_click" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FF3A3A3D" FontWeight="Bold" FontSize="30" Grid.Column="4" Grid.ColumnSpan="2" Foreground="White"/>
         <Button x:Name="Quick4Button"  Content="GOODBYE" Click="immediateEmojiButton_click" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FF3A3A3D" FontWeight="Bold" FontSize="30" Grid.Column="6" Grid.ColumnSpan="2" Foreground="White"/>
-        
+
 
         <Button x:Name="sleepButton" Click="sleepButton_Click" Content="zZZ.." HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FF525252" FontWeight="Bold" FontSize="18" Grid.Row="5" Foreground="White"/>
         <Button x:Name="qButton" Click="charButton_click" Content="q" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FF3A3A3D" FontWeight="Bold" FontSize="30" Grid.Row="5" Grid.Column="1" Foreground="White"/>
