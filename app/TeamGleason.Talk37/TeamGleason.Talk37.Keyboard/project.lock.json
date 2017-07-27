@@ -22119,23 +22119,23 @@
     "UAP,Version=v10.0": []
   },
   "packageFolders": {
-    "C:\\Users\\t-emclem\\.nuget\\packages\\": {}
+    "C:\\Users\\v-dwlamb\\.nuget\\packages\\": {}
   },
   "project": {
     "restore": {
-      "projectUniqueName": "C:\\Users\\t-emclem\\Source\\Repos\\Talk37\\app\\TeamGleason.Talk37\\TeamGleason.Talk37.Keyboard\\TeamGleason.Talk37.Keyboard.csproj",
+      "projectUniqueName": "C:\\Data\\CodeRepos2017\\RealTalk37\\app\\TeamGleason.Talk37\\TeamGleason.Talk37.Keyboard\\TeamGleason.Talk37.Keyboard.csproj",
       "projectName": "TeamGleason.Talk37.Keyboard",
-      "projectPath": "C:\\Users\\t-emclem\\Source\\Repos\\Talk37\\app\\TeamGleason.Talk37\\TeamGleason.Talk37.Keyboard\\TeamGleason.Talk37.Keyboard.csproj",
-      "projectJsonPath": "C:\\Users\\t-emclem\\Source\\Repos\\Talk37\\app\\TeamGleason.Talk37\\TeamGleason.Talk37.Keyboard\\project.json",
+      "projectPath": "C:\\Data\\CodeRepos2017\\RealTalk37\\app\\TeamGleason.Talk37\\TeamGleason.Talk37.Keyboard\\TeamGleason.Talk37.Keyboard.csproj",
+      "projectJsonPath": "C:\\Data\\CodeRepos2017\\RealTalk37\\app\\TeamGleason.Talk37\\TeamGleason.Talk37.Keyboard\\project.json",
       "projectStyle": "ProjectJson",
       "frameworks": {
         "uap10.0": {
           "projectReferences": {
-            "C:\\Users\\t-emclem\\Source\\Repos\\Talk37\\app\\TeamGleason.Talk37\\TeamGleason.Talk37.ComSupport\\TeamGleason.Talk37.ComSupport.csproj": {
-              "projectPath": "C:\\Users\\t-emclem\\Source\\Repos\\Talk37\\app\\TeamGleason.Talk37\\TeamGleason.Talk37.ComSupport\\TeamGleason.Talk37.ComSupport.csproj"
+            "C:\\Data\\CodeRepos2017\\RealTalk37\\app\\TeamGleason.Talk37\\TeamGleason.Talk37.ComSupport\\TeamGleason.Talk37.ComSupport.csproj": {
+              "projectPath": "C:\\Data\\CodeRepos2017\\RealTalk37\\app\\TeamGleason.Talk37\\TeamGleason.Talk37.ComSupport\\TeamGleason.Talk37.ComSupport.csproj"
             },
-            "C:\\Users\\t-emclem\\Source\\Repos\\Talk37\\app\\TeamGleason.Talk37\\TeamGleason.Talk37.SpeechSupport\\TeamGleason.Talk37.SpeechSupport.csproj": {
-              "projectPath": "C:\\Users\\t-emclem\\Source\\Repos\\Talk37\\app\\TeamGleason.Talk37\\TeamGleason.Talk37.SpeechSupport\\TeamGleason.Talk37.SpeechSupport.csproj"
+            "C:\\Data\\CodeRepos2017\\RealTalk37\\app\\TeamGleason.Talk37\\TeamGleason.Talk37.SpeechSupport\\TeamGleason.Talk37.SpeechSupport.csproj": {
+              "projectPath": "C:\\Data\\CodeRepos2017\\RealTalk37\\app\\TeamGleason.Talk37\\TeamGleason.Talk37.SpeechSupport\\TeamGleason.Talk37.SpeechSupport.csproj"
             }
           }
         }
