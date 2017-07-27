@@ -36,7 +36,7 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <MediaElement x:Name="TheMedia" Margin="42,33,42.333,76.667" Grid.Row="3"/>
-        <TextBox x:Name="result" TextWrapping="Wrap" Text="" Foreground="Black" Grid.ColumnSpan="8" Grid.Column="1" Grid.Row="3"/>
+        <TextBox x:Name="result" Text="" Foreground="Black" Grid.ColumnSpan="8" Grid.Column="1" Grid.Row="3" FontSize="36" Padding="10,15,6,0" TextWrapping="Wrap" TextAlignment="Left"/>
         <Button x:Name="poopEmojiButton" Content="💩" Click="emojiButton_click" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" FontWeight="Bold" FontSize="40" Grid.Row="4" Grid.Column="9"/>
 
         <TextBlock x:Name="theSpeech" TextWrapping="Wrap" Text="" Foreground="#FF020202" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="8" Visibility="Collapsed"/>
@@ -48,7 +48,7 @@
         <Button x:Name="surpriseEmojiButton" Content="😲" Click="emojiButton_click" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" FontWeight="Bold" FontSize="40" Grid.Row="4" Grid.Column="2"/>
         <Button x:Name="disgustEmojiButton" Content="😒" Click="emojiButton_click" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" FontWeight="Bold" FontSize="40" Grid.Row="4" Grid.Column="3"/>
         <Button x:Name="angerEmojiButton" Content="😡" Click="emojiButton_click" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" FontWeight="Bold" FontSize="40" Grid.Row="4" Grid.Column="4"/>
-        <Button x:Name="spaceButton" Click="spaceButton_click" Content="SPACE" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FF525252" FontWeight="Bold" FontSize="18" Grid.Row="4" Grid.Column="5" Grid.ColumnSpan="2" Foreground="White"/>
+        <Button x:Name="spaceButton" Click="spaceButton_click" Content="SPACE" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FF3A3A3D" FontWeight="Bold" FontSize="18" Grid.Row="4" Grid.Column="5" Grid.ColumnSpan="2" Foreground="White"/>
         <Button x:Name="fearEmojiButton" Content="😱" Click="emojiButton_click" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" FontWeight="Bold" FontSize="40" Grid.Row="4" Grid.Column="7"/>
         <Button x:Name="loveEmojiButton" Content="❤"  Click="emojiButton_click" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" FontWeight="Bold" FontSize="40" Grid.Row="4" Grid.Column="8"/>
         <Button x:Name="winkyEmojiButton" Content="😘" Click="emojiButton_click" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" FontWeight="Bold" FontSize="40" Grid.Row="4" Grid.Column="10"/>
@@ -102,5 +102,7 @@
         <Button x:Name="winkyEmojiButtonPrivate" Content="😘" Click="immediateEmojiButton_click" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" FontWeight="Bold" FontSize="40" Grid.Row="2" Grid.Column="9"/>
         <Button x:Name="HappyButtonPrivate" Content="😃" Click="immediateEmojiButton_click" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" FontWeight="Bold" FontSize="40" Grid.Row="2" Grid.Column="10"/>
         <Button x:Name="BrightFutureButton2Private" Content="😎" Click="immediateEmojiButton_click" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" FontWeight="Bold" FontSize="40" Grid.Row="2" Grid.Column="11"/>
+        <Button x:Name="playButton" Click="enterButton_Click" Content="&#x25b6;" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FF525252" FontWeight="Bold" FontSize="18" Grid.Row="3" Foreground="White" FontFamily="Segoe UI Symbol"/>
+        <Button x:Name="clearXButton" Click="clearButton_click" Content="&#xE894;" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontWeight="Bold" FontSize="36" Grid.Row="3" Grid.Column="8" Foreground="Black" FontFamily="Segoe MDL2 Assets" Background="Transparent"/>
     </Grid>
 </Page>
