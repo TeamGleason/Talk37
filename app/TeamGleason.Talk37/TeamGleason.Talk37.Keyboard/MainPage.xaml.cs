@@ -30,7 +30,7 @@ namespace TeamGleason.Talk37.Keyboard
             this.InitializeComponent();
 
             result.SelectionChanged += OnSelectionChanged;
-            
+
             _hoverBrush = new SolidColorBrush(Colors.IndianRed);
 
             _gazePointer = new GazePointer(this);
@@ -269,6 +269,19 @@ namespace TeamGleason.Talk37.Keyboard
             {
                 allKeysToLower();
             }
+        }
+
+        async void immediateEmojiButton_click(object sender, RoutedEventArgs e)
+        {
+            var text = ((Button)sender).Content.ToString();
+
+            var connection = await GetDeviceAsync();
+
+            var stream = await _engine.SayText(text);
+
+            TheMedia.SetSource(stream, stream.ContentType);
+            var task = connection?.PlayAnimationSequenceAsync(stream.Markers);
+            TheMedia.Play();
         }
     }
 }
