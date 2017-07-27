@@ -101,6 +101,6 @@
         <Button x:Name="poopEmojiButtonPrivate" Content="💩" Click="immediateEmojiButton_click" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" FontWeight="Bold" FontSize="40" Grid.Row="1" Grid.Column="11"/>
         <Button x:Name="winkyEmojiButtonPrivate" Content="😘" Click="immediateEmojiButton_click" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" FontWeight="Bold" FontSize="40" Grid.Row="2" Grid.Column="9"/>
         <Button x:Name="HappyButtonPrivate" Content="😃" Click="immediateEmojiButton_click" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" FontWeight="Bold" FontSize="40" Grid.Row="2" Grid.Column="10"/>
-        <Button x:Name="BrightFutureButton2Private" Content="😎" Click="emojiButton_click" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" FontWeight="Bold" FontSize="40" Grid.Row="2" Grid.Column="11"/>
+        <Button x:Name="BrightFutureButton2Private" Content="😎" Click="immediateEmojiButton_click" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" FontWeight="Bold" FontSize="40" Grid.Row="2" Grid.Column="11"/>
     </Grid>
 </Page>
