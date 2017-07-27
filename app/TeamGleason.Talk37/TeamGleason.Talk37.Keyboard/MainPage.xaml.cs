@@ -30,7 +30,7 @@ namespace TeamGleason.Talk37.Keyboard
             this.InitializeComponent();
 
             result.SelectionChanged += OnSelectionChanged;
-            
+
             _hoverBrush = new SolidColorBrush(Colors.IndianRed);
 
             _gazePointer = new GazePointer(this);
@@ -91,13 +91,23 @@ namespace TeamGleason.Talk37.Keyboard
 
         private void AddCharToMessage(string c)
         {
-            result.Text += c;
-            result.Select(result.Text.Length, 0);
+            var oldText = result.Text;
+            var start = result.SelectionStart;
+            var length = result.SelectionLength;
+
+            var newText = oldText.Substring(0, start) + c + oldText.Substring(start + length);
+
+            result.Text = newText;
+            result.Select(start + c.Length, 0);
         }
 
         private void RemoveCharFromMessage()
         {
-            if (result.Text.Length > 0)
+            if (result.SelectionLength != 0)
+            {
+                AddCharToMessage(string.Empty);
+            }
+            else if (result.Text.Length > 0)
             {
                 var lastCharLength = char.IsSurrogate(result.Text, result.Text.Length - 1) ? 2 : 1;
                 result.Text = result.Text.Remove((result.Text.Length - lastCharLength), lastCharLength);
@@ -259,6 +269,19 @@ namespace TeamGleason.Talk37.Keyboard
             {
                 allKeysToLower();
             }
+        }
+
+        async void immediateEmojiButton_click(object sender, RoutedEventArgs e)
+        {
+            var text = ((Button)sender).Content.ToString();
+
+            var connection = await GetDeviceAsync();
+
+            var stream = await _engine.SayText(text);
+
+            TheMedia.SetSource(stream, stream.ContentType);
+            var task = connection?.PlayAnimationSequenceAsync(stream.Markers);
+            TheMedia.Play();
         }
     }
 }
