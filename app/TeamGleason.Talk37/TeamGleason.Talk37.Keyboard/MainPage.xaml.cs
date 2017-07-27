@@ -4,6 +4,8 @@ using TeamGleason.Talk37.ComSupport;
 using TeamGleason.Talk37.SpeechSupport;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
+using Windows.UI;
 
 using GazeInput;
 
@@ -19,6 +21,8 @@ namespace TeamGleason.Talk37.Keyboard
 
         DeviceConnection _connection;
 
+        Brush _hoverBrush;
+
         string _comPort = "COM5";
 
         public MainPage()
@@ -26,6 +30,8 @@ namespace TeamGleason.Talk37.Keyboard
             this.InitializeComponent();
 
             result.SelectionChanged += OnSelectionChanged;
+            
+            _hoverBrush = new SolidColorBrush(Colors.IndianRed);
 
             _gazePointer = new GazePointer(this);
             _gazePointer.Filter = new OneEuroFilter();
@@ -46,6 +52,7 @@ namespace TeamGleason.Talk37.Keyboard
             switch (ea.State)
             {
                 case GazePointerState.Fixation:
+                    button.BorderBrush = _hoverBrush;
                     button.BorderThickness = new Thickness(5);
                     break;
                 case GazePointerState.Dwell:
