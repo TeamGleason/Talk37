@@ -53,6 +53,11 @@
         <Button x:Name="loveEmojiButton" Content="❤"  Click="emojiButton_click" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" FontWeight="Bold" FontSize="40" Grid.Row="4" Grid.Column="8"/>
         <Button x:Name="winkyEmojiButton" Content="😘" Click="emojiButton_click" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" FontWeight="Bold" FontSize="40" Grid.Row="4" Grid.Column="10"/>
         <Button x:Name="okayEmojiButton" Content="👌" Click="emojiButton_click" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" FontWeight="Bold" FontSize="40" Grid.Row="4" Grid.Column="11"/>
+        <Button x:Name="Quick1Button"  Content="YES" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FF3A3A3D" FontWeight="Bold" FontSize="30" Grid.ColumnSpan="2" Foreground="White"/>
+        <Button x:Name="Quick2Button"  Content="NO" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FF3A3A3D" FontWeight="Bold" FontSize="30" Grid.Column="2" Grid.ColumnSpan="2" Foreground="White"/>
+        <Button x:Name="Quick3Button"  Content="HELLO" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FF3A3A3D" FontWeight="Bold" FontSize="30" Grid.Column="4" Grid.ColumnSpan="2" Foreground="White"/>
+        <Button x:Name="Quick4Button"  Content="GOODBYE" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FF3A3A3D" FontWeight="Bold" FontSize="30" Grid.Column="6" Grid.ColumnSpan="2" Foreground="White"/>
+        
 
         <Button x:Name="sleepButton" Click="sleepButton_Click" Content="zZZ.." HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FF525252" FontWeight="Bold" FontSize="18" Grid.Row="5" Foreground="White"/>
         <Button x:Name="qButton" Click="charButton_click" Content="q" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FF3A3A3D" FontWeight="Bold" FontSize="30" Grid.Row="5" Grid.Column="1" Foreground="White"/>
