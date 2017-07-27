@@ -13,7 +13,7 @@ namespace TeamGleason.Talk37.Keyboard
     public sealed partial class MainPage : Page
     {
         readonly TextToSpeechEngine _engine = new TextToSpeechEngine();
-        
+
         bool _isShowingIdle;
         GazePointer _gazePointer;
 
@@ -57,7 +57,7 @@ namespace TeamGleason.Talk37.Keyboard
             }
         }
 
-            async Task<DeviceConnection> GetDeviceAsync()
+        async Task<DeviceConnection> GetDeviceAsync()
         {
             if (_connection == null)
             {
@@ -85,6 +85,7 @@ namespace TeamGleason.Talk37.Keyboard
         private void AddCharToMessage(string c)
         {
             result.Text += c;
+            result.Select(result.Text.Length, 0);
         }
 
         private void RemoveCharFromMessage()
