@@ -106,7 +106,7 @@
         <Button x:Name="poopEmojiButtonPrivate" Content="💩" Click="immediateEmojiButton_click" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" FontWeight="Bold" FontSize="40" Grid.Row="1" Grid.Column="11"/>
         <Button x:Name="winkyEmojiButtonPrivate" Content="😘" Click="immediateEmojiButton_click" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" FontWeight="Bold" FontSize="40" Grid.Row="2" Grid.Column="9"/>
         <Button x:Name="HappyButtonPrivate" Content="😃" Click="immediateEmojiButton_click" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" FontWeight="Bold" FontSize="40" Grid.Row="2" Grid.Column="10"/>
-        <Button x:Name="BrightFutureButton2Private" Content="😎" Click="emojiButton_click" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" FontWeight="Bold" FontSize="40" Grid.Row="2" Grid.Column="11"/>
+        <Button x:Name="BrightFutureButton2Private" Content="😎" Click="immediateEmojiButton_click" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" FontWeight="Bold" FontSize="40" Grid.Row="2" Grid.Column="11"/>
         <Button x:Name="playButton" Click="enterButton_Click" Content="&#x25b6;" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FF525252" FontWeight="Bold" FontSize="18" Grid.Row="3" Foreground="White" FontFamily="Segoe UI Symbol"/>
         <Button x:Name="clearXButton" Click="clearButton_click" Content="&#xE894;" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontWeight="Bold" FontSize="36" Grid.Row="3" Grid.Column="8" Foreground="Black" FontFamily="Segoe MDL2 Assets" Background="Transparent"/>
     </Grid>
