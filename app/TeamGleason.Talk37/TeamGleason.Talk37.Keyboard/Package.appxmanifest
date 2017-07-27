@@ -45,6 +45,13 @@
 
   <Capabilities>
     <Capability Name="internetClient" />
+    
+    <DeviceCapability Name="humaninterfacedevice">
+      <Device Id="any">
+        <Function Type="usage:0012 0001" />
+      </Device>
+    </DeviceCapability>
+    
     <DeviceCapability Name="serialcommunication">
         <Device Id="any">
             <Function Type="name:serialPort" />

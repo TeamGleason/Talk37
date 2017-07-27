@@ -5,18 +5,17 @@ using TeamGleason.Talk37.SpeechSupport;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
+using GazeInput;
+
 
 namespace TeamGleason.Talk37.Keyboard
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class MainPage : Page
     {
         readonly TextToSpeechEngine _engine = new TextToSpeechEngine();
-
+        
         bool _isShowingIdle;
+        GazePointer _gazePointer;
 
         DeviceConnection _connection;
 
@@ -27,9 +26,38 @@ namespace TeamGleason.Talk37.Keyboard
             this.InitializeComponent();
 
             result.SelectionChanged += OnSelectionChanged;
+
+            _gazePointer = new GazePointer(this);
+            _gazePointer.Filter = new OneEuroFilter();
+
+            _gazePointer.CursorRadius = 5;
+            _gazePointer.IsCursorVisible = true;
+
+            _gazePointer.GazePointerEvent += OnGazePointerEvent;
         }
 
-        async Task<DeviceConnection> GetDeviceAsync()
+
+        private void OnGazePointerEvent(GazePointer sender, GazePointerEventArgs ea)
+        {
+            var button = ea.HitTarget as Button;
+            if (button == null)
+                return;
+
+            switch (ea.State)
+            {
+                case GazePointerState.Fixation:
+                    button.BorderThickness = new Thickness(5);
+                    break;
+                case GazePointerState.Dwell:
+                    _gazePointer.InvokeTarget(button);
+                    break;
+                case GazePointerState.Exit:
+                    button.BorderThickness = new Thickness(0);
+                    break;
+            }
+        }
+
+            async Task<DeviceConnection> GetDeviceAsync()
         {
             if (_connection == null)
             {
