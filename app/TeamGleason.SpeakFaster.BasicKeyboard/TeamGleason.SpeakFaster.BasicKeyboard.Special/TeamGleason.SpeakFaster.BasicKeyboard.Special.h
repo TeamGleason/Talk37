@@ -6,9 +6,19 @@ namespace TeamGleason { namespace SpeakFaster { namespace BasicKeyboard { namesp
 	public ref class InteropHelper
 	{
 	public:
-		static void SendKeystroke()
+		static void SendCharacter(wchar_t ch)
 		{
-			MessageBeep(0xFFFFFFFF);
+			INPUT inputs[2];
+			ZeroMemory(inputs, sizeof(inputs));
+
+			inputs[0].type = INPUT_KEYBOARD;
+			inputs[0].ki.wVk = ch;
+
+			inputs[1].type = INPUT_KEYBOARD;
+			inputs[1].ki.wVk = ch;
+			inputs[1].ki.dwFlags = KEYEVENTF_KEYUP;
+
+			UINT uSent = SendInput(ARRAYSIZE(inputs), inputs, sizeof(INPUT));
 		}
 
 		static void SetMainWindowStyle(IntPtr handle)

@@ -1,4 +1,5 @@
-﻿using System.Xml;
+﻿using System.Diagnostics;
+using System.Xml;
 using TeamGleason.SpeakFaster.BasicKeyboard.Special;
 
 namespace TeamGleason.SpeakFaster.BasicKeyboard
@@ -11,7 +12,10 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard
         {
             base.Execute();
 
-            InteropHelper.SendKeystroke();
+            Debug.Assert(KeyRef.Length == 1);
+            var ch = KeyRef[0];
+            var upperCh = char.ToUpper(ch);
+            InteropHelper.SendCharacter(upperCh);
         }
     }
 }
