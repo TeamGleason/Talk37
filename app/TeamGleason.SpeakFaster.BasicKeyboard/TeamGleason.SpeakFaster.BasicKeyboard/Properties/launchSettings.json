@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "TeamGleason.SpeakFaster.BasicKeyboard": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}
