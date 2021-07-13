@@ -1,0 +1,44 @@
+<CommandKeyRef KeyRef="Function.Windows" Column="0"/>
+<CommandKeyRef KeyRef="Function.ExpandHint" Column="2"/>
+<PredictionKeyRef KeyRef="Predictions.First" ColumnSpan="2" Column="3" RowSpan="1" Row="0"/>
+<PredictionKeyRef KeyRef="Predictions.Second" ColumnSpan="2" Column="5" RowSpan="1" Row="0"/>
+<PredictionKeyRef KeyRef="Predictions.Third" ColumnSpan="2" Column="7" RowSpan="1" Row="0"/>
+<CommandKeyRef KeyRef="Function.MouseLeftClick" Column="9"/>
+<CommandKeyRef KeyRef="Navigate.Punctuation" ColumnSpan="1" Column="10" RowSpan="1" Row="0"/>
+<CommandKeyRef KeyRef="Navigate.Numeric" ColumnSpan="1" Column="11" RowSpan="1" Row="0"/>
+<CommandKeyRef KeyRef="Custom.ClearWord" ColumnSpan="1" Column="0" RowSpan="1" Row="1"/>
+<TextKeyRef KeyRef="q" ColumnSpan="1" Column="1" RowSpan="1" Row="1"/>
+<TextKeyRef KeyRef="w" ColumnSpan="1" Column="2" RowSpan="1" Row="1"/>
+<TextKeyRef KeyRef="e" ColumnSpan="1" Column="3" RowSpan="1" Row="1"/>
+<TextKeyRef KeyRef="r" ColumnSpan="1" Column="4" RowSpan="1" Row="1"/>
+<TextKeyRef KeyRef="t" ColumnSpan="1" Column="5" RowSpan="1" Row="1"/>
+<TextKeyRef KeyRef="y" ColumnSpan="1" Column="6" RowSpan="1" Row="1"/>
+<TextKeyRef KeyRef="u" ColumnSpan="1" Column="7" RowSpan="1" Row="1"/>
+<TextKeyRef KeyRef="i" ColumnSpan="1" Column="8" RowSpan="1" Row="1"/>
+<TextKeyRef KeyRef="o" ColumnSpan="1" Column="9" RowSpan="1" Row="1"/>
+<TextKeyRef KeyRef="p" ColumnSpan="1" Column="10" RowSpan="1" Row="1"/>
+<CommandKeyRef KeyRef="Function.Backspace" ColumnSpan="1" Column="11" RowSpan="1" Row="1"/>
+<CommandKeyRef KeyRef="Modifier.Ctrl" ColumnSpan="1" Column="0" RowSpan="1" Row="2"/>
+<TextKeyRef KeyRef="a" ColumnSpan="1" Column="1" RowSpan="1" Row="2"/>
+<TextKeyRef KeyRef="s" ColumnSpan="1" Column="2" RowSpan="1" Row="2"/>
+<TextKeyRef KeyRef="d" ColumnSpan="1" Column="3" RowSpan="1" Row="2"/>
+<TextKeyRef KeyRef="f" ColumnSpan="1" Column="4" RowSpan="1" Row="2"/>
+<TextKeyRef KeyRef="g" ColumnSpan="1" Column="5" RowSpan="1" Row="2"/>
+<TextKeyRef KeyRef="h" ColumnSpan="1" Column="6" RowSpan="1" Row="2"/>
+<TextKeyRef KeyRef="j" ColumnSpan="1" Column="7" RowSpan="1" Row="2"/>
+<TextKeyRef KeyRef="k" ColumnSpan="1" Column="8" RowSpan="1" Row="2"/>
+<TextKeyRef KeyRef="l" ColumnSpan="1" Column="9" RowSpan="1" Row="2"/>
+<TextKeyRef KeyRef="Punctuation.Exclamation" ColumnSpan="1" Column="10" RowSpan="1" Row="2"/>
+<CommandKeyRef KeyRef="Function.Enter" ColumnSpan="1" Column="11" RowSpan="1" Row="2"/>
+<CommandKeyRef KeyRef="Modifier.Shift" ColumnSpan="1" Column="0" RowSpan="1" Row="3"/>
+<TextKeyRef KeyRef="z" ColumnSpan="1" Column="1" RowSpan="1" Row="3"/>
+<TextKeyRef KeyRef="x" ColumnSpan="1" Column="2" RowSpan="1" Row="3"/>
+<TextKeyRef KeyRef="c" ColumnSpan="1" Column="3" RowSpan="1" Row="3"/>
+<TextKeyRef KeyRef="v" ColumnSpan="1" Column="4" RowSpan="1" Row="3"/>
+<TextKeyRef KeyRef="b" ColumnSpan="1" Column="5" RowSpan="1" Row="3"/>
+<TextKeyRef KeyRef="n" ColumnSpan="1" Column="6" RowSpan="1" Row="3"/>
+<TextKeyRef KeyRef="m" ColumnSpan="1" Column="7" RowSpan="1" Row="3"/>
+<TextKeyRef KeyRef="Punctuation.Comma" ColumnSpan="1" Column="8" RowSpan="1" Row="3"/>
+<TextKeyRef KeyRef="Punctuation.Period" ColumnSpan="1" Column="9" RowSpan="1" Row="3"/>
+<TextKeyRef KeyRef="Punctuation.Question" ColumnSpan="1" Column="10" RowSpan="1" Row="3"/>
+<CommandKeyRef KeyRef="Function.Space" ColumnSpan="1" Column="11" RowSpan="1" Row="3"/>
