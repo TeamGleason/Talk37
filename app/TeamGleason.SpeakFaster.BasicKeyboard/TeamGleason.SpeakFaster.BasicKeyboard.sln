@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31424.327
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamGleason.SpeakFaster.BasicKeyboard", "TeamGleason.SpeakFaster.BasicKeyboard\TeamGleason.SpeakFaster.BasicKeyboard.csproj", "{550F7164-0B19-4F74-B339-29629708E557}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{550F7164-0B19-4F74-B339-29629708E557}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{550F7164-0B19-4F74-B339-29629708E557}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{550F7164-0B19-4F74-B339-29629708E557}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{550F7164-0B19-4F74-B339-29629708E557}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {42443C83-EEB8-4A17-B692-7A75B287B59A}
+	EndGlobalSection
+EndGlobal
