@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Interop;
 using System.Xml;
+using TeamGleason.SpeakFaster.BasicKeyboard.Special;
 
 namespace TeamGleason.SpeakFaster.BasicKeyboard
 {
@@ -52,6 +54,15 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard
             {
                 TheGrid.ColumnDefinitions.Add(new ColumnDefinition());
             }
+        }
+
+        protected override void OnSourceInitialized(EventArgs e)
+        {
+            base.OnSourceInitialized(e);
+
+            //Set the window style to noactivate.
+            var helper = new WindowInteropHelper(this);
+            InteropHelper.SetMainWindowStyle(helper.Handle);
         }
 
         private IEnumerable<KeyRefBase> ReadLayout()
