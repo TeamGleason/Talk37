@@ -1,10 +1,12 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Xml;
 
 namespace TeamGleason.SpeakFaster.BasicKeyboard
 {
-    public abstract class KeyRefBase
+    public abstract class KeyRefBase : ICommand
     {
         internal KeyRefBase(XmlReader reader)
         {
@@ -28,14 +30,43 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard
         public int RowSpan { get; } = 1;
         public int Row { get; }
 
+        event EventHandler ICommand.CanExecuteChanged
+        {
+            add
+            {
+                _canExecuteChanged += value;
+            }
+
+            remove
+            {
+                _canExecuteChanged -= value;
+            }
+        }
+        private EventHandler _canExecuteChanged;
+
         internal Control CreateControl()
         {
-            var control = new Button { Content = KeyRef };
+            var control = new Button { Content = KeyRef, Command = this };
             Grid.SetRow(control, Row);
             Grid.SetRowSpan(control, RowSpan);
             Grid.SetColumn(control, Column);
             Grid.SetColumnSpan(control, ColumnSpan);
             return control;
+        }
+
+        bool ICommand.CanExecute(object parameter)
+        {
+            return true;
+        }
+
+        void ICommand.Execute(object parameter)
+        {
+            Execute();
+        }
+
+        protected virtual void Execute()
+        {
+
         }
     }
 }
