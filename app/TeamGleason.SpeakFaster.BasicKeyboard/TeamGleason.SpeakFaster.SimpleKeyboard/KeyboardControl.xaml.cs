@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using TeamGleason.SpeakFaster.KeyboardLayouts;
 
 namespace TeamGleason.SpeakFaster.SimpleKeyboard
@@ -71,10 +70,9 @@ namespace TeamGleason.SpeakFaster.SimpleKeyboard
             ((KeyboardControl)d).OnLayoutChanged((KeyboardLayout)e.NewValue);
         }
 
-        private void CreateButton(KeyRefBase keyRef, bool isToggle, string label, string icon)
+        private void AddManager(KeyRefBase keyRef, ButtonManager manager)
         {
-            ButtonBase button = isToggle ? new KeyboardToggleButton() : new KeyboardButton();
-            button.Content = label ?? icon;
+            var button = manager.Button;
             Grid.SetRow(button, keyRef.Row);
             Grid.SetRowSpan(button, keyRef.RowSpan);
             Grid.SetColumn(button, keyRef.Column);
@@ -84,17 +82,20 @@ namespace TeamGleason.SpeakFaster.SimpleKeyboard
 
         void IKeyboardControl.Create(TextKeyRef keyRef, TextKey key)
         {
-            CreateButton(keyRef, false, key.Label, null);
+            var manager = TextButtonManager.CreateInstance(this, key);
+            AddManager(keyRef, manager);
         }
 
         void IKeyboardControl.Create(CommandKeyRef keyRef, CommandKey key)
         {
-            CreateButton(keyRef, key.Toggles, key.Label, key.Icon);
+            var manager = CommandButtonManager.CreateInstance(this, key);
+            AddManager(keyRef, manager);
         }
 
         void IKeyboardControl.Create(PredictionKeyRef keyRef, PredictionKey key)
         {
-            CreateButton(keyRef, false, string.Empty, null);
+            var manager = PredictionButtonManager.CreateInstance(this, key);
+            AddManager(keyRef, manager);
         }
     }
 }
