@@ -49,7 +49,8 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard
                 }
             }
         }
-        string _caption;
+
+        private string _caption;
 
         event EventHandler ICommand.CanExecuteChanged
         {
