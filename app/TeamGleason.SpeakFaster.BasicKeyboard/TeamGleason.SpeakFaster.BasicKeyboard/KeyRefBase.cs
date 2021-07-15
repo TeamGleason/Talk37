@@ -30,7 +30,7 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard
         public int RowSpan { get; } = 1;
         public int Row { get; }
 
-        private Button _control;
+        protected Button _control;
 
         event EventHandler ICommand.CanExecuteChanged
         {
@@ -67,6 +67,11 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard
         void ICommand.Execute(object parameter)
         {
             Execute();
+        }
+
+        internal virtual void SetState(bool isShift, bool isControl, bool isCapsLock)
+        {
+
         }
 
         protected virtual void Execute()

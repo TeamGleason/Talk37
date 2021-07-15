@@ -7,36 +7,60 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard
 {
     internal class TextKeyRef : KeyRefBase
     {
-        internal TextKeyRef(XmlReader reader) : base(reader) { }
+        private readonly string _normalCaption;
+        private readonly string _shiftedCaption;
+
+        internal TextKeyRef(XmlReader reader) : base(reader)
+        {
+            if(KeyRef.Length==1)
+            {
+                _normalCaption = KeyRef;
+                _shiftedCaption = KeyRef.ToUpperInvariant();
+            }
+            else
+            {
+                switch(KeyRef)
+                {
+                    case "Punctuation.Comma":
+                        _normalCaption = ",";
+                        break;
+
+                    case "Punctuation.Period":
+                        _normalCaption = ".";
+                        break;
+
+                    case "Punctuation.Question":
+                        _normalCaption = "?";
+                        break;
+
+                    case "Punctuation.Exclamation":
+                        _normalCaption = "!";
+                        break;
+
+                    default:
+                        _normalCaption = "Error";
+                        break;
+                }
+
+                _shiftedCaption = _normalCaption;
+            }
+        }
 
         protected override void Execute()
         {
             base.Execute();
 
-            Debug.Assert(KeyRef.Length == 1);
-            var ch = KeyRef[0];
-            var upperCh = char.ToUpper(ch);
-            InteropHelper.SendCharacter(upperCh);
-
-            switch (upperCh)
-            {
-                case 'A':
-                    InteropHelper.StateChange += InteropHelper_StateChange;
-                    break;
-
-                case 'B':
-                    InteropHelper.StateChange -= InteropHelper_StateChange;
-                    break;
-
-                case 'C':
-                    InteropHelper.raise_StateChange(this, EventArgs.Empty);
-                    break;
-            }
+            Debug.Assert(_shiftedCaption.Length == 1);
+            var ch = _shiftedCaption[0];
+            InteropHelper.SendCharacter(_shiftedCaption[0]);
         }
 
-        private void InteropHelper_StateChange(object sender, System.EventArgs e)
+        internal override void SetState(bool isShift, bool isControl, bool isCapsLock)
         {
-            Debug.WriteLine("Wibble");
+            base.SetState(isShift, isControl, isCapsLock);
+
+            var caption = isShift == isCapsLock ? _normalCaption : _shiftedCaption;
+            _control.Content = caption;
         }
     }
 }

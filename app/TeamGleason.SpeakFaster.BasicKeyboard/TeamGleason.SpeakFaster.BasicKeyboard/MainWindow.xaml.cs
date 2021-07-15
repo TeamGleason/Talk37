@@ -30,6 +30,10 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard
 
         private readonly KeyRefBase[] _keyRefs;
 
+        private bool _isShift;
+        private bool _isControl;
+        private bool _isCapsLock;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -73,6 +77,25 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard
             _stateSemaphore.Release();
         }
 
+        private void CheckState()
+        {
+            var isShift = InteropHelper.IsShift;
+            var isControl = InteropHelper.IsControl;
+            var isCapsLock = InteropHelper.IsCapsLock;
+
+            if (isShift != _isShift || isControl != _isControl || isCapsLock != _isCapsLock)
+            {
+                _isShift = isShift;
+                _isControl = isControl;
+                _isCapsLock = isCapsLock;
+
+                foreach (var key in _keyRefs)
+                {
+                    key.SetState(isShift, isControl, isCapsLock);
+                }
+            }
+        }
+
         private async Task WatchStateAsync()
         {
             for (; ; )
@@ -84,15 +107,11 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard
                     // Spin.
                 }
 
-                Debug.WriteLine($"xCapsLock = {InteropHelper.IsCapsLock}");
-                Debug.WriteLine($"xShift = {InteropHelper.IsShift}");
-                Debug.WriteLine($"xControl = {InteropHelper.IsControl}");
+                CheckState();
 
-                await Task.Delay(50);
+                await Task.Delay(100);
 
-                Debug.WriteLine($"CapsLock = {InteropHelper.IsCapsLock}");
-                Debug.WriteLine($"Shift = {InteropHelper.IsShift}");
-                Debug.WriteLine($"Control = {InteropHelper.IsControl}");
+                CheckState();
             }
         }
 
