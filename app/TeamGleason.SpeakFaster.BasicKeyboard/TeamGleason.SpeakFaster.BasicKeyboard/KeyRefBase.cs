@@ -24,6 +24,8 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard
                     default: throw new InvalidDataException();
                 }
             }
+
+            Caption = KeyRef;
         }
 
         internal MainWindow Window { get; }
@@ -34,6 +36,20 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard
         public int Row { get; }
 
         protected Button _control;
+
+        protected string Caption
+        {
+            get => _caption;
+            set
+            {
+                _caption = value;
+                if (_control != null)
+                {
+                    _control.Content = value;
+                }
+            }
+        }
+        string _caption;
 
         event EventHandler ICommand.CanExecuteChanged
         {
@@ -51,7 +67,7 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard
 
         internal Control CreateControl()
         {
-            var control = new Button { Content = KeyRef, Command = this };
+            var control = new Button { Content = Caption, Command = this };
             Grid.SetRow(control, Row);
             Grid.SetRowSpan(control, RowSpan);
             Grid.SetColumn(control, Column);

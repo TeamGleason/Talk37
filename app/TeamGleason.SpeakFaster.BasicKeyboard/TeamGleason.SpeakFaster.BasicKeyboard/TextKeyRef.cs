@@ -58,8 +58,7 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard
         {
             base.SetState(isShift, isControl, isCapsLock);
 
-            var caption = isShift == isCapsLock ? _normalCaption : _shiftedCaption;
-            _control.Content = caption;
+            Caption = isShift == isCapsLock ? _normalCaption : _shiftedCaption;
         }
     }
 }
