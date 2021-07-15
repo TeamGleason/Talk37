@@ -4,6 +4,6 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard
 {
     internal class CommandKeyRef : KeyRefBase
     {
-        internal CommandKeyRef(XmlReader reader) : base(reader) { }
+        internal CommandKeyRef(MainWindow window, XmlReader reader) : base(window, reader) { }
     }
 }

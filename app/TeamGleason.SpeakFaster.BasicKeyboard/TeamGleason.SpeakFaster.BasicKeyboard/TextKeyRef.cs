@@ -10,7 +10,7 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard
         private readonly string _normalCaption;
         private readonly string _shiftedCaption;
 
-        internal TextKeyRef(XmlReader reader) : base(reader)
+        internal TextKeyRef(MainWindow window, XmlReader reader) : base(window, reader)
         {
             if(KeyRef.Length==1)
             {

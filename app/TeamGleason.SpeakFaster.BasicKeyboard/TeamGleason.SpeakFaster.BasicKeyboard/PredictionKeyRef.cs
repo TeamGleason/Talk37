@@ -4,6 +4,6 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard
 {
     internal class PredictionKeyRef : KeyRefBase
     {
-        internal PredictionKeyRef(XmlReader reader) : base(reader) { }
+        internal PredictionKeyRef(MainWindow window, XmlReader reader) : base(window, reader) { }
     }
 }

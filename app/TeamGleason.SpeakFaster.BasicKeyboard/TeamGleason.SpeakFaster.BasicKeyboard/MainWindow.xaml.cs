@@ -18,13 +18,13 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard
     /// </summary>
     public partial class MainWindow : Window
     {
-        private static readonly KeyValuePair<string, Func<XmlReader, KeyRefBase>>[] _types = new KeyValuePair<string, Func<XmlReader, KeyRefBase>>[]
+        private static readonly KeyValuePair<string, Func<MainWindow, XmlReader, KeyRefBase>>[] _types = new KeyValuePair<string, Func<MainWindow, XmlReader, KeyRefBase>>[]
         {
-            new KeyValuePair<string, Func<XmlReader, KeyRefBase>>(nameof(PredictionKeyRef), r => new PredictionKeyRef(r)),
-            new KeyValuePair<string, Func<XmlReader, KeyRefBase>>(nameof(CommandKeyRef), r => new CommandKeyRef(r)),
-            new KeyValuePair<string, Func<XmlReader, KeyRefBase>>(nameof(TextKeyRef), r => new TextKeyRef(r))
+            new KeyValuePair<string, Func<MainWindow, XmlReader, KeyRefBase>>(nameof(PredictionKeyRef), (w, r) => new PredictionKeyRef(w, r)),
+            new KeyValuePair<string, Func<MainWindow, XmlReader, KeyRefBase>>(nameof(CommandKeyRef), (w, r) => new CommandKeyRef(w, r)),
+            new KeyValuePair<string, Func<MainWindow, XmlReader, KeyRefBase>>(nameof(TextKeyRef), (w, r) => new TextKeyRef(w, r))
         };
-        private static readonly Dictionary<string, Func<XmlReader, KeyRefBase>> _constructors = new Dictionary<string, Func<XmlReader, KeyRefBase>>(_types);
+        private static readonly Dictionary<string, Func<MainWindow, XmlReader, KeyRefBase>> _constructors = new Dictionary<string, Func<MainWindow, XmlReader, KeyRefBase>>(_types);
 
         private readonly SemaphoreSlim _stateSemaphore = new SemaphoreSlim(1);
 
@@ -146,7 +146,7 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard
                         {
                             throw new InvalidDataException();
                         }
-                        var item = constructor(reader);
+                        var item = constructor(this, reader);
                         keyRefs.Add(item);
 
                         while (reader.Read() && reader.NodeType == XmlNodeType.Whitespace) { }

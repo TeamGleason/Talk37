@@ -8,8 +8,10 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard
 {
     public abstract class KeyRefBase : ICommand
     {
-        internal KeyRefBase(XmlReader reader)
+        internal KeyRefBase(MainWindow window, XmlReader reader)
         {
+            Window = window;
+
             for (var attribute = reader.MoveToFirstAttribute(); attribute; attribute = reader.MoveToNextAttribute())
             {
                 switch (reader.Name)
@@ -24,6 +26,7 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard
             }
         }
 
+        internal MainWindow Window { get; }
         public string KeyRef { get; }
         public int ColumnSpan { get; } = 1;
         public int Column { get; }
