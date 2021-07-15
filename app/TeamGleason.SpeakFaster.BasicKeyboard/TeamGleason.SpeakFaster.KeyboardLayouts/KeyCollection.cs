@@ -19,7 +19,7 @@ namespace TeamGleason.SpeakFaster.KeyboardLayouts
             _dictionary.Add(item.Id, item);
         }
 
-        public void Clear()
+        public virtual void Clear()
         {
             _dictionary.Clear();
         }
@@ -40,7 +40,7 @@ namespace TeamGleason.SpeakFaster.KeyboardLayouts
             return _dictionary.Values.GetEnumerator();
         }
 
-        public bool Remove(T item)
+        public virtual bool Remove(T item)
         {
             var value = _dictionary.Remove(item.Id);
             return value;
@@ -51,9 +51,6 @@ namespace TeamGleason.SpeakFaster.KeyboardLayouts
             return GetEnumerator();
         }
 
-        public T this[string key]
-        {
-            get => _dictionary[key];
-        }
+        public T this[string key] => _dictionary[key];
     }
 }

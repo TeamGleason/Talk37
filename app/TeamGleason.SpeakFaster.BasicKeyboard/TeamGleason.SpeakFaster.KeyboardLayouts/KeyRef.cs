@@ -2,7 +2,7 @@
 
 namespace TeamGleason.SpeakFaster.KeyboardLayouts
 {
-    public class KeyRefBase
+    public abstract class KeyRefBase
     {
         protected KeyboardLayout _layout;
 
@@ -10,11 +10,7 @@ namespace TeamGleason.SpeakFaster.KeyboardLayouts
         {
             _layout = layout;
         }
-    }
 
-    public abstract class KeyRefBase<T> : KeyRefBase
-        where T : IndexObject
-    {
         [XmlAttribute]
         public string KeyRef { get; set; }
 
@@ -30,6 +26,12 @@ namespace TeamGleason.SpeakFaster.KeyboardLayouts
         [XmlAttribute]
         public int ColumnSpan { get; set; }
 
+        public abstract void Create(IKeyboardControl parent);
+    }
+
+    public abstract class KeyRefBase<T> : KeyRefBase
+        where T : IndexObject
+    {
         internal T Key => IndexCollection[KeyRef];
 
         internal abstract KeyCollection<T> IndexCollection { get; }
