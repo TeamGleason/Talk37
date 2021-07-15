@@ -73,7 +73,7 @@ namespace TeamGleason.SpeakFaster.SimpleKeyboard
 
         private void CreateButton(KeyRefBase keyRef, bool isToggle, string label, string icon)
         {
-            ButtonBase button = isToggle ? new ToggleButton() : new Button();
+            ButtonBase button = isToggle ? new KeyboardToggleButton() : new KeyboardButton();
             button.Content = label ?? icon;
             Grid.SetRow(button, keyRef.Row);
             Grid.SetRowSpan(button, keyRef.RowSpan);
