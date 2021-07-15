@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Xml;
 using TeamGleason.SpeakFaster.BasicKeyboard.Special;
 
@@ -12,14 +11,14 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard
 
         internal TextKeyRef(MainWindow window, XmlReader reader) : base(window, reader)
         {
-            if(KeyRef.Length==1)
+            if (KeyRef.Length == 1)
             {
                 _normalCaption = KeyRef;
                 _shiftedCaption = KeyRef.ToUpperInvariant();
             }
             else
             {
-                switch(KeyRef)
+                switch (KeyRef)
                 {
                     case "Punctuation.Comma":
                         _normalCaption = ",";
