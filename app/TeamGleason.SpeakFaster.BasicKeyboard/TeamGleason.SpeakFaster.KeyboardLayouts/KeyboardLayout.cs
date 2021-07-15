@@ -9,6 +9,11 @@ namespace TeamGleason.SpeakFaster.KeyboardLayouts
     {
         private static readonly XmlSerializer _serializer = new XmlSerializer(typeof(KeyboardLayout));
 
+        public KeyboardLayout()
+        {
+            Views = new ViewCollection(this);
+        }
+
         [XmlAttribute]
         public int Rows { get; set; }
 
@@ -19,13 +24,13 @@ namespace TeamGleason.SpeakFaster.KeyboardLayouts
 
         public Language Language { get; set; }
 
-        public TextKey[] TextKeys { get; set; }
+        public KeyCollection<TextKey> TextKeys { get; } = new KeyCollection<TextKey>();
 
-        public CommandKey[] CommandKeys { get; set; }
+        public KeyCollection<CommandKey> CommandKeys { get; } = new KeyCollection<CommandKey>();
 
-        public PredictionKey[] PredictionKeys { get; set; }
+        public KeyCollection<PredictionKey> PredictionKeys { get; } = new KeyCollection<PredictionKey>();
 
-        public View[] Views { get; set; }
+        public ViewCollection Views { get; }
 
         public static KeyboardLayout Deserialize(XmlReader reader)
         {
