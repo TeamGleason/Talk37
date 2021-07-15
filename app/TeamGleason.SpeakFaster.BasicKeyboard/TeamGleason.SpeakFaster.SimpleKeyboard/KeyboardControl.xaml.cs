@@ -33,6 +33,12 @@ namespace TeamGleason.SpeakFaster.SimpleKeyboard
             }
         }
 
+        internal void NavigateToView(string viewName)
+        {
+            var view = _layout.Views[viewName];
+            NavigateToView(view);
+        }
+
         private void OnLayoutChanged(KeyboardLayout layout)
         {
             TheGrid.Children.Clear();

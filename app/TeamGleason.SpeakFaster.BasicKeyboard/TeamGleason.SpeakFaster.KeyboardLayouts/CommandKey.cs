@@ -17,6 +17,21 @@ namespace TeamGleason.SpeakFaster.KeyboardLayouts
         public bool Toggles { get; set; }
 
         [XmlAttribute]
-        public string Command { get; set; }
+        public string Command
+        {
+            get => CommandType + '.' + CommandParameter;
+            set
+            {
+                var splits = value.Split('.', 2);
+                CommandType = splits[0];
+                CommandParameter = splits[1];
+            }
+        }
+
+        [XmlIgnore]
+        public string CommandType { get; set; }
+
+        [XmlIgnore]
+        public string CommandParameter { get; set; }
     }
 }
