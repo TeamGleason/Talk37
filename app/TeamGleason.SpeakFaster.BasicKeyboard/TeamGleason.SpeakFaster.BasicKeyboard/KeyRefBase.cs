@@ -30,6 +30,8 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard
         public int RowSpan { get; } = 1;
         public int Row { get; }
 
+        private Button _control;
+
         event EventHandler ICommand.CanExecuteChanged
         {
             add
@@ -51,6 +53,9 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard
             Grid.SetRowSpan(control, RowSpan);
             Grid.SetColumn(control, Column);
             Grid.SetColumnSpan(control, ColumnSpan);
+
+            _control = control;
+
             return control;
         }
 

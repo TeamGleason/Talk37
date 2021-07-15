@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Interop;
+using System.Windows.Threading;
 using System.Xml;
 using TeamGleason.SpeakFaster.BasicKeyboard.Special;
 
@@ -22,11 +26,16 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard
         };
         private static readonly Dictionary<string, Func<XmlReader, KeyRefBase>> _constructors = new Dictionary<string, Func<XmlReader, KeyRefBase>>(_types);
 
+        private readonly SemaphoreSlim _stateSemaphore = new SemaphoreSlim(1);
+
+        private readonly KeyRefBase[] _keyRefs;
+
         public MainWindow()
         {
             InitializeComponent();
 
             var keyRefs = ReadLayout();
+            _keyRefs = new List<KeyRefBase>(keyRefs).ToArray();
 
             var rows = 0;
             var columns = 0;
@@ -53,6 +62,37 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard
             for (var i = 0; i < columns; i++)
             {
                 TheGrid.ColumnDefinitions.Add(new ColumnDefinition());
+            }
+
+            InteropHelper.StateChange += OnStateChanged;
+            _ = WatchStateAsync();
+        }
+
+        private void OnStateChanged(object sender, EventArgs e)
+        {
+            _stateSemaphore.Release();
+        }
+
+        private async Task WatchStateAsync()
+        {
+            for (; ; )
+            {
+                await _stateSemaphore.WaitAsync();
+
+                while (_stateSemaphore.Wait(0))
+                {
+                    // Spin.
+                }
+
+                Debug.WriteLine($"xCapsLock = {InteropHelper.IsCapsLock}");
+                Debug.WriteLine($"xShift = {InteropHelper.IsShift}");
+                Debug.WriteLine($"xControl = {InteropHelper.IsControl}");
+
+                await Task.Delay(50);
+
+                Debug.WriteLine($"CapsLock = {InteropHelper.IsCapsLock}");
+                Debug.WriteLine($"Shift = {InteropHelper.IsShift}");
+                Debug.WriteLine($"Control = {InteropHelper.IsControl}");
             }
         }
 
