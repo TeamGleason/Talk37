@@ -5,16 +5,48 @@ namespace TeamGleason.SpeakFaster.SimpleKeyboard
 {
     internal class TextButtonManager : ButtonManager
     {
+        private readonly TextKey _key;
+
         public TextButtonManager(KeyboardControl parent, TextKey key, Button button)
             : base(parent, button)
         {
+            _key = key;
+        }
+
+        private TextKey GetEffectiveKey()
+        {
+            var effectiveKey = _key;
+
+            var shift = effectiveKey.Modifiers?.Shift;
+            if (shift != null && _parent.GetState(StateModifier.Shift))
+            {
+                effectiveKey = _parent.Layout.TextKeys[shift.KeyRef];
+            }
+
+            var caps = effectiveKey.Modifiers?.CapsLock;
+            if (caps != null && _parent.GetState(StateModifier.CapsLock))
+            {
+                effectiveKey = _parent.Layout.TextKeys[caps.KeyRef];
+            }
+
+            return effectiveKey;
         }
 
         internal static TextButtonManager CreateInstance(KeyboardControl parent, TextKey key)
         {
-            var button = new KeyboardButton { Content = key.Label };
+            var button = new KeyboardButton();
             var manager = new TextButtonManager(parent, key, button);
+            manager.UpdateStateModifiers();
             return manager;
+        }
+
+        internal override void UpdateStateModifiers()
+        {
+            base.UpdateStateModifiers();
+
+            TextKey effectiveKey = GetEffectiveKey();
+
+            Button.Content = effectiveKey.Label;
         }
     }
 }

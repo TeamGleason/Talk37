@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Controls;
 using TeamGleason.SpeakFaster.KeyboardLayouts;
 
@@ -13,6 +14,10 @@ namespace TeamGleason.SpeakFaster.SimpleKeyboard
             new PropertyMetadata(null, OnLayoutChanged));
 
         private KeyboardLayout _layout;
+
+        private readonly bool[] _states = new bool[4];
+
+        private readonly List<ButtonManager> _managers = new List<ButtonManager>();
 
         public KeyboardControl()
         {
@@ -33,6 +38,26 @@ namespace TeamGleason.SpeakFaster.SimpleKeyboard
             }
         }
 
+        internal bool GetState(StateModifier modifier)
+        {
+            var value = _states[(int)modifier];
+            return value;
+        }
+
+        internal void SetState(StateModifier modifier, bool newState)
+        {
+            var currentState = _states[(int)modifier];
+            if (currentState != newState)
+            {
+                _states[(int)modifier] = newState;
+
+                foreach (var manager in _managers)
+                {
+                    manager.UpdateStateModifiers();
+                }
+            }
+        }
+
         internal void NavigateToView(string viewName)
         {
             var view = _layout.Views[viewName];
@@ -42,6 +67,7 @@ namespace TeamGleason.SpeakFaster.SimpleKeyboard
         private void OnLayoutChanged(KeyboardLayout layout)
         {
             TheGrid.Children.Clear();
+            _managers.Clear();
             _layout = layout;
 
             if (layout != null)
@@ -84,6 +110,7 @@ namespace TeamGleason.SpeakFaster.SimpleKeyboard
             Grid.SetColumn(button, keyRef.Column);
             Grid.SetColumnSpan(button, keyRef.ColumnSpan);
             TheGrid.Children.Add(button);
+            _managers.Add(manager);
         }
 
         void IKeyboardControl.Create(TextKeyRef keyRef, TextKey key)

@@ -19,6 +19,10 @@ namespace TeamGleason.SpeakFaster.SimpleKeyboard
 
         internal ButtonBase Button { get; }
 
+        internal virtual void UpdateStateModifiers()
+        {
+        }
+
         event EventHandler ICommand.CanExecuteChanged
         {
             add
