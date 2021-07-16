@@ -33,10 +33,7 @@ namespace TeamGleason.SpeakFaster.SimpleKeyboard
             }
         }
 
-        protected virtual void Execute()
-        {
-
-        }
+        protected abstract void Execute();
 
         bool ICommand.CanExecute(object parameter)
         {
@@ -49,7 +46,7 @@ namespace TeamGleason.SpeakFaster.SimpleKeyboard
         }
     }
 
-    internal class ButtonManager<T> : ButtonManager
+    internal abstract class ButtonManager<T> : ButtonManager
     {
         protected readonly T _key;
 

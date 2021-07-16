@@ -21,8 +21,6 @@ namespace TeamGleason.SpeakFaster.SimpleKeyboard
 
         protected override void Execute()
         {
-            base.Execute();
-
             _parent.NavigateToView(_key.CommandParameter);
         }
     }

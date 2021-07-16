@@ -45,5 +45,9 @@ namespace TeamGleason.SpeakFaster.SimpleKeyboard
 
             Button.Content = effectiveKey.Label;
         }
+
+        protected override void Execute()
+        {
+        }
     }
 }

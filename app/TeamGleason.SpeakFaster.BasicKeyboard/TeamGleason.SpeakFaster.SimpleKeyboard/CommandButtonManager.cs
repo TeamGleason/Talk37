@@ -4,7 +4,7 @@ using TeamGleason.SpeakFaster.KeyboardLayouts;
 
 namespace TeamGleason.SpeakFaster.SimpleKeyboard
 {
-    internal class CommandButtonManager : ButtonManager<CommandKey>
+    internal abstract class CommandButtonManager : ButtonManager<CommandKey>
     {
         internal CommandButtonManager(KeyboardControl parent, CommandKey key, ButtonBase button)
             : base(parent, key, button)

@@ -16,5 +16,9 @@ namespace TeamGleason.SpeakFaster.SimpleKeyboard
             var manager = new PredictionButtonManager(parent, key, button);
             return manager;
         }
+
+        protected override void Execute()
+        {
+        }
     }
 }
