@@ -5,7 +5,7 @@ using TeamGleason.SpeakFaster.KeyboardLayouts;
 
 namespace TeamGleason.SpeakFaster.SimpleKeyboard
 {
-    internal class ModifierCommandButtonManager : ButtonManager<CommandKey>
+    internal class ModifierCommandButtonManager : CommandButtonManager
     {
         private ModifierCommandButtonManager(KeyboardControl parent, CommandKey key, ButtonBase button)
             : base(parent, key, button)
@@ -16,7 +16,6 @@ namespace TeamGleason.SpeakFaster.SimpleKeyboard
         {
             Debug.Assert(key.Toggles);
             ButtonBase button = new KeyboardToggleButton();
-            button.Content = key.Label ?? key.Icon;
             var manager = new ModifierCommandButtonManager(parent, key, button);
             manager.UpdateStateModifiers();
             return manager;

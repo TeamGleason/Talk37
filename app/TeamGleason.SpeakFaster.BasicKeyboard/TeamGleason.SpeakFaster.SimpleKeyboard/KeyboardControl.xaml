@@ -6,5 +6,48 @@
              xmlns:local="clr-namespace:TeamGleason.SpeakFaster.SimpleKeyboard"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <FontFamily x:Key="KeyboardFontFamily">Arial Black</FontFamily>
+        <DataTemplate x:Key="KeyIcon.ClearWord">
+            <TextBlock Text="ClearWord"/>
+        </DataTemplate>
+        <DataTemplate x:Key="KeyIcon.Backspace">
+            <TextBlock Text="Backspace"/>
+        </DataTemplate>
+        <DataTemplate x:Key="KeyIcon.Shift">
+            <TextBlock Text="Shift"/>
+        </DataTemplate>
+        <DataTemplate x:Key="KeyIcon.More">
+            <TextBlock Text="More"/>
+        </DataTemplate>
+        <DataTemplate x:Key="KeyIcon.Tab">
+            <TextBlock Text="Tab"/>
+        </DataTemplate>
+        <DataTemplate x:Key="KeyIcon.Space">
+            <TextBlock Text="Space"/>
+        </DataTemplate>
+        <DataTemplate x:Key="KeyIcon.Back">
+            <TextBlock Text="Back"/>
+        </DataTemplate>
+        <DataTemplate x:Key="KeyIcon.Arrow.Up">
+            <TextBlock Text="Up"/>
+        </DataTemplate>
+        <DataTemplate x:Key="KeyIcon.Arrow.Down">
+            <TextBlock Text="Down"/>
+        </DataTemplate>
+        <DataTemplate x:Key="KeyIcon.Arrow.Left">
+            <TextBlock Text="Left"/>
+        </DataTemplate>
+        <DataTemplate x:Key="KeyIcon.Arrow.Right">
+            <TextBlock Text="Right"/>
+        </DataTemplate>
+        
+        <Style TargetType="local:KeyboardButton">
+            <Setter Property="FontFamily" Value="{StaticResource KeyboardFontFamily}"/>
+        </Style>
+        <Style TargetType="local:KeyboardToggleButton">
+            <Setter Property="FontFamily" Value="{StaticResource KeyboardFontFamily}"/>
+        </Style>
+    </UserControl.Resources>
     <Grid x:Name="TheGrid"/>
 </UserControl>

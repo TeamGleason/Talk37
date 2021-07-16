@@ -6,15 +6,6 @@
         xmlns:local="clr-namespace:TeamGleason.SpeakFaster.SimpleKeyboard"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Window.Resources>
-        <FontFamily x:Key="KeyboardFontFamily">Arial Black</FontFamily>
-        <Style TargetType="local:KeyboardButton">
-            <Setter Property="FontFamily" Value="{StaticResource KeyboardFontFamily}"/>
-        </Style>
-        <Style TargetType="local:KeyboardToggleButton">
-            <Setter Property="FontFamily" Value="{StaticResource KeyboardFontFamily}"/>
-        </Style>
-    </Window.Resources>
     <Grid>
         <local:KeyboardControl x:Name="TheKeyboard"/>
     </Grid>
