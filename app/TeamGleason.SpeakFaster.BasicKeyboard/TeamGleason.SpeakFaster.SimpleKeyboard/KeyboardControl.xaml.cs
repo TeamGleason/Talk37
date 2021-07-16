@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using TeamGleason.SpeakFaster.KeyboardLayouts;
@@ -121,7 +122,25 @@ namespace TeamGleason.SpeakFaster.SimpleKeyboard
 
         void IKeyboardControl.Create(CommandKeyRef keyRef, CommandKey key)
         {
-            var manager = CommandButtonManager.CreateInstance(this, key);
+            ButtonManager manager;
+
+            switch (key.CommandType)
+            {
+                case "Navigate":
+                    manager = NavigateCommandButtonManager.CreateInstance(this, key);
+                    break;
+                case "Function":
+                    manager = FunctionCommandButtonManager.CreateInstance(this, key);
+                    break;
+                case "Modifier":
+                    manager = ModifierCommandButtonManager.CreateInstance(this, key);
+                    break;
+                case "Custom":
+                    manager = CustomCommandButtonManager.CreateInstance(this, key);
+                    break;
+                default:
+                    throw new InvalidOperationException();
+            }
             AddManager(keyRef, manager);
         }
 

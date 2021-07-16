@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
-using TeamGleason.SpeakFaster.KeyboardLayouts;
 
 namespace TeamGleason.SpeakFaster.SimpleKeyboard
 {
@@ -34,24 +33,6 @@ namespace TeamGleason.SpeakFaster.SimpleKeyboard
             }
         }
 
-        internal static TextButtonManager Create(KeyboardControl parent, TextKey key)
-        {
-            var manager = TextButtonManager.Create(parent, key);
-            return manager;
-        }
-
-        internal static CommandButtonManager Create(KeyboardControl parent, CommandKey key)
-        {
-            var manager = CommandButtonManager.Create(parent, key);
-            return manager;
-        }
-
-        internal static PredictionButtonManager Create(KeyboardControl parent, PredictionKey key)
-        {
-            var manager = PredictionButtonManager.Create(parent, key);
-            return manager;
-        }
-
         protected virtual void Execute()
         {
 
@@ -65,6 +46,17 @@ namespace TeamGleason.SpeakFaster.SimpleKeyboard
         void ICommand.Execute(object parameter)
         {
             Execute();
+        }
+    }
+
+    internal class ButtonManager<T> : ButtonManager
+    {
+        protected readonly T _key;
+
+        internal ButtonManager(KeyboardControl parent, T key, ButtonBase button)
+            : base(parent, button)
+        {
+            _key = key;
         }
     }
 }

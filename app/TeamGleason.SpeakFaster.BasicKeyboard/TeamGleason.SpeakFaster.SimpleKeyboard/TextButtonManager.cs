@@ -3,14 +3,11 @@ using TeamGleason.SpeakFaster.KeyboardLayouts;
 
 namespace TeamGleason.SpeakFaster.SimpleKeyboard
 {
-    internal class TextButtonManager : ButtonManager
+    internal class TextButtonManager : ButtonManager<TextKey>
     {
-        private readonly TextKey _key;
-
         public TextButtonManager(KeyboardControl parent, TextKey key, Button button)
-            : base(parent, button)
+            : base(parent, key, button)
         {
-            _key = key;
         }
 
         private TextKey GetEffectiveKey()

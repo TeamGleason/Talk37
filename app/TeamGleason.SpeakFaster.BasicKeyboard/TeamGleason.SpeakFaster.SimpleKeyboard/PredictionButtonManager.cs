@@ -3,10 +3,10 @@ using TeamGleason.SpeakFaster.KeyboardLayouts;
 
 namespace TeamGleason.SpeakFaster.SimpleKeyboard
 {
-    internal class PredictionButtonManager : ButtonManager
+    internal class PredictionButtonManager : ButtonManager<PredictionKey>
     {
         public PredictionButtonManager(KeyboardControl parent, PredictionKey key, ButtonBase button)
-            : base(parent, button)
+            : base(parent, key, button)
         {
         }
 
