@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using TeamGleason.SpeakFaster.KeyboardLayouts;
 
 namespace TeamGleason.SpeakFaster.SimpleKeyboard
@@ -57,6 +59,40 @@ namespace TeamGleason.SpeakFaster.SimpleKeyboard
                     manager.UpdateStateModifiers();
                 }
             }
+
+            if (modifier == StateModifier.CapsLock)
+            {
+                SendUpDown(Key.CapsLock);
+            }
+            else
+            {
+                Key key;
+
+                switch (modifier)
+                {
+                    case StateModifier.Ctrl:
+                        key = Key.LeftCtrl;
+                        break;
+
+                    case StateModifier.Alt:
+                        key = Key.LeftAlt;
+                        break;
+
+                    default:
+                    case StateModifier.Shift:
+                        key = Key.LeftShift;
+                        break;
+                }
+
+                if (newState)
+                {
+                    SendDown(key);
+                }
+                else
+                {
+                    SendUp(key);
+                }
+            }
         }
 
         internal void NavigateToView(string viewName)
@@ -96,6 +132,36 @@ namespace TeamGleason.SpeakFaster.SimpleKeyboard
                     NavigateToView(_layout.Views[0]);
                 }
             }
+        }
+
+        internal void SendKeys(bool sendDowns,
+            bool sendUps,
+            params Key[] keys)
+        {
+            // TODO.
+        }
+
+        internal void SendDown(Key code)
+        {
+            Debug.WriteLine($"TODO: SendDown({code})");
+            SendKeys(true, false, code);
+        }
+
+        internal void SendUp(Key code)
+        {
+            Debug.WriteLine($"TODO: SendUp({code})");
+            SendKeys(false, true, code);
+        }
+
+        internal void SendUpDown(Key code)
+        {
+            Debug.WriteLine($"TODO: SendUpDown({code})");
+            SendKeys(true, true, code);
+        }
+
+        internal void SendText(string text)
+        {
+            Debug.WriteLine($"TODO: SendText(\"{text}\")");
         }
 
         private static void OnLayoutChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)

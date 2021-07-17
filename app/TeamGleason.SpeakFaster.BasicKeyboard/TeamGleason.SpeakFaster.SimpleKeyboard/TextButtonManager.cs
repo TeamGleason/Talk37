@@ -41,13 +41,16 @@ namespace TeamGleason.SpeakFaster.SimpleKeyboard
         {
             base.UpdateStateModifiers();
 
-            TextKey effectiveKey = GetEffectiveKey();
+            var effectiveKey = GetEffectiveKey();
 
             Button.Content = effectiveKey.Label;
         }
 
         protected override void Execute()
         {
+            var effectiveKey = GetEffectiveKey();
+
+            _parent.SendText(effectiveKey.Text);
         }
     }
 }
