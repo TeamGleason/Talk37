@@ -4,9 +4,11 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
+    <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TeamGleason.SpeakFaster.BasicKeyboard.Special\TeamGleason.SpeakFaster.BasicKeyboard.Special.vcxproj" />
     <ProjectReference Include="..\TeamGleason.SpeakFaster.KeyboardLayouts\TeamGleason.SpeakFaster.KeyboardLayouts.csproj" />
   </ItemGroup>
 

@@ -7,11 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeamGleason.SpeakFaster.Bas
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TeamGleason.SpeakFaster.BasicKeyboard.Special", "TeamGleason.SpeakFaster.BasicKeyboard.Special\TeamGleason.SpeakFaster.BasicKeyboard.Special.vcxproj", "{A24F470A-7C6D-419B-9E2F-FA9928CE6889}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamGleason.SpeakFaster.KeyboardLayouts", "TeamGleason.SpeakFaster.KeyboardLayouts\TeamGleason.SpeakFaster.KeyboardLayouts.csproj", "{4CAB9BC6-D2E7-4A1E-8814-C2A89D4AE948}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeamGleason.SpeakFaster.KeyboardLayouts", "TeamGleason.SpeakFaster.KeyboardLayouts\TeamGleason.SpeakFaster.KeyboardLayouts.csproj", "{4CAB9BC6-D2E7-4A1E-8814-C2A89D4AE948}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeamGleason.SpeakFaster.KeyboardLayouts.Test", "TeamGleason.SpeakFaster.KeyboardLayouts.Test\TeamGleason.SpeakFaster.KeyboardLayouts.Test.csproj", "{7B3DB86A-27EB-4174-8474-2186CAFAFBC3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamGleason.SpeakFaster.SimpleKeyboard", "TeamGleason.SpeakFaster.SimpleKeyboard\TeamGleason.SpeakFaster.SimpleKeyboard.csproj", "{9FCAFECB-F3BF-4528-A752-8A1453F47A07}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeamGleason.SpeakFaster.SimpleKeyboard", "TeamGleason.SpeakFaster.SimpleKeyboard\TeamGleason.SpeakFaster.SimpleKeyboard.csproj", "{9FCAFECB-F3BF-4528-A752-8A1453F47A07}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,14 +71,14 @@ Global
 		{7B3DB86A-27EB-4174-8474-2186CAFAFBC3}.Release|x86.Build.0 = Release|Any CPU
 		{9FCAFECB-F3BF-4528-A752-8A1453F47A07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9FCAFECB-F3BF-4528-A752-8A1453F47A07}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9FCAFECB-F3BF-4528-A752-8A1453F47A07}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{9FCAFECB-F3BF-4528-A752-8A1453F47A07}.Debug|x64.Build.0 = Debug|Any CPU
+		{9FCAFECB-F3BF-4528-A752-8A1453F47A07}.Debug|x64.ActiveCfg = Debug|x64
+		{9FCAFECB-F3BF-4528-A752-8A1453F47A07}.Debug|x64.Build.0 = Debug|x64
 		{9FCAFECB-F3BF-4528-A752-8A1453F47A07}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{9FCAFECB-F3BF-4528-A752-8A1453F47A07}.Debug|x86.Build.0 = Debug|Any CPU
 		{9FCAFECB-F3BF-4528-A752-8A1453F47A07}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9FCAFECB-F3BF-4528-A752-8A1453F47A07}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9FCAFECB-F3BF-4528-A752-8A1453F47A07}.Release|x64.ActiveCfg = Release|Any CPU
-		{9FCAFECB-F3BF-4528-A752-8A1453F47A07}.Release|x64.Build.0 = Release|Any CPU
+		{9FCAFECB-F3BF-4528-A752-8A1453F47A07}.Release|x64.ActiveCfg = Release|x64
+		{9FCAFECB-F3BF-4528-A752-8A1453F47A07}.Release|x64.Build.0 = Release|x64
 		{9FCAFECB-F3BF-4528-A752-8A1453F47A07}.Release|x86.ActiveCfg = Release|Any CPU
 		{9FCAFECB-F3BF-4528-A752-8A1453F47A07}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection

@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TeamGleason.SpeakFaster.SimpleKeyboard"
         mc:Ignorable="d"
+        Topmost="True"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <local:KeyboardControl x:Name="TheKeyboard"/>
