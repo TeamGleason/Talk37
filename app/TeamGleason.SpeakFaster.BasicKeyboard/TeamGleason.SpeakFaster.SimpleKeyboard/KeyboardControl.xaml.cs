@@ -144,25 +144,22 @@ namespace TeamGleason.SpeakFaster.SimpleKeyboard
 
         internal void SendDown(Key code)
         {
-            Debug.WriteLine($"TODO: SendDown({code})");
             SendKey(true, false, code);
         }
 
         internal void SendUp(Key code)
         {
-            Debug.WriteLine($"TODO: SendUp({code})");
             SendKey(false, true, code);
         }
 
         internal void SendUpDown(Key code)
         {
-            Debug.WriteLine($"TODO: SendUpDown({code})");
             SendKey(true, true, code);
         }
 
         internal void SendText(string text)
         {
-            Debug.WriteLine($"TODO: SendText(\"{text}\")");
+            InteropHelper.SendText(text);
         }
 
         private static void OnLayoutChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
