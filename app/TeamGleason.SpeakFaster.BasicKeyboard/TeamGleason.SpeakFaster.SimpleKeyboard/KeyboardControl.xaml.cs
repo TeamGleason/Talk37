@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using TeamGleason.SpeakFaster.BasicKeyboard.Special;
 using TeamGleason.SpeakFaster.KeyboardLayouts;
 
 namespace TeamGleason.SpeakFaster.SimpleKeyboard
@@ -134,29 +135,29 @@ namespace TeamGleason.SpeakFaster.SimpleKeyboard
             }
         }
 
-        internal void SendKeys(bool sendDowns,
-            bool sendUps,
-            params Key[] keys)
+        internal void SendKey(bool sendDown,
+            bool sendUp,
+            Key key)
         {
-            // TODO.
+            InteropHelper.SendKey(sendDown, sendUp, key);
         }
 
         internal void SendDown(Key code)
         {
             Debug.WriteLine($"TODO: SendDown({code})");
-            SendKeys(true, false, code);
+            SendKey(true, false, code);
         }
 
         internal void SendUp(Key code)
         {
             Debug.WriteLine($"TODO: SendUp({code})");
-            SendKeys(false, true, code);
+            SendKey(false, true, code);
         }
 
         internal void SendUpDown(Key code)
         {
             Debug.WriteLine($"TODO: SendUpDown({code})");
-            SendKeys(true, true, code);
+            SendKey(true, true, code);
         }
 
         internal void SendText(string text)

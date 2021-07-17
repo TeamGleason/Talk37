@@ -1,6 +1,7 @@
 #pragma once
 
 using namespace System;
+using namespace System::Windows::Input;
 
 namespace TeamGleason {
 	namespace SpeakFaster {
@@ -73,6 +74,57 @@ namespace TeamGleason {
 							{
 								_stateChange->Invoke(sender, args);
 							}
+						}
+					}
+
+					static void SendKey(bool sendDown, bool sendUp, Key key)
+					{
+						WORD code = 0;
+
+						switch (key)
+						{
+						case Key::Back: code = VK_BACK; break;
+						case Key::Tab: code = VK_TAB; break;
+						case Key::Enter: code = VK_RETURN; break;
+						case Key::Space: code = VK_SPACE; break;
+						case Key::Home: code = VK_HOME; break;
+						case Key::End: code = VK_END; break;
+						case Key::Delete: code = VK_DELETE; break;
+						case Key::PageUp: code = VK_PRIOR; break;
+						case Key::PageDown: code = VK_NEXT; break;
+						case Key::Up: code = VK_UP; break;
+						case Key::Down: code = VK_DOWN; break;
+						case Key::Left: code = VK_LEFT; break;
+						case Key::Right: code = VK_RIGHT; break;
+						case Key::F1: code = VK_F1; break;
+						case Key::F2: code = VK_F2; break;
+						case Key::F3: code = VK_F3; break;
+						case Key::F4: code = VK_F4; break;
+						case Key::F5: code = VK_F5; break;
+						case Key::F6: code = VK_F6; break;
+						case Key::F7: code = VK_F7; break;
+						case Key::F8: code = VK_F8; break;
+						case Key::F9: code = VK_F9; break;
+						case Key::F10: code = VK_F10; break;
+						case Key::F11: code = VK_F11; break;
+						case Key::F12: code = VK_F12; break;
+						case Key::Escape: code = VK_ESCAPE; break;
+						}
+
+						if (code != 0 && (sendDown || sendUp))
+						{
+							INPUT inputs[2];
+							ZeroMemory(inputs, sizeof(inputs));
+
+							inputs[0].type = INPUT_KEYBOARD;
+							inputs[0].ki.wVk = code;
+							inputs[0].ki.dwFlags = sendDown ? 0 : KEYEVENTF_KEYUP;
+
+							inputs[1].type = INPUT_KEYBOARD;
+							inputs[1].ki.wVk = code;
+							inputs[1].ki.dwFlags = KEYEVENTF_KEYUP;
+
+							UINT uSent = SendInput((sendUp && sendDown) ? 2 : 1, inputs, sizeof(INPUT));
 						}
 					}
 
