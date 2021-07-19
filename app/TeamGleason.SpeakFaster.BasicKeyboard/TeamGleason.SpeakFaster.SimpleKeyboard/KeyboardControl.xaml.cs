@@ -36,6 +36,9 @@ namespace TeamGleason.SpeakFaster.SimpleKeyboard
 
         private void NavigateToView(View view)
         {
+            _managers.Clear();
+            TheGrid.Children.Clear();
+
             foreach (var key in view.KeyRefs)
             {
                 key.Create(this);
