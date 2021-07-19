@@ -4,7 +4,7 @@
     {
         Shift,
         Ctrl,
-        CapsLock,
-        Alt
+        Alt,
+        CapsLock
     }
 }

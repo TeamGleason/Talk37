@@ -128,25 +128,69 @@ namespace TeamGleason {
 						}
 					}
 
-					static void SendText(String^ text)
+					static void SendText(bool isShift, bool isCtrl, bool isAlt, bool isWindows, String^ text)
 					{
 						auto length = text->Length;
 						for (auto i = 0; i < length; i++)
 						{
 							auto ch = text[i];
-							ch = ch.ToUpperInvariant(ch);
 
-							INPUT inputs[2];
-							ZeroMemory(inputs, sizeof(inputs));
+							auto code = VkKeyScan(ch);
 
-							inputs[0].type = INPUT_KEYBOARD;
-							inputs[0].ki.wVk = ch;
+							if ((code & 0xFFFF) != 0xFFFF)
+							{
+								auto isShiftNeeded = isShift || !!(code & 0x0100);
+								auto isCtrlNeeded = isCtrl || !!(code & 0x0200);
+								auto isAltNeeded = isAlt || !!(code & 0x0400);
+								//auto isHankakuNeeded = !!(code & 0x0800);
 
-							inputs[1].type = INPUT_KEYBOARD;
-							inputs[1].ki.wVk = ch;
-							inputs[1].ki.dwFlags = KEYEVENTF_KEYUP;
+								INPUT inputs[8];
+								ZeroMemory(inputs, sizeof(inputs));
 
-							UINT uSent = SendInput(ARRAYSIZE(inputs), inputs, sizeof(INPUT));
+								auto count = 0;
+
+								if (isShiftNeeded)
+								{
+									inputs[count].type = INPUT_KEYBOARD;
+									inputs[count].ki.wVk = VK_SHIFT;
+									count++;
+								}
+
+								if (isCtrlNeeded)
+								{
+									inputs[count].type = INPUT_KEYBOARD;
+									inputs[count].ki.wVk = VK_CONTROL;
+									count++;
+								}
+
+								if (isAltNeeded)
+								{
+									inputs[count].type = INPUT_KEYBOARD;
+									inputs[count].ki.wVk = VK_MENU;
+									count++;
+								}
+
+								inputs[count].type = INPUT_KEYBOARD;
+								inputs[count].ki.wVk = code & 0xFF;
+								count++;
+
+								auto countdown = count;
+								while (countdown != 0)
+								{
+									countdown--;
+
+									inputs[count].type = inputs[countdown].type;
+									inputs[count].ki.wVk = inputs[countdown].ki.wVk;
+									inputs[count].ki.dwFlags = inputs[countdown].ki.dwFlags ^ KEYEVENTF_KEYUP;
+									count++;
+								}
+
+								UINT uSent = SendInput(count, inputs, sizeof(INPUT));
+							}
+							else
+							{
+								System::Diagnostics::Debug::WriteLine(String::Format("Cannot send {0}", ch));
+							}
 						}
 					}
 

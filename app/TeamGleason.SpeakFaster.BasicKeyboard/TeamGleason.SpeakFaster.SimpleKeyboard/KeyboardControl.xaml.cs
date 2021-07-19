@@ -159,7 +159,11 @@ namespace TeamGleason.SpeakFaster.SimpleKeyboard
 
         internal void SendText(string text)
         {
-            InteropHelper.SendText(text);
+            var isShift = _states[(int)StateModifier.Shift];
+            var isCtrl = _states[(int)StateModifier.Ctrl];
+            var isAlt = _states[(int)StateModifier.Alt];
+            var isWindows = false;
+            InteropHelper.SendText(isShift: isShift, isCtrl: isCtrl, isAlt: isAlt, isWindows: isWindows, text: text);
         }
 
         private static void OnLayoutChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
