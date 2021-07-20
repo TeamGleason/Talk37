@@ -41,7 +41,13 @@
         <DataTemplate x:Key="KeyIcon.Arrow.Right">
             <TextBlock Text="Right"/>
         </DataTemplate>
-        
+        <DataTemplate x:Key="KeyIcon.Windows">
+            <TextBlock Text="Windows"/>
+        </DataTemplate>
+        <DataTemplate x:Key="KeyIcon.Mouse">
+            <TextBlock Text="Mouse"/>
+        </DataTemplate>
+
         <Style TargetType="local:KeyboardButton">
             <Setter Property="FontFamily" Value="{StaticResource KeyboardFontFamily}"/>
         </Style>

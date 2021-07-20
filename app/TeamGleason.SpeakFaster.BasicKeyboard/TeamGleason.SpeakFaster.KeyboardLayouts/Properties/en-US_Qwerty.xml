@@ -412,6 +412,10 @@
     <CommandKey Id="Modifier.Alt" Label="Alt" Style="KeyStyle.Modifier" Toggles="true" Command="Modifier.Alt" />
     <CommandKey Id="Navigate.Function Keys Punctuation" Label="F1..F12" Style="KeyStyle.Navigation" Toggles="false" Command="Navigate.Function Keys Punctuation" />
     <CommandKey Id="Function.Escape" Label="Esc" Style="KeyStyle.Function" Toggles="false" Command="Function.Escape" />
+    <CommandKey Id="Modifier.Windows" Icon="KeyIcon.Windows" Style="KeyStyle.Modifier" Toggles="true" Command="Modifier.Windows" />
+    <CommandKey Id="Custom.ExpandHint" Label="TLA" Style="KeyStyle.Function" Toggles="false" Command="Custom.ExpandHint" />
+    <CommandKey Id="Custom.MouseLeftClick" Icon="KeyIcon.Mouse" Style="KeyStyle.Function" Toggles="false" Command="Custom.MouseLeftClick" />
+
   </CommandKeys>
   <PredictionKeys>
     <PredictionKey Id="Predictions.First" Style="KeyStyle.Prediction" Order="1" />
@@ -422,9 +426,12 @@
 
     <View Id="Alphabet">
 
+      <CommandKeyRef KeyRef="Modifier.Windows" Column="0"/>
+      <CommandKeyRef KeyRef="Custom.ExpandHint" Column="2"/>
       <PredictionKeyRef KeyRef="Predictions.First" Row="0" RowSpan="1" Column="3" ColumnSpan="2" />
       <PredictionKeyRef KeyRef="Predictions.Second" Row="0" RowSpan="1" Column="5" ColumnSpan="2" />
       <PredictionKeyRef KeyRef="Predictions.Third" Row="0" RowSpan="1" Column="7" ColumnSpan="2" />
+      <CommandKeyRef KeyRef="Custom.MouseLeftClick" Column="9"/>
       <CommandKeyRef KeyRef="Navigate.Punctuation" Row="0" RowSpan="1" Column="10" ColumnSpan="1" />
       <CommandKeyRef KeyRef="Navigate.Numeric" Row="0" RowSpan="1" Column="11" ColumnSpan="1" />
 

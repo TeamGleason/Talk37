@@ -18,13 +18,13 @@ namespace TeamGleason.SpeakFaster.KeyboardLayouts
         public int Row { get; set; }
 
         [XmlAttribute]
-        public int RowSpan { get; set; }
+        public int RowSpan { get; set; } = 1;
 
         [XmlAttribute]
         public int Column { get; set; }
 
         [XmlAttribute]
-        public int ColumnSpan { get; set; }
+        public int ColumnSpan { get; set; } = 1;
 
         public abstract void Create(IKeyboardControl parent);
     }

@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Diagnostics;
+using System.Windows;
 using System.Windows.Controls.Primitives;
 using TeamGleason.SpeakFaster.KeyboardLayouts;
 
@@ -22,6 +23,7 @@ namespace TeamGleason.SpeakFaster.SimpleKeyboard
                 }
                 else
                 {
+                    Debug.Fail($"No template for {key.Icon}");
                     button.Content = key.Icon;
                 }
             }

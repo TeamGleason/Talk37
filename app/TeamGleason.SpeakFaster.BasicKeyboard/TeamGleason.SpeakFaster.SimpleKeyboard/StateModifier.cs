@@ -5,6 +5,7 @@
         Shift,
         Ctrl,
         Alt,
+        Windows,
         CapsLock
     }
 }

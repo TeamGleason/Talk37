@@ -19,7 +19,7 @@ namespace TeamGleason.SpeakFaster.SimpleKeyboard
 
         private KeyboardLayout _layout;
 
-        private readonly bool[] _states = new bool[4];
+        private readonly bool[] _states = new bool[Enum.GetValues<StateModifier>().Length];
 
         private readonly List<ButtonManager> _managers = new List<ButtonManager>();
 
