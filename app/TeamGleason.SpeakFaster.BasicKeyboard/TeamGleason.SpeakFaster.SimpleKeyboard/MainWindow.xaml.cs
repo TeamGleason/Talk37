@@ -13,7 +13,7 @@ namespace TeamGleason.SpeakFaster.SimpleKeyboard
     /// </summary>
     public partial class MainWindow : Window
     {
-        private static bool TryParseRect(string source, out Rect rect)
+        internal static bool TryParseRect(string source, out Rect rect)
         {
             bool value;
 
@@ -30,7 +30,7 @@ namespace TeamGleason.SpeakFaster.SimpleKeyboard
             return value;
         }
 
-        private bool SetWindowPosition(string rectString)
+        internal bool SetWindowPosition(string rectString)
         {
             var value = TryParseRect(rectString, out var rect);
             if (value)

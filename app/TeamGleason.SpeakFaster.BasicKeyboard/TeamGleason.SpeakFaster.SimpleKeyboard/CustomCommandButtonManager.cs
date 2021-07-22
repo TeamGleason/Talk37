@@ -1,6 +1,8 @@
 ﻿using System.Diagnostics;
+using System.Windows;
 using System.Windows.Controls.Primitives;
 using TeamGleason.SpeakFaster.KeyboardLayouts;
+using TeamGleason.SpeakFaster.SimpleKeyboard.Properties;
 
 namespace TeamGleason.SpeakFaster.SimpleKeyboard
 {
@@ -19,8 +21,20 @@ namespace TeamGleason.SpeakFaster.SimpleKeyboard
             return manager;
         }
 
+        private void DoWindowPosition()
+        {
+            var mainWindow = (MainWindow)Application.Current.MainWindow;
+            mainWindow.SetWindowPosition(Settings.Default.WindowRect);
+        }
+
         protected override void Execute()
         {
+            switch (_key.Command)
+            {
+                case "Custom.WindowPosition":
+                    DoWindowPosition();
+                    break;
+            }
         }
     }
 }
