@@ -22,7 +22,7 @@ namespace TeamGleason.SpeakFaster.KeyboardLayouts
             get => CommandType + '.' + CommandParameter;
             set
             {
-                var splits = value.Split('.', 2);
+                var splits = value.Split(new char[] { '.' }, 2);
                 CommandType = splits[0];
                 CommandParameter = splits[1];
             }
