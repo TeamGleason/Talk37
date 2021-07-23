@@ -13,6 +13,30 @@ namespace TeamGleason.SpeakFaster.SimpleKeyboard
     /// </summary>
     public partial class MainWindow : Window
     {
+        public MainWindow()
+        {
+            InitializeComponent();
+
+            SetWindowPosition(Settings.Default.WindowRect);
+
+            var layout = KeyboardLayout.ReadDefaultKeyboardLayout();
+            TheKeyboard.Layout = layout;
+
+            Closing += OnClosing;
+        }
+
+        internal Rect WindowRect
+        {
+            get => new Rect(x: Left, y: Top, width: Width, height: Height);
+            set
+            {
+                Left = value.Left;
+                Top = value.Top;
+                Width = value.Width;
+                Height = value.Height;
+            }
+        }
+
         internal static bool TryParseRect(string source, out Rect rect)
         {
             bool value;
@@ -35,29 +59,14 @@ namespace TeamGleason.SpeakFaster.SimpleKeyboard
             var value = TryParseRect(rectString, out var rect);
             if (value)
             {
-                Left = rect.Left;
-                Top = rect.Top;
-                Width = rect.Width;
-                Height = rect.Height;
+                WindowRect = rect;
             }
             return value;
         }
 
-        public MainWindow()
-        {
-            InitializeComponent();
-
-            SetWindowPosition(Settings.Default.WindowRect);
-
-            var layout = KeyboardLayout.ReadDefaultKeyboardLayout();
-            TheKeyboard.Layout = layout;
-
-            Closing += OnClosing;
-        }
-
         private void OnClosing(object sender, CancelEventArgs e)
         {
-            var rect = new Rect(x: Left, y: Top, width: Width, height: Height);
+            var rect = WindowRect;
             Settings.Default.WindowRect = rect.ToString();
             Settings.Default.Save();
         }

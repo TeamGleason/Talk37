@@ -24,7 +24,27 @@ namespace TeamGleason.SpeakFaster.SimpleKeyboard
         private void DoWindowPosition()
         {
             var mainWindow = (MainWindow)Application.Current.MainWindow;
-            mainWindow.SetWindowPosition(Settings.Default.WindowRect);
+            var currentWindowRectString = mainWindow.WindowRect.ToString();
+            var windowRectString = Settings.Default.WindowRect;
+            var altWindowRectString = Settings.Default.AltWindowRect;
+
+            if (currentWindowRectString == windowRectString)
+            {
+                if (MainWindow.TryParseRect(altWindowRectString, out var altWindowRect))
+                {
+                    Settings.Default.WindowRect = altWindowRectString;
+                    Settings.Default.AltWindowRect = windowRectString;
+                    mainWindow.WindowRect = altWindowRect;
+                }
+            }
+            else
+            {
+                Settings.Default.AltWindowRect = currentWindowRectString;
+                if (MainWindow.TryParseRect(windowRectString, out var windowRect))
+                {
+                    mainWindow.WindowRect = windowRect;
+                }
+            }
         }
 
         protected override void Execute()

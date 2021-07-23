@@ -34,5 +34,17 @@ namespace TeamGleason.SpeakFaster.SimpleKeyboard.Properties {
                 this["WindowRect"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string AltWindowRect {
+            get {
+                return ((string)(this["AltWindowRect"]));
+            }
+            set {
+                this["AltWindowRect"] = value;
+            }
+        }
     }
 }
