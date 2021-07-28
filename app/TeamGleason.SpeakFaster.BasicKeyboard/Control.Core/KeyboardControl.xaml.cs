@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
+using TeamGleason.SpeakFaster.BasicKeyboard.Control.Core.Properties;
 using TeamGleason.SpeakFaster.BasicKeyboard.Layout.Standard;
 
 namespace TeamGleason.SpeakFaster.BasicKeyboard.Control.Core
@@ -14,6 +17,8 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard.Control.Core
     {
         public static readonly DependencyProperty LayoutProperty = DependencyProperty.Register(nameof(Layout), typeof(KeyboardLayout), typeof(KeyboardControl),
             new PropertyMetadata(null, OnLayoutChanged));
+        public static readonly DependencyProperty InteropHelperProperty = DependencyProperty.Register(nameof(InteropHelper), typeof(IInteropHelper), typeof(KeyboardControl),
+            new PropertyMetadata(null));
 
         private KeyboardLayout _layout;
 
@@ -34,6 +39,68 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard.Control.Core
         {
             get => (KeyboardLayout)GetValue(LayoutProperty);
             set => SetValue(LayoutProperty, value);
+        }
+
+        public IInteropHelper InteropHelper
+        {
+            get => (IInteropHelper)GetValue(InteropHelperProperty);
+            set => SetValue(InteropHelperProperty, value);
+        }
+
+        private static Window GetWindow(DependencyObject ob)
+        {
+            Window value = null;
+
+            for (var walker = ob as FrameworkElement;
+                walker != null && value == null;
+                walker = walker.Parent as FrameworkElement)
+            {
+                value = walker as Window;
+            }
+
+            return value;
+        }
+
+        internal Window GetWindow()
+        {
+            var value = GetWindow(this);
+            return value;
+        }
+
+        protected override void OnVisualParentChanged(DependencyObject oldParent)
+        {
+            var oldWindow = GetWindow(oldParent);
+            if (oldWindow != null)
+            {
+                oldWindow.Closing -= OnClosing;
+            }
+
+            var newWindow = GetWindow();
+            if (newWindow != null)
+            {
+                newWindow.Closing += OnClosing;
+
+                var helper = newWindow as IWindowHelper;
+                if (helper != null)
+                {
+                    var rectString = Settings.Default.WindowRect;
+                    var value = helper.TryParseRect(rectString, out var rect);
+                    if (value)
+                    {
+                        helper.WindowRect = rect;
+                    }
+                }
+            }
+
+            base.OnVisualParentChanged(oldParent);
+        }
+
+        private void OnClosing(object sender, CancelEventArgs e)
+        {
+            var window = GetWindow(this) as IWindowHelper;
+            var rect = window.WindowRect;
+            Settings.Default.WindowRect = rect.ToString();
+            Settings.Default.Save();
         }
 
         private void NavigateToView(View view)
@@ -107,6 +174,11 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard.Control.Core
             NavigateToView(view);
         }
 
+        private void OnWindowHelperChanged(IWindowHelper helper)
+        {
+
+        }
+
         private void OnLayoutChanged(KeyboardLayout layout)
         {
             TheGrid.Children.Clear();
@@ -178,6 +250,11 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard.Control.Core
         private static void OnLayoutChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             ((KeyboardControl)d).OnLayoutChanged((KeyboardLayout)e.NewValue);
+        }
+
+        private static void OnWindowHelperChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            ((KeyboardControl)d).OnWindowHelperChanged((IWindowHelper)e.NewValue);
         }
 
         private void AddManager(KeyRefBase keyRef, ButtonManager manager)

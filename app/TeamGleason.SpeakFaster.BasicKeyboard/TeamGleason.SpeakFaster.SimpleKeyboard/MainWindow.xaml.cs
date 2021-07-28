@@ -1,7 +1,9 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Interop;
+using TeamGleason.SpeakFaster.BasicKeyboard.Control.Core;
 using TeamGleason.SpeakFaster.BasicKeyboard.Layout.Standard;
 using TeamGleason.SpeakFaster.BasicKeyboard.Special;
 using TeamGleason.SpeakFaster.SimpleKeyboard.Properties;
@@ -11,21 +13,17 @@ namespace TeamGleason.SpeakFaster.SimpleKeyboard
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, IWindowHelper, IInteropHelper
     {
         public MainWindow()
         {
             InitializeComponent();
 
-            SetWindowPosition(Settings.Default.WindowRect);
-
             var layout = KeyboardLayout.ReadDefaultKeyboardLayout();
             TheKeyboard.Layout = layout;
-
-            Closing += OnClosing;
         }
 
-        internal Rect WindowRect
+        Rect IWindowHelper.WindowRect
         {
             get => new Rect(x: Left, y: Top, width: Width, height: Height);
             set
@@ -37,7 +35,7 @@ namespace TeamGleason.SpeakFaster.SimpleKeyboard
             }
         }
 
-        internal static bool TryParseRect(string source, out Rect rect)
+        bool IWindowHelper.TryParseRect(string source, out Rect rect)
         {
             bool value;
 
@@ -54,23 +52,6 @@ namespace TeamGleason.SpeakFaster.SimpleKeyboard
             return value;
         }
 
-        internal bool SetWindowPosition(string rectString)
-        {
-            var value = TryParseRect(rectString, out var rect);
-            if (value)
-            {
-                WindowRect = rect;
-            }
-            return value;
-        }
-
-        private void OnClosing(object sender, CancelEventArgs e)
-        {
-            var rect = WindowRect;
-            Settings.Default.WindowRect = rect.ToString();
-            Settings.Default.Save();
-        }
-
         protected override void OnSourceInitialized(EventArgs e)
         {
             base.OnSourceInitialized(e);
@@ -78,6 +59,17 @@ namespace TeamGleason.SpeakFaster.SimpleKeyboard
             //Set the window style to noactivate.
             var helper = new WindowInteropHelper(this);
             InteropHelper.SetMainWindowStyle(helper.Handle);
+        }
+
+        void IInteropHelper.SendKey(bool sendDown, bool sendUp, Key key)
+        {
+            InteropHelper.SendKey(sendDown, sendUp, key);
+            throw new NotImplementedException();
+        }
+
+        void IInteropHelper.SendText(bool isShift, bool isCtrl, bool isAlt, bool isWindows, string text)
+        {
+            InteropHelper.SendText(isShift: isShift, isCtrl: isCtrl, isAlt: isAlt, isWindows: isWindows, text: text);
         }
     }
 }

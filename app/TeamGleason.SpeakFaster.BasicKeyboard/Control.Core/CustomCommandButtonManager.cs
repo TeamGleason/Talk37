@@ -22,26 +22,29 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard.Control.Core
 
         private void DoWindowPosition()
         {
-            var mainWindow = _parent._windowHelper;
-            var currentWindowRectString = mainWindow.WindowRect.ToString();
-            var windowRectString = Settings.Default.WindowRect;
-            var altWindowRectString = Settings.Default.AltWindowRect;
+            var helper = _parent.GetWindow() as IWindowHelper;
+            if (helper != null)
+            {
+                var currentWindowRectString = helper.WindowRect.ToString();
+                var windowRectString = Settings.Default.WindowRect;
+                var altWindowRectString = Settings.Default.AltWindowRect;
 
-            if (currentWindowRectString == windowRectString)
-            {
-                if (mainWindow.TryParseRect(altWindowRectString, out var altWindowRect))
+                if (currentWindowRectString == windowRectString)
                 {
-                    Settings.Default.WindowRect = altWindowRectString;
-                    Settings.Default.AltWindowRect = windowRectString;
-                    mainWindow.WindowRect = altWindowRect;
+                    if (helper.TryParseRect(altWindowRectString, out var altWindowRect))
+                    {
+                        Settings.Default.WindowRect = altWindowRectString;
+                        Settings.Default.AltWindowRect = windowRectString;
+                        helper.WindowRect = altWindowRect;
+                    }
                 }
-            }
-            else
-            {
-                Settings.Default.AltWindowRect = currentWindowRectString;
-                if (mainWindow.TryParseRect(windowRectString, out var windowRect))
+                else
                 {
-                    mainWindow.WindowRect = windowRect;
+                    Settings.Default.AltWindowRect = currentWindowRectString;
+                    if (helper.TryParseRect(windowRectString, out var windowRect))
+                    {
+                        helper.WindowRect = windowRect;
+                    }
                 }
             }
         }

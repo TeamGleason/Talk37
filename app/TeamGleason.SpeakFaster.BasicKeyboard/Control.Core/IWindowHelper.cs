@@ -2,7 +2,7 @@
 
 namespace TeamGleason.SpeakFaster.BasicKeyboard.Control.Core
 {
-    internal interface IWindowHelper
+    public interface IWindowHelper
     {
         Rect WindowRect { get; set; }
 
