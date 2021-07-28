@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls.Primitives;
 
-namespace TeamGleason.SpeakFaster.SimpleKeyboard
+namespace TeamGleason.SpeakFaster.BasicKeyboard.Control.Core
 {
     public class KeyboardToggleButton : ToggleButton
     {

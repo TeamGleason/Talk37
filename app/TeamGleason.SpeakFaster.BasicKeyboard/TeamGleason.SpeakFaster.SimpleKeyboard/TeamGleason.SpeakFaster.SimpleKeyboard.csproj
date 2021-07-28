@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Control.Core\Control.Core.csproj" />
     <ProjectReference Include="..\Layout.Standard\Layout.Standard.csproj" />
     <ProjectReference Include="..\TeamGleason.SpeakFaster.BasicKeyboard.Special\TeamGleason.SpeakFaster.BasicKeyboard.Special.vcxproj" />
   </ItemGroup>

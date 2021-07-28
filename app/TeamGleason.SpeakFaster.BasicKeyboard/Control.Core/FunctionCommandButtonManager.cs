@@ -4,7 +4,7 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using TeamGleason.SpeakFaster.BasicKeyboard.Layout.Standard;
 
-namespace TeamGleason.SpeakFaster.SimpleKeyboard
+namespace TeamGleason.SpeakFaster.BasicKeyboard.Control.Core
 {
     internal class FunctionCommandButtonManager : CommandButtonManager
     {

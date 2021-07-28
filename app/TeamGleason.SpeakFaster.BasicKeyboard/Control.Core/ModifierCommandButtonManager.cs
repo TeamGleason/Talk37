@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Windows.Controls.Primitives;
 using TeamGleason.SpeakFaster.BasicKeyboard.Layout.Standard;
 
-namespace TeamGleason.SpeakFaster.SimpleKeyboard
+namespace TeamGleason.SpeakFaster.BasicKeyboard.Control.Core
 {
     internal class ModifierCommandButtonManager : CommandButtonManager
     {

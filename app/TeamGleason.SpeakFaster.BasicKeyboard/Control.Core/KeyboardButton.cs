@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace TeamGleason.SpeakFaster.SimpleKeyboard
+namespace TeamGleason.SpeakFaster.BasicKeyboard.Control.Core
 {
     public class KeyboardButton : Button
     {

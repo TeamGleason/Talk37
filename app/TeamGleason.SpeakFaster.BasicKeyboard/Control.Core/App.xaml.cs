@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace TeamGleason.SpeakFaster.SimpleKeyboard
+namespace TeamGleason.SpeakFaster.BasicKeyboard.Control.Core
 {
     /// <summary>
     /// Interaction logic for App.xaml

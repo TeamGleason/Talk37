@@ -1,10 +1,10 @@
 ﻿using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls.Primitives;
+using TeamGleason.SpeakFaster.BasicKeyboard.Control.Core.Properties;
 using TeamGleason.SpeakFaster.BasicKeyboard.Layout.Standard;
-using TeamGleason.SpeakFaster.SimpleKeyboard.Properties;
 
-namespace TeamGleason.SpeakFaster.SimpleKeyboard
+namespace TeamGleason.SpeakFaster.BasicKeyboard.Control.Core
 {
     internal class CustomCommandButtonManager : CommandButtonManager
     {
@@ -23,14 +23,14 @@ namespace TeamGleason.SpeakFaster.SimpleKeyboard
 
         private void DoWindowPosition()
         {
-            var mainWindow = (MainWindow)Application.Current.MainWindow;
+            var mainWindow = _parent._windowHelper;
             var currentWindowRectString = mainWindow.WindowRect.ToString();
             var windowRectString = Settings.Default.WindowRect;
             var altWindowRectString = Settings.Default.AltWindowRect;
 
             if (currentWindowRectString == windowRectString)
             {
-                if (MainWindow.TryParseRect(altWindowRectString, out var altWindowRect))
+                if (mainWindow.TryParseRect(altWindowRectString, out var altWindowRect))
                 {
                     Settings.Default.WindowRect = altWindowRectString;
                     Settings.Default.AltWindowRect = windowRectString;
@@ -40,7 +40,7 @@ namespace TeamGleason.SpeakFaster.SimpleKeyboard
             else
             {
                 Settings.Default.AltWindowRect = currentWindowRectString;
-                if (MainWindow.TryParseRect(windowRectString, out var windowRect))
+                if (mainWindow.TryParseRect(windowRectString, out var windowRect))
                 {
                     mainWindow.WindowRect = windowRect;
                 }

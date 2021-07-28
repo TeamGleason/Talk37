@@ -5,9 +5,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using TeamGleason.SpeakFaster.BasicKeyboard.Layout.Standard;
-using TeamGleason.SpeakFaster.BasicKeyboard.Special;
 
-namespace TeamGleason.SpeakFaster.SimpleKeyboard
+namespace TeamGleason.SpeakFaster.BasicKeyboard.Control.Core
 {
     /// <summary>
     /// Interaction logic for KeyboardControl.xaml
@@ -22,6 +21,10 @@ namespace TeamGleason.SpeakFaster.SimpleKeyboard
         private readonly bool[] _states = new bool[Enum.GetValues<StateModifier>().Length];
 
         private readonly List<ButtonManager> _managers = new List<ButtonManager>();
+
+        private readonly IInteropHelper _interopHelper = null;
+
+        internal readonly IWindowHelper _windowHelper = null;
 
         public KeyboardControl()
         {
@@ -142,7 +145,7 @@ namespace TeamGleason.SpeakFaster.SimpleKeyboard
             bool sendUp,
             Key key)
         {
-            InteropHelper.SendKey(sendDown, sendUp, key);
+            _interopHelper.SendKey(sendDown, sendUp, key);
         }
 
         internal void SendDown(Key code)
@@ -166,7 +169,7 @@ namespace TeamGleason.SpeakFaster.SimpleKeyboard
             var isCtrl = _states[(int)StateModifier.Ctrl];
             var isAlt = _states[(int)StateModifier.Alt];
             var isWindows = false;
-            InteropHelper.SendText(isShift: isShift, isCtrl: isCtrl, isAlt: isAlt, isWindows: isWindows, text: text);
+            _interopHelper.SendText(isShift: isShift, isCtrl: isCtrl, isAlt: isAlt, isWindows: isWindows, text: text);
 
             SetState(StateModifier.Shift, false);
             SetState(StateModifier.Ctrl, false);
