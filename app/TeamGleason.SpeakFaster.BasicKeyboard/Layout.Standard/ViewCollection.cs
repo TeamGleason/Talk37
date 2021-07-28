@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace TeamGleason.SpeakFaster.KeyboardLayouts
+namespace TeamGleason.SpeakFaster.BasicKeyboard.Layout.Standard
 {
     public class ViewCollection : KeyCollection<View>
     {

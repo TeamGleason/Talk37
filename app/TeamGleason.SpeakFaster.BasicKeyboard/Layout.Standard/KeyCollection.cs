@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace TeamGleason.SpeakFaster.KeyboardLayouts
+namespace TeamGleason.SpeakFaster.BasicKeyboard.Layout.Standard
 {
     public class KeyCollection<T> : ICollection<T>
         where T : IndexObject

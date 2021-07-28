@@ -1,9 +1,9 @@
 ﻿using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
-using TeamGleason.SpeakFaster.KeyboardLayouts.Properties;
+using TeamGleason.SpeakFaster.BasicKeyboard.Layout.Standard.Properties;
 
-namespace TeamGleason.SpeakFaster.KeyboardLayouts
+namespace TeamGleason.SpeakFaster.BasicKeyboard.Layout.Standard
 {
     public class KeyboardLayout : IndexObject
     {

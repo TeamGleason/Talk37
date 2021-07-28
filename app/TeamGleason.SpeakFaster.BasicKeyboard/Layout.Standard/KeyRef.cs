@@ -1,6 +1,6 @@
 ﻿using System.Xml.Serialization;
 
-namespace TeamGleason.SpeakFaster.KeyboardLayouts
+namespace TeamGleason.SpeakFaster.BasicKeyboard.Layout.Standard
 {
     public abstract class KeyRefBase
     {

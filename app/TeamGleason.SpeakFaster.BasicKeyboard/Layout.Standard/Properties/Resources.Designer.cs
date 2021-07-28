@@ -8,8 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TeamGleason.SpeakFaster.BasicKeyboard.Properties {
+namespace TeamGleason.SpeakFaster.BasicKeyboard.Layout.Standard.Properties {
     using System;
+    using System.Reflection;
     
     
     /// <summary>
@@ -39,7 +40,7 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("TeamGleason.SpeakFaster.BasicKeyboard.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("TeamGleason.SpeakFaster.BasicKeyboard.Layout.Standard.Properties.Resources", typeof(Resources).GetTypeInfo().Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,17 +62,30 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;CommandKeyRef KeyRef=&quot;Function.Windows&quot; Column=&quot;0&quot;/&gt;
-        ///&lt;CommandKeyRef KeyRef=&quot;Function.ExpandHint&quot; Column=&quot;2&quot;/&gt;
-        ///&lt;PredictionKeyRef KeyRef=&quot;Predictions.First&quot; ColumnSpan=&quot;2&quot; Column=&quot;3&quot; RowSpan=&quot;1&quot; Row=&quot;0&quot;/&gt;
-        ///&lt;PredictionKeyRef KeyRef=&quot;Predictions.Second&quot; ColumnSpan=&quot;2&quot; Column=&quot;5&quot; RowSpan=&quot;1&quot; Row=&quot;0&quot;/&gt;
-        ///&lt;PredictionKeyRef KeyRef=&quot;Predictions.Third&quot; ColumnSpan=&quot;2&quot; Column=&quot;7&quot; RowSpan=&quot;1&quot; Row=&quot;0&quot;/&gt;
-        ///&lt;CommandKeyRef KeyRef=&quot;Function.MouseLeftClick&quot; Column=&quot;9&quot;/&gt;
-        ///&lt;CommandKeyRef KeyRef=&quot;Navigate.Punctuation&quot; ColumnSpa [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;KeyboardLayout Id=&quot;Control_en-US_Qwerty&quot; Rows=&quot;4&quot; Columns=&quot;12&quot;&gt;
+        ///  &lt;Version&gt;
+        ///    &lt;Number&gt;4&lt;/Number&gt;
+        ///  &lt;/Version&gt;
+        ///  &lt;Language&gt;
+        ///    &lt;Name&gt;English&lt;/Name&gt;
+        ///    &lt;Code&gt;en-US&lt;/Code&gt;
+        ///  &lt;/Language&gt;
+        ///  &lt;TextKeys&gt;
+        ///    &lt;TextKey Id=&quot;a&quot; Label=&quot;a&quot; Text=&quot;a&quot;&gt;
+        ///      &lt;Modifiers&gt;
+        ///        &lt;Shift KeyRef=&quot;A&quot; /&gt;
+        ///        &lt;CapsLock KeyRef=&quot;A&quot; /&gt;
+        ///      &lt;/Modifiers&gt;
+        ///    &lt;/TextKey&gt;
+        ///    &lt;TextKey Id=&quot;b&quot; Label=&quot;b&quot; Text=&quot;b&quot;&gt;
+        ///      &lt;Modifiers&gt;
+        ///        &lt;Shift KeyRef=&quot;B&quot; /&gt;
+        ///        &lt;Caps [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string Layout {
+        internal static string en_US_Qwerty {
             get {
-                return ResourceManager.GetString("Layout", resourceCulture);
+                return ResourceManager.GetString("en_US_Qwerty", resourceCulture);
             }
         }
     }

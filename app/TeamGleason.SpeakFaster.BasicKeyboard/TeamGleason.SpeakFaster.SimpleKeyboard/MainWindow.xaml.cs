@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Interop;
 using TeamGleason.SpeakFaster.BasicKeyboard.Special;
-using TeamGleason.SpeakFaster.KeyboardLayouts;
+using TeamGleason.SpeakFaster.BasicKeyboard.Layout.Standard;
 using TeamGleason.SpeakFaster.SimpleKeyboard.Properties;
 
 namespace TeamGleason.SpeakFaster.SimpleKeyboard

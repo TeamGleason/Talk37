@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls.Primitives;
-using TeamGleason.SpeakFaster.KeyboardLayouts;
+using TeamGleason.SpeakFaster.BasicKeyboard.Layout.Standard;
 
 namespace TeamGleason.SpeakFaster.SimpleKeyboard
 {

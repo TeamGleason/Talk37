@@ -1,4 +1,4 @@
-﻿namespace TeamGleason.SpeakFaster.KeyboardLayouts
+﻿namespace TeamGleason.SpeakFaster.BasicKeyboard.Layout.Standard
 {
     public class LayoutVersion
     {

@@ -4,6 +4,8 @@
     <TargetFramework>net5.0</TargetFramework>
 
     <IsPackable>false</IsPackable>
+
+    <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TeamGleason.SpeakFaster.KeyboardLayouts\TeamGleason.SpeakFaster.KeyboardLayouts.csproj" />
+    <ProjectReference Include="..\Layout.Standard\Layout.Standard.csproj" />
   </ItemGroup>
 
 </Project>

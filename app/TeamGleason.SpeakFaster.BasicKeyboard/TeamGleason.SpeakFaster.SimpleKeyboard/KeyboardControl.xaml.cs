@@ -4,8 +4,8 @@ using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using TeamGleason.SpeakFaster.BasicKeyboard.Layout.Standard;
 using TeamGleason.SpeakFaster.BasicKeyboard.Special;
-using TeamGleason.SpeakFaster.KeyboardLayouts;
 
 namespace TeamGleason.SpeakFaster.SimpleKeyboard
 {
