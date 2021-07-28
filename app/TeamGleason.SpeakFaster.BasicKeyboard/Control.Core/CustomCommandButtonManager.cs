@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using System.Windows;
 using System.Windows.Controls.Primitives;
 using TeamGleason.SpeakFaster.BasicKeyboard.Control.Core.Properties;
 using TeamGleason.SpeakFaster.BasicKeyboard.Layout.Standard;
