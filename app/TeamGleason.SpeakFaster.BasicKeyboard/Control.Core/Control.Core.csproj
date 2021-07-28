@@ -6,4 +6,8 @@
     <AssemblyName>TeamGleason.SpeakFaster.BasicKeyboard.Control.Core</AssemblyName>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Layout.Standard\Layout.Standard.csproj" />
+  </ItemGroup>
+
 </Project>

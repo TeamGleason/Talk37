@@ -13,15 +13,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeamGleason.SpeakFaster.Sim
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Framework", "App.Framework\App.Framework.csproj", "{70710686-1206-42FD-BB06-FF2A2FCF909F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Core", "App.Core\App.Core.csproj", "{19F736ED-A984-4227-A0A0-0463BDAC02A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.Core", "App.Core\App.Core.csproj", "{19F736ED-A984-4227-A0A0-0463BDAC02A0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Universal", "App.Universal\App.Universal.csproj", "{3D6B20B4-8521-4379-BC29-7A176EE18056}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Control.Framework", "Control.Framework\Control.Framework.csproj", "{55C34524-F2C6-447E-B982-507104D7C244}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Control.Core", "Control.Core\Control.Core.csproj", "{A9C5D1B7-F963-465F-BB66-3AE671B921D4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Control.Core", "Control.Core\Control.Core.csproj", "{A9C5D1B7-F963-465F-BB66-3AE671B921D4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Control.Universal", "Control.Universal\Control.Universal.csproj", "{E41AE068-E15F-452A-86BC-232D4C80550F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Layout.Standard", "Layout.Standard\Layout.Standard.csproj", "{07833E68-03F8-4D8A-B491-3868A48A5823}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -231,6 +233,26 @@ Global
 		{E41AE068-E15F-452A-86BC-232D4C80550F}.Release|x64.Build.0 = Release|x64
 		{E41AE068-E15F-452A-86BC-232D4C80550F}.Release|x86.ActiveCfg = Release|x86
 		{E41AE068-E15F-452A-86BC-232D4C80550F}.Release|x86.Build.0 = Release|x86
+		{07833E68-03F8-4D8A-B491-3868A48A5823}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07833E68-03F8-4D8A-B491-3868A48A5823}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07833E68-03F8-4D8A-B491-3868A48A5823}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{07833E68-03F8-4D8A-B491-3868A48A5823}.Debug|ARM.Build.0 = Debug|Any CPU
+		{07833E68-03F8-4D8A-B491-3868A48A5823}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{07833E68-03F8-4D8A-B491-3868A48A5823}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{07833E68-03F8-4D8A-B491-3868A48A5823}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{07833E68-03F8-4D8A-B491-3868A48A5823}.Debug|x64.Build.0 = Debug|Any CPU
+		{07833E68-03F8-4D8A-B491-3868A48A5823}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{07833E68-03F8-4D8A-B491-3868A48A5823}.Debug|x86.Build.0 = Debug|Any CPU
+		{07833E68-03F8-4D8A-B491-3868A48A5823}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07833E68-03F8-4D8A-B491-3868A48A5823}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07833E68-03F8-4D8A-B491-3868A48A5823}.Release|ARM.ActiveCfg = Release|Any CPU
+		{07833E68-03F8-4D8A-B491-3868A48A5823}.Release|ARM.Build.0 = Release|Any CPU
+		{07833E68-03F8-4D8A-B491-3868A48A5823}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{07833E68-03F8-4D8A-B491-3868A48A5823}.Release|ARM64.Build.0 = Release|Any CPU
+		{07833E68-03F8-4D8A-B491-3868A48A5823}.Release|x64.ActiveCfg = Release|Any CPU
+		{07833E68-03F8-4D8A-B491-3868A48A5823}.Release|x64.Build.0 = Release|Any CPU
+		{07833E68-03F8-4D8A-B491-3868A48A5823}.Release|x86.ActiveCfg = Release|Any CPU
+		{07833E68-03F8-4D8A-B491-3868A48A5823}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

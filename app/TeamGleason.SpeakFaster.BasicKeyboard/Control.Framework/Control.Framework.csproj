@@ -43,5 +43,11 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Layout.Standard\Layout.Standard.csproj">
+      <Project>{07833e68-03f8-4d8a-b491-3868a48a5823}</Project>
+      <Name>Layout.Standard</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
