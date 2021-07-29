@@ -1,12 +1,10 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interop;
 using TeamGleason.SpeakFaster.BasicKeyboard.Control.Core;
 using TeamGleason.SpeakFaster.BasicKeyboard.Layout.Standard;
 using TeamGleason.SpeakFaster.BasicKeyboard.Special;
-using TeamGleason.SpeakFaster.SimpleKeyboard.Properties;
 
 namespace TeamGleason.SpeakFaster.SimpleKeyboard
 {
@@ -21,6 +19,8 @@ namespace TeamGleason.SpeakFaster.SimpleKeyboard
 
             var layout = KeyboardLayout.ReadDefaultKeyboardLayout();
             TheKeyboard.Layout = layout;
+
+            Closing += (s, e) => _closing?.Invoke(s, e);
         }
 
         Rect IWindowHelper.WindowRect
@@ -51,6 +51,13 @@ namespace TeamGleason.SpeakFaster.SimpleKeyboard
 
             return value;
         }
+
+        event EventHandler IWindowHelper.Closing
+        {
+            add => _closing += value;
+            remove => _closing -= value;
+        }
+        private event EventHandler _closing;
 
         protected override void OnSourceInitialized(EventArgs e)
         {
