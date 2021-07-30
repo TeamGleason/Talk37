@@ -1,9 +1,9 @@
 ﻿using System.Diagnostics;
 using System.Windows.Controls.Primitives;
-using TeamGleason.SpeakFaster.BasicKeyboard.Control.Core.Properties;
+using TeamGleason.SpeakFaster.BasicKeyboard.Control.Properties;
 using TeamGleason.SpeakFaster.BasicKeyboard.Layout.Standard;
 
-namespace TeamGleason.SpeakFaster.BasicKeyboard.Control.Core
+namespace TeamGleason.SpeakFaster.BasicKeyboard.Control
 {
     internal class CustomCommandButtonManager : CommandButtonManager
     {

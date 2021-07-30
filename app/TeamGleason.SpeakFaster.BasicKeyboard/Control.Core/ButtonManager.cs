@@ -2,7 +2,7 @@
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 
-namespace TeamGleason.SpeakFaster.BasicKeyboard.Control.Core
+namespace TeamGleason.SpeakFaster.BasicKeyboard.Control
 {
     internal abstract class ButtonManager : ICommand
     {

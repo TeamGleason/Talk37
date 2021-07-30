@@ -1,6 +1,6 @@
 ﻿using System.Windows.Input;
 
-namespace TeamGleason.SpeakFaster.BasicKeyboard.Control.Core
+namespace TeamGleason.SpeakFaster.BasicKeyboard.Control
 {
     public interface IInteropHelper
     {

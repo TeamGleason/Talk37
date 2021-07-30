@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interop;
-using TeamGleason.SpeakFaster.BasicKeyboard.Control.Core;
+using TeamGleason.SpeakFaster.BasicKeyboard.Control;
 using TeamGleason.SpeakFaster.BasicKeyboard.Layout.Standard;
 using TeamGleason.SpeakFaster.BasicKeyboard.Special;
 

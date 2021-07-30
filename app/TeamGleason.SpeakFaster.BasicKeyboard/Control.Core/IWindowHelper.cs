@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows;
 
-namespace TeamGleason.SpeakFaster.BasicKeyboard.Control.Core
+namespace TeamGleason.SpeakFaster.BasicKeyboard.Control
 {
     public interface IWindowHelper
     {

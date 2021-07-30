@@ -1,4 +1,4 @@
-﻿namespace TeamGleason.SpeakFaster.BasicKeyboard.Control.Core
+﻿namespace TeamGleason.SpeakFaster.BasicKeyboard.Control
 {
     internal enum StateModifier
     {

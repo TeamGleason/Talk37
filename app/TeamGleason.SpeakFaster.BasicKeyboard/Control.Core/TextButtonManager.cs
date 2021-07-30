@@ -1,7 +1,7 @@
 ﻿using System.Windows.Controls;
 using TeamGleason.SpeakFaster.BasicKeyboard.Layout.Standard;
 
-namespace TeamGleason.SpeakFaster.BasicKeyboard.Control.Core
+namespace TeamGleason.SpeakFaster.BasicKeyboard.Control
 {
     internal class TextButtonManager : ButtonManager<TextKey>
     {

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TeamGleason.SpeakFaster.BasicKeyboard.Control.Core.Properties {
+namespace TeamGleason.SpeakFaster.BasicKeyboard.Control.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

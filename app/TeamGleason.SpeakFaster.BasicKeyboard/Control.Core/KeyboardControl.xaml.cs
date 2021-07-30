@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using TeamGleason.SpeakFaster.BasicKeyboard.Control.Core.Properties;
+using TeamGleason.SpeakFaster.BasicKeyboard.Control.Properties;
 using TeamGleason.SpeakFaster.BasicKeyboard.Layout.Standard;
 
-namespace TeamGleason.SpeakFaster.BasicKeyboard.Control.Core
+namespace TeamGleason.SpeakFaster.BasicKeyboard.Control
 {
     /// <summary>
     /// Interaction logic for KeyboardControl.xaml
