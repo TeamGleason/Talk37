@@ -6,6 +6,12 @@
     <UseWPF>true</UseWPF>
     <AssemblyName>TeamGleason.SpeakFaster.BasicKeyboard.App.Core</AssemblyName>
     <Platforms>x64;AnyCPU</Platforms>
+    <RootNamespace>TeamGleason.SpeakFaster.BasicKeyboard.App.Core</RootNamespace>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Control.Core\Control.Core.csproj" />
+    <ProjectReference Include="..\TeamGleason.SpeakFaster.BasicKeyboard.Special\TeamGleason.SpeakFaster.BasicKeyboard.Special.vcxproj" />
+  </ItemGroup>
 
 </Project>
