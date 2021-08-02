@@ -1,17 +1,14 @@
 ﻿using System;
 using System.Windows;
-using System.Windows.Input;
-using System.Windows.Interop;
 using TeamGleason.SpeakFaster.BasicKeyboard.Control;
 using TeamGleason.SpeakFaster.BasicKeyboard.Layout.Standard;
-using TeamGleason.SpeakFaster.BasicKeyboard.Special;
 
 namespace TeamGleason.SpeakFaster.BasicKeyboard.App.Core
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window, IWindowHelper, IInteropHelper
+    public partial class MainWindow : Window, IWindowHelper
     {
         public MainWindow()
         {
@@ -46,6 +43,7 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard.App.Core
             }
             catch (InvalidOperationException)
             {
+                rect = new Rect();
                 value = false;
             }
 
@@ -58,25 +56,5 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard.App.Core
             remove => _closing -= value;
         }
         private event EventHandler _closing;
-
-        protected override void OnSourceInitialized(EventArgs e)
-        {
-            base.OnSourceInitialized(e);
-
-            //Set the window style to noactivate.
-            var helper = new WindowInteropHelper(this);
-            InteropHelper.SetMainWindowStyle(helper.Handle);
-        }
-
-        void IInteropHelper.SendKey(bool sendDown, bool sendUp, Key key)
-        {
-            InteropHelper.SendKey(sendDown, sendUp, key);
-            throw new NotImplementedException();
-        }
-
-        void IInteropHelper.SendText(bool isShift, bool isCtrl, bool isAlt, bool isWindows, string text)
-        {
-            InteropHelper.SendText(isShift: isShift, isCtrl: isCtrl, isAlt: isAlt, isWindows: isWindows, text: text);
-        }
     }
 }

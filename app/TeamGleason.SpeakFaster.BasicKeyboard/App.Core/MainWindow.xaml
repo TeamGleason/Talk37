@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TeamGleason.SpeakFaster.BasicKeyboard.App.Core"
-        xmlns:control="clr-namespace:TeamGleason.SpeakFaster.BasicKeyboard.Control;assembly=TeamGleason.SpeakFaster.BasicKeyboard.Control.Core"
+        xmlns:control="clr-namespace:TeamGleason.SpeakFaster.BasicKeyboard.Control;assembly=TeamGleason.SpeakFaster.BasicKeyboard.Control"
         mc:Ignorable="d"
         Topmost="True"
         Title="MainWindow" Height="450" Width="800">

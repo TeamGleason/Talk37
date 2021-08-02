@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TeamGleason.SpeakFaster.BasicKeyboard.App.Properties {
+namespace TeamGleason.SpeakFaster.BasicKeyboard.Control.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
@@ -20,6 +20,30 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard.App.Properties {
         public static Settings Default {
             get {
                 return defaultInstance;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string WindowRect {
+            get {
+                return ((string)(this["WindowRect"]));
+            }
+            set {
+                this["WindowRect"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string AltWindowRect {
+            get {
+                return ((string)(this["AltWindowRect"]));
+            }
+            set {
+                this["AltWindowRect"] = value;
             }
         }
     }

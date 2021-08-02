@@ -37,11 +37,21 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard.Control
             new KeyValuePair<string, Key>("F12", Key.F12),
             new KeyValuePair<string, Key>("Escape", Key.Escape)
         };
-        private static readonly Dictionary<string, Key> _nameToKey = new Dictionary<string, Key>(_keyValuePairs);
+        private static readonly Dictionary<string, Key> _nameToKey = CreateNameToKey();
 
         private FunctionCommandButtonManager(KeyboardControl parent, CommandKey key, ButtonBase button)
             : base(parent, key, button)
         {
+        }
+
+        private static Dictionary<string, Key> CreateNameToKey()
+        {
+            var nameToKey = new Dictionary<string, Key>();
+            foreach (var pair in _keyValuePairs)
+            {
+                nameToKey.Add(pair.Key, pair.Value);
+            }
+            return nameToKey;
         }
 
         internal static FunctionCommandButtonManager CreateInstance(KeyboardControl parent, CommandKey key)

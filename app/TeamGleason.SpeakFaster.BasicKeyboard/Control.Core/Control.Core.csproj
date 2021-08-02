@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
-    <AssemblyName>TeamGleason.SpeakFaster.BasicKeyboard.Control.Core</AssemblyName>
+    <AssemblyName>TeamGleason.SpeakFaster.BasicKeyboard.Control</AssemblyName>
     <Platforms>AnyCPU;x64</Platforms>
     <RootNamespace>TeamGleason.SpeakFaster.BasicKeyboard.Control</RootNamespace>
   </PropertyGroup>
