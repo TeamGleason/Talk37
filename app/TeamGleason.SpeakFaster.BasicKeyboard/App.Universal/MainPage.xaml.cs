@@ -1,4 +1,6 @@
-﻿using Windows.UI.Xaml.Controls;
+﻿using TeamGleason.SpeakFaster.BasicKeyboard.Control;
+using TeamGleason.SpeakFaster.BasicKeyboard.Layout.Standard;
+using Windows.UI.Xaml.Controls;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -12,6 +14,14 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard.App.Universal
         public MainPage()
         {
             this.InitializeComponent();
+
+            var keyboard = new KeyboardControl();
+            var grid = (Grid)Content;
+            grid.Children.Add(keyboard);
+
+            var layout = KeyboardLayout.ReadDefaultKeyboardLayout();
+            keyboard.Layout = layout;
+
         }
     }
 }

@@ -1,8 +1,19 @@
-﻿using System.Windows.Controls;
+﻿#if WINDOWS_UWP
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+#else
+using System.Windows;
+using System.Windows.Controls;
+#endif
 
 namespace TeamGleason.SpeakFaster.BasicKeyboard.Control
 {
     public class KeyboardButton : Button
     {
+        public KeyboardButton()
+        {
+            HorizontalAlignment = HorizontalAlignment.Stretch;
+            VerticalAlignment = VerticalAlignment.Stretch;
+        }
     }
 }

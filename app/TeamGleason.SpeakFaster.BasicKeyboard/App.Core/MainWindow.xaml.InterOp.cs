@@ -2,6 +2,7 @@
 using System.Windows.Input;
 using System.Windows.Interop;
 using TeamGleason.SpeakFaster.BasicKeyboard.Control;
+using TeamGleason.SpeakFaster.BasicKeyboard.Layout.Standard;
 using TeamGleason.SpeakFaster.BasicKeyboard.Special;
 
 namespace TeamGleason.SpeakFaster.BasicKeyboard.App.Core
@@ -21,9 +22,9 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard.App.Core
             TheKeyboard.InteropHelper = this;
         }
 
-        void IInteropHelper.SendKey(bool sendDown, bool sendUp, Key key)
+        void IInteropHelper.SendKey(bool sendDown, bool sendUp, KeyName keyName)
         {
-            InteropHelper.SendKey(sendDown, sendUp, key);
+            InteropHelper.SendKey(sendDown, sendUp, keyName);
         }
 
         void IInteropHelper.SendText(bool isShift, bool isCtrl, bool isAlt, bool isWindows, string text)

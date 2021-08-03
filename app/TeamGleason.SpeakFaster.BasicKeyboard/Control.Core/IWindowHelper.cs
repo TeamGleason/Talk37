@@ -1,5 +1,9 @@
 ﻿using System;
+#if WINDOWS_UWP
+using Windows.Foundation;
+#else
 using System.Windows;
+#endif
 
 namespace TeamGleason.SpeakFaster.BasicKeyboard.Control
 {

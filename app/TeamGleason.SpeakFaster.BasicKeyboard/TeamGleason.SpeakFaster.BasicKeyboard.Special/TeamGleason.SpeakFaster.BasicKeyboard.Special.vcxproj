@@ -142,6 +142,11 @@
   <ItemGroup>
     <Image Include="app.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Layout.Standard\Layout.Standard.csproj">
+      <Project>{07833e68-03f8-4d8a-b491-3868a48a5823}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

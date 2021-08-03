@@ -154,6 +154,16 @@
       <Version>6.2.12</Version>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Control.Universal\Control.Universal.csproj">
+      <Project>{e41ae068-e15f-452a-86bc-232d4c80550f}</Project>
+      <Name>Control.Universal</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Layout.Standard\Layout.Standard.csproj">
+      <Project>{07833E68-03F8-4D8A-B491-3868A48A5823}</Project>
+      <Name>Layout.Standard</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

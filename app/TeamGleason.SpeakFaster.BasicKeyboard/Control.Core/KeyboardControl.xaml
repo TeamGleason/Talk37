@@ -51,12 +51,14 @@
             <TextBlock Text="Pos"/>
         </DataTemplate>
 
+        <!--
         <Style TargetType="local:KeyboardButton">
             <Setter Property="FontFamily" Value="{StaticResource KeyboardFontFamily}"/>
         </Style>
         <Style TargetType="local:KeyboardToggleButton">
             <Setter Property="FontFamily" Value="{StaticResource KeyboardFontFamily}"/>
         </Style>
+        -->
     </UserControl.Resources>
     <Grid x:Name="TheGrid"/>
 </UserControl>

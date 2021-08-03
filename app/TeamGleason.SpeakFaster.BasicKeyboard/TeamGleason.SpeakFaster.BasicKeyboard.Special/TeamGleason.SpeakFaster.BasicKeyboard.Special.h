@@ -2,6 +2,7 @@
 
 using namespace System;
 using namespace System::Windows::Input;
+using namespace TeamGleason::SpeakFaster::BasicKeyboard::Layout::Standard;
 
 namespace TeamGleason {
 	namespace SpeakFaster {
@@ -77,38 +78,38 @@ namespace TeamGleason {
 						}
 					}
 
-					static void SendKey(bool sendDown, bool sendUp, Key key)
+					static void SendKey(bool sendDown, bool sendUp, KeyName key)
 					{
 						WORD code = 0;
 
 						switch (key)
 						{
-						case Key::Back: code = VK_BACK; break;
-						case Key::Tab: code = VK_TAB; break;
-						case Key::Enter: code = VK_RETURN; break;
-						case Key::Space: code = VK_SPACE; break;
-						case Key::Home: code = VK_HOME; break;
-						case Key::End: code = VK_END; break;
-						case Key::Delete: code = VK_DELETE; break;
-						case Key::PageUp: code = VK_PRIOR; break;
-						case Key::PageDown: code = VK_NEXT; break;
-						case Key::Up: code = VK_UP; break;
-						case Key::Down: code = VK_DOWN; break;
-						case Key::Left: code = VK_LEFT; break;
-						case Key::Right: code = VK_RIGHT; break;
-						case Key::F1: code = VK_F1; break;
-						case Key::F2: code = VK_F2; break;
-						case Key::F3: code = VK_F3; break;
-						case Key::F4: code = VK_F4; break;
-						case Key::F5: code = VK_F5; break;
-						case Key::F6: code = VK_F6; break;
-						case Key::F7: code = VK_F7; break;
-						case Key::F8: code = VK_F8; break;
-						case Key::F9: code = VK_F9; break;
-						case Key::F10: code = VK_F10; break;
-						case Key::F11: code = VK_F11; break;
-						case Key::F12: code = VK_F12; break;
-						case Key::Escape: code = VK_ESCAPE; break;
+						case KeyName::Backspace: code = VK_BACK; break;
+						case KeyName::Tab: code = VK_TAB; break;
+						case KeyName::Enter: code = VK_RETURN; break;
+						case KeyName::Space: code = VK_SPACE; break;
+						case KeyName::Home: code = VK_HOME; break;
+						case KeyName::End: code = VK_END; break;
+						case KeyName::Delete: code = VK_DELETE; break;
+						case KeyName::PageUp: code = VK_PRIOR; break;
+						case KeyName::PageDown: code = VK_NEXT; break;
+						case KeyName::ArrowUp: code = VK_UP; break;
+						case KeyName::ArrowDown: code = VK_DOWN; break;
+						case KeyName::ArrowLeft: code = VK_LEFT; break;
+						case KeyName::ArrowRight: code = VK_RIGHT; break;
+						case KeyName::F1: code = VK_F1; break;
+						case KeyName::F2: code = VK_F2; break;
+						case KeyName::F3: code = VK_F3; break;
+						case KeyName::F4: code = VK_F4; break;
+						case KeyName::F5: code = VK_F5; break;
+						case KeyName::F6: code = VK_F6; break;
+						case KeyName::F7: code = VK_F7; break;
+						case KeyName::F8: code = VK_F8; break;
+						case KeyName::F9: code = VK_F9; break;
+						case KeyName::F10: code = VK_F10; break;
+						case KeyName::F11: code = VK_F11; break;
+						case KeyName::F12: code = VK_F12; break;
+						case KeyName::Escape: code = VK_ESCAPE; break;
 						}
 
 						if (code != 0 && (sendDown || sendUp))

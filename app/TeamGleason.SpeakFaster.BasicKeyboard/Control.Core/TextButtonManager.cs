@@ -1,4 +1,8 @@
-﻿using System.Windows.Controls;
+﻿#if WINDOWS_UWP
+using Windows.UI.Xaml.Controls;
+#else
+using System.Windows.Controls;
+#endif
 using TeamGleason.SpeakFaster.BasicKeyboard.Layout.Standard;
 
 namespace TeamGleason.SpeakFaster.BasicKeyboard.Control

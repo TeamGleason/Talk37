@@ -1,7 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+#if WINDOWS_UWP
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+#else
 using System.Windows;
 using System.Windows.Controls;
+#endif
 using System.Windows.Input;
 using TeamGleason.SpeakFaster.BasicKeyboard.Control.Properties;
 using TeamGleason.SpeakFaster.BasicKeyboard.Layout.Standard;
@@ -64,6 +69,9 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard.Control
             return _windowHelper;
         }
 
+#if WINDOWS_UWP
+#else
+
         protected override void OnVisualParentChanged(DependencyObject oldParent)
         {
             if (_windowHelper != null)
@@ -86,6 +94,8 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard.Control
 
             base.OnVisualParentChanged(oldParent);
         }
+
+#endif
 
         private void OnClosing(object sender, EventArgs e)
         {
@@ -129,35 +139,35 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard.Control
 
             if (modifier == StateModifier.CapsLock)
             {
-                SendUpDown(Key.CapsLock);
+                SendUpDown(KeyName.CapsLock);
             }
             else
             {
-                Key key;
+                KeyName keyName;
 
                 switch (modifier)
                 {
                     case StateModifier.Ctrl:
-                        key = Key.LeftCtrl;
+                        keyName = KeyName.Ctrl;
                         break;
 
                     case StateModifier.Alt:
-                        key = Key.LeftAlt;
+                        keyName = KeyName.Alt;
                         break;
 
                     default:
                     case StateModifier.Shift:
-                        key = Key.LeftShift;
+                        keyName = KeyName.Shift;
                         break;
                 }
 
                 if (newState)
                 {
-                    SendDown(key);
+                    SendDown(keyName);
                 }
                 else
                 {
-                    SendUp(key);
+                    SendUp(keyName);
                 }
             }
         }
@@ -208,24 +218,24 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard.Control
 
         internal void SendKey(bool sendDown,
             bool sendUp,
-            Key key)
+            KeyName keyName)
         {
-            _interopHelper?.SendKey(sendDown, sendUp, key);
+            _interopHelper?.SendKey(sendDown, sendUp, keyName);
         }
 
-        internal void SendDown(Key code)
+        internal void SendDown(KeyName keyName)
         {
-            SendKey(true, false, code);
+            SendKey(true, false, keyName);
         }
 
-        internal void SendUp(Key code)
+        internal void SendUp(KeyName keyName)
         {
-            SendKey(false, true, code);
+            SendKey(false, true, keyName);
         }
 
-        internal void SendUpDown(Key code)
+        internal void SendUpDown(KeyName keyName)
         {
-            SendKey(true, true, code);
+            SendKey(true, true, keyName);
         }
 
         internal void SendText(string text)
