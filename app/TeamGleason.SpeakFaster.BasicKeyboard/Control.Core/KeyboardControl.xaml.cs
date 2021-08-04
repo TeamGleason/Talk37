@@ -20,16 +20,12 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard.Control
     {
         public static readonly DependencyProperty LayoutProperty = DependencyProperty.Register(nameof(Layout), typeof(KeyboardLayout), typeof(KeyboardControl),
             new PropertyMetadata(null, OnLayoutChanged));
-        public static readonly DependencyProperty InteropHelperProperty = DependencyProperty.Register(nameof(InteropHelper), typeof(IInteropHelper), typeof(KeyboardControl),
-            new PropertyMetadata(null, OnInteropHelperChanged));
 
         private KeyboardLayout _layout;
 
         private readonly bool[] _states = new bool[Enum.GetValues(typeof(StateModifier)).Length];
 
         private readonly List<ButtonManager> _managers = new List<ButtonManager>();
-
-        private IInteropHelper _interopHelper = null;
 
         private IWindowHelper _windowHelper = null;
 
@@ -44,11 +40,19 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard.Control
             set => SetValue(LayoutProperty, value);
         }
 
-        public IInteropHelper InteropHelper
+        public event EventHandler<SendKeyEventArgs> SendKey
         {
-            get => (IInteropHelper)GetValue(InteropHelperProperty);
-            set => SetValue(InteropHelperProperty, value);
+            add => _sendKey += value;
+            remove => _sendKey -= value;
         }
+        private EventHandler<SendKeyEventArgs> _sendKey;
+
+        public event EventHandler<SendTextEventArgs> SendText
+        {
+            add => _sendText += value;
+            remove => _sendText -= value;
+        }
+        private EventHandler<SendTextEventArgs> _sendText;
 
         private static IWindowHelper GetWindow(DependencyObject ob)
         {
@@ -216,35 +220,37 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard.Control
             }
         }
 
-        internal void SendKey(bool sendDown,
+        internal void RaiseSendKey(bool sendDown,
             bool sendUp,
             KeyName keyName)
         {
-            _interopHelper?.SendKey(sendDown, sendUp, keyName);
+            var args = new SendKeyEventArgs(sendDown: sendDown, sendUp: sendUp, keyName: keyName);
+            _sendKey?.Invoke(this, args);
         }
 
         internal void SendDown(KeyName keyName)
         {
-            SendKey(true, false, keyName);
+            RaiseSendKey(true, false, keyName);
         }
 
         internal void SendUp(KeyName keyName)
         {
-            SendKey(false, true, keyName);
+            RaiseSendKey(false, true, keyName);
         }
 
         internal void SendUpDown(KeyName keyName)
         {
-            SendKey(true, true, keyName);
+            RaiseSendKey(true, true, keyName);
         }
 
-        internal void SendText(string text)
+        internal void RaiseSendText(string text)
         {
             var isShift = _states[(int)StateModifier.Shift];
             var isCtrl = _states[(int)StateModifier.Ctrl];
             var isAlt = _states[(int)StateModifier.Alt];
-            var isWindows = false;
-            _interopHelper?.SendText(isShift: isShift, isCtrl: isCtrl, isAlt: isAlt, isWindows: isWindows, text: text);
+            var isWindows = _states[(int)StateModifier.Windows];
+            var sendTextEventArgs = new SendTextEventArgs(isShift: isShift, isCtrl: isCtrl, isAlt: isAlt, isWindows: isWindows, text: text);
+            _sendText?.Invoke(this, sendTextEventArgs);
 
             SetState(StateModifier.Shift, false);
             SetState(StateModifier.Ctrl, false);
@@ -254,11 +260,6 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard.Control
         private static void OnLayoutChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             ((KeyboardControl)d).OnLayoutChanged((KeyboardLayout)e.NewValue);
-        }
-
-        private static void OnInteropHelperChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            ((KeyboardControl)d)._interopHelper = (IInteropHelper)e.NewValue;
         }
 
         private void AddManager(KeyRefBase keyRef, ButtonManager manager)

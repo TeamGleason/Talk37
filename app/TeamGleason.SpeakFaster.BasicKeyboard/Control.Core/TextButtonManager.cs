@@ -54,7 +54,7 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard.Control
         {
             var effectiveKey = GetEffectiveKey();
 
-            _parent.SendText(effectiveKey.Text);
+            _parent.RaiseSendText(effectiveKey.Text);
         }
     }
 }

@@ -78,11 +78,11 @@ namespace TeamGleason {
 						}
 					}
 
-					static void SendKey(bool sendDown, bool sendUp, KeyName key)
+					static void SendKey(bool sendDown, bool sendUp, KeyName keyName)
 					{
 						WORD code = 0;
 
-						switch (key)
+						switch (keyName)
 						{
 						case KeyName::Backspace: code = VK_BACK; break;
 						case KeyName::Tab: code = VK_TAB; break;
