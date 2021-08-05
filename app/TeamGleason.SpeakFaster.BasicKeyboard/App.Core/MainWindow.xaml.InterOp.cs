@@ -18,7 +18,7 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard.App.Core
             InteropHelper.SetMainWindowStyle(helper.Handle);
 
             TheKeyboard.SendKey += (s, e) => InteropHelper.SendKey(sendDown: e.SendDown, sendUp: e.SendUp, keyName: e.KeyName);
-            TheKeyboard.SendText+=(s,e)=>InteropHelper.SendText(isShift: e.IsShift, isCtrl: e.IsCtrl, isAlt: e.IsAlt, isWindows: e.IsWindows, text: e.Text);
+            TheKeyboard.SendText += (s, e) => InteropHelper.SendText(isShift: e.IsShift, isCtrl: e.IsCtrl, isAlt: e.IsAlt, isWindows: e.IsWindows, text: e.Text);
         }
     }
 }

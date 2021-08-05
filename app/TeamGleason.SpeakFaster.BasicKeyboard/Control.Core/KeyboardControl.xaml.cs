@@ -7,7 +7,6 @@ using Windows.UI.Xaml.Controls;
 using System.Windows;
 using System.Windows.Controls;
 #endif
-using System.Windows.Input;
 using TeamGleason.SpeakFaster.BasicKeyboard.Control.Properties;
 using TeamGleason.SpeakFaster.BasicKeyboard.Layout.Standard;
 

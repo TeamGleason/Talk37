@@ -5,7 +5,6 @@ using Windows.UI.Xaml.Controls.Primitives;
 #else
 using System.Windows.Controls.Primitives;
 #endif
-using System.Windows.Input;
 using TeamGleason.SpeakFaster.BasicKeyboard.Layout.Standard;
 
 namespace TeamGleason.SpeakFaster.BasicKeyboard.Control

@@ -26,7 +26,7 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard.Control
 
         private void DoWindowPosition()
         {
-            var helper = _parent.GetWindow() as IWindowHelper;
+            var helper = _parent.GetWindow();
             if (helper != null)
             {
                 var currentWindowRectString = helper.WindowRect.ToString();
