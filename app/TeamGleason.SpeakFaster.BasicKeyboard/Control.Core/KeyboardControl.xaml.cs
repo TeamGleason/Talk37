@@ -15,7 +15,7 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard.Control
     /// <summary>
     /// Interaction logic for KeyboardControl.xaml
     /// </summary>
-    public partial class KeyboardControl : UserControl, IKeyboardControl
+    public partial class KeyboardControl : UserControl
     {
         public static readonly DependencyProperty LayoutProperty = DependencyProperty.Register(nameof(Layout), typeof(KeyboardLayout), typeof(KeyboardControl),
             new PropertyMetadata(null, OnLayoutChanged));
@@ -24,9 +24,13 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard.Control
 
         private readonly bool[] _states = new bool[Enum.GetValues(typeof(StateModifier)).Length];
 
+        private IWindowHelper _windowHelper;
+
         private readonly List<ButtonManager> _managers = new List<ButtonManager>();
 
-        private IWindowHelper _windowHelper = null;
+        private readonly Dictionary<string, KeyboardGrid> _views = new Dictionary<string, KeyboardGrid>();
+
+        private KeyboardGrid _currentView;
 
         public KeyboardControl()
         {
@@ -110,14 +114,18 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard.Control
             }
         }
 
-        private void NavigateToView(View view)
+        internal void NavigateToView(string viewName)
         {
-            _managers.Clear();
-            TheGrid.Children.Clear();
-
-            foreach (var key in view.KeyRefs)
+            if (_views.TryGetValue(viewName, out var newView))
             {
-                key.Create(this);
+                if (_currentView != null)
+                {
+                    _currentView.Visibility = Visibility.Collapsed;
+                }
+
+                _currentView = newView;
+
+                _currentView.Visibility = Visibility.Visible;
             }
         }
 
@@ -175,41 +183,40 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard.Control
             }
         }
 
-        internal void NavigateToView(string viewName)
-        {
-            var view = _layout.Views[viewName];
-            NavigateToView(view);
-        }
-
         private void OnLayoutChanged(KeyboardLayout layout)
         {
             TheGrid.Children.Clear();
+            _views.Clear();
             _managers.Clear();
             _layout = layout;
 
             if (layout != null)
             {
-                while (TheGrid.RowDefinitions.Count < layout.Rows)
+                foreach (var view in layout.Views)
                 {
-                    TheGrid.RowDefinitions.Add(new RowDefinition());
-                }
-                while (layout.Rows < TheGrid.RowDefinitions.Count)
-                {
-                    TheGrid.RowDefinitions.RemoveAt(layout.Rows);
-                }
+                    var grid = new KeyboardGrid(this) { Visibility = Visibility.Collapsed };
+                    TheGrid.Children.Add(grid);
+                    _views.Add(view.Id, grid);
 
-                while (TheGrid.ColumnDefinitions.Count < layout.Columns)
-                {
-                    TheGrid.ColumnDefinitions.Add(new ColumnDefinition());
-                }
-                while (layout.Columns < TheGrid.ColumnDefinitions.Count)
-                {
-                    TheGrid.ColumnDefinitions.RemoveAt(layout.Columns);
+                    while (grid.RowDefinitions.Count < layout.Rows)
+                    {
+                        grid.RowDefinitions.Add(new RowDefinition());
+                    }
+
+                    while (grid.ColumnDefinitions.Count < layout.Columns)
+                    {
+                        grid.ColumnDefinitions.Add(new ColumnDefinition());
+                    }
+
+                    foreach (var key in view.KeyRefs)
+                    {
+                        key.Create(grid);
+                    }
                 }
 
                 if (_layout.Views.Count != 0)
                 {
-                    NavigateToView(_layout.Views[0]);
+                    NavigateToView(_layout.Views[0].Id);
                 }
             }
         }
@@ -256,51 +263,15 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard.Control
             ((KeyboardControl)d).OnLayoutChanged((KeyboardLayout)e.NewValue);
         }
 
-        private void AddManager(KeyRefBase keyRef, ButtonManager manager)
+        internal void AddManager(KeyboardGrid grid, KeyRefBase keyRef, ButtonManager manager)
         {
             var button = manager.Button;
             Grid.SetRow(button, keyRef.Row);
             Grid.SetRowSpan(button, keyRef.RowSpan);
             Grid.SetColumn(button, keyRef.Column);
             Grid.SetColumnSpan(button, keyRef.ColumnSpan);
-            TheGrid.Children.Add(button);
+            grid.Children.Add(button);
             _managers.Add(manager);
-        }
-
-        void IKeyboardControl.Create(TextKeyRef keyRef, TextKey key)
-        {
-            var manager = TextButtonManager.CreateInstance(this, key);
-            AddManager(keyRef, manager);
-        }
-
-        void IKeyboardControl.Create(CommandKeyRef keyRef, CommandKey key)
-        {
-            ButtonManager manager;
-
-            switch (key.CommandType)
-            {
-                case "Navigate":
-                    manager = NavigateCommandButtonManager.CreateInstance(this, key);
-                    break;
-                case "Function":
-                    manager = FunctionCommandButtonManager.CreateInstance(this, key);
-                    break;
-                case "Modifier":
-                    manager = ModifierCommandButtonManager.CreateInstance(this, key);
-                    break;
-                case "Custom":
-                    manager = CustomCommandButtonManager.CreateInstance(this, key);
-                    break;
-                default:
-                    throw new InvalidOperationException();
-            }
-            AddManager(keyRef, manager);
-        }
-
-        void IKeyboardControl.Create(PredictionKeyRef keyRef, PredictionKey key)
-        {
-            var manager = PredictionButtonManager.CreateInstance(this, key);
-            AddManager(keyRef, manager);
         }
     }
 }

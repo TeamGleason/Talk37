@@ -141,6 +141,9 @@
     <Compile Include="..\Control.Core\KeyboardControl.xaml.cs">
       <Link>KeyboardControl.xaml.cs</Link>
     </Compile>
+    <Compile Include="..\Control.Core\KeyboardGrid.cs">
+      <Link>KeyboardGrid.cs</Link>
+    </Compile>
     <Compile Include="..\Control.Core\KeyboardToggleButton.cs">
       <Link>KeyboardToggleButton.cs</Link>
     </Compile>
