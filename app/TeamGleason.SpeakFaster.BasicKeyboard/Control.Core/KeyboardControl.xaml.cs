@@ -181,11 +181,6 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard.Control
             NavigateToView(view);
         }
 
-        private void OnWindowHelperChanged(IWindowHelper helper)
-        {
-
-        }
-
         private void OnLayoutChanged(KeyboardLayout layout)
         {
             TheGrid.Children.Clear();
