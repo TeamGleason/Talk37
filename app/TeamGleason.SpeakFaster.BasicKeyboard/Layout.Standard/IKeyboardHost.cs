@@ -7,5 +7,9 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard.Layout.Standard
         void SetPredictions(params string[] predictions);
 
         event EventHandler<string> AcceptPrediction;
+
+        event EventHandler ExpandHint;
+
+        event EventHandler MouseLeftClick;
     }
 }

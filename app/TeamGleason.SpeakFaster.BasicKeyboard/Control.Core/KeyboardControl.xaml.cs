@@ -49,7 +49,7 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard.Control
             {
                 _layoutChanged += value;
 
-                if(Layout!=null)
+                if (Layout != null)
                 {
                     var args = new SendEventArgs(this);
                     value?.Invoke(this, args);
@@ -71,6 +71,7 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard.Control
             add => _sendText += value;
             remove => _sendText -= value;
         }
+        private EventHandler<SendTextEventArgs> _sendText;
 
         event EventHandler<string> IKeyboardHost.AcceptPrediction
         {
@@ -79,7 +80,20 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard.Control
         }
         private EventHandler<string> _acceptPrediction;
 
-        private EventHandler<SendTextEventArgs> _sendText;
+        event EventHandler IKeyboardHost.ExpandHint
+        {
+            add => _expandHint += value;
+            remove => _expandHint -= value;
+        }
+        private EventHandler _expandHint;
+
+        event EventHandler IKeyboardHost.MouseLeftClick
+        {
+            add => _mouseLeftClick += value;
+            remove => _mouseLeftClick -= value;
+        }
+        private EventHandler _mouseLeftClick;
+
 
         private static IWindowHelper GetWindow(DependencyObject ob)
         {
@@ -303,15 +317,25 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard.Control
 
         void IKeyboardHost.SetPredictions(string[] predictions)
         {
-            foreach(var manager in _managers)
+            foreach (var manager in _managers)
             {
                 manager.SetPredictions(predictions);
-            }    
+            }
         }
 
         internal void RaiseAcceptPrediction(string content)
         {
             _acceptPrediction?.Invoke(this, content);
+        }
+
+        internal void RaiseExpandHint()
+        {
+            _expandHint?.Invoke(this, EventArgs.Empty);
+        }
+
+        internal void RaiseMouseLeftClick()
+        {
+            _mouseLeftClick?.Invoke(this, EventArgs.Empty);
         }
     }
 }

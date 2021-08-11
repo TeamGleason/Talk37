@@ -57,6 +57,14 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard.Control
         {
             switch (_key.Command)
             {
+                case "Custom.ExpandHint":
+                    _parent.RaiseExpandHint();
+                    break;
+
+                case "Custom.MouseLeftClick":
+                    _parent.RaiseMouseLeftClick();
+                    break;
+
                 case "Custom.WindowPosition":
                     DoWindowPosition();
                     break;
