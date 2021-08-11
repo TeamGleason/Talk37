@@ -2,9 +2,10 @@
 
 namespace TeamGleason.SpeakFaster.BasicKeyboard.Layout.Standard
 {
-    public class SendTextEventArgs : EventArgs
+    public class SendTextEventArgs : SendEventArgs
     {
-        public SendTextEventArgs(bool isShift, bool isCtrl, bool isAlt, bool isWindows, string text)
+        public SendTextEventArgs(IKeyboardHost target, bool isShift, bool isCtrl, bool isAlt, bool isWindows, string text)
+            : base(target)
         {
             IsShift = isShift;
             IsCtrl = isAlt;

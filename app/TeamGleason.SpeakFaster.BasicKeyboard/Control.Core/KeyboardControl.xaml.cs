@@ -15,7 +15,7 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard.Control
     /// <summary>
     /// Interaction logic for KeyboardControl.xaml
     /// </summary>
-    public partial class KeyboardControl : UserControl
+    public partial class KeyboardControl : UserControl, IKeyboardHost
     {
         public static readonly DependencyProperty LayoutProperty = DependencyProperty.Register(nameof(Layout), typeof(KeyboardLayout), typeof(KeyboardControl),
             new PropertyMetadata(null, OnLayoutChanged));
@@ -43,6 +43,22 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard.Control
             set => SetValue(LayoutProperty, value);
         }
 
+        public event EventHandler<SendEventArgs> LayoutChanged
+        {
+            add
+            {
+                _layoutChanged += value;
+
+                if(Layout!=null)
+                {
+                    var args = new SendEventArgs(this);
+                    value?.Invoke(this, args);
+                }
+            }
+            remove => _layoutChanged -= value;
+        }
+        private event EventHandler<SendEventArgs> _layoutChanged;
+
         public event EventHandler<SendKeyEventArgs> SendKey
         {
             add => _sendKey += value;
@@ -55,6 +71,14 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard.Control
             add => _sendText += value;
             remove => _sendText -= value;
         }
+
+        event EventHandler<string> IKeyboardHost.AcceptPrediction
+        {
+            add => _acceptPrediction += value;
+            remove => _acceptPrediction -= value;
+        }
+        private EventHandler<string> _acceptPrediction;
+
         private EventHandler<SendTextEventArgs> _sendText;
 
         private static IWindowHelper GetWindow(DependencyObject ob)
@@ -219,13 +243,16 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard.Control
                     NavigateToView(_layout.Views[0].Id);
                 }
             }
+
+            var args = new SendEventArgs(this);
+            _layoutChanged?.Invoke(this, args);
         }
 
         internal void RaiseSendKey(bool sendDown,
             bool sendUp,
             KeyName keyName)
         {
-            var args = new SendKeyEventArgs(sendDown: sendDown, sendUp: sendUp, keyName: keyName);
+            var args = new SendKeyEventArgs(target: this, sendDown: sendDown, sendUp: sendUp, keyName: keyName);
             _sendKey?.Invoke(this, args);
         }
 
@@ -250,7 +277,7 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard.Control
             var isCtrl = _states[(int)StateModifier.Ctrl];
             var isAlt = _states[(int)StateModifier.Alt];
             var isWindows = _states[(int)StateModifier.Windows];
-            var sendTextEventArgs = new SendTextEventArgs(isShift: isShift, isCtrl: isCtrl, isAlt: isAlt, isWindows: isWindows, text: text);
+            var sendTextEventArgs = new SendTextEventArgs(target: this, isShift: isShift, isCtrl: isCtrl, isAlt: isAlt, isWindows: isWindows, text: text);
             _sendText?.Invoke(this, sendTextEventArgs);
 
             SetState(StateModifier.Shift, false);
@@ -272,6 +299,19 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard.Control
             Grid.SetColumnSpan(button, keyRef.ColumnSpan);
             grid.Children.Add(button);
             _managers.Add(manager);
+        }
+
+        void IKeyboardHost.SetPredictions(string[] predictions)
+        {
+            foreach(var manager in _managers)
+            {
+                manager.SetPredictions(predictions);
+            }    
+        }
+
+        internal void RaiseAcceptPrediction(string content)
+        {
+            _acceptPrediction?.Invoke(this, content);
         }
     }
 }

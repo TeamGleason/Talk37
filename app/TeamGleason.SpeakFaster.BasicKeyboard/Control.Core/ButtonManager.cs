@@ -48,6 +48,8 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard.Control
         {
             Execute();
         }
+
+        internal virtual void SetPredictions(params string[] predictions) { }
     }
 
     internal abstract class ButtonManager<T> : ButtonManager

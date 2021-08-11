@@ -2,9 +2,10 @@
 
 namespace TeamGleason.SpeakFaster.BasicKeyboard.Layout.Standard
 {
-    public class SendKeyEventArgs : EventArgs
+    public class SendKeyEventArgs : SendEventArgs
     {
-        public SendKeyEventArgs(bool sendDown, bool sendUp, KeyName keyName)
+        public SendKeyEventArgs(IKeyboardHost target, bool sendDown, bool sendUp, KeyName keyName)
+            : base(target)
         {
             SendDown = sendDown;
             SendUp = sendUp;
