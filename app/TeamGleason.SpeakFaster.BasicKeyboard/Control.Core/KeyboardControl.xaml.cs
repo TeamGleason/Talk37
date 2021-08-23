@@ -7,7 +7,6 @@ using Windows.UI.Xaml.Controls;
 using System.Windows;
 using System.Windows.Controls;
 #endif
-using TeamGleason.SpeakFaster.BasicKeyboard.Control.Properties;
 using TeamGleason.SpeakFaster.BasicKeyboard.Layout.Standard;
 
 namespace TeamGleason.SpeakFaster.BasicKeyboard.Control
@@ -23,8 +22,6 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard.Control
         private KeyboardLayout _layout;
 
         private readonly bool[] _states = new bool[Enum.GetValues(typeof(StateModifier)).Length];
-
-        private IWindowHelper _windowHelper;
 
         private readonly List<ButtonManager> _managers = new List<ButtonManager>();
 
@@ -80,77 +77,26 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard.Control
         }
         private EventHandler<string> _acceptPrediction;
 
-        event EventHandler IKeyboardHost.ExpandHint
+        public event EventHandler ExpandHint
         {
             add => _expandHint += value;
             remove => _expandHint -= value;
         }
         private EventHandler _expandHint;
 
-        event EventHandler IKeyboardHost.MouseLeftClick
+        public event EventHandler MouseLeftClick
         {
             add => _mouseLeftClick += value;
             remove => _mouseLeftClick -= value;
         }
         private EventHandler _mouseLeftClick;
 
-
-        private static IWindowHelper GetWindow(DependencyObject ob)
+        public event EventHandler PositionWindow
         {
-            IWindowHelper value = null;
-
-            for (var walker = ob as FrameworkElement;
-                walker != null && value == null;
-                walker = walker.Parent as FrameworkElement)
-            {
-                value = walker as IWindowHelper;
-            }
-
-            return value;
+            add => _positionWindow += value;
+            remove => _positionWindow -= value;
         }
-
-        internal IWindowHelper GetWindow()
-        {
-            return _windowHelper;
-        }
-
-#if WINDOWS_UWP
-#else
-
-        protected override void OnVisualParentChanged(DependencyObject oldParent)
-        {
-            if (_windowHelper != null)
-            {
-                _windowHelper.Closing -= OnClosing;
-            }
-
-            _windowHelper = GetWindow(this);
-            if (_windowHelper != null)
-            {
-                _windowHelper.Closing += OnClosing;
-
-                var rectString = Settings.Default.WindowRect;
-                var value = _windowHelper.TryParseRect(rectString, out var rect);
-                if (value)
-                {
-                    _windowHelper.WindowRect = rect;
-                }
-            }
-
-            base.OnVisualParentChanged(oldParent);
-        }
-
-#endif
-
-        private void OnClosing(object sender, EventArgs e)
-        {
-            if (_windowHelper != null)
-            {
-                var rect = _windowHelper.WindowRect;
-                Settings.Default.WindowRect = rect.ToString();
-                Settings.Default.Save();
-            }
-        }
+        private EventHandler _positionWindow;
 
         internal void NavigateToView(string viewName)
         {
@@ -336,6 +282,11 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard.Control
         internal void RaiseMouseLeftClick()
         {
             _mouseLeftClick?.Invoke(this, EventArgs.Empty);
+        }
+
+        internal void RaisePositionWindow()
+        {
+            _positionWindow?.Invoke(this, EventArgs.Empty);
         }
     }
 }

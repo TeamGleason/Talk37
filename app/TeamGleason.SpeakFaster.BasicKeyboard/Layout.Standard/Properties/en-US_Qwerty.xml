@@ -415,7 +415,7 @@
     <CommandKey Id="Modifier.Windows" Icon="KeyIcon.Windows" Style="KeyStyle.Modifier" Toggles="true" Command="Modifier.Windows" />
     <CommandKey Id="Custom.ExpandHint" Label="TLA" Style="KeyStyle.Function" Toggles="false" Command="Custom.ExpandHint" />
     <CommandKey Id="Custom.MouseLeftClick" Icon="KeyIcon.Mouse" Style="KeyStyle.Function" Toggles="false" Command="Custom.MouseLeftClick" />
-    <CommandKey Id="Custom.WindowPosition" Icon="KeyIcon.WindowPosition" Style="KeyStyle.Function" Toggles="false" Command="Custom.WindowPosition" />
+    <CommandKey Id="Custom.PositionWindow" Icon="KeyIcon.PositionWindow" Style="KeyStyle.Function" Toggles="false" Command="Custom.PositionWindow" />
 
   </CommandKeys>
   <PredictionKeys>
@@ -428,7 +428,7 @@
     <View Id="Alphabet">
 
       <CommandKeyRef KeyRef="Modifier.Windows" Column="0" />
-      <CommandKeyRef KeyRef="Custom.WindowPosition" Column="1" />
+      <CommandKeyRef KeyRef="Custom.PositionWindow" Column="1" />
       <CommandKeyRef KeyRef="Custom.ExpandHint" Column="2"/>
       <PredictionKeyRef KeyRef="Predictions.First" Row="0" RowSpan="1" Column="3" ColumnSpan="2" />
       <PredictionKeyRef KeyRef="Predictions.Second" Row="0" RowSpan="1" Column="5" ColumnSpan="2" />

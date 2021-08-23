@@ -75,9 +75,6 @@
     <Compile Include="..\Control.Core\FunctionCommandButtonManager.cs">
       <Link>FunctionCommandButtonManager.cs</Link>
     </Compile>
-    <Compile Include="..\Control.Core\IWindowHelper.cs">
-      <Link>IWindowHelper.cs</Link>
-    </Compile>
     <Compile Include="..\Control.Core\KeyboardButton.cs">
       <Link>KeyboardButton.cs</Link>
     </Compile>
@@ -95,6 +92,9 @@
     </Compile>
     <Compile Include="..\Control.Core\NavigateCommandButtonManager.cs">
       <Link>NavigateCommandButtonManager.cs</Link>
+    </Compile>
+    <Compile Include="..\Control.Core\PositionWindowHelper.cs">
+      <Link>PositionWindowHelper.cs</Link>
     </Compile>
     <Compile Include="..\Control.Core\PredictionButtonManager.cs">
       <Link>PredictionButtonManager.cs</Link>

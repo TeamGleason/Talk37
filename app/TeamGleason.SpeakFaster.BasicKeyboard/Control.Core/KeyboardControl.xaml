@@ -47,7 +47,7 @@
         <DataTemplate x:Key="KeyIcon.Mouse">
             <TextBlock Text="Mouse"/>
         </DataTemplate>
-        <DataTemplate x:Key="KeyIcon.WindowPosition">
+        <DataTemplate x:Key="KeyIcon.PositionWindow">
             <TextBlock Text="Pos"/>
         </DataTemplate>
 

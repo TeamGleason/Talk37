@@ -4,7 +4,6 @@ using Windows.UI.Xaml.Controls.Primitives;
 #else
 using System.Windows.Controls.Primitives;
 #endif
-using TeamGleason.SpeakFaster.BasicKeyboard.Control.Properties;
 using TeamGleason.SpeakFaster.BasicKeyboard.Layout.Standard;
 
 namespace TeamGleason.SpeakFaster.BasicKeyboard.Control
@@ -24,35 +23,6 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard.Control
             return manager;
         }
 
-        private void DoWindowPosition()
-        {
-            var helper = _parent.GetWindow();
-            if (helper != null)
-            {
-                var currentWindowRectString = helper.WindowRect.ToString();
-                var windowRectString = Settings.Default.WindowRect;
-                var altWindowRectString = Settings.Default.AltWindowRect;
-
-                if (currentWindowRectString == windowRectString)
-                {
-                    if (helper.TryParseRect(altWindowRectString, out var altWindowRect))
-                    {
-                        Settings.Default.WindowRect = altWindowRectString;
-                        Settings.Default.AltWindowRect = windowRectString;
-                        helper.WindowRect = altWindowRect;
-                    }
-                }
-                else
-                {
-                    Settings.Default.AltWindowRect = currentWindowRectString;
-                    if (helper.TryParseRect(windowRectString, out var windowRect))
-                    {
-                        helper.WindowRect = windowRect;
-                    }
-                }
-            }
-        }
-
         protected override void Execute()
         {
             switch (_key.Command)
@@ -65,8 +35,8 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard.Control
                     _parent.RaiseMouseLeftClick();
                     break;
 
-                case "Custom.WindowPosition":
-                    DoWindowPosition();
+                case "Custom.PositionWindow":
+                    _parent.RaisePositionWindow();
                     break;
             }
         }

@@ -132,9 +132,6 @@
     <Compile Include="..\Control.Core\FunctionCommandButtonManager.cs">
       <Link>FunctionCommandButtonManager.cs</Link>
     </Compile>
-    <Compile Include="..\Control.Core\IWindowHelper.cs">
-      <Link>IWindowHelper.cs</Link>
-    </Compile>
     <Compile Include="..\Control.Core\KeyboardButton.cs">
       <Link>KeyboardButton.cs</Link>
     </Compile>

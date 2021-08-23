@@ -30,7 +30,7 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard.Control
         {
             base.SetPredictions(predictions);
 
-            switch(_key.Id)
+            switch (_key.Id)
             {
                 case "Predictions.First":
                     Button.Content = 0 < predictions.Length ? predictions[0] : null;

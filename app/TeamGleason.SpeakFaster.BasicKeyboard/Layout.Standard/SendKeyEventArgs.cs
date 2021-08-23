@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace TeamGleason.SpeakFaster.BasicKeyboard.Layout.Standard
+﻿namespace TeamGleason.SpeakFaster.BasicKeyboard.Layout.Standard
 {
     public class SendKeyEventArgs : SendEventArgs
     {

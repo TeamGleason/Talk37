@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 #if WINDOWS_UWP
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -14,7 +10,7 @@ using TeamGleason.SpeakFaster.BasicKeyboard.Layout.Standard;
 
 namespace TeamGleason.SpeakFaster.BasicKeyboard.Control
 {
-    class KeyboardGrid : Grid, IKeyboardControl
+    internal class KeyboardGrid : Grid, IKeyboardControl
     {
         private readonly KeyboardControl _parent;
 

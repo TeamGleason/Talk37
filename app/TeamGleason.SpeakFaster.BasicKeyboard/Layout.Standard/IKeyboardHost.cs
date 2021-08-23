@@ -11,5 +11,7 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard.Layout.Standard
         event EventHandler ExpandHint;
 
         event EventHandler MouseLeftClick;
+
+        event EventHandler PositionWindow;
     }
 }
