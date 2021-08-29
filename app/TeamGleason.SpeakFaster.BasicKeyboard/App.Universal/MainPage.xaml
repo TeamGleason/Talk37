@@ -6,7 +6,9 @@
     xmlns:control="using:TeamGleason.SpeakFaster.BasicKeyboard.Control"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:gaze="using:Microsoft.Toolkit.Uwp.Input.GazeInteraction"
     mc:Ignorable="d"
+    gaze:GazeInput.Interaction="Enabled"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
