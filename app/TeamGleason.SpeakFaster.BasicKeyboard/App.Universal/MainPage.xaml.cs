@@ -15,12 +15,21 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard.App.Universal
         {
             this.InitializeComponent();
 
-            var keyboard = new KeyboardControl();
-            var grid = (Grid)Content;
-            grid.Children.Add(keyboard);
 
             var layout = KeyboardLayout.ReadDefaultKeyboardLayout();
-            keyboard.Layout = layout;
+            TheKeyboard.Layout = layout;
+
+            TheKeyboard.SendKey += (s, e) => InteropHelper.SendKey(sendDown: e.SendDown, sendUp: e.SendUp, keyName: e.KeyName);
+            TheKeyboard.SendText += (s, e) => InteropHelper.SendText(isShift: e.IsShift, isCtrl: e.IsCtrl, isAlt: e.IsAlt, isWindows: e.IsWindows, text: e.Text);
+
+            Loaded += OnLoaded;
+        }
+
+        private void OnLoaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            //Set the window style to noactivate.
+            //var helper = new WindowInteropHelper(this);
+            //InteropHelper.SetMainWindowStyle(helper.Handle);
 
         }
     }

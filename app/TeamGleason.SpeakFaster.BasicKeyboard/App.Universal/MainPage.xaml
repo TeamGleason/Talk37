@@ -12,6 +12,11 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <!--<control:KeyboardControl x:Name="TheKeyboard"/>-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TextBox/>
+        <control:KeyboardControl Grid.Row="1" x:Name="TheKeyboard"/>
     </Grid>
 </Page>

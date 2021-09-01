@@ -75,15 +75,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="..\App.Core\MainWindow.xaml.cs">
-      <Link>MainWindow.xaml.cs</Link>
-    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MainWindow.xaml.InterOp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -124,6 +122,10 @@
     <ProjectReference Include="..\Layout.Standard\Layout.Standard.csproj">
       <Project>{07833e68-03f8-4d8a-b491-3868a48a5823}</Project>
       <Name>Layout.Standard</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TeamGleason.SpeakFaster.BasicKeyboard.Special\TeamGleason.SpeakFaster.BasicKeyboard.Special.vcxproj">
+      <Project>{a24f470a-7c6d-419b-9e2f-fa9928ce6889}</Project>
+      <Name>TeamGleason.SpeakFaster.BasicKeyboard.Special</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
