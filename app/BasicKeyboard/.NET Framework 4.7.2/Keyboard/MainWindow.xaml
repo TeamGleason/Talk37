@@ -8,7 +8,6 @@
         xmlns:gaze="clr-namespace:FrameworkLib;assembly=FrameworkLib"
         mc:Ignorable="d"
         gaze:GazeInput.Interaction="Enabled"
-        Topmost="True"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <control:KeyboardControl x:Name="TheKeyboard"/>
