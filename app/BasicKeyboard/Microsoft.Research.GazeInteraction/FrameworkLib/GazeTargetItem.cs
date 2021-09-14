@@ -6,7 +6,6 @@ using StandardLib;
 using System;
 using PointF = System.Drawing.PointF;
 using System.Linq;
-using System.Diagnostics;
 #if WINDOWS_UWP
 using Windows.Foundation;
 using Windows.UI;
@@ -36,6 +35,9 @@ namespace FrameworkLib
 {
     internal abstract class GazeTargetItem
     {
+        private double _scalingX = 2;
+        private double _scalingY = 2;
+
         internal static readonly Brush GazeInput_DwellFeedbackEnterBrush = null;
 
         internal static readonly Brush GazeInput_DwellFeedbackProgressBrush = new SolidColorBrush(Colors.Green);
@@ -67,6 +69,10 @@ namespace FrameworkLib
 
         internal GazeTargetItem(UIElement target)
         {
+            var screenRect = System.Windows.Forms.Screen.PrimaryScreen;
+            _scalingX = (float)(SystemParameters.PrimaryScreenWidth / screenRect.Bounds.Width);
+            _scalingY = (float)(SystemParameters.PrimaryScreenHeight / screenRect.Bounds.Height);
+
             TargetElement = target;
         }
 
@@ -341,7 +347,6 @@ namespace FrameworkLib
             {
                 if (state != DwellProgressState.Idle)
                 {
-                    Debug.WriteLine($"state = {state}");
                     if (_feedbackPopup == null)
                     {
                         _feedbackPopup = GazePointer.Instance.GazeFeedbackPopupFactory.Get();
@@ -357,13 +362,9 @@ namespace FrameworkLib
 #else
                     var controlLeftTop = control.PointToScreen(new Point(0, 0));
                     var controlRightBottom = control.PointToScreen(new Point(control.ActualWidth, control.ActualHeight));
-                    Debug.WriteLine($"PlacementMode = {_feedbackPopup.Placement}");
-                    Debug.WriteLine($"Control = {controlLeftTop} to {controlRightBottom}");
-                    controlLeftTop = new Point(controlLeftTop.X / 2, controlLeftTop.Y / 2);
-                    controlRightBottom = new Point(controlRightBottom.X / 2, controlRightBottom.Y / 2);
-                    Debug.WriteLine($"Scaled = {controlLeftTop} to {controlRightBottom}");
+                    controlLeftTop = new Point(controlLeftTop.X * _scalingX, controlLeftTop.Y * _scalingY);
+                    controlRightBottom = new Point(controlRightBottom.X * _scalingX, controlRightBottom.Y * _scalingY);
                     var bounds = new Rect(controlLeftTop, controlRightBottom);
-                    Debug.WriteLine($"bounds = {bounds}");
 #endif
                     var rectangle = (Rectangle)_feedbackPopup.Child;
 
@@ -390,8 +391,6 @@ namespace FrameworkLib
                         _feedbackPopup.HorizontalOffset = bounds.Left;
                         _feedbackPopup.VerticalOffset = bounds.Top;
                     }
-
-                    Debug.WriteLine($"position = {_feedbackPopup.HorizontalOffset},{_feedbackPopup.VerticalOffset} by {rectangle.Width},{rectangle.Height}");
 
                     _feedbackPopup.IsOpen = true;
                 }
