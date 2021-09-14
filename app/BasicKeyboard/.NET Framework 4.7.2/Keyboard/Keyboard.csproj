@@ -117,6 +117,14 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Microsoft.Research.GazeInteraction\FrameworkLib\FrameworkLib.csproj">
+      <Project>{b0c5978f-35fc-4c5f-8355-e28a952d4047}</Project>
+      <Name>FrameworkLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Microsoft.Research.GazeInteraction\StandardLib\StandardLib.csproj">
+      <Project>{ade1cc11-db7c-48bc-9c33-007744739457}</Project>
+      <Name>StandardLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Standard 2.0\Layout\Layout.csproj">
       <Project>{925c7373-17e5-4627-b4ee-5981d10bb55c}</Project>
       <Name>Layout</Name>
