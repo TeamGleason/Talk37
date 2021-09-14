@@ -356,7 +356,7 @@ namespace FrameworkLib
                         new Size((float)control.ActualWidth, (float)control.ActualHeight)));
 #else
                     var controlLeftTop = control.PointToScreen(new Point(0, 0));
-                    var controlRightBottom = control.PointToScreen(new Point(control.Width, control.Height));
+                    var controlRightBottom = control.PointToScreen(new Point(control.ActualWidth, control.ActualHeight));
                     Debug.WriteLine($"PlacementMode = {_feedbackPopup.Placement}");
                     Debug.WriteLine($"Control = {controlLeftTop} to {controlRightBottom}");
                     controlLeftTop = new Point(controlLeftTop.X / 2, controlLeftTop.Y / 2);
