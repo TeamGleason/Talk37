@@ -1,5 +1,4 @@
 ﻿using Microsoft.HandsFree.Sensors;
-using StandardLib;
 using System;
 using System.Diagnostics;
 using System.Threading;

@@ -11,7 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 
-namespace StandardLib
+namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 {
     internal class OneEuroFilter : IGazeFilter
     {

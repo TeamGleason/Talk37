@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 
-namespace StandardLib
+namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 {
     public struct GazePoint
     {

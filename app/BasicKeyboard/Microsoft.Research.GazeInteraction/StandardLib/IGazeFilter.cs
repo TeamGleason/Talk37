@@ -4,7 +4,7 @@
 
 using System.Collections.Generic;
 
-namespace StandardLib
+namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 {
     // Every filter must provide an Update method which transforms sample data
     // and returns filtered output

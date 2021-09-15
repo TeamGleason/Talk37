@@ -4,7 +4,7 @@
 
 using System.Collections.Generic;
 
-namespace StandardLib
+namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 {
     // Basic filter which performs no input filtering -- easy to
     // use as a default filter.

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace StandardLib
+namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 {
     public interface IGazeDevice
     {

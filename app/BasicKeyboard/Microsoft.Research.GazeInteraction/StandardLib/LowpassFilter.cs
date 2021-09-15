@@ -9,7 +9,7 @@
 
 using System.Drawing;
 
-namespace StandardLib
+namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 {
     internal class LowpassFilter
     {

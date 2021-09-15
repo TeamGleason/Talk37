@@ -5,7 +5,7 @@
 using System;
 using System.Drawing;
 
-namespace StandardLib
+namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 {
     /// <summary>
     /// This struct encapsulates the location and timestamp associated with the user's gaze

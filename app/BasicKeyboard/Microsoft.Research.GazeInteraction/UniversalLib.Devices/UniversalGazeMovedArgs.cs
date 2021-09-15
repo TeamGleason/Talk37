@@ -1,5 +1,4 @@
-﻿using StandardLib;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using Windows.Devices.Input.Preview;

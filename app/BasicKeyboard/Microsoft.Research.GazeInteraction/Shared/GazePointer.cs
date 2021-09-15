@@ -3,7 +3,6 @@
 // See the LICENSE file in the project root for more information.
 
 using Microsoft.Toolkit.Uwp.Input.GazeInteraction.Device;
-using StandardLib;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
