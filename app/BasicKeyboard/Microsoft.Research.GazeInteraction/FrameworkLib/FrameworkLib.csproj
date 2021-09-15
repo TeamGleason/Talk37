@@ -49,6 +49,15 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Shared\GazeCursor.cs">
+      <Link>GazeCursor.cs</Link>
+    </Compile>
+    <Compile Include="..\Shared\GazeFeedbackPopupFactory.cs">
+      <Link>GazeFeedbackPopupFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\Shared\GazeHistoryItem.cs">
+      <Link>GazeHistoryItem.cs</Link>
+    </Compile>
     <Compile Include="..\Shared\GazeInput.cs">
       <Link>GazeInput.cs</Link>
     </Compile>
@@ -64,11 +73,12 @@
     <Compile Include="..\Shared\GazeTargetItem.cs">
       <Link>GazeTargetItem.cs</Link>
     </Compile>
-    <Compile Include="GazeCursor.cs" />
-    <Compile Include="GazeFeedbackPopupFactory.cs" />
-    <Compile Include="GazeHistoryItem.cs" />
-    <Compile Include="InvokeGazeTargetItem.cs" />
-    <Compile Include="NonInvokeGazeTargetItem.cs" />
+    <Compile Include="..\Shared\InvokeGazeTargetItem.cs">
+      <Link>InvokeGazeTargetItem.cs</Link>
+    </Compile>
+    <Compile Include="..\Shared\NonInvokeGazeTargetItem.cs">
+      <Link>NonInvokeGazeTargetItem.cs</Link>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
