@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TeamGleason.SpeakFaster.BasicKeyboard.Keyboard"
         xmlns:control="clr-namespace:TeamGleason.SpeakFaster.BasicKeyboard.Controls;assembly=Controls"
-        xmlns:gaze="clr-namespace:FrameworkLib;assembly=FrameworkLib"
+        xmlns:gaze="clr-namespace:Microsoft.Toolkit.Uwp.Input.GazeInteraction;assembly=FrameworkLib"
         mc:Ignorable="d"
         gaze:GazeInput.Interaction="Enabled"
         Title="MainWindow" Height="450" Width="800">
