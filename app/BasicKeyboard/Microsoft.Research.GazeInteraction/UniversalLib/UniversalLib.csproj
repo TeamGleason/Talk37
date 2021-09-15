@@ -138,8 +138,6 @@
     <Compile Include="GazeCursor.cs" />
     <Compile Include="GazeFeedbackPopupFactory.cs" />
     <Compile Include="GazeHistoryItem.cs" />
-    <Compile Include="GazeSettingsHelper.cs" />
-    <Compile Include="GazeStats.cs" />
     <Compile Include="InvokeGazeTargetItem.cs" />
     <Compile Include="NonInvokeGazeTargetItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
