@@ -8,7 +8,6 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Shapes;
 #else
 using System.Windows.Controls.Primitives;
-using System.Windows.Media;
 using System.Windows.Shapes;
 #endif
 

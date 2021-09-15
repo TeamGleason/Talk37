@@ -15,7 +15,6 @@ using System.Threading.Tasks;
 #if WINDOWS_UWP
 using Windows.System;
 #else
-using System.Windows;
 using System.Windows.Threading;
 #endif
 

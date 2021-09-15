@@ -4,7 +4,6 @@
 
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 #if WINDOWS_UWP
 using Windows.UI;
 using Windows.UI.Xaml;
