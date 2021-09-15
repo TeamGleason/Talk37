@@ -35,8 +35,11 @@ namespace FrameworkLib
 {
     internal abstract class GazeTargetItem
     {
-        private double _scalingX = 2;
-        private double _scalingY = 2;
+#if WINDOWS_UWP
+#else
+        private double _scalingX = 1;
+        private double _scalingY = 1;
+#endif
 
         internal static readonly Brush GazeInput_DwellFeedbackEnterBrush = null;
 
@@ -69,9 +72,12 @@ namespace FrameworkLib
 
         internal GazeTargetItem(UIElement target)
         {
+#if WINDOWS_UWP
+#else
             var screenRect = System.Windows.Forms.Screen.PrimaryScreen;
             _scalingX = (float)(SystemParameters.PrimaryScreenWidth / screenRect.Bounds.Width);
             _scalingY = (float)(SystemParameters.PrimaryScreenHeight / screenRect.Bounds.Height);
+#endif
 
             TargetElement = target;
         }

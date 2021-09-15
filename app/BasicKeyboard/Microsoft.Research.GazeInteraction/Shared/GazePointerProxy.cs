@@ -4,11 +4,21 @@
 
 using StandardLib;
 using System.Diagnostics;
+#if WINDOWS_UWP
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Media;
+#else
+using System.Windows;
+using System.Windows.Controls.Primitives;
+using System.Windows.Media;
+#endif
 
+#if WINDOWS_UWP
 namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
+#else
+namespace FrameworkLib
+#endif
 {
     /// <summary>
     /// Helper class that helps track which UIElements in the visual tree are enabled.
@@ -106,12 +116,12 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
                     if (value)
                     {
                         // ...count the element in...
-                        GazePointer.Instance.AddRoot(_uniqueId);
+                        GazeInput.GazePointerInstance.AddRoot(_uniqueId);
                     }
                     else
                     {
                         // ...otherwise count the element out.
-                        GazePointer.Instance.RemoveRoot(_uniqueId);
+                        GazeInput.GazePointerInstance.RemoveRoot(_uniqueId);
                     }
                 }
             }
@@ -122,7 +132,9 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
         /// </summary>
         private void OnLoaded(object sender, RoutedEventArgs args)
         {
+#if WINDOWS_UWP
             Debug.Assert(IsLoadedHeuristic(sender as FrameworkElement), "Should not be loaded if this is called");
+#endif
 
             if (!_isLoaded)
             {
@@ -133,7 +145,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
                 if (_isEnabled)
                 {
                     // ...we can now be counted as actively enabled.
-                    GazePointer.Instance.AddRoot(_uniqueId);
+                    GazeInput.GazePointerInstance.AddRoot(_uniqueId);
                 }
             }
             else
@@ -158,7 +170,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
                 if (_isEnabled)
                 {
                     // ...we no longer count as being actively enabled (because we have fallen out the visual tree).
-                    GazePointer.Instance.RemoveRoot(_uniqueId);
+                    GazeInput.GazePointerInstance.RemoveRoot(_uniqueId);
                 }
             }
             else

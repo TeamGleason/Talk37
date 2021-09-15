@@ -76,15 +76,25 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Shared\GazeInput.cs">
+      <Link>GazeInput.cs</Link>
+    </Compile>
+    <Compile Include="..\Shared\GazePointer.cs">
+      <Link>GazePointer.cs</Link>
+    </Compile>
+    <Compile Include="..\Shared\GazePointerProxy.cs">
+      <Link>GazePointerProxy.cs</Link>
+    </Compile>
+    <Compile Include="..\Shared\GazeTargetFactory.cs">
+      <Link>GazeTargetFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\Shared\GazeTargetItem.cs">
+      <Link>GazeTargetItem.cs</Link>
+    </Compile>
     <Compile Include="GazeCursor.cs" />
     <Compile Include="GazeDevice.cs" />
     <Compile Include="GazeFeedbackPopupFactory.cs" />
     <Compile Include="GazeHistoryItem.cs" />
-    <Compile Include="GazeInput.cs" />
-    <Compile Include="GazePointer.cs" />
-    <Compile Include="GazePointerProxy.cs" />
-    <Compile Include="GazeTargetFactory.cs" />
-    <Compile Include="GazeTargetItem.cs" />
     <Compile Include="InvokeGazeTargetItem.cs" />
     <Compile Include="LegacyGazePointerGazeMovedEventArgs.cs" />
     <Compile Include="NonInvokeGazeTargetItem.cs" />
