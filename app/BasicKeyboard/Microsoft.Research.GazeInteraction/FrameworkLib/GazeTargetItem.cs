@@ -349,7 +349,7 @@ namespace FrameworkLib
                 {
                     if (_feedbackPopup == null)
                     {
-                        _feedbackPopup = GazePointer.Instance.GazeFeedbackPopupFactory.Get();
+                        _feedbackPopup = GazeInput.GazePointerInstance.GazeFeedbackPopupFactory.Get();
                     }
 
                     var control = TargetElement as FrameworkElement;
@@ -398,7 +398,7 @@ namespace FrameworkLib
                 {
                     if (_feedbackPopup != null)
                     {
-                        GazePointer.Instance.GazeFeedbackPopupFactory.Return(_feedbackPopup);
+                        GazeInput.GazePointerInstance.GazeFeedbackPopupFactory.Return(_feedbackPopup);
                         _feedbackPopup = null;
                     }
                 }

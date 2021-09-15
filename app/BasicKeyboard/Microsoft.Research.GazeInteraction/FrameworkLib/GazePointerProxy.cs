@@ -106,12 +106,12 @@ namespace FrameworkLib
                     if (value)
                     {
                         // ...count the element in...
-                        GazePointer.Instance.AddRoot(_uniqueId);
+                        GazeInput.GazePointerInstance.AddRoot(_uniqueId);
                     }
                     else
                     {
                         // ...otherwise count the element out.
-                        GazePointer.Instance.RemoveRoot(_uniqueId);
+                        GazeInput.GazePointerInstance.RemoveRoot(_uniqueId);
                     }
                 }
             }
@@ -135,7 +135,7 @@ namespace FrameworkLib
                 if (_isEnabled)
                 {
                     // ...we can now be counted as actively enabled.
-                    GazePointer.Instance.AddRoot(_uniqueId);
+                    GazeInput.GazePointerInstance.AddRoot(_uniqueId);
                 }
             }
             else
@@ -160,7 +160,7 @@ namespace FrameworkLib
                 if (_isEnabled)
                 {
                     // ...we no longer count as being actively enabled (because we have fallen out the visual tree).
-                    GazePointer.Instance.RemoveRoot(_uniqueId);
+                    GazeInput.GazePointerInstance.RemoveRoot(_uniqueId);
                 }
             }
             else

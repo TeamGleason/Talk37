@@ -85,7 +85,7 @@ namespace FrameworkLib
                 }
                 else
                 {
-                    item = GazePointer.Instance.NonInvokeGazeTargetItem;
+                    item = GazeInput.GazePointerInstance.NonInvokeGazeTargetItem;
                 }
 
                 element.SetValue(_gazeTargetItemProperty, item);

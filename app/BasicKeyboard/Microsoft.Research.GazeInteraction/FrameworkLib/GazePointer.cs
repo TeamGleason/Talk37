@@ -180,9 +180,8 @@ namespace FrameworkLib
         /// </summary>
         public bool IsAlwaysActivated { get; set; }
 
-        private static ThreadLocal<GazePointer> _instance = new ThreadLocal<GazePointer>(() => new GazePointer(GazeDevice.Instance));
-
-        internal static GazePointer Instance => _instance.Value;
+        internal static GazePointer FactoryMethod() =>
+            new GazePointer(GazeDevice.Instance);
 
         internal void AddRoot(int proxyId)
         {

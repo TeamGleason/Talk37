@@ -5,6 +5,7 @@
 using StandardLib;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 #if WINDOWS_UWP
 using Windows.UI.Xaml;
 #else
@@ -42,8 +43,8 @@ namespace FrameworkLib
         /// </summary>
         public static Interaction Interaction
         {
-            get => GazePointer.Instance.Interaction;
-            set => GazePointer.Instance.Interaction = value;
+            get => GazePointerInstance.Interaction;
+            set => GazePointerInstance.Interaction = value;
         }
 
         /// <summary>
@@ -67,7 +68,7 @@ namespace FrameworkLib
                 new PropertyMetadata(true, new PropertyChangedCallback(OnIsCursorVisibleChanged)));
 
         private static void OnIsCursorVisibleChanged(DependencyObject ob, DependencyPropertyChangedEventArgs args) =>
-            GazePointer.Instance.IsCursorVisible = (bool)args.NewValue;
+            GazePointerInstance.IsCursorVisible = (bool)args.NewValue;
 
         /// <summary>
         /// Gets a boolean indicating whether cursor is shown while user is looking at the school.
@@ -210,7 +211,7 @@ namespace FrameworkLib
             new PropertyMetadata(false, new PropertyChangedCallback(OnIsSwitchEnabledChanged)));
 
         private static void OnIsSwitchEnabledChanged(DependencyObject ob, DependencyPropertyChangedEventArgs args) =>
-            GazePointer.Instance.IsSwitchEnabled = (bool)args.NewValue;
+            GazePointerInstance.IsSwitchEnabled = (bool)args.NewValue;
 
         /// <summary>
         /// Gets a boolean indicating whether gaze plus switch is enabled.
@@ -237,15 +238,15 @@ namespace FrameworkLib
         /// <summary>
         /// Gets a value indicating whether a gaze input device is available, and hence whether there is any possibility of gaze events occurring in the application.
         /// </summary>
-        public static bool IsDeviceAvailable => GazePointer.Instance.IsDeviceAvailable;
+        public static bool IsDeviceAvailable => GazePointerInstance.IsDeviceAvailable;
 
         /// <summary>
         /// Event triggered whenever IsDeviceAvailable changes value.
         /// </summary>
         public static event EventHandler IsDeviceAvailableChanged
         {
-            add => GazePointer.Instance.IsDeviceAvailableChanged += value;
-            remove => GazePointer.Instance.IsDeviceAvailableChanged -= value;
+            add => GazePointerInstance.IsDeviceAvailableChanged += value;
+            remove => GazePointerInstance.IsDeviceAvailableChanged -= value;
         }
 
         /// <summary>
@@ -254,6 +255,12 @@ namespace FrameworkLib
         /// instance is tied to the UI thread.
         /// </summary>
         public static void LoadSettings(IDictionary<string, object> settings) =>
-            GazePointer.Instance.LoadSettings(settings);
+            GazePointerInstance.LoadSettings(settings);
+
+        internal static Func<GazePointer> GazePointerFactory { get; set; } = GazePointer.FactoryMethod;
+
+        private static ThreadLocal<GazePointer> _instance = new ThreadLocal<GazePointer>(GazePointerFactory);
+
+        internal static GazePointer GazePointerInstance => _instance.Value;
     }
 }
