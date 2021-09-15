@@ -5,6 +5,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 #if WINDOWS_UWP
+using System.Linq;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls.Primitives;

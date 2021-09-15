@@ -4,7 +4,11 @@
 
 using System;
 
+#if WINDOWS_UWP
+namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
+#else
 namespace FrameworkLib
+#endif
 {
     internal struct GazeHistoryItem
     {
