@@ -12,11 +12,7 @@ using Windows.UI.Xaml;
 using System.Windows;
 #endif
 
-#if WINDOWS_UWP
 namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
-#else
-namespace FrameworkLib
-#endif
 {
     /// <summary>
     /// Static class primarily providing access to attached properties controlling gaze behavior.

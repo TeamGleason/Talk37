@@ -2,9 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
-#if WINDOWS_UWP
 using Microsoft.Toolkit.Uwp.Input.GazeInteraction.Device;
-#endif
 using StandardLib;
 using System;
 using System.Collections.Generic;
@@ -18,11 +16,7 @@ using Windows.System;
 using System.Windows.Threading;
 #endif
 
-#if WINDOWS_UWP
 namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
-#else
-namespace FrameworkLib
-#endif
 {
     /// <summary>
     /// Class of singleton object coordinating gaze input.

@@ -14,11 +14,7 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Media;
 #endif
 
-#if WINDOWS_UWP
 namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
-#else
-namespace FrameworkLib
-#endif
 {
     /// <summary>
     /// Helper class that helps track which UIElements in the visual tree are enabled.

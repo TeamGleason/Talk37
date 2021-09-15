@@ -5,11 +5,7 @@ using Windows.UI.Xaml;
 using System.Windows;
 #endif
 
-#if WINDOWS_UWP
 namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
-#else
-namespace FrameworkLib
-#endif
 {
     class InvokeGazeTargetItem : GazeTargetItem
     {

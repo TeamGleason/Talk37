@@ -14,11 +14,7 @@ using System.Windows.Automation.Peers;
 using System.Windows.Automation.Provider;
 #endif
 
-#if WINDOWS_UWP
 namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
-#else
-namespace FrameworkLib
-#endif
 {
     static class GazeTargetFactory
     {

@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 
-namespace FrameworkLib
+namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction.Device
 {
     internal class LegacyGazePointerGazeMovedEventArgs : GazeMovedEventArgs
     {

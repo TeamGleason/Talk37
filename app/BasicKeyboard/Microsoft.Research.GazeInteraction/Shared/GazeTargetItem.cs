@@ -27,11 +27,7 @@ using System.Windows.Media;
 using System.Windows.Shapes;
 #endif
 
-#if WINDOWS_UWP
 namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
-#else
-namespace FrameworkLib
-#endif
 {
     internal abstract class GazeTargetItem
     {

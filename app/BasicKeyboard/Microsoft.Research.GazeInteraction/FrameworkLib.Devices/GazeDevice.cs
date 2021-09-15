@@ -6,7 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Threading;
 
-namespace FrameworkLib
+namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction.Device
 {
     public class GazeDevice : IGazeDevice
     {
