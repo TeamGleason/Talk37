@@ -173,11 +173,6 @@ namespace FrameworkLib
             get { return _gazeCursor.IsCursorVisible; }
             set { _gazeCursor.IsCursorVisible = value; }
         }
-        internal int CursorRadius
-        {
-            get { return _gazeCursor.CursorRadius; }
-            set { _gazeCursor.CursorRadius = value; }
-        }
 
         internal bool IsSwitchEnabled { get; set; }
 

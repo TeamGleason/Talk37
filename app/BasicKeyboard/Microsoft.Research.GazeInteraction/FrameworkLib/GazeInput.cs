@@ -44,14 +44,6 @@ namespace FrameworkLib
             GazePointer.Instance.IsCursorVisible = (bool)args.NewValue;
 
         /// <summary>
-        /// Gets the CursorRadius dependency property
-        /// </summary>
-        public static DependencyProperty CursorRadiusProperty { get; } = DependencyProperty.RegisterAttached("CursorRadius", typeof(int), typeof(GazeInput), new PropertyMetadata(6, new PropertyChangedCallback(OnCursorRadiusChanged)));
-
-        private static void OnCursorRadiusChanged(DependencyObject ob, DependencyPropertyChangedEventArgs args) =>
-            GazePointer.Instance.CursorRadius = (int)args.NewValue;
-
-        /// <summary>
         /// Gets the FixationDuration dependency property
         /// </summary>
         public static DependencyProperty FixationDurationProperty { get; } = DependencyProperty.RegisterAttached("FixationDuration", typeof(TimeSpan), typeof(GazeInput), new PropertyMetadata(UnsetTimeSpan));
@@ -114,13 +106,6 @@ namespace FrameworkLib
             (bool)element.GetValue(IsCursorVisibleProperty);
 
         /// <summary>
-        /// Gets the size of the gaze cursor radius.
-        /// </summary>
-        /// <returns>The size of the gaze cursor radius.</returns>
-        public static int GetCursorRadius(UIElement element) =>
-            (int)element.GetValue(CursorRadiusProperty);
-
-        /// <summary>
         /// Gets the duration for the control to transition from the Enter state to the Fixation state. At this point, a StateChanged event is fired with PointerState set to Fixation. This event should be used to control the earliest visual feedback the application needs to provide to the user about the gaze location. The default is 350ms.
         /// </summary>
         /// <returns>Duration for the control to transition from the Enter state to the Fixation state.</returns>
@@ -180,12 +165,6 @@ namespace FrameworkLib
         /// </summary>
         public static void SetIsCursorVisible(UIElement element, bool value) =>
             element.SetValue(IsCursorVisibleProperty, value);
-
-        /// <summary>
-        /// Sets the size of the gaze cursor radius.
-        /// </summary>
-        public static void SetCursorRadius(UIElement element, int value) =>
-            element.SetValue(CursorRadiusProperty, value);
 
         /// <summary>
         /// Sets the duration for the control to transition from the Enter state to the Fixation state. At this point, a StateChanged event is fired with PointerState set to Fixation. This event should be used to control the earliest visual feedback the application needs to provide to the user about the gaze location. The default is 350ms.
