@@ -81,7 +81,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
                 }
                 else
                 {
-                    item = GazeInput.GazePointerInstance.NonInvokeGazeTargetItem;
+                    item = null;
                 }
 
                 element.SetValue(_gazeTargetItemProperty, item);

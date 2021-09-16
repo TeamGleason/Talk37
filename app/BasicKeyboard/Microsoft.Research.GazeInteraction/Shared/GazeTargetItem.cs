@@ -171,14 +171,9 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             return parent as UIElement;
         }
 
-        internal static GazeTargetItem GetHitTarget(GazePointer gazePointer, PointF gazePoint)
+        internal static GazeTargetItem GetHitTarget(PointF gazePoint)
         {
             GazeTargetItem invokable = null;
-
-            if (!gazePointer.IsAlwaysActivated)
-            {
-                invokable = gazePointer.NonInvokeGazeTargetItem;
-            }
 
 #if WINDOWS_UWP
             switch (Window.Current.CoreWindow.ActivationMode)
@@ -188,7 +183,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 #endif
             var gazePointD = new Point(gazePoint.X, gazePoint.Y);
 #if WINDOWS_UWP
-                    var elements = VisualTreeHelper.FindElementsInHostCoordinates(gazePointD, null, false);
+            var elements = VisualTreeHelper.FindElementsInHostCoordinates(gazePointD, null, false);
 #else
             var window = Application.Current.MainWindow;
             var pointFromScreen = window.PointFromScreen(new Point(gazePoint.X, gazePoint.Y));
@@ -229,7 +224,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             {
                 invokable = GazeTargetFactory.GetOrCreate(element);
 
-                while (element != null && !invokable.IsInvokable)
+                while (element != null && invokable==null)
                 {
                     element = VisualTreeHelper.GetParent(element) as UIElement;
 
@@ -240,11 +235,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
                 }
             }
 
-            if (element == null || !invokable.IsInvokable)
-            {
-                invokable = gazePointer.NonInvokeGazeTargetItem;
-            }
-            else
+            if (element != null && invokable!=null)
             {
                 Interaction interaction;
                 do
@@ -264,7 +255,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 
                 if (interaction != Interaction.Enabled)
                 {
-                    invokable = gazePointer.NonInvokeGazeTargetItem;
+                    invokable = null;
                 }
             }
 #if WINDOWS_UWP

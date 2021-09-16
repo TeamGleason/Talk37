@@ -124,7 +124,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
         }
         private Interaction _interaction = Interaction.Disabled;
 
-        internal GazeTargetItem NonInvokeGazeTargetItem { get; }
+        private readonly GazeTargetItem NonInvokeGazeTargetItem = new NonInvokeGazeTargetItem();
 
         internal GazeFeedbackPopupFactory GazeFeedbackPopupFactory { get; } = new GazeFeedbackPopupFactory();
 
@@ -167,11 +167,6 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
         }
 
         internal bool IsSwitchEnabled { get; set; }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether this GazePointer should always be activated or not.
-        /// </summary>
-        public bool IsAlwaysActivated { get; set; }
 
         internal static GazePointer FactoryMethod() =>
             new GazePointer(GazeDevice.Instance);
@@ -332,7 +327,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             // subsequently needed.
 
             // create GazeHistoryItem to deal with this sample
-            var target = GazeTargetItem.GetHitTarget(this, gazePoint);
+            var target = GazeTargetItem.GetHitTarget(gazePoint) ?? NonInvokeGazeTargetItem;
             GazeHistoryItem historyItem = default;
             historyItem.HitTarget = target;
             historyItem.Timestamp = timestamp;

@@ -222,13 +222,10 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             element.SetValue(IsSwitchEnabledProperty, value);
 
         /// <summary>
-        /// Invoke the default action of the specified UIElement.
+        /// When in switch mode, will issue a click on the currently fixated element
         /// </summary>
-        public static void Invoke(UIElement element)
-        {
-            var item = GazeTargetFactory.GetOrCreate(element);
-            item.Invoke();
-        }
+        public static void Click() =>
+            GazePointerInstance.Click();
 
         /// <summary>
         /// Gets a value indicating whether a gaze input device is available, and hence whether there is any possibility of gaze events occurring in the application.
