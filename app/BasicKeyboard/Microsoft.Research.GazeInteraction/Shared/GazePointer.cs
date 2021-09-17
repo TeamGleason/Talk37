@@ -450,7 +450,9 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
                 foreach (var point in intermediatePoints)
                 {
                     _gazeCursor.IsGazeEntered = true;
-                    ProcessGazePoint(point.Timestamp, point.Position);
+
+                    var location = Filter.Update(point.Timestamp, point.Position);
+                    ProcessGazePoint(point.Timestamp, location);
                 }
             }
         }
@@ -461,21 +463,18 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             _gazeCursor.IsGazeEntered = false;
         }
 
-        private void ProcessGazePoint(TimeSpan timestamp, PointF position)
+        private void ProcessGazePoint(TimeSpan timestamp, PointF location)
         {
-            var ea = new GazeFilterArgs(position, timestamp);
+            _gazeCursor.Position = location;
 
-            var fa = Filter.Update(ea);
-            _gazeCursor.Position = fa.Location;
-
-            var targetItem = ResolveHitTarget(fa.Location, fa.Timestamp);
+            var targetItem = ResolveHitTarget(location, timestamp);
             Debug.Assert(targetItem != null, "targetItem is null when processing gaze point");
 
-            // Debug.WriteLine("ProcessGazePoint. [{0}, {1}], {2}", (int)fa.Location.X, (int)fa.Location.Y, fa.Timestamp);
+            // Debug.WriteLine("ProcessGazePoint. [{0}, {1}], {2}", (int)location.X, (int)location.Y, timestamp);
 
             // check to see if any element in _hitTargetTimes needs an exit event fired.
             // this ensures that all exit events are fired before enter event
-            CheckIfExiting(fa.Timestamp);
+            CheckIfExiting(timestamp);
 
             PointerState nextState = (PointerState)((int)targetItem.ElementState + 1);
 
@@ -535,7 +534,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             targetItem.GiveFeedback();
 
             _eyesOffTimer.Start();
-            _lastTimestamp = fa.Timestamp;
+            _lastTimestamp = timestamp;
         }
 
         private void OnEyesOff(object sender, object ea)

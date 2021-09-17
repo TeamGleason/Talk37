@@ -2,7 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using System;
 using System.Collections.Generic;
+using System.Drawing;
 
 namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 {
@@ -10,7 +12,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
     // and returns filtered output
     public interface IGazeFilter
     {
-        GazeFilterArgs Update(GazeFilterArgs args);
+        PointF Update(TimeSpan timestamp, PointF location);
 
         void LoadSettings(IDictionary<string, object> settings);
     }

@@ -2,7 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using System;
 using System.Collections.Generic;
+using System.Drawing;
 
 namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 {
@@ -10,12 +12,12 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
     // use as a default filter.
     public class NullFilter : IGazeFilter
     {
-        public virtual GazeFilterArgs Update(GazeFilterArgs args)
+        PointF IGazeFilter.Update(TimeSpan timestamp, PointF location)
         {
-            return args;
+            return location;
         }
 
-        public virtual void LoadSettings(IDictionary<string, object> settings)
+        void IGazeFilter.LoadSettings(IDictionary<string, object> settings)
         {
         }
     }

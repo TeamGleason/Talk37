@@ -35,17 +35,17 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             VelocityCutoff = ONEEUROFILTER_DEFAULT_VELOCITY_CUTOFF;
         }
 
-        public virtual GazeFilterArgs Update(GazeFilterArgs args)
+        PointF IGazeFilter.Update(TimeSpan timestamp, PointF location)
         {
             if (_lastTimestamp == TimeSpan.Zero)
             {
-                _lastTimestamp = args.Timestamp;
-                _pointFilter = new LowpassFilter(args.Location);
+                _lastTimestamp = timestamp;
+                _pointFilter = new LowpassFilter(location);
                 _deltaFilter = new LowpassFilter(default);
-                return new GazeFilterArgs(args.Location, args.Timestamp);
+                return location;
             }
 
-            var gazePoint = args.Location;
+            var gazePoint = location;
 
             // Reducing _beta increases lag. Increasing beta decreases lag and improves response time
             // But a really high value of beta also contributes to jitter
@@ -57,8 +57,8 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             var cutoff = new PointF(cf, cf);
 
             // determine sampling frequency based on last time stamp
-            float samplingFrequency = 100000000.0f / Math.Max(1, (args.Timestamp - _lastTimestamp).Ticks);
-            _lastTimestamp = args.Timestamp;
+            float samplingFrequency = 100000000.0f / Math.Max(1, (timestamp - _lastTimestamp).Ticks);
+            _lastTimestamp = timestamp;
 
             // calculate change in distance...
             PointF deltaDistance;
@@ -90,11 +90,10 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             PointF filteredPoint = _pointFilter.Update(gazePoint, distanceAlpha);
 
             // compute the new args
-            var fa = new GazeFilterArgs(filteredPoint, args.Timestamp);
-            return fa;
+            return filteredPoint;
         }
 
-        public virtual void LoadSettings(IDictionary<string, object> settings)
+        void IGazeFilter.LoadSettings(IDictionary<string, object> settings)
         {
             if (settings.ContainsKey("OneEuroFilter.Beta"))
             {
