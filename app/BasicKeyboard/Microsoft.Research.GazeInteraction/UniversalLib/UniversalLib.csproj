@@ -123,6 +123,10 @@
     <Compile Include="..\Shared\GazeCursor.cs">
       <Link>GazeCursor.cs</Link>
     </Compile>
+    <Compile Include="..\Shared\GazeFeedbackControl.xaml.cs">
+      <Link>GazeFeedbackControl.xaml.cs</Link>
+      <DependentUpon>GazeFeedbackControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="..\Shared\GazeFeedbackPopupFactory.cs">
       <Link>GazeFeedbackPopupFactory.cs</Link>
     </Compile>
@@ -167,6 +171,13 @@
       <Project>{d531766a-668d-4aab-9f1a-6e3a84281d98}</Project>
       <Name>UniversalLib.Devices</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="..\Shared\GazeFeedbackControl.xaml">
+      <Link>GazeFeedbackControl.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

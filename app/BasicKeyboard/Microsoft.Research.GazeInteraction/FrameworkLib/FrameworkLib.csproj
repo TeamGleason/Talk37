@@ -7,7 +7,7 @@
     <ProjectGuid>{B0C5978F-35FC-4C5F-8355-E28A952D4047}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FrameworkLib</RootNamespace>
+    <RootNamespace>Microsoft.Toolkit.Uwp.Input.GazeInteraction</RootNamespace>
     <AssemblyName>FrameworkLib</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -38,6 +38,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,6 +52,10 @@
   <ItemGroup>
     <Compile Include="..\Shared\GazeCursor.cs">
       <Link>GazeCursor.cs</Link>
+    </Compile>
+    <Compile Include="..\Shared\GazeFeedbackControl.xaml.cs">
+      <Link>GazeFeedbackControl.xaml.cs</Link>
+      <DependentUpon>GazeFeedbackControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="..\Shared\GazeFeedbackPopupFactory.cs">
       <Link>GazeFeedbackPopupFactory.cs</Link>
@@ -90,6 +95,13 @@
       <Project>{60032A09-64C1-4980-A36C-5BAF968C7F5B}</Project>
       <Name>StandardLib</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="..\Shared\GazeFeedbackControl.xaml">
+      <Link>GazeFeedbackControl.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

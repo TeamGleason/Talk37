@@ -5,10 +5,8 @@
 using System.Collections.Generic;
 #if WINDOWS_UWP
 using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Shapes;
 #else
 using System.Windows.Controls.Primitives;
-using System.Windows.Shapes;
 #endif
 
 namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
@@ -20,34 +18,24 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
         public Popup Get()
         {
             Popup popup;
-            Rectangle rectangle;
 
             if (_cache.Count != 0)
             {
                 popup = _cache[0];
                 _cache.RemoveAt(0);
-
-                rectangle = popup.Child as Rectangle;
             }
             else
             {
-                popup = new Popup();
-
-                rectangle = new Rectangle
+                popup = new Popup
                 {
-                    IsHitTestVisible = false
-                };
-
 #if WINDOWS_UWP
 #else
-                popup.AllowsTransparency = true;
-                popup.Placement = PlacementMode.Absolute;
+                    AllowsTransparency = true,
+                    Placement = PlacementMode.Absolute,
 #endif
-
-                popup.Child = rectangle;
+                    Child = new GazeFeedbackControl()
+                };
             }
-
-            rectangle.StrokeThickness = GazeTargetItem.GazeInput_DwellFeedbackStrokeThickness;
 
             return popup;
         }

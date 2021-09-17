@@ -7,23 +7,18 @@ using PointF = System.Drawing.PointF;
 using System.Linq;
 #if WINDOWS_UWP
 using Windows.Foundation;
-using Windows.UI;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Automation.Peers;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Shapes;
-using Point = Windows.Foundation.Point;
-using Size = Windows.Foundation.Size;
 #else
 using System.Windows;
 using System.Windows.Automation.Peers;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Media;
-using System.Windows.Shapes;
 #endif
 
 namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
@@ -35,14 +30,6 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
         private double _scalingX = 1;
         private double _scalingY = 1;
 #endif
-
-        internal static readonly Brush GazeInput_DwellFeedbackEnterBrush = null;
-
-        internal static readonly Brush GazeInput_DwellFeedbackProgressBrush = new SolidColorBrush(Colors.Green);
-
-        internal static readonly Brush GazeInput_DwellFeedbackCompleteBrush = new SolidColorBrush(Colors.Red);
-
-        internal const double GazeInput_DwellFeedbackStrokeThickness = 2;
 
         internal TimeSpan DetailedTime { get; set; }
 
@@ -358,31 +345,16 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
                     controlRightBottom = new Point(controlRightBottom.X * _scalingX, controlRightBottom.Y * _scalingY);
                     var bounds = new Rect(controlLeftTop, controlRightBottom);
 #endif
-                    var rectangle = (Rectangle)_feedbackPopup.Child;
+                    var feedback = (GazeFeedbackControl)_feedbackPopup.Child;
+                    _feedbackPopup.HorizontalOffset = bounds.Left;
+                    _feedbackPopup.VerticalOffset = bounds.Top;
+                    feedback.Width = bounds.Width;
+                    feedback.Height = bounds.Height;
 
-                    if (state == DwellProgressState.Progressing)
-                    {
-                        var progress = ((double)(ElapsedTime - _prevStateTime).Ticks) / (_nextStateTime - _prevStateTime).Ticks;
-                        if (progress >= 0 && progress < 1)
-                        {
-                            rectangle.Stroke = GazeInput_DwellFeedbackProgressBrush;
-                            rectangle.Width = (1 - progress) * bounds.Width;
-                            rectangle.Height = (1 - progress) * bounds.Height;
-
-                            _feedbackPopup.HorizontalOffset = bounds.Left + (progress * bounds.Width / 2);
-                            _feedbackPopup.VerticalOffset = bounds.Top + (progress * bounds.Height / 2);
-                        }
-                    }
-                    else
-                    {
-                        rectangle.Stroke = state == DwellProgressState.Fixating ?
-                            GazeInput_DwellFeedbackEnterBrush : GazeInput_DwellFeedbackCompleteBrush;
-                        rectangle.Width = bounds.Width;
-                        rectangle.Height = bounds.Height;
-
-                        _feedbackPopup.HorizontalOffset = bounds.Left;
-                        _feedbackPopup.VerticalOffset = bounds.Top;
-                    }
+                    var feedbackProgress = state == DwellProgressState.Progressing ?
+                        ((double)(ElapsedTime - _prevStateTime).Ticks) / (_nextStateTime - _prevStateTime).Ticks : 
+                        0.0;
+                    feedback.SetState(state, feedbackProgress);
 
                     _feedbackPopup.IsOpen = true;
                 }
