@@ -13,7 +13,7 @@ using System.Drawing;
 
 namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 {
-    internal class OneEuroFilter : IGazeFilter
+    public class OneEuroFilter : IGazeFilter
     {
         private const float ONEEUROFILTER_DEFAULT_BETA = 5.0f;
         private const float ONEEUROFILTER_DEFAULT_CUTOFF = 0.1f;
