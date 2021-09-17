@@ -23,15 +23,15 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
     public class GazePointer
     {
         // units in microseconds
-        private static readonly TimeSpan DEFAULT_FIXATION_DELAY = new TimeSpan(3500000);
-        private static readonly TimeSpan DEFAULT_DWELL_DELAY = new TimeSpan(4000000);
-        private static readonly TimeSpan DEFAULT_DWELL_REPEAT_DELAY = new TimeSpan(4000000);
-        private static readonly TimeSpan DEFAULT_REPEAT_DELAY = new TimeSpan(4000000);
-        private static readonly TimeSpan DEFAULT_THRESHOLD_DELAY = new TimeSpan(500000);
-        private static readonly TimeSpan DEFAULT_MAX_HISTORY_DURATION = new TimeSpan(30000000);
-        private static readonly TimeSpan MAX_SINGLE_SAMPLE_DURATION = new TimeSpan(1000000);
+        private static readonly TimeSpan DEFAULT_FIXATION_DELAY = TimeSpan.FromMilliseconds(350);
+        private static readonly TimeSpan DEFAULT_DWELL_DELAY = TimeSpan.FromMilliseconds(400);
+        private static readonly TimeSpan DEFAULT_DWELL_REPEAT_DELAY = TimeSpan.FromMilliseconds(400);
+        private static readonly TimeSpan DEFAULT_REPEAT_DELAY = TimeSpan.FromMilliseconds(400);
+        private static readonly TimeSpan DEFAULT_THRESHOLD_DELAY = TimeSpan.FromMilliseconds(50);
+        private static readonly TimeSpan DEFAULT_MAX_HISTORY_DURATION = TimeSpan.FromSeconds(3);
+        private static readonly TimeSpan MAX_SINGLE_SAMPLE_DURATION = TimeSpan.FromMilliseconds(100);
 
-        private static readonly TimeSpan GAZE_IDLE_TIME = new TimeSpan(250000000);
+        private static readonly TimeSpan GAZE_IDLE_TIME = TimeSpan.FromSeconds(25);
 
         private readonly IGazeDevice _device;
 
