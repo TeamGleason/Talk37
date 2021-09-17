@@ -25,12 +25,6 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 {
     internal abstract class GazeTargetItem
     {
-#if WINDOWS_UWP
-#else
-        private double _scalingX = 1;
-        private double _scalingY = 1;
-#endif
-
         internal TimeSpan DetailedTime { get; set; }
 
         internal TimeSpan OverflowTime { get; set; }
@@ -46,21 +40,14 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 
         internal PointerState ElementState { get; set; }
 
-        private UIElement TargetElement { get; set; }
+        private FrameworkElement TargetElement { get; set; }
 
         internal int RepeatCount { get; set; }
 
         internal int MaxDwellRepeatCount { get; set; }
 
-        internal GazeTargetItem(UIElement target)
+        internal GazeTargetItem(FrameworkElement target)
         {
-#if WINDOWS_UWP
-#else
-            var screenRect = System.Windows.Forms.Screen.PrimaryScreen;
-            _scalingX = (float)(SystemParameters.PrimaryScreenWidth / screenRect.Bounds.Width);
-            _scalingY = (float)(SystemParameters.PrimaryScreenHeight / screenRect.Bounds.Height);
-#endif
-
             TargetElement = target;
         }
 
@@ -328,35 +315,13 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
                 {
                     if (_feedbackPopup == null)
                     {
-                        _feedbackPopup = GazeInput.GazePointerInstance.GazeFeedbackPopupFactory.Get();
+                        _feedbackPopup = GazeInput.GazePointerInstance.GazeFeedbackPopupFactory.Get(TargetElement);
                     }
-
-                    var control = TargetElement as FrameworkElement;
-
-#if WINDOWS_UWP
-                    var transform = control.TransformToVisual(_feedbackPopup);
-                    var bounds = transform.TransformBounds(new Rect(
-                        new Point(0, 0),
-                        new Size((float)control.ActualWidth, (float)control.ActualHeight)));
-#else
-                    var controlLeftTop = control.PointToScreen(new Point(0, 0));
-                    var controlRightBottom = control.PointToScreen(new Point(control.ActualWidth, control.ActualHeight));
-                    controlLeftTop = new Point(controlLeftTop.X * _scalingX, controlLeftTop.Y * _scalingY);
-                    controlRightBottom = new Point(controlRightBottom.X * _scalingX, controlRightBottom.Y * _scalingY);
-                    var bounds = new Rect(controlLeftTop, controlRightBottom);
-#endif
-                    var feedback = (GazeFeedbackControl)_feedbackPopup.Child;
-                    _feedbackPopup.HorizontalOffset = bounds.Left;
-                    _feedbackPopup.VerticalOffset = bounds.Top;
-                    feedback.Width = bounds.Width;
-                    feedback.Height = bounds.Height;
 
                     var feedbackProgress = state == DwellProgressState.Progressing ?
                         ((double)(ElapsedTime - _prevStateTime).Ticks) / (_nextStateTime - _prevStateTime).Ticks : 
                         0.0;
-                    feedback.SetState(state, feedbackProgress);
-
-                    _feedbackPopup.IsOpen = true;
+                    _feedbackPopup.SetState(state, feedbackProgress);
                 }
                 else
                 {
@@ -375,6 +340,6 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
         private TimeSpan _prevStateTime;
         private TimeSpan _nextStateTime;
         private DwellProgressState _notifiedProgressState = DwellProgressState.Idle;
-        private Popup _feedbackPopup;
+        private GazeFeedbackControl _feedbackPopup;
     }
 }

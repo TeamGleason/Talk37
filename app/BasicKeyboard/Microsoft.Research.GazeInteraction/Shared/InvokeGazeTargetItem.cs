@@ -11,7 +11,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
     {
         private readonly Action<UIElement> _action;
 
-        internal InvokeGazeTargetItem(UIElement element, Action<UIElement> action)
+        internal InvokeGazeTargetItem(FrameworkElement element, Action<UIElement> action)
             : base(element)
         {
             _action = action;

@@ -77,7 +77,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 
                 if (action != null)
                 {
-                    item = new InvokeGazeTargetItem(element, action);
+                    item = new InvokeGazeTargetItem((FrameworkElement)element, action);
                 }
                 else
                 {
