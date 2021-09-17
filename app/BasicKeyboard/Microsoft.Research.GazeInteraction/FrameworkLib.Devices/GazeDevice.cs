@@ -11,6 +11,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction.Device
     {
         private readonly IGazeDataProvider _provider;
         private readonly Dispatcher _dispatcher = Dispatcher.CurrentDispatcher;
+        private readonly DispatcherTimer _eyesOffTimer = new DispatcherTimer();
 
         public static GazeDevice Instance => _instance.Value;
         private static ThreadLocal<GazeDevice> _instance = new ThreadLocal<GazeDevice>(() => new GazeDevice());
@@ -20,6 +21,14 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction.Device
             _provider = GazeDataProvider.InitializeGazeDataProvider();
             var task = _provider.CreateProfileAsync();
             task.ContinueWith(OnProfileCreated);
+
+            _eyesOffTimer.Tick += OnEyesOffTimerTick;
+        }
+
+        private void OnEyesOffTimerTick(object sender, EventArgs e)
+        {
+            _eyesOffTimer.Stop();
+            _eyesOff?.Invoke(this, EventArgs.Empty);
         }
 
         private void OnProfileCreated(Task<bool> obj)
@@ -32,6 +41,8 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction.Device
 
         private void OnGazeEvent(object sender, GazeEventArgs e)
         {
+            _eyesOffTimer.Stop();
+
             var handler = _gazeMoved;
             if (handler != null)
             {
@@ -45,9 +56,17 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction.Device
                     Debug.WriteLine($"Exception caught (on exit?): {ex}");
                 }
             }
+
+            _eyesOffTimer.Start();
         }
 
         public bool IsAvailable => true;
+
+        public TimeSpan EyesOffDelay
+        {
+            get => _eyesOffTimer.Interval;
+            set => _eyesOffTimer.Interval = value;
+        }
 
         public event EventHandler IsAvailableChanged
         {
@@ -73,6 +92,13 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction.Device
             add { }
             remove { }
         }
+
+        public event EventHandler EyesOff
+        {
+            add => _eyesOff += value;
+            remove => _eyesOff -= value;
+        }
+        private EventHandler _eyesOff;
 
         public Task<bool> RequestCalibrationAsync()
         {

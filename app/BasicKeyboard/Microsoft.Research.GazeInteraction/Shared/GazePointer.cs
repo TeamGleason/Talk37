@@ -7,13 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
-using System.Threading;
 using System.Threading.Tasks;
-#if WINDOWS_UWP
-using Windows.System;
-#else
-using System.Windows.Threading;
-#endif
 
 namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 {
@@ -141,19 +135,8 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
         // can update the timer interval
         internal TimeSpan EyesOffDelay
         {
-            get
-            {
-                return _eyesOffDelay;
-            }
-
-            set
-            {
-                _eyesOffDelay = value;
-
-                // convert GAZE_IDLE_TIME units (microseconds) to 100-nanosecond units used
-                // by TimeSpan struct
-                _eyesOffTimer.Interval = EyesOffDelay;
-            }
+            get => _device.EyesOffDelay;
+            set => _device.EyesOffDelay = value;
         }
 
         // Pluggable filter for eye tracking sample data. This defaults to being set to the
@@ -220,20 +203,14 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
         private GazePointer(IGazeDevice device)
         {
             _device = device;
+            _device.EyesOff += OnEyesOff;
+
             NonInvokeGazeTargetItem = new NonInvokeGazeTargetItem();
 
             // Default to not filtering sample data
             Filter = new NullFilter();
 
             _gazeCursor = new GazeCursor();
-#if WINDOWS_UWP
-
-            // timer that gets called back if there gaze samples haven't been received in a while
-            _eyesOffTimer = DispatcherQueue.GetForCurrentThread().CreateTimer();
-#else
-            _eyesOffTimer = new DispatcherTimer();
-#endif
-            _eyesOffTimer.Tick += OnEyesOff;
 
             // provide a default of GAZE_IDLE_TIME microseconds to fire eyes off
             EyesOffDelay = GAZE_IDLE_TIME;
@@ -533,29 +510,18 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 
             targetItem.GiveFeedback();
 
-            _eyesOffTimer.Start();
             _lastTimestamp = timestamp;
         }
 
         private void OnEyesOff(object sender, object ea)
         {
-            _eyesOffTimer.Stop();
-
             CheckIfExiting(_lastTimestamp + EyesOffDelay);
             NonInvokeGazeTargetItem.RaiseGazePointerEvent(PointerState.Enter, EyesOffDelay);
         }
 
         private readonly List<int> _roots = new List<int>();
 
-#if WINDOWS_UWP
-        private readonly DispatcherQueueTimer _eyesOffTimer;
-#else
-        private readonly DispatcherTimer _eyesOffTimer;
-#endif
-
         private readonly GazeCursor _gazeCursor;
-
-        private TimeSpan _eyesOffDelay;
 
         // The value is the total time that FrameworkElement has been gazed at
         private List<GazeTargetItem> _activeHitTargetTimes;

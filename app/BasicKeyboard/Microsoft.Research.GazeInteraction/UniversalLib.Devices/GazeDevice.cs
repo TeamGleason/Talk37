@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Windows.Devices.Input.Preview;
+using Windows.System;
 
 namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction.Device
 {
@@ -10,12 +11,19 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction.Device
     {
         private readonly GazeDeviceWatcherPreview _watcher = GazeInputSourcePreview.CreateWatcher();
         private readonly List<GazeDevicePreview> _devices = new List<GazeDevicePreview>();
+        private readonly DispatcherQueueTimer _eyesOffTimer = DispatcherQueue.GetForCurrentThread().CreateTimer();
         private GazeInputSourcePreview _input;
 
         public static GazeDevice Instance => _instance.Value;
         private static ThreadLocal<GazeDevice> _instance = new ThreadLocal<GazeDevice>(() => new GazeDevice());
 
         public bool IsAvailable => _devices.Count != 0;
+
+        public TimeSpan EyesOffDelay
+        {
+            get => _eyesOffTimer.Interval;
+            set => _eyesOffTimer.Interval = value;
+        }
 
         public event EventHandler IsAvailableChanged
         {
@@ -45,11 +53,26 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction.Device
         }
         private EventHandler _gazeExited;
 
+        public event EventHandler EyesOff
+        {
+            add => _eyesOff += value;
+            remove => _eyesOff -= value;
+        }
+        private EventHandler _eyesOff;
+
         private GazeDevice()
         {
             _watcher.Added += OnDeviceAdded;
             _watcher.Removed += OnDeviceRemoved;
             _watcher.Start();
+
+            _eyesOffTimer.Tick += OnEyesOffTimerTick;
+        }
+
+        private void OnEyesOffTimerTick(DispatcherQueueTimer sender, object args)
+        {
+            _eyesOffTimer.Stop();
+            _eyesOff?.Invoke(this, EventArgs.Empty);
         }
 
         ~GazeDevice()
@@ -119,12 +142,16 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction.Device
 
         private void OnGazeMoved(GazeInputSourcePreview sender, GazeMovedPreviewEventArgs args)
         {
+            _eyesOffTimer.Stop();
+
             var handler = _gazeMoved;
             if (handler != null)
             {
                 var wrappedArgs = new UniversalGazeMovedArgs(args);
                 handler.Invoke(this, wrappedArgs);
             }
+
+            _eyesOffTimer.Start();
         }
 
         private void OnGazeExited(GazeInputSourcePreview sender, GazeExitedPreviewEventArgs args)
