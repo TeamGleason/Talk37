@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
-using Microsoft.Toolkit.Uwp.Input.GazeInteraction.Device;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -28,6 +27,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
         private static readonly TimeSpan GAZE_IDLE_TIME = TimeSpan.FromSeconds(25);
 
         private readonly IGazeDevice _device;
+        private readonly Func<PointF, GazeTargetItem> _targetFactory;
 
         /// <summary>
         /// Loads a settings collection into GazePointer.
@@ -151,9 +151,6 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 
         internal bool IsSwitchEnabled { get; set; }
 
-        internal static GazePointer FactoryMethod() =>
-            new GazePointer(GazeDevice.Instance);
-
         internal void AddRoot(int proxyId)
         {
             _roots.Insert(0, proxyId);
@@ -200,10 +197,12 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
         }
         private EventHandler _isDeviceAvailableChanged;
 
-        private GazePointer(IGazeDevice device)
+        internal GazePointer(IGazeDevice device, Func<PointF, GazeTargetItem> targetFactory)
         {
             _device = device;
             _device.EyesOff += OnEyesOff;
+
+            _targetFactory = targetFactory;
 
             NonInvokeGazeTargetItem = new NonInvokeGazeTargetItem();
 
@@ -320,7 +319,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             // subsequently needed.
 
             // create GazeHistoryItem to deal with this sample
-            var target = InvokeGazeTargetItem.GetHitTarget(gazePoint) ?? NonInvokeGazeTargetItem;
+            var target = _targetFactory(gazePoint) ?? NonInvokeGazeTargetItem;
             GazeHistoryItem historyItem = default;
             historyItem.HitTarget = target;
             historyItem.Timestamp = timestamp;

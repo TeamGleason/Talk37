@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using Microsoft.Toolkit.Uwp.Input.GazeInteraction.Device;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -249,7 +250,9 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
         public static void LoadSettings(IDictionary<string, object> settings) =>
             GazePointerInstance.LoadSettings(settings);
 
-        internal static Func<GazePointer> GazePointerFactory { get; set; } = GazePointer.FactoryMethod;
+        internal static Func<GazePointer> GazePointerFactory { get; set; } =
+            () => new GazePointer(GazeDevice.Instance, InvokeGazeTargetItem.GetHitTarget);
+
 
         private static ThreadLocal<GazePointer> _instance = new ThreadLocal<GazePointer>(GazePointerFactory);
 
