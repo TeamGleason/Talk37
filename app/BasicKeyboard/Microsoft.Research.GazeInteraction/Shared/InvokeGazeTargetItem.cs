@@ -6,8 +6,6 @@ using Windows.Foundation;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Automation.Peers;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Media;
 #else
 using System.Windows;
@@ -149,7 +147,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 #endif
             var gazePointD = new Point(gazePoint.X, gazePoint.Y);
 #if WINDOWS_UWP
-            var elements = VisualTreeHelper.FindElementsInHostCoordinates(gazePointD, null, false);
+                    var elements = VisualTreeHelper.FindElementsInHostCoordinates(gazePointD, null, false);
 #else
             var window = Application.Current.MainWindow;
             var pointFromScreen = window.PointFromScreen(new Point(gazePoint.X, gazePoint.Y));
@@ -225,7 +223,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
                 }
             }
 #if WINDOWS_UWP
-                break;
+                    break;
             }
 #endif
 
