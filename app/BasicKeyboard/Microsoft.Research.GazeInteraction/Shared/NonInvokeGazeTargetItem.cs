@@ -12,22 +12,22 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
         {
         }
 
-        internal override bool IsInvokable
+        public override bool IsInvokable
         {
             get { return false; }
         }
 
-        internal override TimeSpan GetElementStateDelay(PointerState pointerState, TimeSpan defaultValue) => TimeSpan.Zero;
+        public override TimeSpan GetElementStateDelay(PointerState pointerState, TimeSpan defaultValue) => TimeSpan.Zero;
 
-        internal override TimeSpan GetElementRepeatDelay(TimeSpan defaultValue) => TimeSpan.Zero;
+        public override TimeSpan GetElementRepeatDelay(TimeSpan defaultValue) => TimeSpan.Zero;
 
-        internal override int GetMaxDwellRepeatCount() => 0;
+        public override int GetMaxDwellRepeatCount() => 0;
 
-        internal override void Invoke()
+        public override void Invoke()
         {
         }
 
-        internal override void ShowFeedback(DwellProgressState state, double progress)
+        protected override void ShowFeedback(DwellProgressState state, double progress)
         {
         }
     }

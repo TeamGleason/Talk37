@@ -97,24 +97,24 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             }
         }
 
-        internal override TimeSpan GetElementStateDelay(PointerState pointerState, TimeSpan defaultValue)
+        public override TimeSpan GetElementStateDelay(PointerState pointerState, TimeSpan defaultValue)
         {
             var property = GetProperty(pointerState);
             var value = GetElementStateDelay(property, defaultValue);
             return value;
         }
 
-        internal override TimeSpan GetElementRepeatDelay(TimeSpan defaultValue)
+        public override TimeSpan GetElementRepeatDelay(TimeSpan defaultValue)
         {
             var value = GetElementStateDelay(GazeInput.RepeatDelayDurationProperty, defaultValue);
             return value;
         }
 
-        internal override int GetMaxDwellRepeatCount() => GazeInput.GetMaxDwellRepeatCount(_element);
+        public override int GetMaxDwellRepeatCount() => GazeInput.GetMaxDwellRepeatCount(_element);
 
-        internal override void Invoke() => _action(_element);
+        public override void Invoke() => _action(_element);
 
-        internal override void ShowFeedback(DwellProgressState state, double progress)
+        protected override void ShowFeedback(DwellProgressState state, double progress)
         {
             if (state != DwellProgressState.Idle)
             {

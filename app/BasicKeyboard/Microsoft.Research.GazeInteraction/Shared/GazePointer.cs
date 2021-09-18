@@ -197,7 +197,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
         }
         private EventHandler _isDeviceAvailableChanged;
 
-        internal GazePointer(IGazeDevice device, Func<PointF, GazeTargetItem> targetFactory)
+        public GazePointer(IGazeDevice device, Func<PointF, GazeTargetItem> targetFactory)
         {
             _device = device;
             _device.EyesOff += OnEyesOff;

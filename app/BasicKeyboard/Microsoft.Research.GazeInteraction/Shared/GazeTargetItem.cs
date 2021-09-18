@@ -6,32 +6,32 @@ using System;
 
 namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 {
-    internal abstract class GazeTargetItem
+    public abstract class GazeTargetItem
     {
-        internal TimeSpan DetailedTime { get; set; }
+        public  TimeSpan DetailedTime { get; set; }
 
-        internal TimeSpan OverflowTime { get; set; }
+        public TimeSpan OverflowTime { get; set; }
 
-        internal TimeSpan ElapsedTime
+        public TimeSpan ElapsedTime
         {
             get { return DetailedTime + OverflowTime; }
         }
 
-        internal TimeSpan NextStateTime { get; set; }
+        public TimeSpan NextStateTime { get; set; }
 
-        internal TimeSpan LastTimestamp { get; set; }
+        public TimeSpan LastTimestamp { get; set; }
 
-        internal PointerState ElementState { get; set; }
+        public PointerState ElementState { get; set; }
 
-        internal int RepeatCount { get; set; }
+        public int RepeatCount { get; set; }
 
-        internal int MaxDwellRepeatCount { get; set; }
+        public int MaxDwellRepeatCount { get; set; }
 
-        internal GazeTargetItem()
+        protected GazeTargetItem()
         {
         }
 
-        internal void RaiseGazePointerEvent(PointerState state, TimeSpan elapsedTime)
+        public void RaiseGazePointerEvent(PointerState state, TimeSpan elapsedTime)
         {
             if (state == PointerState.Dwell)
             {
@@ -39,18 +39,18 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             }
         }
 
-        internal abstract TimeSpan GetElementStateDelay(PointerState pointerState, TimeSpan defaultValue);
+        public abstract TimeSpan GetElementStateDelay(PointerState pointerState, TimeSpan defaultValue);
 
-        internal abstract TimeSpan GetElementRepeatDelay(TimeSpan defaultValue);
+        public abstract TimeSpan GetElementRepeatDelay(TimeSpan defaultValue);
 
-        internal abstract void Invoke();
+        public abstract void Invoke();
 
-        internal virtual bool IsInvokable
+        public virtual bool IsInvokable
         {
             get { return true; }
         }
 
-        internal void Reset(TimeSpan nextStateTime)
+        public void Reset(TimeSpan nextStateTime)
         {
             ElementState = PointerState.PreEnter;
             DetailedTime = TimeSpan.Zero;
@@ -60,9 +60,9 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             MaxDwellRepeatCount = GetMaxDwellRepeatCount();
         }
 
-        internal abstract int GetMaxDwellRepeatCount();
+        public abstract int GetMaxDwellRepeatCount();
 
-        internal void GiveFeedback()
+        public void GiveFeedback()
         {
             if (_nextStateTime != NextStateTime)
             {
@@ -117,7 +117,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             _notifiedProgressState = state;
         }
 
-        internal abstract void ShowFeedback(DwellProgressState state, double progress);
+        protected abstract void ShowFeedback(DwellProgressState state, double progress);
 
         private PointerState _notifiedPointerState = PointerState.Exit;
         private TimeSpan _prevStateTime;

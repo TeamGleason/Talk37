@@ -6,7 +6,7 @@ using System;
 
 namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 {
-    internal struct GazeHistoryItem
+    public struct GazeHistoryItem
     {
         public GazeTargetItem HitTarget { get; set; }
 
