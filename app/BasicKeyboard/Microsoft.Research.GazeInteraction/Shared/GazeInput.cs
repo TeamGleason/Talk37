@@ -257,5 +257,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
         private static ThreadLocal<GazePointer> _instance = new ThreadLocal<GazePointer>(GazePointerFactory);
 
         internal static GazePointer GazePointerInstance => _instance.Value;
+
+        internal static GazeFeedbackPopupFactory GazeFeedbackPopupFactory { get; } = new GazeFeedbackPopupFactory();
     }
 }

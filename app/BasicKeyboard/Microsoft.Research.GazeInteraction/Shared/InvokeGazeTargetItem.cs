@@ -120,7 +120,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             {
                 if (_feedbackPopup == null)
                 {
-                    _feedbackPopup = GazeInput.GazePointerInstance.GazeFeedbackPopupFactory.Get(_element);
+                    _feedbackPopup = GazeInput.GazeFeedbackPopupFactory.Get(_element);
                 }
 
                 _feedbackPopup.SetState(state, progress);
@@ -129,7 +129,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             {
                 if (_feedbackPopup != null)
                 {
-                    GazeInput.GazePointerInstance.GazeFeedbackPopupFactory.Return(_feedbackPopup);
+                    GazeInput.GazeFeedbackPopupFactory.Return(_feedbackPopup);
                     _feedbackPopup = null;
                 }
             }

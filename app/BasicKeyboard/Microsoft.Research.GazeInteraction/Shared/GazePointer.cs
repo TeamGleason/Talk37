@@ -120,8 +120,6 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 
         private readonly GazeTargetItem NonInvokeGazeTargetItem = new NonInvokeGazeTargetItem();
 
-        internal GazeFeedbackPopupFactory GazeFeedbackPopupFactory { get; } = new GazeFeedbackPopupFactory();
-
         internal void Reset()
         {
             _activeHitTargetTimes.Clear();
