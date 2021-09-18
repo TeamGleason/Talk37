@@ -8,7 +8,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 {
     public abstract class GazeTargetItem
     {
-        public  TimeSpan DetailedTime { get; set; }
+        public TimeSpan DetailedTime { get; set; }
 
         public TimeSpan OverflowTime { get; set; }
 

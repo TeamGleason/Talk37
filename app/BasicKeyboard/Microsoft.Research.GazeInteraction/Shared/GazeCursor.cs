@@ -20,7 +20,7 @@ using System.Windows.Shapes;
 
 namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 {
-    internal class GazeCursor
+    internal class GazeCursor : IGazeCursor
     {
         private const int DEFAULT_CURSOR_RADIUS = 5;
         private const bool DEFAULT_CURSOR_VISIBILITY = true;

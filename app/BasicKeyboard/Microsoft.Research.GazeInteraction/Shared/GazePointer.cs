@@ -195,7 +195,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
         }
         private EventHandler _isDeviceAvailableChanged;
 
-        public GazePointer(IGazeDevice device, Func<PointF, GazeTargetItem> targetFactory)
+        public GazePointer(IGazeDevice device, IGazeCursor cursor, Func<PointF, GazeTargetItem> targetFactory)
         {
             _device = device;
             _device.EyesOff += OnEyesOff;
@@ -207,7 +207,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             // Default to not filtering sample data
             Filter = new NullFilter();
 
-            _gazeCursor = new GazeCursor();
+            _gazeCursor = cursor;
 
             // provide a default of GAZE_IDLE_TIME microseconds to fire eyes off
             EyesOffDelay = GAZE_IDLE_TIME;
@@ -534,7 +534,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 
         private readonly List<int> _roots = new List<int>();
 
-        private readonly GazeCursor _gazeCursor;
+        private readonly IGazeCursor _gazeCursor;
 
         // The value is the total time that FrameworkElement has been gazed at
         private List<GazeTargetItem> _activeHitTargetTimes;
