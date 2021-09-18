@@ -17,7 +17,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             get { return false; }
         }
 
-        protected override TimeSpan GetElementStateDelay(PointerState pointerState, TimeSpan defaultValue) => TimeSpan.Zero;
+        internal override TimeSpan GetElementStateDelay(PointerState pointerState, TimeSpan defaultValue) => TimeSpan.Zero;
 
         internal override TimeSpan GetElementRepeatDelay(TimeSpan defaultValue) => TimeSpan.Zero;
 

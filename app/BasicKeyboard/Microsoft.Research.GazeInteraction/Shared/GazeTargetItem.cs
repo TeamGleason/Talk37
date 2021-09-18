@@ -39,23 +39,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             }
         }
 
-        internal TimeSpan GetElementStateDelay(GazePointer gazePointer, PointerState pointerState)
-        {
-            var defaultValue = gazePointer.GetDefaultPropertyValue(pointerState);
-            var ticks = GetElementStateDelay(pointerState, defaultValue);
-
-            switch (pointerState)
-            {
-                case PointerState.Dwell:
-                case PointerState.DwellRepeat:
-                    gazePointer._maxHistoryTime = new TimeSpan(Math.Max(gazePointer._maxHistoryTime.Ticks, 2 * ticks.Ticks));
-                    break;
-            }
-
-            return ticks;
-        }
-
-        protected abstract TimeSpan GetElementStateDelay(PointerState pointerState, TimeSpan defaultValue);
+        internal abstract TimeSpan GetElementStateDelay(PointerState pointerState, TimeSpan defaultValue);
 
         internal abstract TimeSpan GetElementRepeatDelay(TimeSpan defaultValue);
 

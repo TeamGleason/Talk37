@@ -282,6 +282,22 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             }
         }
 
+        private TimeSpan GetElementStateDelay(GazeTargetItem target, PointerState pointerState)
+        {
+            var defaultValue = GetDefaultPropertyValue(pointerState);
+            var ticks = target.GetElementStateDelay(pointerState, defaultValue);
+
+            switch (pointerState)
+            {
+                case PointerState.Dwell:
+                case PointerState.DwellRepeat:
+                    _maxHistoryTime = new TimeSpan(Math.Max(_maxHistoryTime.Ticks, 2 * ticks.Ticks));
+                    break;
+            }
+
+            return ticks;
+        }
+
         private void ActivateGazeTargetItem(GazeTargetItem target)
         {
             if (_activeHitTargetTimes.IndexOf(target) == -1)
@@ -290,7 +306,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 
                 // calculate the time that the first DwellRepeat needs to be fired after. this will be updated every time a DwellRepeat is
                 // fired to keep track of when the next one is to be fired after that.
-                var nextStateTime = target.GetElementStateDelay(this, PointerState.Enter);
+                var nextStateTime = GetElementStateDelay(target, PointerState.Enter);
 
                 target.Reset(nextStateTime);
             }
@@ -366,7 +382,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             for (int index = 0; index < _activeHitTargetTimes.Count; index++)
             {
                 var targetItem = _activeHitTargetTimes[index];
-                var exitDelay = targetItem.GetElementStateDelay(this, PointerState.Exit);
+                var exitDelay = GetElementStateDelay(targetItem, PointerState.Exit);
 
                 var idleDuration = curTimestamp - targetItem.LastTimestamp;
                 if (targetItem.ElementState != PointerState.PreEnter && idleDuration > exitDelay)
@@ -468,7 +484,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
                 {
                     targetItem.ElementState = nextState;
                     nextState = (PointerState)((int)nextState + 1);     // nextState++
-                    targetItem.NextStateTime += targetItem.GetElementStateDelay(this, nextState);
+                    targetItem.NextStateTime += GetElementStateDelay(targetItem, nextState);
 
                     if (targetItem.ElementState == PointerState.Dwell)
                     {
@@ -478,7 +494,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
                 else
                 {
                     // move the NextStateTime by one dwell period, while continuing to stay in Dwell state
-                    targetItem.NextStateTime += targetItem.GetElementStateDelay(this, PointerState.DwellRepeat);
+                    targetItem.NextStateTime += GetElementStateDelay(targetItem, PointerState.DwellRepeat);
                 }
 
                 if (targetItem.ElementState == PointerState.Dwell)
