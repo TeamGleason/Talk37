@@ -304,7 +304,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             // subsequently needed.
 
             // create GazeHistoryItem to deal with this sample
-            var target = GazeTargetItem.GetHitTarget(gazePoint) ?? NonInvokeGazeTargetItem;
+            var target = InvokeGazeTargetItem.GetHitTarget(gazePoint) ?? NonInvokeGazeTargetItem;
             GazeHistoryItem historyItem = default;
             historyItem.HitTarget = target;
             historyItem.Timestamp = timestamp;
@@ -472,7 +472,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 
                     if (targetItem.ElementState == PointerState.Dwell)
                     {
-                        targetItem.NextStateTime += targetItem.GetElementStateDelay(this, GazeInput.RepeatDelayDurationProperty, _defaultDwellRepeatDelay);
+                        targetItem.NextStateTime += targetItem.GetElementRepeatDelay(_defaultDwellRepeatDelay);
                     }
                 }
                 else
