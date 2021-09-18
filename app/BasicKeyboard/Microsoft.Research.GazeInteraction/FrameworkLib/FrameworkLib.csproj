@@ -63,9 +63,6 @@
     <Compile Include="..\Shared\GazeInput.cs">
       <Link>GazeInput.cs</Link>
     </Compile>
-    <Compile Include="..\Shared\GazePointer.cs">
-      <Link>GazePointer.cs</Link>
-    </Compile>
     <Compile Include="..\Shared\GazePointerProxy.cs">
       <Link>GazePointerProxy.cs</Link>
     </Compile>

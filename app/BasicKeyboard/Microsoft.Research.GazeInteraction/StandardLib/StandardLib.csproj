@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <Compile Include="..\Shared\GazeHistoryItem.cs" Link="GazeHistoryItem.cs" />
+    <Compile Include="..\Shared\GazePointer.cs" Link="GazePointer.cs" />
     <Compile Include="..\Shared\GazeTargetItem.cs" Link="GazeTargetItem.cs" />
     <Compile Include="..\Shared\NonInvokeGazeTargetItem.cs" Link="NonInvokeGazeTargetItem.cs" />
   </ItemGroup>

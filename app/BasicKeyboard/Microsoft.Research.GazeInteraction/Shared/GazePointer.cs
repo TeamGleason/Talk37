@@ -96,7 +96,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             return _device.RequestCalibrationAsync();
         }
 
-        internal Interaction Interaction
+        public Interaction Interaction
         {
             get => _interaction;
             set
@@ -141,15 +141,15 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
         // NullFilter which performs no filtering of input samples.
         internal IGazeFilter Filter { get; set; }
 
-        internal bool IsCursorVisible
+        public bool IsCursorVisible
         {
             get { return _gazeCursor.IsCursorVisible; }
             set { _gazeCursor.IsCursorVisible = value; }
         }
 
-        internal bool IsSwitchEnabled { get; set; }
+        public bool IsSwitchEnabled { get; set; }
 
-        internal void AddRoot(int proxyId)
+        public void AddRoot(int proxyId)
         {
             _roots.Insert(0, proxyId);
 
@@ -160,7 +160,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             }
         }
 
-        internal void RemoveRoot(int proxyId)
+        public void RemoveRoot(int proxyId)
         {
             int index;
             if ((index = _roots.IndexOf(proxyId)) != -1)
@@ -180,7 +180,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             }
         }
 
-        internal bool IsDeviceAvailable
+        public bool IsDeviceAvailable
         {
             get
             {
@@ -188,7 +188,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             }
         }
 
-        internal event EventHandler IsDeviceAvailableChanged
+        public event EventHandler IsDeviceAvailableChanged
         {
             add => _isDeviceAvailableChanged += value;
             remove => _isDeviceAvailableChanged -= value;
