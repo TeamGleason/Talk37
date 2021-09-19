@@ -130,14 +130,8 @@
     <Compile Include="..\Shared\GazeFeedbackPopupFactory.cs">
       <Link>GazeFeedbackPopupFactory.cs</Link>
     </Compile>
-    <Compile Include="..\Shared\GazeHistoryItem.cs">
-      <Link>GazeHistoryItem.cs</Link>
-    </Compile>
     <Compile Include="..\Shared\GazeInput.cs">
       <Link>GazeInput.cs</Link>
-    </Compile>
-    <Compile Include="..\Shared\GazePointer.cs">
-      <Link>GazePointer.cs</Link>
     </Compile>
     <Compile Include="..\Shared\GazePointerProxy.cs">
       <Link>GazePointerProxy.cs</Link>
@@ -145,14 +139,8 @@
     <Compile Include="..\Shared\GazeTargetFactory.cs">
       <Link>GazeTargetFactory.cs</Link>
     </Compile>
-    <Compile Include="..\Shared\GazeTargetItem.cs">
-      <Link>GazeTargetItem.cs</Link>
-    </Compile>
     <Compile Include="..\Shared\InvokeGazeTargetItem.cs">
       <Link>InvokeGazeTargetItem.cs</Link>
-    </Compile>
-    <Compile Include="..\Shared\NonInvokeGazeTargetItem.cs">
-      <Link>NonInvokeGazeTargetItem.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\UniversalLib.rd.xml" />
