@@ -97,30 +97,30 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             }
         }
 
-        internal override TimeSpan GetElementStateDelay(PointerState pointerState, TimeSpan defaultValue)
+        protected override TimeSpan GetElementStateDelay(PointerState pointerState, TimeSpan defaultValue)
         {
             var property = GetProperty(pointerState);
             var value = GetElementStateDelay(property, defaultValue);
             return value;
         }
 
-        internal override TimeSpan GetElementRepeatDelay(TimeSpan defaultValue)
+        protected override TimeSpan GetElementRepeatDelay(TimeSpan defaultValue)
         {
             var value = GetElementStateDelay(GazeInput.RepeatDelayDurationProperty, defaultValue);
             return value;
         }
 
-        internal override int GetMaxDwellRepeatCount() => GazeInput.GetMaxDwellRepeatCount(_element);
+        protected override int GetMaxDwellRepeatCount() => GazeInput.GetMaxDwellRepeatCount(_element);
 
-        internal override void Invoke() => _action(_element);
+        protected override void Invoke() => _action(_element);
 
-        internal override void ShowFeedback(DwellProgressState state, double progress)
+        protected override void ShowFeedback(DwellProgressState state, double progress)
         {
             if (state != DwellProgressState.Idle)
             {
                 if (_feedbackPopup == null)
                 {
-                    _feedbackPopup = GazeInput.GazePointerInstance.GazeFeedbackPopupFactory.Get(_element);
+                    _feedbackPopup = GazeInput.GazeFeedbackPopupFactory.Get(_element);
                 }
 
                 _feedbackPopup.SetState(state, progress);
@@ -129,7 +129,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             {
                 if (_feedbackPopup != null)
                 {
-                    GazeInput.GazePointerInstance.GazeFeedbackPopupFactory.Return(_feedbackPopup);
+                    GazeInput.GazeFeedbackPopupFactory.Return(_feedbackPopup);
                     _feedbackPopup = null;
                 }
             }

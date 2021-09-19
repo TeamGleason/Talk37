@@ -96,7 +96,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             return _device.RequestCalibrationAsync();
         }
 
-        internal Interaction Interaction
+        public Interaction Interaction
         {
             get => _interaction;
             set
@@ -120,8 +120,6 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 
         private readonly GazeTargetItem NonInvokeGazeTargetItem = new NonInvokeGazeTargetItem();
 
-        internal GazeFeedbackPopupFactory GazeFeedbackPopupFactory { get; } = new GazeFeedbackPopupFactory();
-
         internal void Reset()
         {
             _activeHitTargetTimes.Clear();
@@ -143,15 +141,15 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
         // NullFilter which performs no filtering of input samples.
         internal IGazeFilter Filter { get; set; }
 
-        internal bool IsCursorVisible
+        public bool IsCursorVisible
         {
             get { return _gazeCursor.IsCursorVisible; }
             set { _gazeCursor.IsCursorVisible = value; }
         }
 
-        internal bool IsSwitchEnabled { get; set; }
+        public bool IsSwitchEnabled { get; set; }
 
-        internal void AddRoot(int proxyId)
+        public void AddRoot(int proxyId)
         {
             _roots.Insert(0, proxyId);
 
@@ -162,7 +160,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             }
         }
 
-        internal void RemoveRoot(int proxyId)
+        public void RemoveRoot(int proxyId)
         {
             int index;
             if ((index = _roots.IndexOf(proxyId)) != -1)
@@ -182,7 +180,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             }
         }
 
-        internal bool IsDeviceAvailable
+        public bool IsDeviceAvailable
         {
             get
             {
@@ -190,14 +188,14 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             }
         }
 
-        internal event EventHandler IsDeviceAvailableChanged
+        public event EventHandler IsDeviceAvailableChanged
         {
             add => _isDeviceAvailableChanged += value;
             remove => _isDeviceAvailableChanged -= value;
         }
         private EventHandler _isDeviceAvailableChanged;
 
-        internal GazePointer(IGazeDevice device, Func<PointF, GazeTargetItem> targetFactory)
+        public GazePointer(IGazeDevice device, IGazeCursor cursor, Func<PointF, GazeTargetItem> targetFactory)
         {
             _device = device;
             _device.EyesOff += OnEyesOff;
@@ -209,7 +207,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             // Default to not filtering sample data
             Filter = new NullFilter();
 
-            _gazeCursor = new GazeCursor();
+            _gazeCursor = cursor;
 
             // provide a default of GAZE_IDLE_TIME microseconds to fire eyes off
             EyesOffDelay = GAZE_IDLE_TIME;
@@ -536,7 +534,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 
         private readonly List<int> _roots = new List<int>();
 
-        private readonly GazeCursor _gazeCursor;
+        private readonly IGazeCursor _gazeCursor;
 
         // The value is the total time that FrameworkElement has been gazed at
         private List<GazeTargetItem> _activeHitTargetTimes;

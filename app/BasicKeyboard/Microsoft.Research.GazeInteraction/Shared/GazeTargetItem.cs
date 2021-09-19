@@ -6,7 +6,7 @@ using System;
 
 namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 {
-    internal abstract class GazeTargetItem
+    public abstract class GazeTargetItem
     {
         internal TimeSpan DetailedTime { get; set; }
 
@@ -27,10 +27,6 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 
         internal int MaxDwellRepeatCount { get; set; }
 
-        internal GazeTargetItem()
-        {
-        }
-
         internal void RaiseGazePointerEvent(PointerState state, TimeSpan elapsedTime)
         {
             if (state == PointerState.Dwell)
@@ -39,13 +35,13 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             }
         }
 
-        internal abstract TimeSpan GetElementStateDelay(PointerState pointerState, TimeSpan defaultValue);
+        internal protected abstract TimeSpan GetElementStateDelay(PointerState pointerState, TimeSpan defaultValue);
 
-        internal abstract TimeSpan GetElementRepeatDelay(TimeSpan defaultValue);
+        internal protected abstract TimeSpan GetElementRepeatDelay(TimeSpan defaultValue);
 
-        internal abstract void Invoke();
+        internal protected abstract void Invoke();
 
-        internal virtual bool IsInvokable
+        internal protected virtual bool IsInvokable
         {
             get { return true; }
         }
@@ -60,7 +56,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             MaxDwellRepeatCount = GetMaxDwellRepeatCount();
         }
 
-        internal abstract int GetMaxDwellRepeatCount();
+        protected internal abstract int GetMaxDwellRepeatCount();
 
         internal void GiveFeedback()
         {
@@ -117,7 +113,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             _notifiedProgressState = state;
         }
 
-        internal abstract void ShowFeedback(DwellProgressState state, double progress);
+        protected abstract void ShowFeedback(DwellProgressState state, double progress);
 
         private PointerState _notifiedPointerState = PointerState.Exit;
         private TimeSpan _prevStateTime;

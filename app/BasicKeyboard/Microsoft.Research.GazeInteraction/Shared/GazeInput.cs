@@ -251,11 +251,13 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             GazePointerInstance.LoadSettings(settings);
 
         internal static Func<GazePointer> GazePointerFactory { get; set; } =
-            () => new GazePointer(GazeDevice.Instance, InvokeGazeTargetItem.GetHitTarget);
+            () => new GazePointer(GazeDevice.Instance, new GazeCursor(), InvokeGazeTargetItem.GetHitTarget);
 
 
         private static ThreadLocal<GazePointer> _instance = new ThreadLocal<GazePointer>(GazePointerFactory);
 
         internal static GazePointer GazePointerInstance => _instance.Value;
+
+        internal static GazeFeedbackPopupFactory GazeFeedbackPopupFactory { get; } = new GazeFeedbackPopupFactory();
     }
 }

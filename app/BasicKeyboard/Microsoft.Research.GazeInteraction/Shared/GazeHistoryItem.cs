@@ -6,12 +6,12 @@ using System;
 
 namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 {
-    internal struct GazeHistoryItem
+    struct GazeHistoryItem
     {
-        public GazeTargetItem HitTarget { get; set; }
+        internal GazeTargetItem HitTarget { get; set; }
 
-        public TimeSpan Timestamp { get; set; }
+        internal TimeSpan Timestamp { get; set; }
 
-        public TimeSpan Duration { get; set; }
+        internal TimeSpan Duration { get; set; }
     }
 }

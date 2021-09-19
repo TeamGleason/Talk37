@@ -6,28 +6,28 @@ using System;
 
 namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 {
-    internal class NonInvokeGazeTargetItem : GazeTargetItem
+    public class NonInvokeGazeTargetItem : GazeTargetItem
     {
-        internal NonInvokeGazeTargetItem()
+        public NonInvokeGazeTargetItem()
         {
         }
 
-        internal override bool IsInvokable
+        protected internal override bool IsInvokable
         {
             get { return false; }
         }
 
-        internal override TimeSpan GetElementStateDelay(PointerState pointerState, TimeSpan defaultValue) => TimeSpan.Zero;
+        protected internal override TimeSpan GetElementStateDelay(PointerState pointerState, TimeSpan defaultValue) => TimeSpan.Zero;
 
-        internal override TimeSpan GetElementRepeatDelay(TimeSpan defaultValue) => TimeSpan.Zero;
+        protected internal override TimeSpan GetElementRepeatDelay(TimeSpan defaultValue) => TimeSpan.Zero;
 
-        internal override int GetMaxDwellRepeatCount() => 0;
+        protected internal override int GetMaxDwellRepeatCount() => 0;
 
-        internal override void Invoke()
+        protected internal override void Invoke()
         {
         }
 
-        internal override void ShowFeedback(DwellProgressState state, double progress)
+        protected override void ShowFeedback(DwellProgressState state, double progress)
         {
         }
     }
