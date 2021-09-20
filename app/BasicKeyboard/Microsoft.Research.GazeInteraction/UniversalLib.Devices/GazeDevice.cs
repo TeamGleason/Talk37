@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Threading;
 using System.Threading.Tasks;
 using Windows.Devices.Input.Preview;
@@ -147,8 +148,21 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction.Device
             var handler = _gazeMoved;
             if (handler != null)
             {
-                var wrappedArgs = new UniversalGazeMovedArgs(args);
-                handler.Invoke(this, wrappedArgs);
+                var intermediatePoints = args.GetIntermediatePoints();
+                var tailCountdown = intermediatePoints.Count;
+                foreach (var point in intermediatePoints)
+                {
+                    tailCountdown--;
+                    var position = point.EyeGazePosition;
+                    if (position.HasValue)
+                    {
+                        // TODO: The last item may not have IsBacklog == false.
+                        var timestamp = new TimeSpan(10 * (long)point.Timestamp);
+                        var value = position.Value;
+                        var e = new GazeMovedEventArgs(timestamp, value.X, value.Y, tailCountdown != 0);
+                        handler.Invoke(this, e);
+                    }
+                }
             }
 
             _eyesOffTimer.Start();

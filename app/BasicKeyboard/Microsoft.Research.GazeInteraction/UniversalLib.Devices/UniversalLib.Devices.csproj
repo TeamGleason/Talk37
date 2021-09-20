@@ -122,7 +122,6 @@
   <ItemGroup>
     <Compile Include="GazeDevice.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UniversalGazeMovedArgs.cs" />
     <EmbeddedResource Include="Properties\UniversalLib.Devices.rd.xml" />
   </ItemGroup>
   <ItemGroup>

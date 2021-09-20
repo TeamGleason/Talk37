@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Drawing;
 
 namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 {
@@ -42,31 +42,12 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             }
         }
 
-        private class UpdatedGazeMovedEventArgs : GazeMovedEventArgs
-        {
-            private readonly IEnumerable<GazePoint> _points;
-
-            internal UpdatedGazeMovedEventArgs(IEnumerable<GazePoint> points)
-            {
-                _points = points;
-            }
-
-            public override IEnumerable<GazePoint> GetGazePoints() => _points;
-        }
-
         private void OnGazeMoved(object sender, GazeMovedEventArgs e)
         {
-            var points = new List<GazePoint>(1);
-            foreach (var unfiltered in e.GetGazePoints())
-            {
-
-                var filteredPosition = _filter.Update(unfiltered.Timestamp, unfiltered.Position);
-                var filtered = new GazePoint(unfiltered.Timestamp, filteredPosition);
-                points.Add(filtered);
-            }
-            var updatedArgs = new UpdatedGazeMovedEventArgs(points);
-
-            _gazeMoved?.Invoke(sender, updatedArgs);
+            var position = new PointF((float)e.X, (float)e.Y);
+            var filteredPosition = _filter.Update(e.Timestamp, position);
+            var filteredArgs = new GazeMovedEventArgs(e.Timestamp, filteredPosition.X, filteredPosition.Y, e.IsBacklog);
+            _gazeMoved?.Invoke(sender, filteredArgs);
         }
         EventHandler<GazeMovedEventArgs> _gazeMoved;
 

@@ -46,7 +46,9 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction.Device
             var handler = _gazeMoved;
             if (handler != null)
             {
-                var args = new LegacyGazePointerGazeMovedEventArgs(e);
+                var timestamp = new TimeSpan(10000 * e.Timestamp);
+                var screen = e.Screen;
+                var args = new GazeMovedEventArgs(timestamp, screen.X, screen.Y, false);
                 try
                 {
                     _dispatcher.Invoke(() => handler.Invoke(this, args));

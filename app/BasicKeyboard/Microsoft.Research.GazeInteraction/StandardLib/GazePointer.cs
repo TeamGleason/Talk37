@@ -27,6 +27,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
         private static readonly TimeSpan GAZE_IDLE_TIME = TimeSpan.FromSeconds(25);
 
         private readonly IGazeDevice _device;
+        private readonly IGazeSource _source;
         private readonly Func<PointF, GazeTargetItem> _targetFactory;
 
         /// <summary>
@@ -196,9 +197,15 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
         private EventHandler _isDeviceAvailableChanged;
 
         public GazePointer(IGazeDevice device, IGazeCursor cursor, Func<PointF, GazeTargetItem> targetFactory)
+            : this(device, device, cursor, targetFactory)
+        {
+        }
+
+        public GazePointer(IGazeDevice device, IGazeSource source, IGazeCursor cursor, Func<PointF, GazeTargetItem> targetFactory)
         {
             _device = device;
-            _device.EyesOff += OnEyesOff;
+            _source = source;
+            _source.EyesOff += OnEyesOff;
 
             _targetFactory = targetFactory;
 
@@ -258,9 +265,9 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             {
                 if (_roots.Count != 0 && _device.IsAvailable)
                 {
-                    _device.GazeEntered += OnGazeEntered;
-                    _device.GazeMoved += OnGazeMoved;
-                    _device.GazeExited += OnGazeExited;
+                    _source.GazeEntered += OnGazeEntered;
+                    _source.GazeMoved += OnGazeMoved;
+                    _source.GazeExited += OnGazeExited;
 
                     _initialized = true;
                 }
@@ -273,9 +280,9 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             {
                 _initialized = false;
 
-                _device.GazeEntered -= OnGazeEntered;
-                _device.GazeMoved -= OnGazeMoved;
-                _device.GazeExited -= OnGazeExited;
+                _source.GazeEntered -= OnGazeEntered;
+                _source.GazeMoved -= OnGazeMoved;
+                _source.GazeExited -= OnGazeExited;
             }
         }
 
@@ -436,14 +443,10 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
         {
             if (!_isShuttingDown)
             {
-                var intermediatePoints = args.GetGazePoints();
-                foreach (var point in intermediatePoints)
-                {
-                    _gazeCursor.IsGazeEntered = true;
-
-                    var location = Filter.Update(point.Timestamp, point.Position);
-                    ProcessGazePoint(point.Timestamp, location);
-                }
+                _gazeCursor.IsGazeEntered = true;
+                var position = new PointF((float)args.X, (float)args.Y);
+                var location = Filter.Update(args.Timestamp, position);
+                ProcessGazePoint(args.Timestamp, location);
             }
         }
 

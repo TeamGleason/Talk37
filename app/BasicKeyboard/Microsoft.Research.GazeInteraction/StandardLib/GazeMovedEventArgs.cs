@@ -1,10 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 {
-    public abstract class GazeMovedEventArgs : EventArgs
+    public class GazeMovedEventArgs : EventArgs
     {
-        public abstract IEnumerable<GazePoint> GetGazePoints();
+        public GazeMovedEventArgs(TimeSpan timestamp, double x, double y, bool isBacklog)
+        {
+            Timestamp = timestamp;
+            X = x;
+            Y = y;
+            IsBacklog = isBacklog;
+        }
+
+        public TimeSpan Timestamp { get; protected set; }
+
+        public double X { get; protected set; }
+
+        public double Y { get; protected set; }
+
+        public bool IsBacklog { get; protected set; }
     }
 }
