@@ -57,6 +57,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             var cutoff = new PointF(cf, cf);
 
             // determine sampling frequency based on last time stamp
+            // TODO: This calculation looks suspect - the magic 10^N number does not match TimeSpan.TicksPerSecond!
             float samplingFrequency = 100000000.0f / Math.Max(1, (timestamp - _lastTimestamp).Ticks);
             _lastTimestamp = timestamp;
 
