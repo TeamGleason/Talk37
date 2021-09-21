@@ -3,8 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -17,9 +15,37 @@ namespace WinFormsLib
         public static void Start(Form form)
         {
             var device = new MouseDevice(form);
-            _gazePointer = new GazePointer(device, new NonCursor(form), p => null);
+            _gazePointer = new GazePointer(device, new NonCursor(form), p => TargetFactory(form, p));
             _gazePointer.AddRoot(0);
             _gazePointer.IsCursorVisible = true;
+        }
+
+        private static GazeTargetItem TargetFactory(Form form, PointF arg)
+        {
+            GazeTargetItem item;
+
+            var point = form.PointToClient(new Point((int)arg.X, (int)arg.Y));
+            var child = form.GetChildAtPoint(point, GetChildAtPointSkip.Invisible);
+
+            if (child == null)
+            {
+                item = null;
+            }
+            else if (child.Tag is GazeTargetItem cached)
+            {
+                item = cached;
+            }
+            else if (child is Button button)
+            {
+                item = new ButtonGazeTargetItem(button);
+                child.Tag = item;
+            }
+            else
+            {
+                item = null;
+            }
+
+            return item;
         }
 
         private class MouseDevice : IGazeDevice
@@ -141,15 +167,48 @@ namespace WinFormsLib
                 get => _position;
                 set
                 {
+                    _position = value;
+
                     var point = _form.PointToClient(new Point((int)value.X, (int)value.Y));
-                    var left = point.X - _pictureBox.Size.Width / 2;
-                    var top = point.Y - _pictureBox.Size.Height / 2;
+                    var left = point.X/*-_pictureBox.Size.Width / 2*/ + 1;
+                    var top = point.Y/*-_pictureBox.Size.Height / 2*/ + 1;
                     _pictureBox.Location = new Point(left, top);
                 }
             }
-            PointF _position;
+            private PointF _position;
 
             public void LoadSettings(IDictionary<string, object> settings)
+            {
+            }
+        }
+
+        private class ButtonGazeTargetItem : GazeTargetItem
+        {
+            private Button _button;
+
+            public ButtonGazeTargetItem(Button button)
+            {
+                _button = button;
+            }
+
+            protected override TimeSpan GetElementRepeatDelay(TimeSpan defaultValue)
+            {
+                return defaultValue;
+            }
+
+            protected override TimeSpan GetElementStateDelay(PointerState pointerState, TimeSpan defaultValue)
+            {
+                return defaultValue;
+            }
+
+            protected override int GetMaxDwellRepeatCount() => 0;
+
+            protected override void Invoke()
+            {
+                _button.PerformClick();
+            }
+
+            protected override void ShowFeedback(DwellProgressState state, double progress)
             {
             }
         }
