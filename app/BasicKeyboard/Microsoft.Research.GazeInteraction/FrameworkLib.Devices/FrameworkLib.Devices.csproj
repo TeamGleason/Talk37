@@ -74,7 +74,7 @@
   </ItemGroup>
   <ItemGroup>
     <AdditionalFiles Include="tobii_stream_engine.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </AdditionalFiles>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

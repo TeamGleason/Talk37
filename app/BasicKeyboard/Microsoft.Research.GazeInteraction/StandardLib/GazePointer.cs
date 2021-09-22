@@ -196,6 +196,13 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
         }
         private EventHandler _isDeviceAvailableChanged;
 
+        public event EventHandler<GazeHitTestArgs> HitTest
+        {
+            add => _hitTest += value;
+            remove => _hitTest -= value;
+        }
+        private EventHandler<GazeHitTestArgs> _hitTest;
+
         public GazePointer(IGazeDevice device, IGazeCursor cursor, Func<PointF, GazeTargetItem> targetFactory)
             : this(device, device, cursor, targetFactory)
         {
@@ -324,7 +331,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             // subsequently needed.
 
             // create GazeHistoryItem to deal with this sample
-            var target = _targetFactory(gazePoint) ?? NonInvokeGazeTargetItem;
+            GazeTargetItem target = GetTarget(gazePoint);
             GazeHistoryItem historyItem = default;
             historyItem.HitTarget = target;
             historyItem.Timestamp = timestamp;
@@ -378,6 +385,35 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             // when they are looking at something else.
             // That is why we return the most recent hitTarget so that
             // when its dwell time has elapsed, it will be invoked
+            return target;
+        }
+
+        private GazeTargetItem GetTarget(PointF gazePoint)
+        {
+            GazeTargetItem target;
+
+            var hitTest = _hitTest;
+            if (hitTest != null)
+            {
+                var args = new GazeHitTestArgs(gazePoint.X, gazePoint.Y);
+                hitTest(this, args);
+                target = args.Target;
+            }
+            else
+            {
+                target = null;
+            }
+
+            if (target == null)
+            {
+                target = _targetFactory(gazePoint);
+            }
+
+            if(target==null)
+            {
+                target = NonInvokeGazeTargetItem;
+            }
+
             return target;
         }
 

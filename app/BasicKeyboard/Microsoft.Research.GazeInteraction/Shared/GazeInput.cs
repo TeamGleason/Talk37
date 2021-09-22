@@ -242,6 +242,12 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             remove => GazePointerInstance.IsDeviceAvailableChanged -= value;
         }
 
+        public static event EventHandler<GazeHitTestArgs> HitTest
+        {
+            add => GazePointerInstance.HitTest += value;
+            remove => GazePointerInstance.HitTest -= value;
+        }
+
         /// <summary>
         /// Loads a settings collection into GazeInput.
         /// Note: This must be loaded from a UI thread to be valid, since the GazeInput
