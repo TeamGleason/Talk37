@@ -1,4 +1,5 @@
 ﻿using Microsoft.Toolkit.Uwp.Input.GazeInteraction;
+using Microsoft.Toolkit.Uwp.Input.GazeInteraction.Device;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -14,7 +15,7 @@ namespace WinFormsLib
 
         public static void Start(Form form)
         {
-            var device = new MouseDevice(form);
+            var device = GazeDevice.Instance;
             _gazePointer = new GazePointer(device, new NonCursor(form), p => TargetFactory(form, p));
             _gazePointer.AddRoot(0);
             _gazePointer.IsCursorVisible = true;
