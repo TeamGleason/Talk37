@@ -8,8 +8,14 @@
         xmlns:gaze="clr-namespace:Microsoft.Toolkit.Uwp.Input.GazeInteraction;assembly=FrameworkLib"
         mc:Ignorable="d"
         gaze:GazeInput.Interaction="Enabled"
+        FocusManager.FocusedElement="{Binding ElementName=TheTextBlock}"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <control:KeyboardControl x:Name="TheKeyboard"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TextBox Grid.Row="0" x:Name="TheTextBlock"/>
+        <control:KeyboardControl Grid.Row="1" x:Name="TheKeyboard"/>
     </Grid>
 </Window>
