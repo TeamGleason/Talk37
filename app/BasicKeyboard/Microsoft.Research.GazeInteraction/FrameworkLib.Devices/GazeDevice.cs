@@ -1,108 +1,167 @@
-﻿using Microsoft.HandsFree.Sensors;
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Windows.Threading;
+using Tobii.StreamEngine;
 
 namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction.Device
 {
     public class GazeDevice : IGazeDevice
     {
-        private readonly IGazeDataProvider _provider;
-        private readonly Dispatcher _dispatcher = Dispatcher.CurrentDispatcher;
-        private readonly DispatcherTimer _eyesOffTimer = new DispatcherTimer();
-
         public static GazeDevice Instance => _instance.Value;
-        private static ThreadLocal<GazeDevice> _instance = new ThreadLocal<GazeDevice>(() => new GazeDevice());
+        private static readonly ThreadLocal<GazeDevice> _instance =
+            new ThreadLocal<GazeDevice>(() => new GazeDevice());
+
+        private static readonly int ScreenWidth = Screen.PrimaryScreen.Bounds.Width;
+        private static readonly int ScreenHeight = Screen.PrimaryScreen.Bounds.Height;
+
+        private readonly Dispatcher _dispatcher;
+        private volatile bool _isWaiting;
+        private volatile int _waitEpoch;
 
         private GazeDevice()
         {
-            _provider = GazeDataProvider.InitializeGazeDataProvider();
-            var task = _provider.CreateProfileAsync();
-            task.ContinueWith(OnProfileCreated);
+            _dispatcher = Dispatcher.CurrentDispatcher;
 
-            _eyesOffTimer.Tick += OnEyesOffTimerTick;
+            var thread = new Thread(Worker);
+            thread.Start();
         }
 
-        private void OnEyesOffTimerTick(object sender, EventArgs e)
+        private void Worker()
         {
-            _eyesOffTimer.Stop();
-            _eyesOff?.Invoke(this, EventArgs.Empty);
-        }
+            Check(Interop.tobii_get_api_version(out var version));
+            Debug.WriteLine($"Version is {version.major}.{version.minor}.{version.revision}.{version.build}");
 
-        private void OnProfileCreated(Task<bool> obj)
-        {
-            var result = obj.Result;
-            Debug.WriteLine($"{nameof(OnProfileCreated)}({result})");
+            // Create API context
+            Check(Interop.tobii_api_create(out var apiContext, null));
 
-            _provider.GazeEvent += OnGazeEvent;
-        }
-
-        private void OnGazeEvent(object sender, GazeEventArgs e)
-        {
-            _eyesOffTimer.Stop();
-
-            var handler = _gazeMoved;
-            if (handler != null)
+            // Enumerate devices to find connected eye trackers
+            Check(Interop.tobii_enumerate_local_device_urls(apiContext, out var urls));
+            while (urls.Count == 0)
             {
-                var timestamp = new TimeSpan(10000 * e.Timestamp);
-                var screen = e.Screen;
-                var args = new GazeMovedEventArgs(timestamp, screen.X, screen.Y, false);
-                try
+                Thread.Sleep(TimeSpan.FromSeconds(5));
+                Check(Interop.tobii_enumerate_local_device_urls(apiContext, out urls));
+            }
+
+            // Connect to the first tracker found
+            Check(Interop.tobii_device_create(apiContext, urls[0],
+                Interop.tobii_field_of_use_t.TOBII_FIELD_OF_USE_INTERACTIVE, out var deviceContext));
+            var deviceContexts = new[] { deviceContext };
+
+            _isAvailable = true;
+            _isAvailableChanged?.Invoke(this, EventArgs.Empty);
+
+            // Subscribe to gaze data
+            Check(Interop.tobii_gaze_point_subscribe(deviceContext, OnGazePoint));
+
+            // This sample will collect 1000 gaze points
+            for (; ; )
+            {
+                // Optionally block this thread until data is available. Especially useful if running in a separate thread.
+                var result = Interop.tobii_wait_for_callbacks(deviceContexts);
+                if (result != tobii_error_t.TOBII_ERROR_TIMED_OUT)
                 {
-                    _dispatcher.Invoke(() => handler.Invoke(this, args));
+                    Check(result);
+
+                    // Process callbacks on this thread if data is available
+                    Check(Interop.tobii_device_process_callbacks(deviceContext));
                 }
-                catch (Exception ex)
+                else
                 {
-                    Debug.WriteLine($"Exception caught (on exit?): {ex}");
+                    if (_isWaiting)
+                    {
+                        var waited = TimeSpan.FromMilliseconds(Environment.TickCount - _waitEpoch);
+                        if (_eyesOffDelay <= waited)
+                        {
+                            _isWaiting = false;
+                            _dispatcher.Invoke(() => _eyesOff?.Invoke(this, EventArgs.Empty));
+                        }
+                    }
                 }
             }
 
-            _eyesOffTimer.Start();
+            // Cleanup
+#pragma warning disable CS0162 // Unreachable code detected
+            Check(Interop.tobii_gaze_point_unsubscribe(deviceContext));
+            Check(Interop.tobii_device_destroy(deviceContext));
+            Check(Interop.tobii_api_destroy(apiContext));
+#pragma warning restore CS0162 // Unreachable code detected
         }
 
-        public bool IsAvailable => true;
-
-        public TimeSpan EyesOffDelay
+        private void OnGazePoint(ref tobii_gaze_point_t gaze_point, IntPtr user_data)
         {
-            get => _eyesOffTimer.Interval;
-            set => _eyesOffTimer.Interval = value;
+            if (gaze_point.validity == tobii_validity_t.TOBII_VALIDITY_VALID)
+            {
+                _isWaiting = false;
+
+                var timestamp = new TimeSpan(10 * gaze_point.timestamp_us);
+                var x = ScreenWidth * gaze_point.position.x;
+                var y = ScreenHeight * gaze_point.position.y;
+
+                var args = new GazeMovedEventArgs(timestamp, x, y, false);
+                _dispatcher.Invoke(() => _gazeMoved?.Invoke(this, args));
+
+                _waitEpoch = Environment.TickCount;
+                _isWaiting = true;
+            }
         }
 
-        public event EventHandler IsAvailableChanged
+        private void Check(tobii_error_t error)
         {
-            add { }
-            remove { }
+            if (error != tobii_error_t.TOBII_ERROR_NO_ERROR)
+            {
+                throw new Exception(error.ToString());
+            }
         }
 
-        public event EventHandler GazeEntered
+        bool IGazeDevice.IsAvailable => _isAvailable;
+        private bool _isAvailable;
+
+        TimeSpan IGazeDevice.EyesOffDelay
         {
-            add { }
-            remove { }
+            get => _eyesOffDelay;
+            set => _eyesOffDelay = value;
         }
+        private TimeSpan _eyesOffDelay = TimeSpan.FromSeconds(1);
 
-        public event EventHandler<GazeMovedEventArgs> GazeMoved
+        event EventHandler IGazeDevice.IsAvailableChanged
+        {
+            add => _isAvailableChanged += value;
+            remove => _isAvailableChanged -= value;
+        }
+        EventHandler _isAvailableChanged;
+
+        event EventHandler IGazeSource.GazeEntered
+        {
+            add => _gazeEntered += value;
+            remove => _gazeEntered -= value;
+        }
+        private EventHandler _gazeEntered;
+
+        event EventHandler<GazeMovedEventArgs> IGazeSource.GazeMoved
         {
             add => _gazeMoved += value;
             remove => _gazeMoved -= value;
         }
-        private EventHandler<GazeMovedEventArgs> _gazeMoved;
+        event EventHandler<GazeMovedEventArgs> _gazeMoved;
 
-        public event EventHandler GazeExited
+        event EventHandler IGazeSource.GazeExited
         {
-            add { }
-            remove { }
+            add => _gazeExited += value;
+            remove => _gazeExited -= value;
         }
+        private EventHandler _gazeExited;
 
-        public event EventHandler EyesOff
+        event EventHandler IGazeSource.EyesOff
         {
             add => _eyesOff += value;
             remove => _eyesOff -= value;
         }
         private EventHandler _eyesOff;
 
-        public Task<bool> RequestCalibrationAsync()
+        Task<bool> IGazeDevice.RequestCalibrationAsync()
         {
             return Task.FromResult(false);
         }
