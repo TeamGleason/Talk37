@@ -331,7 +331,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             // subsequently needed.
 
             // create GazeHistoryItem to deal with this sample
-            GazeTargetItem target = GetTarget(gazePoint);
+            GazeTargetItem target = GetTarget(timestamp, gazePoint);
             GazeHistoryItem historyItem = default;
             historyItem.HitTarget = target;
             historyItem.Timestamp = timestamp;
@@ -388,14 +388,14 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             return target;
         }
 
-        private GazeTargetItem GetTarget(PointF gazePoint)
+        private GazeTargetItem GetTarget(TimeSpan timestamp, PointF gazePoint)
         {
             GazeTargetItem target;
 
             var hitTest = _hitTest;
             if (hitTest != null)
             {
-                var args = new GazeHitTestArgs(gazePoint.X, gazePoint.Y);
+                var args = new GazeHitTestArgs(timestamp, gazePoint.X, gazePoint.Y);
                 hitTest(this, args);
                 target = args.Target;
             }

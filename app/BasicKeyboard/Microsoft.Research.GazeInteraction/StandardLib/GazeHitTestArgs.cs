@@ -7,15 +7,18 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
     {
         public bool Handled => _target != null;
 
-        public double X { get; private set; }
+        public TimeSpan Timestamp { get; }
 
-        public double Y { get; private set; }
+        public double X { get; }
+
+        public double Y { get; }
 
         internal GazeTargetItem Target => _target;
         private GazeTargetItem _target;
 
-        internal GazeHitTestArgs(double x, double y)
+        internal GazeHitTestArgs(TimeSpan timestamp, double x, double y)
         {
+            Timestamp = timestamp;
             X = x;
             Y = y;
         }
