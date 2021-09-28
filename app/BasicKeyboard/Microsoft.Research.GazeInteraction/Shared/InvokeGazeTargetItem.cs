@@ -135,20 +135,70 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             }
         }
 
+#if WINDOWS_UWP
         internal static GazeTargetItem GetHitTarget(PointF gazePoint)
         {
             GazeTargetItem invokable = null;
 
-#if WINDOWS_UWP
             switch (Window.Current.CoreWindow.ActivationMode)
             {
                 case CoreWindowActivationMode.ActivatedInForeground:
                 case CoreWindowActivationMode.ActivatedNotForeground:
-#endif
-            var gazePointD = new Point(gazePoint.X, gazePoint.Y);
-#if WINDOWS_UWP
+                    var gazePointD = new Point(gazePoint.X, gazePoint.Y);
                     var elements = VisualTreeHelper.FindElementsInHostCoordinates(gazePointD, null, false);
+                    var element = elements.FirstOrDefault();
+
+                    invokable = null;
+
+                    if (element != null)
+                    {
+                        invokable = GazeTargetFactory.GetOrCreate(element);
+
+                        while (element != null && invokable == null)
+                        {
+                            element = VisualTreeHelper.GetParent(element) as UIElement;
+
+                            if (element != null)
+                            {
+                                invokable = GazeTargetFactory.GetOrCreate(element);
+                            }
+                        }
+                    }
+
+                    if (element != null && invokable != null)
+                    {
+                        Interaction interaction;
+                        do
+                        {
+                            interaction = GazeInput.GetInteraction(element);
+                            if (interaction == Interaction.Inherited)
+                            {
+                                element = GetInheritenceParent(element);
+                            }
+                        }
+                        while (interaction == Interaction.Inherited && element != null);
+
+                        if (interaction == Interaction.Inherited)
+                        {
+                            interaction = GazeInput.Interaction;
+                        }
+
+                        if (interaction != Interaction.Enabled)
+                        {
+                            invokable = null;
+                        }
+                    }
+                    break;
+            }
+
+            return invokable;
+        }
 #else
+        internal static GazeTargetItem GetHitTarget(PointF gazePoint)
+        {
+            GazeTargetItem invokable = null;
+
+                    var gazePointD = new Point(gazePoint.X, gazePoint.Y);
             var window = Application.Current.MainWindow;
             if (window != null)
             {
@@ -181,56 +231,53 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
                 var elements = visualHit != null ?
                     new UIElement[] { visualHit } :
                     new UIElement[0];
-#endif
-                var element = elements.FirstOrDefault();
 
-                invokable = null;
+                    var element = elements.FirstOrDefault();
 
-                if (element != null)
-                {
-                    invokable = GazeTargetFactory.GetOrCreate(element);
+                    invokable = null;
 
-                    while (element != null && invokable == null)
+                    if (element != null)
                     {
-                        element = VisualTreeHelper.GetParent(element) as UIElement;
+                        invokable = GazeTargetFactory.GetOrCreate(element);
 
-                        if (element != null)
+                        while (element != null && invokable == null)
                         {
-                            invokable = GazeTargetFactory.GetOrCreate(element);
+                            element = VisualTreeHelper.GetParent(element) as UIElement;
+
+                            if (element != null)
+                            {
+                                invokable = GazeTargetFactory.GetOrCreate(element);
+                            }
                         }
                     }
-                }
 
-                if (element != null && invokable != null)
-                {
-                    Interaction interaction;
-                    do
+                    if (element != null && invokable != null)
                     {
-                        interaction = GazeInput.GetInteraction(element);
+                        Interaction interaction;
+                        do
+                        {
+                            interaction = GazeInput.GetInteraction(element);
+                            if (interaction == Interaction.Inherited)
+                            {
+                                element = GetInheritenceParent(element);
+                            }
+                        }
+                        while (interaction == Interaction.Inherited && element != null);
+
                         if (interaction == Interaction.Inherited)
                         {
-                            element = GetInheritenceParent(element);
+                            interaction = GazeInput.Interaction;
+                        }
+
+                        if (interaction != Interaction.Enabled)
+                        {
+                            invokable = null;
                         }
                     }
-                    while (interaction == Interaction.Inherited && element != null);
-
-                    if (interaction == Interaction.Inherited)
-                    {
-                        interaction = GazeInput.Interaction;
-                    }
-
-                    if (interaction != Interaction.Enabled)
-                    {
-                        invokable = null;
-                    }
-                }
-#if WINDOWS_UWP
-                    break;
-            }
-#endif
-            }
+        }
 
             return invokable;
         }
+#endif
     }
 }
