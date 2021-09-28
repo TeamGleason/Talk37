@@ -2,6 +2,7 @@
 using System;
 using System.Diagnostics;
 using System.Windows;
+using System.Windows.Forms;
 using TeamGleason.SpeakFaster.BasicKeyboard.Layout;
 
 namespace TeamGleason.SpeakFaster.BasicKeyboard.Keyboard
@@ -133,14 +134,19 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard.Keyboard
                     {
                         if (varianceXY < DownVarianceThreshold)
                         {
-                            // TODO: Trigger click
                             Debug.WriteLine("Clicking");
+                            var screenWidth = Screen.PrimaryScreen.Bounds.Width;
+                            var screenHeight = Screen.PrimaryScreen.Bounds.Height;
+                            var dx = (int)Math.Round(0x10000 * e.X / screenWidth);
+                            var dy = (int)Math.Round(0x10000 * e.Y / screenHeight);
+
+                            InteropHelper.SendMouseClick(dx, dy);
 
                             _targetting = false;
                             GazeInput.HitTest -= OnHitTest;
                         }
                     }
-                    else if (UpVarianceThreshold<varianceXY)
+                    else if (UpVarianceThreshold < varianceXY)
                     {
                         Debug.WriteLine("Arming");
 

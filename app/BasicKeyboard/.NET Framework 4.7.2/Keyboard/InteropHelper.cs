@@ -121,6 +121,24 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard.Keyboard
             }
         }
 
+        public static void SendMouseClick(int x, int y)
+        {
+            var inputs = new User32.INPUT[3];
+
+            inputs[0].type = User32.InputType.INPUT_MOUSE;
+            inputs[0].Inputs.mi.dx = x;
+            inputs[0].Inputs.mi.dy = y;
+            inputs[0].Inputs.mi.dwFlags = User32.MOUSEEVENTF.MOUSEEVENTF_MOVE | User32.MOUSEEVENTF.MOUSEEVENTF_ABSOLUTE;
+
+            inputs[1].type = User32.InputType.INPUT_MOUSE;
+            inputs[1].Inputs.mi.dwFlags = User32.MOUSEEVENTF.MOUSEEVENTF_LEFTDOWN;
+
+            inputs[2].type = User32.InputType.INPUT_MOUSE;
+            inputs[2].Inputs.mi.dwFlags = User32.MOUSEEVENTF.MOUSEEVENTF_LEFTUP;
+
+            SendInput(3, inputs);
+        }
+
         unsafe static void SendInput(int nInputs, User32.INPUT[] inputs)
         {
             fixed (User32.INPUT* p = &inputs[0])
