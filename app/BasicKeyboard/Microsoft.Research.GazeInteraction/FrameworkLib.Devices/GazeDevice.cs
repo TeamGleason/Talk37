@@ -31,64 +31,81 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction.Device
 
         private void Worker()
         {
-            Check(Interop.tobii_get_api_version(out var version));
-            Debug.WriteLine($"Version is {version.major}.{version.minor}.{version.revision}.{version.build}");
-
-            // Create API context
-            Check(Interop.tobii_api_create(out var apiContext, null));
-
-            // Enumerate devices to find connected eye trackers
-            Check(Interop.tobii_enumerate_local_device_urls(apiContext, out var urls));
-            while (urls.Count == 0)
+            if (Interop.tobii_get_api_version(out var version) == tobii_error_t.TOBII_ERROR_NO_ERROR)
             {
-                Thread.Sleep(TimeSpan.FromSeconds(5));
-                Check(Interop.tobii_enumerate_local_device_urls(apiContext, out urls));
-            }
+                Debug.WriteLine($"Version is {version.major}.{version.minor}.{version.revision}.{version.build}");
 
-            // Connect to the first tracker found
-            Check(Interop.tobii_device_create(apiContext, urls[0],
-                Interop.tobii_field_of_use_t.TOBII_FIELD_OF_USE_INTERACTIVE, out var deviceContext));
-            var deviceContexts = new[] { deviceContext };
+                // Create API context
+                Check(Interop.tobii_api_create(out var apiContext, null));
 
-            _isAvailable = true;
-            _isAvailableChanged?.Invoke(this, EventArgs.Empty);
-
-            // Subscribe to gaze data
-            Check(Interop.tobii_gaze_point_subscribe(deviceContext, OnGazePoint));
-
-            // This sample will collect 1000 gaze points
-            for (; ; )
-            {
-                // Optionally block this thread until data is available. Especially useful if running in a separate thread.
-                var result = Interop.tobii_wait_for_callbacks(deviceContexts);
-                if (result != tobii_error_t.TOBII_ERROR_TIMED_OUT)
+                // Enumerate devices to find connected eye trackers
+                Check(Interop.tobii_enumerate_local_device_urls(apiContext, out var urls));
+                while (urls.Count == 0 && !_dispatcher.HasShutdownStarted)
                 {
-                    Check(result);
+                    Thread.Sleep(TimeSpan.FromSeconds(5));
+                    Check(Interop.tobii_enumerate_local_device_urls(apiContext, out urls));
+                }
 
-                    // Process callbacks on this thread if data is available
-                    Check(Interop.tobii_device_process_callbacks(deviceContext));
+                IntPtr deviceContext;
+                if (urls.Count != 0)
+                {
+                    // Connect to the first tracker found
+                    Check(Interop.tobii_device_create(apiContext, urls[0],
+                        Interop.tobii_field_of_use_t.TOBII_FIELD_OF_USE_INTERACTIVE, out deviceContext));
+
+                    _isAvailable = true;
+                    _isAvailableChanged?.Invoke(this, EventArgs.Empty);
+
+                    // Subscribe to gaze data
+                    Check(Interop.tobii_gaze_point_subscribe(deviceContext, OnGazePoint));
                 }
                 else
                 {
-                    if (_isWaiting)
+                    deviceContext = IntPtr.Zero;
+                }
+                var deviceContexts = new[] { deviceContext };
+
+                // This sample will collect 1000 gaze points
+                while (!_dispatcher.HasShutdownStarted)
+                {
+                    // Optionally block this thread until data is available. Especially useful if running in a separate thread.
+                    var result = Interop.tobii_wait_for_callbacks(deviceContexts);
+                    if (result != tobii_error_t.TOBII_ERROR_TIMED_OUT)
                     {
-                        var waited = TimeSpan.FromMilliseconds(Environment.TickCount - _waitEpoch);
-                        if (_eyesOffDelay <= waited)
+                        Check(result);
+
+                        // Process callbacks on this thread if data is available
+                        Check(Interop.tobii_device_process_callbacks(deviceContext));
+                    }
+                    else
+                    {
+                        if (_isWaiting)
                         {
-                            _isWaiting = false;
-                            _dispatcher.Invoke(() => _eyesOff?.Invoke(this, EventArgs.Empty));
+                            var waited = TimeSpan.FromMilliseconds(Environment.TickCount - _waitEpoch);
+                            if (_eyesOffDelay <= waited)
+                            {
+                                _isWaiting = false;
+                                _dispatcher.Invoke(() => _eyesOff?.Invoke(this, EventArgs.Empty));
+                            }
                         }
                     }
                 }
-            }
 
-            // Cleanup
-#pragma warning disable CS0162 // Unreachable code detected
-            Check(Interop.tobii_gaze_point_unsubscribe(deviceContext));
-            Check(Interop.tobii_device_destroy(deviceContext));
-            Check(Interop.tobii_api_destroy(apiContext));
-#pragma warning restore CS0162 // Unreachable code detected
+                // Cleanup
+                Debug.WriteLine("Closing Tobii");
+                if (deviceContext != IntPtr.Zero)
+                {
+                    Check(Interop.tobii_gaze_point_unsubscribe(deviceContext));
+                    Check(Interop.tobii_device_destroy(deviceContext));
+                }
+                Check(Interop.tobii_api_destroy(apiContext));
+            }
+            else
+            {
+                Debug.WriteLine("Could not start Tobii device.");
+            }
         }
+
 
         private void OnGazePoint(ref tobii_gaze_point_t gaze_point, IntPtr user_data)
         {
@@ -101,7 +118,14 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction.Device
                 var y = ScreenHeight * gaze_point.position.y;
 
                 var args = new GazeMovedEventArgs(timestamp, x, y, false);
-                _dispatcher.Invoke(() => _gazeMoved?.Invoke(this, args));
+                try
+                {
+                    _dispatcher.Invoke(() => _gazeMoved?.Invoke(this, args));
+                }
+                catch (TaskCanceledException)
+                {
+
+                }
 
                 _waitEpoch = Environment.TickCount;
                 _isWaiting = true;

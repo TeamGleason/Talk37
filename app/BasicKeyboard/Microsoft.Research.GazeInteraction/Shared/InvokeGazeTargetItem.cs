@@ -150,82 +150,85 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
                     var elements = VisualTreeHelper.FindElementsInHostCoordinates(gazePointD, null, false);
 #else
             var window = Application.Current.MainWindow;
-            var pointFromScreen = window.PointFromScreen(new Point(gazePoint.X, gazePoint.Y));
-            var hitTestParameters = new PointHitTestParameters(pointFromScreen);
-            var visualHit = (UIElement)null;
-            var pointHit = new Point();
-            VisualTreeHelper.HitTest(window, null, OnResultCallback, hitTestParameters);
-
-            HitTestResultBehavior OnResultCallback(HitTestResult result)
+            if (window != null)
             {
-                HitTestResultBehavior value;
+                var pointFromScreen = window.PointFromScreen(new Point(gazePoint.X, gazePoint.Y));
+                var hitTestParameters = new PointHitTestParameters(pointFromScreen);
+                var visualHit = (UIElement)null;
+                var pointHit = new Point();
+                VisualTreeHelper.HitTest(window, null, OnResultCallback, hitTestParameters);
 
-                if (result is PointHitTestResult hitTestResult &&
-                    hitTestResult.VisualHit is UIElement elementHit &&
-                    elementHit.IsHitTestVisible)
+                HitTestResultBehavior OnResultCallback(HitTestResult result)
                 {
-                    visualHit = elementHit;
-                    pointHit = hitTestResult.PointHit;
-                    value = HitTestResultBehavior.Stop;
-                }
-                else
-                {
-                    value = HitTestResultBehavior.Continue;
-                }
+                    HitTestResultBehavior value;
 
-                return value;
-            }
-
-            var elements = visualHit != null ?
-                new UIElement[] { visualHit } :
-                new UIElement[0];
-#endif
-            var element = elements.FirstOrDefault();
-
-            invokable = null;
-
-            if (element != null)
-            {
-                invokable = GazeTargetFactory.GetOrCreate(element);
-
-                while (element != null && invokable == null)
-                {
-                    element = VisualTreeHelper.GetParent(element) as UIElement;
-
-                    if (element != null)
+                    if (result is PointHitTestResult hitTestResult &&
+                        hitTestResult.VisualHit is UIElement elementHit &&
+                        elementHit.IsHitTestVisible)
                     {
-                        invokable = GazeTargetFactory.GetOrCreate(element);
+                        visualHit = elementHit;
+                        pointHit = hitTestResult.PointHit;
+                        value = HitTestResultBehavior.Stop;
+                    }
+                    else
+                    {
+                        value = HitTestResultBehavior.Continue;
+                    }
+
+                    return value;
+                }
+
+                var elements = visualHit != null ?
+                    new UIElement[] { visualHit } :
+                    new UIElement[0];
+#endif
+                var element = elements.FirstOrDefault();
+
+                invokable = null;
+
+                if (element != null)
+                {
+                    invokable = GazeTargetFactory.GetOrCreate(element);
+
+                    while (element != null && invokable == null)
+                    {
+                        element = VisualTreeHelper.GetParent(element) as UIElement;
+
+                        if (element != null)
+                        {
+                            invokable = GazeTargetFactory.GetOrCreate(element);
+                        }
                     }
                 }
-            }
 
-            if (element != null && invokable != null)
-            {
-                Interaction interaction;
-                do
+                if (element != null && invokable != null)
                 {
-                    interaction = GazeInput.GetInteraction(element);
+                    Interaction interaction;
+                    do
+                    {
+                        interaction = GazeInput.GetInteraction(element);
+                        if (interaction == Interaction.Inherited)
+                        {
+                            element = GetInheritenceParent(element);
+                        }
+                    }
+                    while (interaction == Interaction.Inherited && element != null);
+
                     if (interaction == Interaction.Inherited)
                     {
-                        element = GetInheritenceParent(element);
+                        interaction = GazeInput.Interaction;
+                    }
+
+                    if (interaction != Interaction.Enabled)
+                    {
+                        invokable = null;
                     }
                 }
-                while (interaction == Interaction.Inherited && element != null);
-
-                if (interaction == Interaction.Inherited)
-                {
-                    interaction = GazeInput.Interaction;
-                }
-
-                if (interaction != Interaction.Enabled)
-                {
-                    invokable = null;
-                }
-            }
 #if WINDOWS_UWP
                     break;
             }
 #endif
+            }
 
             return invokable;
         }
