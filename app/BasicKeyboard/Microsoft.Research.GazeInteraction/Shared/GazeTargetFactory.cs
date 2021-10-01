@@ -18,25 +18,36 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 {
     static class GazeTargetFactory
     {
-        private static readonly DependencyProperty _gazeTargetItemProperty = DependencyProperty.RegisterAttached("_GazeTargetItem", typeof(GazeTargetItem), typeof(GazeTargetItem), new PropertyMetadata(null));
+        private static readonly DependencyProperty _gazeTargetItemProperty = DependencyProperty.RegisterAttached("_GazeTargetItem", typeof(GazeTargetItem<UIElement>), typeof(GazeTargetItem<UIElement>), new PropertyMetadata(null));
 
-        internal static GazeTargetItem GetOrCreate(UIElement element)
+        internal static GazeTargetItem<UIElement> GetOrCreate(UIElement element)
         {
-            GazeTargetItem item;
+            GazeTargetItem<UIElement> item;
 
             var value = element.ReadLocalValue(_gazeTargetItemProperty);
 
             if (value != DependencyProperty.UnsetValue)
             {
-                item = (GazeTargetItem)value;
+                item = (GazeTargetItem<UIElement>)value;
             }
             else
             {
-                var peer = FrameworkElementAutomationPeer.FromElement(element);
-                Action<UIElement> action;
+                item = Create(element);
+                element.SetValue(_gazeTargetItemProperty, item);
+            }
 
-                if (peer == null)
-                {
+            return item;
+        }
+
+        private static InvokeGazeTargetItem Create(UIElement element)
+        {
+            InvokeGazeTargetItem item;
+
+            var peer = FrameworkElementAutomationPeer.FromElement(element);
+            Action<UIElement> action;
+
+            if (peer == null)
+            {
 #if WINDOWS_UWP
                     if (element is PivotHeaderItem)
                     {
@@ -44,47 +55,44 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
                     }
                     else
 #endif
-                    {
-                        action = null;
-                    }
-                }
-                else if (peer.GetPattern(PatternInterface.Invoke) is IInvokeProvider)
                 {
-                    action = InvokePatternAction;
+                    action = null;
                 }
-                else if (peer.GetPattern(PatternInterface.Toggle) is IToggleProvider)
-                {
-                    action = TogglePatternAction;
-                }
-                else if (peer.GetPattern(PatternInterface.SelectionItem) is ISelectionItemProvider)
-                {
-                    action = SelectionItemPatternAction;
-                }
-                else if (peer.GetPattern(PatternInterface.ExpandCollapse) is IExpandCollapseProvider)
-                {
-                    action = ExpandCollapsePatternAction;
-                }
+            }
+            else if (peer.GetPattern(PatternInterface.Invoke) is IInvokeProvider)
+            {
+                action = InvokePatternAction;
+            }
+            else if (peer.GetPattern(PatternInterface.Toggle) is IToggleProvider)
+            {
+                action = TogglePatternAction;
+            }
+            else if (peer.GetPattern(PatternInterface.SelectionItem) is ISelectionItemProvider)
+            {
+                action = SelectionItemPatternAction;
+            }
+            else if (peer.GetPattern(PatternInterface.ExpandCollapse) is IExpandCollapseProvider)
+            {
+                action = ExpandCollapsePatternAction;
+            }
 #if WINDOWS_UWP
                 else if (peer is ComboBoxItemAutomationPeer)
                 {
                     action = ComboBoxItemAction;
                 }
 #endif
-                else
-                {
-                    action = null;
-                }
+            else
+            {
+                action = null;
+            }
 
-                if (action != null)
-                {
-                    item = new InvokeGazeTargetItem((FrameworkElement)element, action);
-                }
-                else
-                {
-                    item = null;
-                }
-
-                element.SetValue(_gazeTargetItemProperty, item);
+            if (action != null)
+            {
+                item = new InvokeGazeTargetItem((FrameworkElement)element, action);
+            }
+            else
+            {
+                item = null;
             }
 
             return item;

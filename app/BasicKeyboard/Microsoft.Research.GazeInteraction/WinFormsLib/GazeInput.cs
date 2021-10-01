@@ -11,19 +11,19 @@ namespace WinFormsLib
 {
     public class GazeInput
     {
-        private static GazePointer _gazePointer;
+        private static GazePointer<Control> _gazePointer;
 
         public static void Start(Form form)
         {
             var device = GazeDevice.Instance;
-            _gazePointer = new GazePointer(device, new NonCursor(form), p => TargetFactory(form, p));
+            _gazePointer = new GazePointer<Control>(device, new NonCursor(form), p => TargetFactory(form, p));
             _gazePointer.AddRoot(0);
             _gazePointer.IsCursorVisible = true;
         }
 
-        private static GazeTargetItem TargetFactory(Form form, PointF arg)
+        private static GazeTargetItem<Control> TargetFactory(Form form, PointF arg)
         {
-            GazeTargetItem item;
+            GazeTargetItem<Control> item;
 
             var point = form.PointToClient(new Point((int)arg.X, (int)arg.Y));
             var child = form.GetChildAtPoint(point, GetChildAtPointSkip.Invisible);
@@ -32,7 +32,7 @@ namespace WinFormsLib
             {
                 item = null;
             }
-            else if (child.Tag is GazeTargetItem cached)
+            else if (child.Tag is GazeTargetItem<Control> cached)
             {
                 item = cached;
             }
@@ -183,7 +183,7 @@ namespace WinFormsLib
             }
         }
 
-        private class ButtonGazeTargetItem : GazeTargetItem
+        private class ButtonGazeTargetItem : GazeTargetItem<Control>
         {
             private Button _button;
 

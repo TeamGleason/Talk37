@@ -15,7 +15,7 @@ using System.Windows.Media;
 
 namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 {
-    class InvokeGazeTargetItem : GazeTargetItem
+    class InvokeGazeTargetItem : GazeTargetItem<UIElement>
     {
         private readonly FrameworkElement _element;
         private readonly Action<UIElement> _action;
@@ -136,9 +136,9 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
         }
 
 #if WINDOWS_UWP
-        internal static GazeTargetItem GetHitTarget(PointF gazePoint)
+        internal static GazeTargetItem<UIElement> GetHitTarget(PointF gazePoint)
         {
-            GazeTargetItem invokable;
+            GazeTargetItem<UIElement> invokable;
 
             switch (Window.Current.CoreWindow.ActivationMode)
             {
@@ -160,9 +160,9 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             return invokable;
         }
 #else
-        internal static GazeTargetItem GetHitTarget(PointF gazePoint)
+        internal static GazeTargetItem<UIElement> GetHitTarget(PointF gazePoint)
         {
-            GazeTargetItem invokable;
+            GazeTargetItem<UIElement> invokable;
 
             var gazePointD = new Point(gazePoint.X, gazePoint.Y);
             var window = Application.Current.MainWindow;
@@ -204,9 +204,9 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             return invokable;
         }
 #endif
-        private static GazeTargetItem GetInvokable(UIElement element)
+        private static GazeTargetItem<UIElement> GetInvokable(UIElement element)
         {
-            GazeTargetItem invokable;
+            GazeTargetItem<UIElement> invokable;
 
             var invokableElement = element;
 

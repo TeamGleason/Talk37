@@ -13,7 +13,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
     /// <summary>
     /// Class of singleton object coordinating gaze input.
     /// </summary>
-    public class GazePointer
+    public class GazePointer<TElement>
     {
         // units in microseconds
         private static readonly TimeSpan DEFAULT_FIXATION_DELAY = TimeSpan.FromMilliseconds(350);
@@ -28,7 +28,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 
         private readonly IGazeDevice _device;
         private readonly IGazeSource _source;
-        private readonly Func<PointF, GazeTargetItem> _targetFactory;
+        private readonly Func<PointF, GazeTargetItem<TElement>> _targetFactory;
 
         /// <summary>
         /// Loads a settings collection into GazePointer.
@@ -119,7 +119,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
         }
         private Interaction _interaction = Interaction.Disabled;
 
-        private readonly GazeTargetItem NonInvokeGazeTargetItem = new NonInvokeGazeTargetItem();
+        private readonly GazeTargetItem<TElement> NonInvokeGazeTargetItem = new NonInvokeGazeTargetItem<TElement>();
 
         internal void Reset()
         {
@@ -196,19 +196,19 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
         }
         private EventHandler _isDeviceAvailableChanged;
 
-        public event EventHandler<GazeHitTestArgs> HitTest
+        public event EventHandler<GazeHitTestArgs<TElement>> HitTest
         {
             add => _hitTest += value;
             remove => _hitTest -= value;
         }
-        private EventHandler<GazeHitTestArgs> _hitTest;
+        private EventHandler<GazeHitTestArgs<TElement>> _hitTest;
 
-        public GazePointer(IGazeDevice device, IGazeCursor cursor, Func<PointF, GazeTargetItem> targetFactory)
+        public GazePointer(IGazeDevice device, IGazeCursor cursor, Func<PointF, GazeTargetItem<TElement>> targetFactory)
             : this(device, device, cursor, targetFactory)
         {
         }
 
-        public GazePointer(IGazeDevice device, IGazeSource source, IGazeCursor cursor, Func<PointF, GazeTargetItem> targetFactory)
+        public GazePointer(IGazeDevice device, IGazeSource source, IGazeCursor cursor, Func<PointF, GazeTargetItem<TElement>> targetFactory)
         {
             _device = device;
             _source = source;
@@ -216,7 +216,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 
             _targetFactory = targetFactory;
 
-            NonInvokeGazeTargetItem = new NonInvokeGazeTargetItem();
+            NonInvokeGazeTargetItem = new NonInvokeGazeTargetItem<TElement>();
 
             // Default to not filtering sample data
             Filter = new NullFilter();
@@ -259,10 +259,10 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 
         private void InitializeHistogram()
         {
-            _activeHitTargetTimes = new List<GazeTargetItem>();
+            _activeHitTargetTimes = new List<GazeTargetItem<TElement>>();
 
             _maxHistoryTime = DEFAULT_MAX_HISTORY_DURATION;    // maintain about 3 seconds of history (in microseconds)
-            _gazeHistory = new List<GazeHistoryItem>();
+            _gazeHistory = new List<GazeHistoryItem<TElement>>();
         }
 
 
@@ -293,7 +293,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             }
         }
 
-        private TimeSpan GetElementStateDelay(GazeTargetItem target, PointerState pointerState)
+        private TimeSpan GetElementStateDelay(GazeTargetItem<TElement> target, PointerState pointerState)
         {
             var defaultValue = GetDefaultPropertyValue(pointerState);
             var ticks = target.GetElementStateDelay(pointerState, defaultValue);
@@ -309,7 +309,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             return ticks;
         }
 
-        private void ActivateGazeTargetItem(GazeTargetItem target)
+        private void ActivateGazeTargetItem(GazeTargetItem<TElement> target)
         {
             if (_activeHitTargetTimes.IndexOf(target) == -1)
             {
@@ -323,7 +323,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             }
         }
 
-        private GazeTargetItem ResolveHitTarget(PointF gazePoint, TimeSpan timestamp)
+        private GazeTargetItem<TElement> ResolveHitTarget(PointF gazePoint, TimeSpan timestamp)
         {
             // TODO: The existence of a GazeTargetItem should be used to indicate that
             // the target item is invokable. The method of invocation should be stored
@@ -331,8 +331,8 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             // subsequently needed.
 
             // create GazeHistoryItem to deal with this sample
-            GazeTargetItem target = GetTarget(timestamp, gazePoint);
-            GazeHistoryItem historyItem = default;
+            var target = GetTarget(timestamp, gazePoint);
+            GazeHistoryItem<TElement> historyItem = default;
             historyItem.HitTarget = target;
             historyItem.Timestamp = timestamp;
             historyItem.Duration = TimeSpan.Zero;
@@ -388,14 +388,14 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             return target;
         }
 
-        private GazeTargetItem GetTarget(TimeSpan timestamp, PointF gazePoint)
+        private GazeTargetItem<TElement> GetTarget(TimeSpan timestamp, PointF gazePoint)
         {
-            GazeTargetItem target;
+            GazeTargetItem<TElement> target;
 
             var hitTest = _hitTest;
             if (hitTest != null)
             {
-                var args = new GazeHitTestArgs(timestamp, gazePoint.X, gazePoint.Y);
+                var args = new GazeHitTestArgs<TElement>(timestamp, gazePoint.X, gazePoint.Y);
                 hitTest(this, args);
                 target = args.Target;
             }
@@ -576,10 +576,10 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
         private readonly IGazeCursor _gazeCursor;
 
         // The value is the total time that FrameworkElement has been gazed at
-        private List<GazeTargetItem> _activeHitTargetTimes;
+        private List<GazeTargetItem<TElement>> _activeHitTargetTimes;
 
         // A vector to track the history of observed gaze targets
-        private List<GazeHistoryItem> _gazeHistory;
+        private List<GazeHistoryItem<TElement>> _gazeHistory;
         internal TimeSpan _maxHistoryTime;
 
         // Used to determine if exit events need to be fired by adding GAZE_IDLE_TIME to the last
@@ -591,6 +591,6 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
         private TimeSpan _defaultDwellRepeatDelay = DEFAULT_DWELL_REPEAT_DELAY;
         private TimeSpan _defaultRepeatDelay = DEFAULT_REPEAT_DELAY;
         private TimeSpan _defaultThreshold = DEFAULT_THRESHOLD_DELAY;
-        private GazeTargetItem _currentlyFixatedElement;
+        private GazeTargetItem<TElement> _currentlyFixatedElement;
     }
 }

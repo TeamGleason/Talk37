@@ -6,7 +6,7 @@ using System;
 
 namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 {
-    public abstract class GazeTargetItem
+    public abstract class GazeTargetItem<TElement>
     {
         internal TimeSpan DetailedTime { get; set; }
 
