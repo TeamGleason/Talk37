@@ -49,11 +49,11 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             if (peer == null)
             {
 #if WINDOWS_UWP
-                    if (element is PivotHeaderItem)
-                    {
-                        action = PivotItemAction;
-                    }
-                    else
+                if (element is PivotHeaderItem)
+                {
+                    action = PivotItemAction;
+                }
+                else
 #endif
                 {
                     action = null;
@@ -76,10 +76,10 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
                 action = ExpandCollapsePatternAction;
             }
 #if WINDOWS_UWP
-                else if (peer is ComboBoxItemAutomationPeer)
-                {
-                    action = ComboBoxItemAction;
-                }
+            else if (peer is ComboBoxItemAutomationPeer)
+            {
+                action = ComboBoxItemAction;
+            }
 #endif
             else
             {

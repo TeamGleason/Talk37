@@ -59,7 +59,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
         /// <summary>
         /// The cursor element.
         /// </summary>
-        public static UIElement DefaultCursor 
+        public static UIElement DefaultCursor
         {
             get => GazePointerInstance.DefaultCursor;
             set => GazePointerInstance.DefaultCursor = value;
