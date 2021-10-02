@@ -57,6 +57,15 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             element.SetValue(InteractionProperty, value);
 
         /// <summary>
+        /// The cursor element.
+        /// </summary>
+        public static UIElement DefaultCursor 
+        {
+            get => GazePointerInstance.DefaultCursor;
+            set => GazePointerInstance.DefaultCursor = value;
+        }
+
+        /// <summary>
         /// Gets the IsCursorVisible dependency property
         /// </summary>
         public static readonly DependencyProperty IsCursorVisibleProperty =

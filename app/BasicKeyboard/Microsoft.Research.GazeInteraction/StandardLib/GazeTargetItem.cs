@@ -6,7 +6,7 @@ using System;
 
 namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 {
-    public abstract class GazeTargetItem<TElement>
+    public abstract class GazeTargetItem
     {
         internal TimeSpan DetailedTime { get; set; }
 
@@ -119,5 +119,11 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
         private TimeSpan _prevStateTime;
         private TimeSpan _nextStateTime;
         private DwellProgressState _notifiedProgressState = DwellProgressState.Idle;
+    }
+
+    public abstract class GazeTargetItem<TElement> : GazeTargetItem
+        where TElement : class
+    {
+        public abstract TElement Cursor { get; }
     }
 }

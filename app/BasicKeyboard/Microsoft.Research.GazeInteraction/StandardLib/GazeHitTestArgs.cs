@@ -4,6 +4,7 @@ using System.Diagnostics;
 namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 {
     public class GazeHitTestArgs<TElement> : EventArgs
+        where TElement : class
     {
         public bool Handled => _target != null;
 

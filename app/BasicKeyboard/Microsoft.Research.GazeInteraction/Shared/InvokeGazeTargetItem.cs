@@ -28,6 +28,8 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             _action = action;
         }
 
+        public override UIElement Cursor => GazeInput.DefaultCursor;
+
         /// <summary>
         /// Find the parent to inherit properties from.
         /// </summary>

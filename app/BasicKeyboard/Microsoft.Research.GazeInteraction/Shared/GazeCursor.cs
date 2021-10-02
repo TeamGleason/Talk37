@@ -20,7 +20,7 @@ using System.Windows.Shapes;
 
 namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 {
-    internal class GazeCursor : IGazeCursor
+    internal class GazeCursor : IGazeCursor<UIElement>
     {
         private const int DEFAULT_CURSOR_RADIUS = 5;
         private const bool DEFAULT_CURSOR_VISIBILITY = true;
@@ -33,34 +33,9 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 
         public void LoadSettings(IDictionary<string, object> settings)
         {
-            if (settings.ContainsKey("GazeCursor.CursorRadius"))
-            {
-                CursorRadius = (int)settings["GazeCursor.CursorRadius"];
-            }
-
             if (settings.ContainsKey("GazeCursor.CursorVisibility"))
             {
                 IsCursorVisible = (bool)settings["GazeCursor.CursorVisibility"];
-            }
-        }
-
-        public int CursorRadius
-        {
-            get
-            {
-                return _cursorRadius;
-            }
-
-            set
-            {
-                _cursorRadius = value;
-                var gazeCursor = CursorElement;
-                if (gazeCursor != null)
-                {
-                    gazeCursor.Width = 2 * _cursorRadius;
-                    gazeCursor.Height = 2 * _cursorRadius;
-                    gazeCursor.Margin = new Thickness(-_cursorRadius, -_cursorRadius, 0, 0);
-                }
             }
         }
 
@@ -113,7 +88,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             }
         }
 
-        public UIElement PopupChild
+        public UIElement ActiveCursor
         {
             get
             {
@@ -126,13 +101,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             }
         }
 
-        public FrameworkElement CursorElement
-        {
-            get
-            {
-                return _gazePopup.Child as FrameworkElement;
-            }
-        }
+        public UIElement DefaultCursor { get; } = CreateDefaultCursor();
 
         internal GazeCursor()
         {
@@ -145,21 +114,24 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 
             _gazePopup = new Popup
             {
-                IsHitTestVisible = false
+                IsHitTestVisible = false,
+                Child = DefaultCursor
             };
+        }
 
+        private static UIElement CreateDefaultCursor()
+        {
             var gazeCursor = new Ellipse
             {
                 Fill = new SolidColorBrush(Colors.IndianRed),
                 VerticalAlignment = VerticalAlignment.Top,
                 HorizontalAlignment = HorizontalAlignment.Left,
-                Width = 2 * CursorRadius,
-                Height = 2 * CursorRadius,
-                Margin = new Thickness(-CursorRadius, -CursorRadius, 0, 0),
+                Width = 2 * DEFAULT_CURSOR_RADIUS,
+                Height = 2 * DEFAULT_CURSOR_RADIUS,
+                Margin = new Thickness(-DEFAULT_CURSOR_RADIUS, -DEFAULT_CURSOR_RADIUS, 0, 0),
                 IsHitTestVisible = false
             };
-
-            _gazePopup.Child = gazeCursor;
+            return gazeCursor;
         }
 
         private void SetVisibility()
@@ -194,7 +166,6 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 
         private readonly Popup _gazePopup;
         private PointF _cursorPosition = default;
-        private int _cursorRadius = DEFAULT_CURSOR_RADIUS;
         private bool _isCursorVisible = DEFAULT_CURSOR_VISIBILITY;
         private bool _isGazeEntered;
     }

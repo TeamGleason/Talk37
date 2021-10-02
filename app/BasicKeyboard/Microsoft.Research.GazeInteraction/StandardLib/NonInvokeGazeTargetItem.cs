@@ -7,10 +7,16 @@ using System;
 namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 {
     public class NonInvokeGazeTargetItem<TElement> : GazeTargetItem<TElement>
+        where TElement : class
     {
-        public NonInvokeGazeTargetItem()
+        private readonly Func<TElement> _getCursor;
+
+        public NonInvokeGazeTargetItem(Func<TElement> getCursor)
         {
+            _getCursor = getCursor;
         }
+
+        public override TElement Cursor => _getCursor();
 
         protected internal override bool IsInvokable
         {

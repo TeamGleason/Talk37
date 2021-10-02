@@ -14,6 +14,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
     /// Class of singleton object coordinating gaze input.
     /// </summary>
     public class GazePointer<TElement>
+        where TElement : class
     {
         // units in microseconds
         private static readonly TimeSpan DEFAULT_FIXATION_DELAY = TimeSpan.FromMilliseconds(350);
@@ -119,7 +120,9 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
         }
         private Interaction _interaction = Interaction.Disabled;
 
-        private readonly GazeTargetItem<TElement> NonInvokeGazeTargetItem = new NonInvokeGazeTargetItem<TElement>();
+        public TElement DefaultCursor { get; set; }
+
+        private readonly GazeTargetItem<TElement> NonInvokeGazeTargetItem = new NonInvokeGazeTargetItem<TElement>(default);
 
         internal void Reset()
         {
@@ -203,12 +206,12 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
         }
         private EventHandler<GazeHitTestArgs<TElement>> _hitTest;
 
-        public GazePointer(IGazeDevice device, IGazeCursor cursor, Func<PointF, GazeTargetItem<TElement>> targetFactory)
+        public GazePointer(IGazeDevice device, IGazeCursor<TElement> cursor, Func<PointF, GazeTargetItem<TElement>> targetFactory)
             : this(device, device, cursor, targetFactory)
         {
         }
 
-        public GazePointer(IGazeDevice device, IGazeSource source, IGazeCursor cursor, Func<PointF, GazeTargetItem<TElement>> targetFactory)
+        public GazePointer(IGazeDevice device, IGazeSource source, IGazeCursor<TElement> cursor, Func<PointF, GazeTargetItem<TElement>> targetFactory)
         {
             _device = device;
             _source = source;
@@ -216,12 +219,13 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 
             _targetFactory = targetFactory;
 
-            NonInvokeGazeTargetItem = new NonInvokeGazeTargetItem<TElement>();
+            NonInvokeGazeTargetItem = new NonInvokeGazeTargetItem<TElement>(() => DefaultCursor);
 
             // Default to not filtering sample data
             Filter = new NullFilter();
 
             _gazeCursor = cursor;
+            DefaultCursor = cursor.DefaultCursor;
 
             // provide a default of GAZE_IDLE_TIME microseconds to fire eyes off
             EyesOffDelay = GAZE_IDLE_TIME;
@@ -409,10 +413,12 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
                 target = _targetFactory(gazePoint);
             }
 
-            if(target==null)
+            if (target == null)
             {
                 target = NonInvokeGazeTargetItem;
             }
+
+            _gazeCursor.ActiveCursor = target.Cursor;
 
             return target;
         }
@@ -573,7 +579,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 
         private readonly List<int> _roots = new List<int>();
 
-        private readonly IGazeCursor _gazeCursor;
+        private readonly IGazeCursor<TElement> _gazeCursor;
 
         // The value is the total time that FrameworkElement has been gazed at
         private List<GazeTargetItem<TElement>> _activeHitTargetTimes;

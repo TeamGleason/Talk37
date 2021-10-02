@@ -13,6 +13,12 @@ namespace WinFormsLib
     {
         private static GazePointer<Control> _gazePointer;
 
+        public static Control DefaultCursor
+        {
+            get => _gazePointer.DefaultCursor;
+            set => _gazePointer.DefaultCursor = value;
+        }
+
         public static void Start(Form form)
         {
             var device = GazeDevice.Instance;
@@ -115,7 +121,7 @@ namespace WinFormsLib
             }
         }
 
-        private class NonCursor : IGazeCursor
+        private class NonCursor : IGazeCursor<Control>
         {
             private readonly Form _form;
             private PictureBox _pictureBox;
@@ -123,6 +129,22 @@ namespace WinFormsLib
             internal NonCursor(Form form)
             {
                 _form = form;
+
+                var diameter = 20;
+                var bitmap = new Bitmap(diameter, diameter);
+                using (var graphics = Graphics.FromImage(bitmap))
+                {
+                    graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
+                    graphics.FillEllipse(Brushes.Green, 0, 0, diameter, diameter);
+                }
+
+                var pictureBox = new PictureBox();
+                pictureBox.Location = new Point(10, 10);
+                pictureBox.Size = new Size(diameter, diameter);
+
+                pictureBox.Image = bitmap;
+
+                DefaultCursor = pictureBox;
             }
 
             public bool IsCursorVisible
@@ -178,6 +200,10 @@ namespace WinFormsLib
             }
             private PointF _position;
 
+            public Control ActiveCursor { get; set; }
+
+            public Control DefaultCursor { get; }
+
             public void LoadSettings(IDictionary<string, object> settings)
             {
             }
@@ -191,6 +217,8 @@ namespace WinFormsLib
             {
                 _button = button;
             }
+
+            public override Control Cursor => GazeInput.DefaultCursor;
 
             protected override TimeSpan GetElementRepeatDelay(TimeSpan defaultValue)
             {
