@@ -121,8 +121,6 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 
         public TElement DefaultCursor { get; set; }
 
-        private readonly GazeTargetItem<TElement> NonInvokeGazeTargetItem = new NonInvokeGazeTargetItem<TElement>(default);
-
         internal void Reset()
         {
             _activeHitTargetTimes.Clear();
@@ -217,8 +215,6 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             _target = target;
 
             _source.EyesOff += OnEyesOff;
-
-            NonInvokeGazeTargetItem = new NonInvokeGazeTargetItem<TElement>(() => DefaultCursor);
 
             // Default to not filtering sample data
             Filter = new NullFilter();
@@ -413,7 +409,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 
             if (target == null)
             {
-                target = NonInvokeGazeTargetItem;
+                target = _target.MissedGazeTargetItem;
             }
 
             _target.ActiveCursor = target.Cursor;
@@ -572,7 +568,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
         private void OnEyesOff(object sender, object ea)
         {
             CheckIfExiting(_lastTimestamp + EyesOffDelay);
-            NonInvokeGazeTargetItem.RaiseGazePointerEvent(PointerState.Enter, EyesOffDelay);
+            _target.MissedGazeTargetItem.RaiseGazePointerEvent(PointerState.Enter, EyesOffDelay);
         }
 
         private readonly List<int> _roots = new List<int>();

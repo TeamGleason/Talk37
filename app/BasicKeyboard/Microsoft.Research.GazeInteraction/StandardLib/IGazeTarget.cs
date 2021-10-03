@@ -18,6 +18,8 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 
         TElement DefaultCursor { get; }
 
+        GazeTargetItem<TElement> MissedGazeTargetItem { get; }
+
         /// <summary>
         /// Get existing item at specificified point.
         /// </summary>

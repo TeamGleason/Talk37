@@ -39,6 +39,9 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             }
         }
 
+        GazeTargetItem<UIElement> IGazeTarget<UIElement>.MissedGazeTargetItem => _missedGazeTargetItem;
+        private readonly GazeTargetItem<UIElement> _missedGazeTargetItem;
+
         GazeTargetItem<UIElement> IGazeTarget<UIElement>.GetOrCreateItem(double x, double y) => InvokeGazeTargetItem.GetHitTarget(new System.Drawing.PointF((float)x, (float)y));
 
         public bool IsCursorVisible
@@ -107,6 +110,8 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 
         internal GazeCursor()
         {
+            _missedGazeTargetItem = new NonInvokeGazeTargetItem<UIElement>(this);
+
 #if WINDOWS_UWP
 #else
             var screenRect = System.Windows.Forms.Screen.PrimaryScreen;
