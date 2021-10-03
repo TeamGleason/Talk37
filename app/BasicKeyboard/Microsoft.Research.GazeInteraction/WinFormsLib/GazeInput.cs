@@ -22,7 +22,7 @@ namespace WinFormsLib
         public static void Start(Form form)
         {
             var device = GazeDevice.Instance;
-            _gazePointer = new GazePointer<Control>(device, new NonCursor(form), p => TargetFactory(form, p));
+            _gazePointer = new GazePointer<Control>(device, new NonCursor(form));
             _gazePointer.AddRoot(0);
             _gazePointer.IsCursorVisible = true;
         }
@@ -146,6 +146,8 @@ namespace WinFormsLib
 
                 DefaultCursor = pictureBox;
             }
+
+            GazeTargetItem<Control> IGazeCursor<Control>.GetOrCreateItem(double x, double y) => TargetFactory(_form, new System.Drawing.PointF((float)x, (float)y));
 
             public bool IsCursorVisible
             {

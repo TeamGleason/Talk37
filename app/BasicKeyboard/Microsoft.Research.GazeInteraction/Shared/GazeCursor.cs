@@ -39,6 +39,8 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             }
         }
 
+        GazeTargetItem<UIElement> IGazeCursor<UIElement>.GetOrCreateItem(double x, double y) => InvokeGazeTargetItem.GetHitTarget(new System.Drawing.PointF((float)x, (float)y));
+
         public bool IsCursorVisible
         {
             get

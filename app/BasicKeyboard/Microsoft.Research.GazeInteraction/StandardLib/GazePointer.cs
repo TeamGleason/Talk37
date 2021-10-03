@@ -29,7 +29,6 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 
         private readonly IGazeDevice _device;
         private readonly IGazeSource _source;
-        private readonly Func<PointF, GazeTargetItem<TElement>> _targetFactory;
 
         /// <summary>
         /// Loads a settings collection into GazePointer.
@@ -206,18 +205,16 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
         }
         private EventHandler<GazeHitTestArgs<TElement>> _hitTest;
 
-        public GazePointer(IGazeDevice device, IGazeCursor<TElement> cursor, Func<PointF, GazeTargetItem<TElement>> targetFactory)
-            : this(device, device, cursor, targetFactory)
+        public GazePointer(IGazeDevice device, IGazeCursor<TElement> cursor)
+            : this(device, device, cursor)
         {
         }
 
-        public GazePointer(IGazeDevice device, IGazeSource source, IGazeCursor<TElement> cursor, Func<PointF, GazeTargetItem<TElement>> targetFactory)
+        public GazePointer(IGazeDevice device, IGazeSource source, IGazeCursor<TElement> cursor)
         {
             _device = device;
             _source = source;
             _source.EyesOff += OnEyesOff;
-
-            _targetFactory = targetFactory;
 
             NonInvokeGazeTargetItem = new NonInvokeGazeTargetItem<TElement>(() => DefaultCursor);
 
@@ -410,7 +407,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 
             if (target == null)
             {
-                target = _targetFactory(gazePoint);
+                target = _gazeCursor.GetOrCreateItem(gazePoint.X, gazePoint.Y);
             }
 
             if (target == null)

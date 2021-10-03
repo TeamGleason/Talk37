@@ -4,6 +4,7 @@ using System.Drawing;
 namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 {
     public interface IGazeCursor<TElement>
+        where TElement : class
     {
         void LoadSettings(IDictionary<string, object> settings);
 
@@ -16,5 +17,13 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
         TElement ActiveCursor { get; set; }
 
         TElement DefaultCursor { get; }
+
+        /// <summary>
+        /// Get existing item at specificified point.
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        GazeTargetItem<TElement> GetOrCreateItem(double x, double y);
     }
 }
