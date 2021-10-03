@@ -20,7 +20,7 @@ using System.Windows.Shapes;
 
 namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 {
-    internal class GazeCursor : IGazeCursor<UIElement>
+    internal class GazeCursor : IGazeTarget<UIElement>
     {
         private const int DEFAULT_CURSOR_RADIUS = 5;
         private const bool DEFAULT_CURSOR_VISIBILITY = true;
@@ -39,7 +39,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             }
         }
 
-        GazeTargetItem<UIElement> IGazeCursor<UIElement>.GetOrCreateItem(double x, double y) => InvokeGazeTargetItem.GetHitTarget(new System.Drawing.PointF((float)x, (float)y));
+        GazeTargetItem<UIElement> IGazeTarget<UIElement>.GetOrCreateItem(double x, double y) => InvokeGazeTargetItem.GetHitTarget(new System.Drawing.PointF((float)x, (float)y));
 
         public bool IsCursorVisible
         {

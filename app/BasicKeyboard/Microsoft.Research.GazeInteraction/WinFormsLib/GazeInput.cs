@@ -121,7 +121,7 @@ namespace WinFormsLib
             }
         }
 
-        private class NonCursor : IGazeCursor<Control>
+        private class NonCursor : IGazeTarget<Control>
         {
             private readonly Form _form;
             private PictureBox _pictureBox;
@@ -147,7 +147,7 @@ namespace WinFormsLib
                 DefaultCursor = pictureBox;
             }
 
-            GazeTargetItem<Control> IGazeCursor<Control>.GetOrCreateItem(double x, double y) => TargetFactory(_form, new System.Drawing.PointF((float)x, (float)y));
+            GazeTargetItem<Control> IGazeTarget<Control>.GetOrCreateItem(double x, double y) => TargetFactory(_form, new System.Drawing.PointF((float)x, (float)y));
 
             public bool IsCursorVisible
             {

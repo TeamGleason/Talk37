@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 {
-    public interface IGazeCursor<TElement>
+    public interface IGazeTarget<TElement>
         where TElement : class
     {
         void LoadSettings(IDictionary<string, object> settings);

@@ -5,8 +5,4 @@
     <RootNamespace>Microsoft.Toolkit.Uwp.Input.GazeInteraction</RootNamespace>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="IGazeTarget.cs" />
-  </ItemGroup>
-
 </Project>

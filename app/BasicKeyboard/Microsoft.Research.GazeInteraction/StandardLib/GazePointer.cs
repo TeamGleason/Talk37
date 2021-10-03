@@ -35,7 +35,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
         /// </summary>
         public void LoadSettings(IDictionary<string, object> settings)
         {
-            _gazeCursor.LoadSettings(settings);
+            _target.LoadSettings(settings);
             Filter.LoadSettings(settings);
 
             // TODO Add logic to protect against missing settings
@@ -146,8 +146,8 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 
         public bool IsCursorVisible
         {
-            get { return _gazeCursor.IsCursorVisible; }
-            set { _gazeCursor.IsCursorVisible = value; }
+            get { return _target.IsCursorVisible; }
+            set { _target.IsCursorVisible = value; }
         }
 
         public bool IsSwitchEnabled { get; set; }
@@ -178,7 +178,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             if (_roots.Count == 0)
             {
                 _isShuttingDown = true;
-                _gazeCursor.IsGazeEntered = false;
+                _target.IsGazeEntered = false;
                 DeinitializeGazeInputSource();
             }
         }
@@ -205,15 +205,17 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
         }
         private EventHandler<GazeHitTestArgs<TElement>> _hitTest;
 
-        public GazePointer(IGazeDevice device, IGazeCursor<TElement> cursor)
-            : this(device, device, cursor)
+        public GazePointer(IGazeDevice device, IGazeTarget<TElement> target)
+            : this(device, device, target)
         {
         }
 
-        public GazePointer(IGazeDevice device, IGazeSource source, IGazeCursor<TElement> cursor)
+        public GazePointer(IGazeDevice device, IGazeSource source, IGazeTarget<TElement> target)
         {
             _device = device;
             _source = source;
+            _target = target;
+
             _source.EyesOff += OnEyesOff;
 
             NonInvokeGazeTargetItem = new NonInvokeGazeTargetItem<TElement>(() => DefaultCursor);
@@ -221,8 +223,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             // Default to not filtering sample data
             Filter = new NullFilter();
 
-            _gazeCursor = cursor;
-            DefaultCursor = cursor.DefaultCursor;
+            DefaultCursor = target.DefaultCursor;
 
             // provide a default of GAZE_IDLE_TIME microseconds to fire eyes off
             EyesOffDelay = GAZE_IDLE_TIME;
@@ -407,7 +408,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 
             if (target == null)
             {
-                target = _gazeCursor.GetOrCreateItem(gazePoint.X, gazePoint.Y);
+                target = _target.GetOrCreateItem(gazePoint.X, gazePoint.Y);
             }
 
             if (target == null)
@@ -415,7 +416,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
                 target = NonInvokeGazeTargetItem;
             }
 
-            _gazeCursor.ActiveCursor = target.Cursor;
+            _target.ActiveCursor = target.Cursor;
 
             return target;
         }
@@ -475,14 +476,14 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
         private void OnGazeEntered(object sender, EventArgs args)
         {
             // Debug.WriteLine("Entered at %ld", args.CurrentPoint.Timestamp);
-            _gazeCursor.IsGazeEntered = true;
+            _target.IsGazeEntered = true;
         }
 
         private void OnGazeMoved(object provider, GazeMovedEventArgs args)
         {
             if (!_isShuttingDown)
             {
-                _gazeCursor.IsGazeEntered = true;
+                _target.IsGazeEntered = true;
                 var position = new PointF((float)args.X, (float)args.Y);
                 var location = Filter.Update(args.Timestamp, position);
                 ProcessGazePoint(args.Timestamp, location);
@@ -492,12 +493,12 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
         private void OnGazeExited(object sender, EventArgs args)
         {
             // Debug.WriteLine("Exited at %ld", args.CurrentPoint.Timestamp);
-            _gazeCursor.IsGazeEntered = false;
+            _target.IsGazeEntered = false;
         }
 
         private void ProcessGazePoint(TimeSpan timestamp, PointF location)
         {
-            _gazeCursor.Position = location;
+            _target.Position = location;
 
             var targetItem = ResolveHitTarget(location, timestamp);
             Debug.Assert(targetItem != null, "targetItem is null when processing gaze point");
@@ -576,7 +577,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 
         private readonly List<int> _roots = new List<int>();
 
-        private readonly IGazeCursor<TElement> _gazeCursor;
+        private readonly IGazeTarget<TElement> _target;
 
         // The value is the total time that FrameworkElement has been gazed at
         private List<GazeTargetItem<TElement>> _activeHitTargetTimes;
