@@ -39,10 +39,10 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             }
         }
 
-        GazeTargetItem<UIElement> IGazeTarget<UIElement>.MissedGazeTargetItem => _missedGazeTargetItem;
         private readonly GazeTargetItem<UIElement> _missedGazeTargetItem;
 
-        GazeTargetItem<UIElement> IGazeTarget<UIElement>.GetOrCreateItem(double x, double y) => InvokeGazeTargetItem.GetHitTarget(new System.Drawing.PointF((float)x, (float)y));
+        GazeTargetItem<UIElement> IGazeTarget<UIElement>.GetOrCreateItem(double x, double y) => 
+            InvokeGazeTargetItem.GetHitTarget(new System.Drawing.PointF((float)x, (float)y)) ?? _missedGazeTargetItem;
 
         public bool IsCursorVisible
         {

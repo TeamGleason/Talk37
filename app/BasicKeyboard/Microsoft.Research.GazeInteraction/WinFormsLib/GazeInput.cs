@@ -149,10 +149,10 @@ namespace WinFormsLib
                 DefaultCursor = pictureBox;
             }
 
-            GazeTargetItem<Control> IGazeTarget<Control>.MissedGazeTargetItem => _missedGazeTargetItem;
             private readonly GazeTargetItem<Control> _missedGazeTargetItem;
 
-            GazeTargetItem<Control> IGazeTarget<Control>.GetOrCreateItem(double x, double y) => TargetFactory(_form, new System.Drawing.PointF((float)x, (float)y));
+            GazeTargetItem<Control> IGazeTarget<Control>.GetOrCreateItem(double x, double y) => 
+                TargetFactory(_form, new System.Drawing.PointF((float)x, (float)y)) ?? _missedGazeTargetItem;
 
             public bool IsCursorVisible
             {

@@ -407,10 +407,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
                 target = _target.GetOrCreateItem(gazePoint.X, gazePoint.Y);
             }
 
-            if (target == null)
-            {
-                target = _target.MissedGazeTargetItem;
-            }
+            Debug.Assert(target != null);
 
             _target.ActiveCursor = target.Cursor;
 
@@ -568,7 +565,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
         private void OnEyesOff(object sender, object ea)
         {
             CheckIfExiting(_lastTimestamp + EyesOffDelay);
-            _target.MissedGazeTargetItem.RaiseGazePointerEvent(PointerState.Enter, EyesOffDelay);
+            _currentlyFixatedElement?.RaiseGazePointerEvent(PointerState.Enter, EyesOffDelay);
         }
 
         private readonly List<int> _roots = new List<int>();
