@@ -79,15 +79,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction.Device
                     }
                     else
                     {
-                        if (_isWaiting)
-                        {
-                            var waited = TimeSpan.FromMilliseconds(Environment.TickCount - _waitEpoch);
-                            if (_eyesOffDelay <= waited)
-                            {
-                                _isWaiting = false;
-                                _dispatcher.Invoke(() => _eyesOff?.Invoke(this, EventArgs.Empty));
-                            }
-                        }
+                        DoWaiting();
                     }
                 }
 
@@ -106,6 +98,18 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction.Device
             }
         }
 
+        private void DoWaiting()
+        {
+            if (_isWaiting)
+            {
+                var waited = TimeSpan.FromMilliseconds(Environment.TickCount - _waitEpoch);
+                if (_eyesOffDelay <= waited)
+                {
+                    _isWaiting = false;
+                    _dispatcher.Invoke(() => _eyesOff?.Invoke(this, EventArgs.Empty));
+                }
+            }
+        }
 
         private void OnGazePoint(ref tobii_gaze_point_t gaze_point, IntPtr user_data)
         {
@@ -129,6 +133,10 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction.Device
 
                 _waitEpoch = Environment.TickCount;
                 _isWaiting = true;
+            }
+            else
+            {
+                DoWaiting();
             }
         }
 
