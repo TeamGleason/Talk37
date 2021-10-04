@@ -6,10 +6,9 @@ using System;
 
 namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 {
-    struct GazeHistoryItem<TElement>
-        where TElement : class
+    struct GazeHistoryItem
     {
-        internal GazeTargetItem<TElement> HitTarget { get; set; }
+        internal GazeTargetItem HitTarget { get; set; }
 
         internal TimeSpan Timestamp { get; set; }
 

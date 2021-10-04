@@ -18,17 +18,17 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 {
     static class GazeTargetFactory
     {
-        private static readonly DependencyProperty _gazeTargetItemProperty = DependencyProperty.RegisterAttached("_GazeTargetItem", typeof(GazeTargetItem<UIElement>), typeof(GazeTargetItem<UIElement>), new PropertyMetadata(null));
+        private static readonly DependencyProperty _gazeTargetItemProperty = DependencyProperty.RegisterAttached("_GazeTargetItem", typeof(GazeTargetItem), typeof(GazeTargetItem), new PropertyMetadata(null));
 
-        internal static GazeTargetItem<UIElement> GetOrCreate(UIElement element)
+        internal static GazeTargetItem GetOrCreate(UIElement element)
         {
-            GazeTargetItem<UIElement> item;
+            GazeTargetItem item;
 
             var value = element.ReadLocalValue(_gazeTargetItemProperty);
 
             if (value != DependencyProperty.UnsetValue)
             {
-                item = (GazeTargetItem<UIElement>)value;
+                item = (GazeTargetItem)value;
             }
             else
             {

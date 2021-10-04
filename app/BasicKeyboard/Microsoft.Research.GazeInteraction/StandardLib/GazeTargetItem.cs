@@ -120,9 +120,4 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
         private TimeSpan _nextStateTime;
         private DwellProgressState _notifiedProgressState = DwellProgressState.Idle;
     }
-
-    public abstract class GazeTargetItem<TElement> : GazeTargetItem
-        where TElement : class
-    {
-    }
 }

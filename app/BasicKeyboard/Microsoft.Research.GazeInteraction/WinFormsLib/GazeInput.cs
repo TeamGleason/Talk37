@@ -21,9 +21,9 @@ namespace WinFormsLib
             _gazePointer.IsCursorVisible = true;
         }
 
-        private static GazeTargetItem<Control> TargetFactory(Form form, PointF arg)
+        private static GazeTargetItem TargetFactory(Form form, PointF arg)
         {
-            GazeTargetItem<Control> item;
+            GazeTargetItem item;
 
             var point = form.PointToClient(new Point((int)arg.X, (int)arg.Y));
             var child = form.GetChildAtPoint(point, GetChildAtPointSkip.Invisible);
@@ -32,7 +32,7 @@ namespace WinFormsLib
             {
                 item = null;
             }
-            else if (child.Tag is GazeTargetItem<Control> cached)
+            else if (child.Tag is GazeTargetItem cached)
             {
                 item = cached;
             }
@@ -115,7 +115,7 @@ namespace WinFormsLib
             }
         }
 
-        private class NonCursor : IGazeTarget<Control>
+        private class NonCursor : IGazeTarget
         {
             private readonly Form _form;
             private PictureBox _pictureBox;
@@ -124,7 +124,7 @@ namespace WinFormsLib
             {
                 _form = form;
 
-                _missedGazeTargetItem = new NonInvokeGazeTargetItem<Control>();
+                _missedGazeTargetItem = new NonInvokeGazeTargetItem();
 
                 var diameter = 20;
                 var bitmap = new Bitmap(diameter, diameter);
@@ -143,12 +143,12 @@ namespace WinFormsLib
                 DefaultCursor = pictureBox;
             }
 
-            private readonly GazeTargetItem<Control> _missedGazeTargetItem;
+            private readonly GazeTargetItem _missedGazeTargetItem;
 
-            GazeTargetItem<Control> IGazeTarget<Control>.GetOrCreateItem(double x, double y) =>
+            GazeTargetItem IGazeTarget.GetOrCreateItem(double x, double y) =>
                 TargetFactory(_form, new System.Drawing.PointF((float)x, (float)y)) ?? _missedGazeTargetItem;
 
-            void IGazeTarget<Control>.UpdateCursor(double x, double y)
+            void IGazeTarget.UpdateCursor(double x, double y)
             {
                 var point = _form.PointToClient(new Point((int)x, (int)y));
                 var left = point.X/*-_pictureBox.Size.Width / 2*/ + 1;
@@ -204,7 +204,7 @@ namespace WinFormsLib
             }
         }
 
-        private class ButtonGazeTargetItem : GazeTargetItem<Control>
+        private class ButtonGazeTargetItem : GazeTargetItem
         {
             private Button _button;
 

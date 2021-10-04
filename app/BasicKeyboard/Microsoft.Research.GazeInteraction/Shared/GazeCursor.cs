@@ -20,7 +20,7 @@ using System.Windows.Shapes;
 
 namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 {
-    internal class GazeCursor : IGazeTarget<UIElement>
+    internal class GazeCursor : IGazeTarget
     {
         private const int DEFAULT_CURSOR_RADIUS = 5;
         private const bool DEFAULT_CURSOR_VISIBILITY = true;
@@ -39,12 +39,12 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             }
         }
 
-        private readonly GazeTargetItem<UIElement> _missedGazeTargetItem;
+        private readonly GazeTargetItem _missedGazeTargetItem;
 
-        GazeTargetItem<UIElement> IGazeTarget<UIElement>.GetOrCreateItem(double x, double y) => 
+        GazeTargetItem IGazeTarget.GetOrCreateItem(double x, double y) => 
             InvokeGazeTargetItem.GetHitTarget(new System.Drawing.PointF((float)x, (float)y)) ?? _missedGazeTargetItem;
 
-        void IGazeTarget<UIElement>.UpdateCursor(double x, double y)
+        void IGazeTarget.UpdateCursor(double x, double y)
         {
 #if WINDOWS_UWP
             _gazePopup.HorizontalOffset = x;
@@ -101,7 +101,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 
         internal GazeCursor()
         {
-            _missedGazeTargetItem = new NonInvokeGazeTargetItem<UIElement>();
+            _missedGazeTargetItem = new NonInvokeGazeTargetItem();
 
 #if WINDOWS_UWP
 #else

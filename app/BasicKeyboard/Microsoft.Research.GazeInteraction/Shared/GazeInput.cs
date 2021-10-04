@@ -242,7 +242,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             remove => GazePointerInstance.IsDeviceAvailableChanged -= value;
         }
 
-        public static event EventHandler<GazeHitTestArgs<UIElement>> HitTest
+        public static event EventHandler<GazeHitTestArgs> HitTest
         {
             add => GazePointerInstance.HitTest += value;
             remove => GazePointerInstance.HitTest -= value;
@@ -256,13 +256,13 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
         public static void LoadSettings(IDictionary<string, object> settings) =>
             GazePointerInstance.LoadSettings(settings);
 
-        internal static Func<GazePointer<UIElement>> GazePointerFactory { get; set; } =
-            () => new GazePointer<UIElement>(GazeDevice.Instance, new GazeCursor());
+        internal static Func<GazePointer> GazePointerFactory { get; set; } =
+            () => new GazePointer(GazeDevice.Instance, new GazeCursor());
 
 
-        private static ThreadLocal<GazePointer<UIElement>> _instance = new ThreadLocal<GazePointer<UIElement>>(GazePointerFactory);
+        private static ThreadLocal<GazePointer> _instance = new ThreadLocal<GazePointer>(GazePointerFactory);
 
-        internal static GazePointer<UIElement> GazePointerInstance => _instance.Value;
+        internal static GazePointer GazePointerInstance => _instance.Value;
 
         internal static GazeFeedbackPopupFactory GazeFeedbackPopupFactory { get; } = new GazeFeedbackPopupFactory();
     }

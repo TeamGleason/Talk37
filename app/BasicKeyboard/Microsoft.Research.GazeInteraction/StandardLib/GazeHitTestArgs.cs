@@ -3,8 +3,7 @@ using System.Diagnostics;
 
 namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 {
-    public class GazeHitTestArgs<TElement> : EventArgs
-        where TElement : class
+    public class GazeHitTestArgs : EventArgs
     {
         public bool Handled => _target != null;
 
@@ -14,8 +13,8 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 
         public double Y { get; }
 
-        internal GazeTargetItem<TElement> Target => _target;
-        private GazeTargetItem<TElement> _target;
+        internal GazeTargetItem Target => _target;
+        private GazeTargetItem _target;
 
         internal GazeHitTestArgs(TimeSpan timestamp, double x, double y)
         {
@@ -24,7 +23,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             Y = y;
         }
 
-        public void SetTarget(GazeTargetItem<TElement> target)
+        public void SetTarget(GazeTargetItem target)
         {
             Debug.Assert(_target == null);
             _target = target;

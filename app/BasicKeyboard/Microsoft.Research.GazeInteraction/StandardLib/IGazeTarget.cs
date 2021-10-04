@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Drawing;
 
 namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 {
-    public interface IGazeTarget<TElement>
-        where TElement : class
+    public interface IGazeTarget
     {
         void LoadSettings(IDictionary<string, object> settings);
 
@@ -12,15 +10,13 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 
         bool IsGazeEntered { get; set; }
 
-        TElement ActiveCursor { get; set; }
-
         /// <summary>
         /// Get existing item at specificified point.
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <returns></returns>
-        GazeTargetItem<TElement> GetOrCreateItem(double x, double y);
+        GazeTargetItem GetOrCreateItem(double x, double y);
 
         void UpdateCursor(double x, double y);
     }
