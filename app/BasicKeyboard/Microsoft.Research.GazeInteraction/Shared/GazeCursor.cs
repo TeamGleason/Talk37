@@ -44,6 +44,18 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
         GazeTargetItem<UIElement> IGazeTarget<UIElement>.GetOrCreateItem(double x, double y) => 
             InvokeGazeTargetItem.GetHitTarget(new System.Drawing.PointF((float)x, (float)y)) ?? _missedGazeTargetItem;
 
+        void IGazeTarget<UIElement>.UpdateCursor(double x, double y)
+        {
+#if WINDOWS_UWP
+            _gazePopup.HorizontalOffset = x;
+            _gazePopup.VerticalOffset = y;
+#else
+            _gazePopup.HorizontalOffset = x * _scalingX;
+            _gazePopup.VerticalOffset = y * _scalingY;
+#endif
+            SetVisibility();
+        }
+
         public bool IsCursorVisible
         {
             get
@@ -72,27 +84,6 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             }
         }
 
-        public PointF Position
-        {
-            get
-            {
-                return _cursorPosition;
-            }
-
-            set
-            {
-                _cursorPosition = value;
-#if WINDOWS_UWP
-                _gazePopup.HorizontalOffset = value.X;
-                _gazePopup.VerticalOffset = value.Y;
-#else
-                _gazePopup.HorizontalOffset = value.X * _scalingX;
-                _gazePopup.VerticalOffset = value.Y * _scalingY;
-#endif
-                SetVisibility();
-            }
-        }
-
         public UIElement ActiveCursor
         {
             get
@@ -110,7 +101,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 
         internal GazeCursor()
         {
-            _missedGazeTargetItem = new NonInvokeGazeTargetItem<UIElement>(this);
+            _missedGazeTargetItem = new NonInvokeGazeTargetItem<UIElement>();
 
 #if WINDOWS_UWP
 #else
@@ -172,7 +163,6 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
         }
 
         private readonly Popup _gazePopup;
-        private PointF _cursorPosition = default;
         private bool _isCursorVisible = DEFAULT_CURSOR_VISIBILITY;
         private bool _isGazeEntered;
     }

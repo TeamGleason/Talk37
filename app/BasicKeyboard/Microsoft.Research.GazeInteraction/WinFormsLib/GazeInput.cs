@@ -13,12 +13,6 @@ namespace WinFormsLib
     {
         private static GazePointer<Control> _gazePointer;
 
-        public static Control DefaultCursor
-        {
-            get => _gazePointer.DefaultCursor;
-            set => _gazePointer.DefaultCursor = value;
-        }
-
         public static void Start(Form form)
         {
             var device = GazeDevice.Instance;
@@ -130,7 +124,7 @@ namespace WinFormsLib
             {
                 _form = form;
 
-                _missedGazeTargetItem = new NonInvokeGazeTargetItem<Control>(this);
+                _missedGazeTargetItem = new NonInvokeGazeTargetItem<Control>();
 
                 var diameter = 20;
                 var bitmap = new Bitmap(diameter, diameter);
@@ -151,8 +145,16 @@ namespace WinFormsLib
 
             private readonly GazeTargetItem<Control> _missedGazeTargetItem;
 
-            GazeTargetItem<Control> IGazeTarget<Control>.GetOrCreateItem(double x, double y) => 
+            GazeTargetItem<Control> IGazeTarget<Control>.GetOrCreateItem(double x, double y) =>
                 TargetFactory(_form, new System.Drawing.PointF((float)x, (float)y)) ?? _missedGazeTargetItem;
+
+            void IGazeTarget<Control>.UpdateCursor(double x, double y)
+            {
+                var point = _form.PointToClient(new Point((int)x, (int)y));
+                var left = point.X/*-_pictureBox.Size.Width / 2*/ + 1;
+                var top = point.Y/*-_pictureBox.Size.Height / 2*/ + 1;
+                _pictureBox.Location = new Point(left, top);
+            }
 
             public bool IsCursorVisible
             {
@@ -192,20 +194,6 @@ namespace WinFormsLib
             bool _isCursorVisible;
 
             public bool IsGazeEntered { get; set; }
-            public PointF Position
-            {
-                get => _position;
-                set
-                {
-                    _position = value;
-
-                    var point = _form.PointToClient(new Point((int)value.X, (int)value.Y));
-                    var left = point.X/*-_pictureBox.Size.Width / 2*/ + 1;
-                    var top = point.Y/*-_pictureBox.Size.Height / 2*/ + 1;
-                    _pictureBox.Location = new Point(left, top);
-                }
-            }
-            private PointF _position;
 
             public Control ActiveCursor { get; set; }
 
@@ -224,8 +212,6 @@ namespace WinFormsLib
             {
                 _button = button;
             }
-
-            public override Control Cursor => GazeInput.DefaultCursor;
 
             protected override TimeSpan GetElementRepeatDelay(TimeSpan defaultValue)
             {

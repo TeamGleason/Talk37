@@ -12,11 +12,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 
         bool IsGazeEntered { get; set; }
 
-        PointF Position { get; set; }
-
         TElement ActiveCursor { get; set; }
-
-        TElement DefaultCursor { get; }
 
         /// <summary>
         /// Get existing item at specificified point.
@@ -25,5 +21,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
         /// <param name="y"></param>
         /// <returns></returns>
         GazeTargetItem<TElement> GetOrCreateItem(double x, double y);
+
+        void UpdateCursor(double x, double y);
     }
 }

@@ -9,14 +9,9 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
     public class NonInvokeGazeTargetItem<TElement> : GazeTargetItem<TElement>
         where TElement : class
     {
-        private readonly IGazeTarget<TElement> _target;
-
-        public NonInvokeGazeTargetItem(IGazeTarget<TElement> target)
+        public NonInvokeGazeTargetItem()
         {
-            _target = target;
         }
-
-        public override TElement Cursor => _target.DefaultCursor;
 
         protected internal override bool IsInvokable
         {

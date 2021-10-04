@@ -119,8 +119,6 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
         }
         private Interaction _interaction = Interaction.Disabled;
 
-        public TElement DefaultCursor { get; set; }
-
         internal void Reset()
         {
             _activeHitTargetTimes.Clear();
@@ -218,8 +216,6 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 
             // Default to not filtering sample data
             Filter = new NullFilter();
-
-            DefaultCursor = target.DefaultCursor;
 
             // provide a default of GAZE_IDLE_TIME microseconds to fire eyes off
             EyesOffDelay = GAZE_IDLE_TIME;
@@ -409,7 +405,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 
             Debug.Assert(target != null);
 
-            _target.ActiveCursor = target.Cursor;
+            _target.UpdateCursor(gazePoint.X, gazePoint.Y);
 
             return target;
         }
@@ -491,7 +487,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 
         private void ProcessGazePoint(TimeSpan timestamp, PointF location)
         {
-            _target.Position = location;
+            _target.UpdateCursor(location.X, location.Y);
 
             var targetItem = ResolveHitTarget(location, timestamp);
             Debug.Assert(targetItem != null, "targetItem is null when processing gaze point");

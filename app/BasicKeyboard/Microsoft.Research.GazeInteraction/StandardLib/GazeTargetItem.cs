@@ -124,6 +124,5 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
     public abstract class GazeTargetItem<TElement> : GazeTargetItem
         where TElement : class
     {
-        public abstract TElement Cursor { get; }
     }
 }
