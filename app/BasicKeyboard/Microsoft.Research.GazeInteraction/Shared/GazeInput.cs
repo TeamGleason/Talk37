@@ -79,6 +79,16 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
         public static void SetIsCursorVisible(UIElement element, bool value) =>
             element.SetValue(IsCursorVisibleProperty, value);
 
+        public static void SetCustomCursor(UIElement element)
+        {
+            _cursorInstance.Value.SetCustomCursor(element);
+        }
+
+        public static void ResetCustomCursor()
+        {
+            _cursorInstance.Value.ResetCustomCursor();
+        }
+
         /// <summary>
         /// Gets the FixationDuration dependency property
         /// </summary>
@@ -256,9 +266,10 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
         public static void LoadSettings(IDictionary<string, object> settings) =>
             GazePointerInstance.LoadSettings(settings);
 
-        internal static Func<GazePointer> GazePointerFactory { get; set; } =
-            () => new GazePointer(GazeDevice.Instance, new GazeCursor());
+        private static ThreadLocal<GazeCursor> _cursorInstance = new ThreadLocal<GazeCursor>(() => new GazeCursor());
 
+        internal static Func<GazePointer> GazePointerFactory { get; set; } =
+            () => new GazePointer(GazeDevice.Instance, _cursorInstance.Value);
 
         private static ThreadLocal<GazePointer> _instance = new ThreadLocal<GazePointer>(GazePointerFactory);
 

@@ -41,7 +41,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 
         private readonly GazeTargetItem _missedGazeTargetItem;
 
-        GazeTargetItem IGazeTarget.GetOrCreateItem(double x, double y) => 
+        GazeTargetItem IGazeTarget.GetOrCreateItem(double x, double y) =>
             InvokeGazeTargetItem.GetHitTarget(new System.Drawing.PointF((float)x, (float)y)) ?? _missedGazeTargetItem;
 
         void IGazeTarget.UpdateCursor(double x, double y)
@@ -130,6 +130,16 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
                 IsHitTestVisible = false
             };
             return gazeCursor;
+        }
+
+        internal void SetCustomCursor(UIElement element)
+        {
+            _gazePopup.Child = element;
+        }
+
+        internal void ResetCustomCursor()
+        {
+            _gazePopup.Child = DefaultCursor;
         }
 
         private void SetVisibility()
