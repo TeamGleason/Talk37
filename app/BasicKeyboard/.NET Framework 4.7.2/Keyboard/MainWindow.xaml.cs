@@ -57,6 +57,44 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard.Keyboard
                 _sampleTail = 0;
                 _isArmed = false;
                 GazeInput.HitTest += OnHitTest;
+
+                //var cursor = new Canvas();
+                //cursor.Children.Add(new Ellipse
+                //{
+                //    Width = 50,
+                //    Height = 50,
+                //    Margin = new Thickness(-25),
+                //    Stroke = Brushes.Green
+                //});
+                //cursor.Children.Add(new Line
+                //{
+                //    X1 = -25,
+                //    X2 = 25,
+                //    Y1 = 0,
+                //    Y2 = 0,
+                //    Stroke = Brushes.Green
+                //});
+                //cursor.Children.Add(new Line
+                //{
+                //    X1 = 0,
+                //    X2 = 0,
+                //    Y1 = -25,
+                //    Y2 = 25,
+                //    Stroke = Brushes.Green
+                //});
+
+                //var cursor = new Ellipse
+                //{
+                //    Fill = new SolidColorBrush(Colors.Blue),
+                //    VerticalAlignment = VerticalAlignment.Top,
+                //    HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
+                //    Width = 2 * 50,
+                //    Height = 2 * 50,
+                //    Margin = new Thickness(-50, -50, 0, 0),
+                //    IsHitTestVisible = false
+                //};
+
+                GazeInput.SetCustomCursor(null/*cursor*/);
             }
         }
 
@@ -78,6 +116,7 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard.Keyboard
                     Debug.WriteLine($"Expired after {_targettingEpoch - e.Timestamp}");
                     _targetting = false;
                     GazeInput.HitTest -= OnHitTest;
+                    GazeInput.ResetCustomCursor();
                 }
                 else
                 {
@@ -85,6 +124,15 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard.Keyboard
                     {
                         //Debug.WriteLine("Samples wrapping around");
                         _sampleTail = 0;
+                    }
+
+                    {
+                        var screenWidth = Screen.PrimaryScreen.Bounds.Width;
+                        var screenHeight = Screen.PrimaryScreen.Bounds.Height;
+                        var dx = (int)Math.Round(0x10000 * e.X / screenWidth);
+                        var dy = (int)Math.Round(0x10000 * e.Y / screenHeight);
+
+                        InteropHelper.SendMouseMove(dx, dy);
                     }
 
                     _targetTimestamps[_sampleTail] = e.Timestamp;
@@ -144,6 +192,7 @@ namespace TeamGleason.SpeakFaster.BasicKeyboard.Keyboard
 
                             _targetting = false;
                             GazeInput.HitTest -= OnHitTest;
+                            GazeInput.ResetCustomCursor();
                         }
                     }
                     else if (UpVarianceThreshold < varianceXY)
