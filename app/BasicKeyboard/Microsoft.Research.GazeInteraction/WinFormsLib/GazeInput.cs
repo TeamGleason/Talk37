@@ -11,21 +11,21 @@ namespace WinFormsLib
 {
     public class GazeInput
     {
-        private static GazePointer<Control> _gazePointer;
+        private static GazePointer _gazePointer;
 
         public static void Start(Form form)
         {
             var device = GazeDevice.Instance;
-            _gazePointer = new GazePointer<Control>(device, new NonCursor(form));
+            _gazePointer = new GazePointer(device, new NonCursor(form));
             _gazePointer.AddRoot(0);
             _gazePointer.IsCursorVisible = true;
         }
 
-        private static GazeTargetItem TargetFactory(Form form, PointF arg)
+        private static GazeTargetItem TargetFactory(Form form, double x, double y)
         {
             GazeTargetItem item;
 
-            var point = form.PointToClient(new Point((int)arg.X, (int)arg.Y));
+            var point = form.PointToClient(new Point((int)x, (int)y));
             var child = form.GetChildAtPoint(point, GetChildAtPointSkip.Invisible);
 
             if (child == null)
@@ -146,7 +146,7 @@ namespace WinFormsLib
             private readonly GazeTargetItem _missedGazeTargetItem;
 
             GazeTargetItem IGazeTarget.GetOrCreateItem(double x, double y) =>
-                TargetFactory(_form, new System.Drawing.PointF((float)x, (float)y)) ?? _missedGazeTargetItem;
+                TargetFactory(_form, x, y) ?? _missedGazeTargetItem;
 
             void IGazeTarget.UpdateCursor(double x, double y)
             {

@@ -3,7 +3,6 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Collections.Generic;
-using System.Drawing;
 #if WINDOWS_UWP
 using System.Linq;
 using Windows.UI;
@@ -42,7 +41,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
         private readonly GazeTargetItem _missedGazeTargetItem;
 
         GazeTargetItem IGazeTarget.GetOrCreateItem(double x, double y) =>
-            InvokeGazeTargetItem.GetHitTarget(new System.Drawing.PointF((float)x, (float)y)) ?? _missedGazeTargetItem;
+            InvokeGazeTargetItem.GetHitTarget(x, y) ?? _missedGazeTargetItem;
 
         void IGazeTarget.UpdateCursor(double x, double y)
         {

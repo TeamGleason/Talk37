@@ -5,8 +5,8 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Drawing;
 using System.Threading.Tasks;
+using PointF = System.Drawing.PointF;
 
 namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 {
@@ -316,7 +316,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             }
         }
 
-        private GazeTargetItem ResolveHitTarget(PointF gazePoint, TimeSpan timestamp)
+        private GazeTargetItem ResolveHitTarget(TimeSpan timestamp, double x, double y)
         {
             // TODO: The existence of a GazeTargetItem should be used to indicate that
             // the target item is invokable. The method of invocation should be stored
@@ -324,7 +324,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             // subsequently needed.
 
             // create GazeHistoryItem to deal with this sample
-            var target = GetTarget(timestamp, gazePoint);
+            var target = GetTarget(timestamp, x, y);
             GazeHistoryItem historyItem = default;
             historyItem.HitTarget = target;
             historyItem.Timestamp = timestamp;
@@ -381,14 +381,14 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             return target;
         }
 
-        private GazeTargetItem GetTarget(TimeSpan timestamp, PointF gazePoint)
+        private GazeTargetItem GetTarget(TimeSpan timestamp, double x, double y)
         {
             GazeTargetItem target;
 
             var hitTest = _hitTest;
             if (hitTest != null)
             {
-                var args = new GazeHitTestArgs(timestamp, gazePoint.X, gazePoint.Y);
+                var args = new GazeHitTestArgs(timestamp, x, y);
                 hitTest(this, args);
                 target = args.Target;
             }
@@ -399,12 +399,12 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 
             if (target == null)
             {
-                target = _target.GetOrCreateItem(gazePoint.X, gazePoint.Y);
+                target = _target.GetOrCreateItem(x, y);
             }
 
             Debug.Assert(target != null);
 
-            _target.UpdateCursor(gazePoint.X, gazePoint.Y);
+            _target.UpdateCursor(x, y);
 
             return target;
         }
@@ -474,7 +474,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
                 _target.IsGazeEntered = true;
                 var position = new PointF((float)args.X, (float)args.Y);
                 var location = Filter.Update(args.Timestamp, position);
-                ProcessGazePoint(args.Timestamp, location);
+                ProcessGazePoint(args.Timestamp, location.X, location.Y);
             }
         }
 
@@ -484,11 +484,11 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             _target.IsGazeEntered = false;
         }
 
-        private void ProcessGazePoint(TimeSpan timestamp, PointF location)
+        private void ProcessGazePoint(TimeSpan timestamp, double x, double y)
         {
-            _target.UpdateCursor(location.X, location.Y);
+            _target.UpdateCursor(x, y);
 
-            var targetItem = ResolveHitTarget(location, timestamp);
+            var targetItem = ResolveHitTarget(timestamp, x, y);
             Debug.Assert(targetItem != null, "targetItem is null when processing gaze point");
 
             // Debug.WriteLine("ProcessGazePoint. [{0}, {1}], {2}", (int)location.X, (int)location.Y, timestamp);

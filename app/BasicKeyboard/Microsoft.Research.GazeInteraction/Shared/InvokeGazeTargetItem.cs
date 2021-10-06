@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Linq;
-using PointF = System.Drawing.PointF;
 #if WINDOWS_UWP
+using System.Linq;
 using Windows.Foundation;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
@@ -136,7 +135,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
         }
 
 #if WINDOWS_UWP
-        internal static GazeTargetItem GetHitTarget(PointF gazePoint)
+        internal static GazeTargetItem GetHitTarget(double x, double y)
         {
             GazeTargetItem invokable;
 
@@ -144,7 +143,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             {
                 case CoreWindowActivationMode.ActivatedInForeground:
                 case CoreWindowActivationMode.ActivatedNotForeground:
-                    var gazePointD = new Point(gazePoint.X, gazePoint.Y);
+                    var gazePointD = new Point(x, y);
                     var elements = VisualTreeHelper.FindElementsInHostCoordinates(gazePointD, null, false);
                     var element = elements.FirstOrDefault();
 
@@ -160,15 +159,15 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             return invokable;
         }
 #else
-        internal static GazeTargetItem GetHitTarget(PointF gazePoint)
+        internal static GazeTargetItem GetHitTarget(double x, double y)
         {
             GazeTargetItem invokable;
 
-            var gazePointD = new Point(gazePoint.X, gazePoint.Y);
+            var gazePointD = new Point(x, y);
             var window = Application.Current.MainWindow;
             if (window != null)
             {
-                var pointFromScreen = window.PointFromScreen(new Point(gazePoint.X, gazePoint.Y));
+                var pointFromScreen = window.PointFromScreen(new Point(x, y));
                 var hitTestParameters = new PointHitTestParameters(pointFromScreen);
                 var element = (UIElement)null;
                 var pointHit = new Point();
