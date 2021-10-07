@@ -39,7 +39,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             return item;
         }
 
-        private static InvokeGazeTargetItem Create(UIElement element)
+        internal static InvokeGazeTargetItem Create(UIElement element)
         {
             InvokeGazeTargetItem item;
 

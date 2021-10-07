@@ -124,8 +124,6 @@ namespace WinFormsLib
             {
                 _form = form;
 
-                _missedGazeTargetItem = new NonInvokeGazeTargetItem();
-
                 var diameter = 20;
                 var bitmap = new Bitmap(diameter, diameter);
                 using (var graphics = Graphics.FromImage(bitmap))
@@ -143,10 +141,8 @@ namespace WinFormsLib
                 DefaultCursor = pictureBox;
             }
 
-            private readonly GazeTargetItem _missedGazeTargetItem;
-
             GazeTargetItem IGazeTarget.GetOrCreateItem(double x, double y) =>
-                TargetFactory(_form, x, y) ?? _missedGazeTargetItem;
+                TargetFactory(_form, x, y);
 
             void IGazeTarget.UpdateCursor(double x, double y)
             {

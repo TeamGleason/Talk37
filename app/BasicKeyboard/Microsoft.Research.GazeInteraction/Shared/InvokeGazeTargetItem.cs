@@ -30,7 +30,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
         /// <summary>
         /// Find the parent to inherit properties from.
         /// </summary>
-        private static UIElement GetInheritenceParent(UIElement child)
+        internal static UIElement GetInheritenceParent(UIElement child)
         {
             // The result value.
             object parent = null;
@@ -132,127 +132,6 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
                     _feedbackPopup = null;
                 }
             }
-        }
-
-#if WINDOWS_UWP
-        internal static GazeTargetItem GetHitTarget(double x, double y)
-        {
-            GazeTargetItem invokable;
-
-            switch (Window.Current.CoreWindow.ActivationMode)
-            {
-                case CoreWindowActivationMode.ActivatedInForeground:
-                case CoreWindowActivationMode.ActivatedNotForeground:
-                    var gazePointD = new Point(x, y);
-                    var elements = VisualTreeHelper.FindElementsInHostCoordinates(gazePointD, null, false);
-                    var element = elements.FirstOrDefault();
-
-                    invokable = GetInvokable(element);
-
-                    break;
-
-                default:
-                    invokable = null;
-                    break;
-            }
-
-            return invokable;
-        }
-#else
-        internal static GazeTargetItem GetHitTarget(double x, double y)
-        {
-            GazeTargetItem invokable;
-
-            var gazePointD = new Point(x, y);
-            var window = Application.Current.MainWindow;
-            if (window != null)
-            {
-                var pointFromScreen = window.PointFromScreen(new Point(x, y));
-                var hitTestParameters = new PointHitTestParameters(pointFromScreen);
-                var element = (UIElement)null;
-                var pointHit = new Point();
-                VisualTreeHelper.HitTest(window, null, OnResultCallback, hitTestParameters);
-
-                HitTestResultBehavior OnResultCallback(HitTestResult result)
-                {
-                    HitTestResultBehavior value;
-
-                    if (result is PointHitTestResult hitTestResult &&
-                        hitTestResult.VisualHit is UIElement elementHit &&
-                        elementHit.IsHitTestVisible)
-                    {
-                        element = elementHit;
-                        pointHit = hitTestResult.PointHit;
-                        value = HitTestResultBehavior.Stop;
-                    }
-                    else
-                    {
-                        value = HitTestResultBehavior.Continue;
-                    }
-
-                    return value;
-                }
-
-                invokable = GetInvokable(element);
-            }
-            else
-            {
-                invokable = null;
-            }
-
-            return invokable;
-        }
-#endif
-        private static GazeTargetItem GetInvokable(UIElement element)
-        {
-            GazeTargetItem invokable;
-
-            var invokableElement = element;
-
-            if (invokableElement == null)
-            {
-                invokable = null;
-            }
-            else
-            {
-                invokable = GazeTargetFactory.GetOrCreate(invokableElement);
-
-                while (invokableElement != null && invokable == null)
-                {
-                    invokableElement = VisualTreeHelper.GetParent(invokableElement) as UIElement;
-
-                    if (invokableElement != null)
-                    {
-                        invokable = GazeTargetFactory.GetOrCreate(invokableElement);
-                    }
-                }
-            }
-
-            if (invokable != null)
-            {
-                Interaction interaction;
-                do
-                {
-                    interaction = GazeInput.GetInteraction(invokableElement);
-                    if (interaction == Interaction.Inherited)
-                    {
-                        invokableElement = GetInheritenceParent(invokableElement);
-                    }
-                }
-                while (interaction == Interaction.Inherited && invokableElement != null);
-
-                if (interaction == Interaction.Inherited)
-                {
-                    interaction = GazeInput.Interaction;
-                }
-
-                if (interaction != Interaction.Enabled)
-                {
-                    invokable = null;
-                }
-            }
-
-            return invokable;
         }
     }
 }

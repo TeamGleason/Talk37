@@ -29,6 +29,8 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
         private readonly IGazeDevice _device;
         private readonly IGazeSource _source;
 
+        private readonly GazeTargetItem _missedGazeTargetItem = new NonInvokeGazeTargetItem();
+
         /// <summary>
         /// Loads a settings collection into GazePointer.
         /// </summary>
@@ -399,7 +401,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 
             if (target == null)
             {
-                target = _target.GetOrCreateItem(x, y);
+                target = _target.GetOrCreateItem(x, y) ?? _missedGazeTargetItem;
             }
 
             Debug.Assert(target != null);

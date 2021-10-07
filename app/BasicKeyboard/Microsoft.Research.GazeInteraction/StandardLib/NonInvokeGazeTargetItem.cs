@@ -6,7 +6,7 @@ using System;
 
 namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 {
-    public class NonInvokeGazeTargetItem : GazeTargetItem
+    class NonInvokeGazeTargetItem : GazeTargetItem
     {
         public NonInvokeGazeTargetItem()
         {
