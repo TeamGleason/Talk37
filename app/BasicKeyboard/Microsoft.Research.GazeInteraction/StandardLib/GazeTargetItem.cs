@@ -120,7 +120,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
         private TimeSpan _nextStateTime;
         private DwellProgressState _notifiedProgressState = DwellProgressState.Idle;
 
-        public GazeTargetItem Specify(double x, double y)
+        public virtual GazeTargetItem Specify(double x, double y)
         {
             return this;
         }

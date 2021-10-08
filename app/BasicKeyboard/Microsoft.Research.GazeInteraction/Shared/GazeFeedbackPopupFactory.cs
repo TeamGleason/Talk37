@@ -36,6 +36,12 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 
         public GazeFeedbackControl Get(FrameworkElement element)
         {
+            var control = Get(element, 0, 0, element.ActualWidth, element.ActualHeight);
+            return control;
+        }
+
+        public GazeFeedbackControl Get(FrameworkElement element, double left, double top, double width, double height)
+        {
             Popup popup;
             GazeFeedbackControl control;
 
@@ -63,11 +69,11 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 #if WINDOWS_UWP
             var transform = element.TransformToVisual(popup);
             var bounds = transform.TransformBounds(new Rect(
-                new Point(0, 0),
-                new Size((float)element.ActualWidth, (float)element.ActualHeight)));
+                new Point(left, top),
+                new Size(width, height)));
 #else
-            var controlLeftTop = element.PointToScreen(new Point(0, 0));
-            var controlRightBottom = element.PointToScreen(new Point(element.ActualWidth, element.ActualHeight));
+            var controlLeftTop = element.PointToScreen(new Point(left, top));
+            var controlRightBottom = element.PointToScreen(new Point(left + width, top + height));
             controlLeftTop = new Point(controlLeftTop.X * _scalingX, controlLeftTop.Y * _scalingY);
             controlRightBottom = new Point(controlRightBottom.X * _scalingX, controlRightBottom.Y * _scalingY);
             var bounds = new Rect(controlLeftTop, controlRightBottom);

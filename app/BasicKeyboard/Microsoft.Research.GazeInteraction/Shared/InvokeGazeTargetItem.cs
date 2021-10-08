@@ -14,18 +14,17 @@ using System.Windows.Media;
 
 namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 {
-    class InvokeGazeTargetItem : GazeTargetItem
+    public abstract class FrameworkGazeTargetItem : GazeTargetItem
     {
         private readonly FrameworkElement _element;
-        private readonly Action<UIElement> _action;
 
         private GazeFeedbackControl _feedbackPopup;
 
-        internal InvokeGazeTargetItem(FrameworkElement element, Action<UIElement> action)
+        protected FrameworkGazeTargetItem(FrameworkElement element)
         {
             _element = element;
-            _action = action;
         }
+        protected FrameworkElement Element => _element;
 
         /// <summary>
         /// Find the parent to inherit properties from.
@@ -111,7 +110,11 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
 
         protected override int GetMaxDwellRepeatCount() => GazeInput.GetMaxDwellRepeatCount(_element);
 
-        protected override void Invoke() => _action(_element);
+        protected virtual GazeFeedbackControl GetFeedbackControl() =>
+            GetFeedbackControl(0, 0, _element.ActualWidth, _element.ActualHeight);
+
+        protected virtual GazeFeedbackControl GetFeedbackControl(double left, double top, double width, double height) =>
+            GazeInput.GazeFeedbackPopupFactory.Get(_element, left, top, width, height);
 
         protected override void ShowFeedback(DwellProgressState state, double progress)
         {
@@ -119,7 +122,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             {
                 if (_feedbackPopup == null)
                 {
-                    _feedbackPopup = GazeInput.GazeFeedbackPopupFactory.Get(_element);
+                    _feedbackPopup = GetFeedbackControl();
                 }
 
                 _feedbackPopup.SetState(state, progress);
@@ -133,5 +136,19 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
                 }
             }
         }
+    }
+
+    public class InvokeGazeTargetItem : FrameworkGazeTargetItem
+    {
+        private readonly Action<UIElement> _action;
+
+        public InvokeGazeTargetItem(FrameworkElement element, Action<UIElement> action)
+            : base(element)
+        {
+            _action = action;
+        }
+
+
+        protected override void Invoke() => _action(Element);
     }
 }

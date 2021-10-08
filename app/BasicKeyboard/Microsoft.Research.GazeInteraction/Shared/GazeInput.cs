@@ -266,6 +266,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
         public static void LoadSettings(IDictionary<string, object> settings) =>
             GazePointerInstance.LoadSettings(settings);
 
+        public static GazeCursor GazeTarget => _cursorInstance.Value;
         private static ThreadLocal<GazeCursor> _cursorInstance = new ThreadLocal<GazeCursor>(() => new GazeCursor());
 
         internal static Func<GazePointer> GazePointerFactory { get; set; } =
