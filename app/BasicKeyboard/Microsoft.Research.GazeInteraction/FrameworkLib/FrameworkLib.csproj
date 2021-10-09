@@ -50,6 +50,9 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Shared\FrameworkGazeTargetItem.cs">
+      <Link>FrameworkGazeTargetItem.cs</Link>
+    </Compile>
     <Compile Include="..\Shared\GazeCursor.cs">
       <Link>GazeCursor.cs</Link>
     </Compile>
