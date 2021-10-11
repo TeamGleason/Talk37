@@ -35,9 +35,9 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             }
         }
 
-        internal protected abstract TimeSpan GetElementStateDelay(PointerState pointerState, TimeSpan defaultValue);
+        public abstract TimeSpan GetElementStateDelay(PointerState pointerState, TimeSpan defaultValue);
 
-        internal protected abstract TimeSpan GetElementRepeatDelay(TimeSpan defaultValue);
+        public abstract TimeSpan GetElementRepeatDelay(TimeSpan defaultValue);
 
         internal protected abstract void Invoke();
 
@@ -56,7 +56,7 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             MaxDwellRepeatCount = GetMaxDwellRepeatCount();
         }
 
-        protected internal abstract int GetMaxDwellRepeatCount();
+        public abstract int GetMaxDwellRepeatCount();
 
         internal void GiveFeedback()
         {

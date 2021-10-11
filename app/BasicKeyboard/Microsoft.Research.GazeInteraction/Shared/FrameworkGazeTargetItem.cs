@@ -92,20 +92,20 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             }
         }
 
-        protected override TimeSpan GetElementStateDelay(PointerState pointerState, TimeSpan defaultValue)
+        public override TimeSpan GetElementStateDelay(PointerState pointerState, TimeSpan defaultValue)
         {
             var property = GetProperty(pointerState);
             var value = GetElementStateDelay(property, defaultValue);
             return value;
         }
 
-        protected override TimeSpan GetElementRepeatDelay(TimeSpan defaultValue)
+        public override TimeSpan GetElementRepeatDelay(TimeSpan defaultValue)
         {
             var value = GetElementStateDelay(GazeInput.RepeatDelayDurationProperty, defaultValue);
             return value;
         }
 
-        protected override int GetMaxDwellRepeatCount() => GazeInput.GetMaxDwellRepeatCount(_element);
+        public override int GetMaxDwellRepeatCount() => GazeInput.GetMaxDwellRepeatCount(_element);
 
         protected virtual GazeFeedbackControl GetFeedbackControl() =>
             GetFeedbackControl(0, 0, _element.ActualWidth, _element.ActualHeight);

@@ -17,11 +17,11 @@ namespace Microsoft.Toolkit.Uwp.Input.GazeInteraction
             get { return false; }
         }
 
-        protected internal override TimeSpan GetElementStateDelay(PointerState pointerState, TimeSpan defaultValue) => TimeSpan.Zero;
+        public override TimeSpan GetElementStateDelay(PointerState pointerState, TimeSpan defaultValue) => TimeSpan.Zero;
 
-        protected internal override TimeSpan GetElementRepeatDelay(TimeSpan defaultValue) => TimeSpan.Zero;
+        public override TimeSpan GetElementRepeatDelay(TimeSpan defaultValue) => TimeSpan.Zero;
 
-        protected internal override int GetMaxDwellRepeatCount() => 0;
+        public override int GetMaxDwellRepeatCount() => 0;
 
         protected internal override void Invoke()
         {
