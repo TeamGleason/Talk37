@@ -16,6 +16,10 @@ namespace WebWatcher
             InitializeComponent();
 
             _browserTargetItem = new BrowserTargetItem(TheBrowser);
+            _browserTargetItem.AddTarget(50, 50, 200, 100, () => TheBrowser.Address = (string)Resources["BingUrl"]);
+            _browserTargetItem.AddTarget(300, 50, 100, 200, () => TheBrowser.Address = (string)Resources["GoogleUrl"]);
+            _browserTargetItem.AddTarget(50, 200, 200, 100, () => TheBrowser.Address = (string)Resources["BbcUrl"]);
+
             GazeInput.GazeTarget.AddElementToTargetItemFactory(WebBrowserTargetFactory);
         }
 

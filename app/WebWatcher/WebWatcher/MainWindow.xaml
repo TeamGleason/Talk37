@@ -5,10 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:cef="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
         xmlns:gaze="clr-namespace:Microsoft.Toolkit.Uwp.Input.GazeInteraction;assembly=FrameworkLib"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:WebWatcher"
         mc:Ignorable="d"
         gaze:GazeInput.Interaction="Enabled"
         Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <system:String x:Key="BingUrl">https://bing.com</system:String>
+        <system:String x:Key="GoogleUrl">https://google.com</system:String>
+        <system:String x:Key="BbcUrl">https://news.bbc.co.uk</system:String>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -22,9 +28,9 @@
                     <Setter Property="Padding" Value="5"/>
                 </Style>
             </StackPanel.Resources>
-            <Button Content="Bing" Tag="https://bing.com" Click="OnNavigate"/>
-            <Button Content="Google" Tag="https://google.com" Click="OnNavigate"/>
-            <Button Content="BBC News" Tag="https://news.bbc.co.uk" Click="OnNavigate"/>
+            <Button Content="Bing" Tag="{StaticResource BingUrl}" Click="OnNavigate"/>
+            <Button Content="Google" Tag="{StaticResource GoogleUrl}" Click="OnNavigate"/>
+            <Button Content="BBC News" Tag="{StaticResource BbcUrl}" Click="OnNavigate"/>
         </StackPanel>
         <cef:ChromiumWebBrowser Grid.Row="1" x:Name="TheBrowser" Address="https://bing.com"/>
     </Grid>
