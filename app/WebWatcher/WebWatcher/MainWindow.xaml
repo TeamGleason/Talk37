@@ -9,29 +9,17 @@
         xmlns:local="clr-namespace:WebWatcher"
         mc:Ignorable="d"
         gaze:GazeInput.Interaction="Enabled"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" 
+        Height="450" 
+        Width="800"
+        Loaded="Window_Loaded">
     <Window.Resources>
         <system:String x:Key="BingUrl">https://bing.com</system:String>
         <system:String x:Key="GoogleUrl">https://google.com</system:String>
         <system:String x:Key="BbcUrl">https://news.bbc.co.uk</system:String>
     </Window.Resources>
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal">
-            <StackPanel.Resources>
-                <Style TargetType="Button">
-                    <Setter Property="Margin" Value="5"/>
-                    <Setter Property="FontSize" Value="28"/>
-                    <Setter Property="Padding" Value="5"/>
-                </Style>
-            </StackPanel.Resources>
-            <Button Content="Bing" Tag="{StaticResource BingUrl}" Click="OnNavigate"/>
-            <Button Content="Google" Tag="{StaticResource GoogleUrl}" Click="OnNavigate"/>
-            <Button Content="BBC News" Tag="{StaticResource BbcUrl}" Click="OnNavigate"/>
-        </StackPanel>
-        <cef:ChromiumWebBrowser Grid.Row="1" x:Name="TheBrowser" Address="https://bing.com"/>
+        <cef:ChromiumWebBrowser x:Name="TheBrowser"/>
+        <Canvas x:Name="overlayCanvas" />
     </Grid>
 </Window>
