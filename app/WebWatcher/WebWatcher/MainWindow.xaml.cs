@@ -1,4 +1,4 @@
-using CefSharp;
+﻿using CefSharp;
 using Microsoft.Toolkit.Uwp.Input.GazeInteraction;
 using System;
 using System.Collections;
@@ -21,13 +21,6 @@ namespace WebWatcher
         public MainWindow()
         {
             InitializeComponent();
-
-            _browserTargetItem = new BrowserTargetItem(TheBrowser);
-            _browserTargetItem.AddTarget(50, 50, 200, 100, () => TheBrowser.Address = (string)Resources["BingUrl"]);
-            _browserTargetItem.AddTarget(300, 50, 100, 200, () => TheBrowser.Address = (string)Resources["GoogleUrl"]);
-            _browserTargetItem.AddTarget(50, 200, 200, 100, () => TheBrowser.Address = (string)Resources["BbcUrl"]);
-
-            GazeInput.GazeTarget.AddElementToTargetItemFactory(WebBrowserTargetFactory);
         }
 
         private static string ReadFileContents(string textFile)
@@ -45,7 +38,6 @@ namespace WebWatcher
             //Wait for the page to finish loading (all resources will have been loaded, rendering is likely still happening)
             TheBrowser.LoadingStateChanged += async (s, args) =>
             {
-                //Wait for the Page to finish loading
                 if (args.IsLoading == false)
                 {
                     RemoveGazeButtons();
@@ -126,12 +118,6 @@ namespace WebWatcher
                 y: centerY,
                 button: CefSharp.DevTools.Input.MouseButton.Left,
                 clickCount: 1);
-        }
-
-        private GazeTargetItem WebBrowserTargetFactory(UIElement arg)
-        {
-            var item = arg == TheBrowser ? _browserTargetItem : null;
-            return item;
         }
 
         private void OnNavigate(object sender, RoutedEventArgs e)

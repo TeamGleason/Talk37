@@ -13,11 +13,6 @@
         Height="450" 
         Width="800"
         Loaded="Window_Loaded">
-    <Window.Resources>
-        <system:String x:Key="BingUrl">https://bing.com</system:String>
-        <system:String x:Key="GoogleUrl">https://google.com</system:String>
-        <system:String x:Key="BbcUrl">https://news.bbc.co.uk</system:String>
-    </Window.Resources>
     <Grid>
         <cef:ChromiumWebBrowser x:Name="TheBrowser"/>
         <Canvas x:Name="overlayCanvas" />
