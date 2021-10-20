@@ -1,4 +1,4 @@
-﻿using CefSharp;
+using CefSharp;
 using Microsoft.Toolkit.Uwp.Input.GazeInteraction;
 using System;
 using System.Collections;
@@ -60,7 +60,7 @@ namespace WebWatcher
             var devToolsClient = TheBrowser.GetDevToolsClient();
 
             var document = await devToolsClient.DOM.GetDocumentAsync();
-            var responseQuerySelectorAllAsync = await devToolsClient.DOM.QuerySelectorAllAsync(document.Root.NodeId, "button");
+            var responseQuerySelectorAllAsync = await devToolsClient.DOM.QuerySelectorAllAsync(document.Root.NodeId, "button, a");
 
             foreach (int nodeId in responseQuerySelectorAllAsync.NodeIds)
             {
